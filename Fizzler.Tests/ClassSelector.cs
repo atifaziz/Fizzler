@@ -23,6 +23,27 @@ namespace Fizzler.Tests
 
 			Assert.AreEqual(1, result.Count);
 			Assert.AreEqual("p", result[0].Name);
+			Assert.AreEqual("eeeee", result[0].InnerText);
 		}
+		
+		//[TestMethod]
+		//public void With_Element()
+		//{
+		//    var result = Parser.Parse("p.ohyeah");
+
+		//    Assert.AreEqual(1, result.Count);
+		//    Assert.AreEqual("p", result[0].Name);
+		//    Assert.AreEqual("eeeee", result[0].InnerText);
+		//}
+		
+		//[TestMethod]
+		//public void Parent_Class_Selector()
+		//{
+		//    var result = Parser.Parse("p .ohyeah");
+
+		//    Assert.AreEqual(1, result.Count);
+		//    Assert.AreEqual("p", result[0].Name);
+		//    Assert.AreEqual("eeeee", result[0].InnerText);
+		//}
 	}
 }
