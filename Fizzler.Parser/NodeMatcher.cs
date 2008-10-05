@@ -15,87 +15,89 @@ namespace Fizzler.Parser
 			if (node.NodeType != HtmlNodeType.Element)
 				return false;
 
-			if (chunk.ChunkType == ChunkType.Star)
+			switch(chunk.ChunkType)
 			{
-				if (previousChunk != null)
+				case ChunkType.Star:
+					match = MatchStar(node, previousChunk);
+					break;
+				case ChunkType.TagName:
+					match = MatchTag(node, chunk, previousChunk);
+					break;
+				case ChunkType.Id:
+					match = MatchId(node, chunk, previousChunk);
+					break;
+				case ChunkType.Class:
+					match = MatchClass(node, chunk, previousChunk);
+					break;
+			}
+
+			return match;
+		}
+
+		private bool MatchId(HtmlNode node, Chunk chunk, Chunk previousChunk)
+		{
+			bool match = false;
+		
+			if (node.Attributes["id"] != null)
+			{
+				string idValue = node.Attributes["id"].Value;
+				string[] chunkParts = chunk.Body.Split("#".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+				// if length is greater than one, we could have an id selector with element
+				if (chunkParts.Length > 1)
 				{
-					// are any parent nodes affected by the previous chunk?
-					var parent = node.ParentNode;
-
-					while (parent != null)
+					if (node.Name == chunkParts[0] && chunkParts[1] == idValue)
 					{
-						match = IsMatch(parent, previousChunk, null);
-
-						if (match)
-						{
-							break;
-						}
-
-						parent = parent.ParentNode;
+						match = previousChunk == null || IsMatch(node.ParentNode, previousChunk, null);
 					}
 				}
 				else
 				{
-					match = true;
+					if (chunkParts[0] == idValue)
+					{
+						match = previousChunk == null || IsMatch(node.ParentNode, previousChunk, null);
+					}
 				}
 			}
+			return match;
+		}
 
-			if (chunk.ChunkType == ChunkType.TagName)
+		private bool MatchTag(HtmlNode node, Chunk chunk, Chunk previousChunk)
+		{
+			bool match = false;
+		
+			if (node.Name == chunk.Body)
 			{
-				if (node.Name == chunk.Body)
-				{
-					if (previousChunk != null)
-					{
-						match = IsMatch(node.ParentNode, previousChunk, null);
-					}
-					else
-					{
-						match = true;
-					}
-				}
+				match = previousChunk == null || IsMatch(node.ParentNode, previousChunk, null);
 			}
+			return match;
+		}
 
-			if (chunk.ChunkType == ChunkType.Id)
+		private bool MatchStar(HtmlNode node, Chunk previousChunk)
+		{
+			bool match = false;
+		
+			if (previousChunk != null)
 			{
-				if (node.Attributes["id"] != null)
-				{
-					string idValue = node.Attributes["id"].Value;
-					string[] chunkParts = chunk.Body.Split("#".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+				// are any parent nodes affected by the previous chunk?
+				var parent = node.ParentNode;
 
-					// if length is greater than one, we could have an id selector with element
-					if (chunkParts.Length > 1)
+				while (parent != null)
+				{
+					match = IsMatch(parent, previousChunk, null);
+
+					if (match)
 					{
-						if (node.Name == chunkParts[0] && chunkParts[1] == idValue)
-						{
-							if (previousChunk != null)
-							{
-								match = IsMatch(node.ParentNode, previousChunk, null);
-							}
-							else
-							{
-								match = true;
-							}
-						}
+						break;
 					}
-					else
-					{
-						if (chunkParts[0] == idValue)
-						{
-							if (previousChunk != null)
-							{
-								match = IsMatch(node.ParentNode, previousChunk, null);
-							}
-							else
-							{
-								match = true;
-							}
-						}
-					}
+
+					parent = parent.ParentNode;
 				}
 			}
-
-			if (chunk.ChunkType == ChunkType.Class)
-				match = MatchClass(node, chunk, previousChunk);
+			else
+			{
+				match = true;
+			}
 
 			return match;
 		}
@@ -118,14 +120,7 @@ namespace Fizzler.Parser
 					}
 					else if (node.Name == chunkParts[0] && idValues.Contains(chunkParts[1]))
 					{
-						if (previousChunk != null)
-						{
-							match = IsMatch(node.ParentNode, previousChunk, null);
-						}
-						else
-						{
-							match = true;
-						}
+						match = previousChunk == null || IsMatch(node.ParentNode, previousChunk, null);
 					}
 				}
 				else
