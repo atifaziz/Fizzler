@@ -11,6 +11,8 @@ namespace Fizzler.Tests
 			var result = Parser.Parse("p.hiclass,a");
 
 			Assert.AreEqual(2, result.Count);
+			Assert.AreEqual("p", result[0].Name);
+			Assert.AreEqual("a", result[1].Name);
 		}
 
 		[TestMethod]
@@ -19,6 +21,8 @@ namespace Fizzler.Tests
 			var result = Parser.Parse("p.hiclass, a");
 			
 			Assert.AreEqual(2, result.Count);
+			Assert.AreEqual("p", result[0].Name);
+			Assert.AreEqual("a", result[1].Name);
 		}
 
 		[TestMethod]
@@ -27,6 +31,8 @@ namespace Fizzler.Tests
 			var result = Parser.Parse("p.hiclass , a");
 
 			Assert.AreEqual(2, result.Count);
+			Assert.AreEqual("p", result[0].Name);
+			Assert.AreEqual("a", result[1].Name);
 		}
 
 		[TestMethod]
@@ -35,6 +41,8 @@ namespace Fizzler.Tests
 			var result = Parser.Parse("p.hiclass ,a");
 
 			Assert.AreEqual(2, result.Count);
+			Assert.AreEqual("p", result[0].Name);
+			Assert.AreEqual("a", result[1].Name);
 		}
 	}
 }
