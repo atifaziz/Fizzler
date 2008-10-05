@@ -1,7 +1,7 @@
 using System.IO;
 using Fizzle.Parser;
 
-namespace Fizzle.Tests
+namespace Fizzler.Tests
 {
 	public abstract class SelectorBaseTest
 	{
@@ -10,7 +10,7 @@ namespace Fizzle.Tests
 
 		protected SelectorBaseTest()
 		{
-			_html = File.ReadAllText("../../../Fizzle.Tests/Data/SelectorTest.html");
+			_html = File.ReadAllText("../../../Fizzler.Tests/Data/SelectorTest.html");
 			_parser = new SelectorEngine(Html);
 		}
 

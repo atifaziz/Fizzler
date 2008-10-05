@@ -1,6 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Fizzler.Tests;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Fizzle.Tests
+namespace Fizzler.Tests
 {
 	[TestClass]
 	public class ElementSelector : SelectorBaseTest

@@ -1,6 +1,7 @@
+using Fizzler.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Fizzle.Tests
+namespace Fizzler.Tests
 {
 	[TestClass]
 	public class ClassSelector : SelectorBaseTest
@@ -21,7 +22,7 @@ namespace Fizzle.Tests
 			var result = Parser.Parse(".checkit.ohyeah");
 
 			Assert.AreEqual(1, result.Count);
-			Assert.AreEqual("div", result[0].Name);
+			Assert.AreEqual("p", result[0].Name);
 		}
 	}
 }

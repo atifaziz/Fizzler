@@ -1,6 +1,7 @@
+using Fizzler.Tests;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace Fizzle.Tests
+namespace Fizzler.Tests
 {
 	[TestClass]
 	public class IDSelector : SelectorBaseTest
