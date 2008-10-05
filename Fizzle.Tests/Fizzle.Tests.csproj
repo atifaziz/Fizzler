@@ -50,7 +50,6 @@
     <Compile Include="SelectorBaseTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AuthoringTests.txt" />
     <Content Include="Data\SelectorTest.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
