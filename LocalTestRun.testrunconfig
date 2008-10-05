@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRunConfiguration name="Local Test Run" id="f02b3360-ae4a-499d-832f-c264dde66ef2" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <Description>This is a default test run configuration for a local test run.</Description>
+  <TestTypeSpecific />
+</TestRunConfiguration>
