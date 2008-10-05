@@ -48,6 +48,7 @@
     <Compile Include="ClassSelector.cs" />
     <Compile Include="IDSelector.cs" />
     <Compile Include="MultipleSelectors.cs" />
+    <Compile Include="NthChild.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ElementSelector.cs" />
     <Compile Include="PsuedoSelectors.cs" />

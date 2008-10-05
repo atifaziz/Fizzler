@@ -9,7 +9,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Star()
 		{
-			Assert.AreEqual(11, Parser.Parse("*").Count);
+			Assert.AreEqual(12, Parser.Parse("*").Count);
 		}
 		
 		[TestMethod]

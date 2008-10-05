@@ -54,8 +54,7 @@ namespace Fizzler.Tests
 		{
 			var result = Parser.Parse("#myDiv *");
 
-			// this is failing because it includes the parent div too...
-			Assert.AreEqual(3, result.Count);
+			Assert.AreEqual(4, result.Count);
 			Assert.AreEqual("div", result[0].Name);
 			Assert.AreEqual("p", result[1].Name);
 		}
@@ -82,8 +81,7 @@ namespace Fizzler.Tests
 		{
 			var result = Parser.Parse("#myDiv>*");
 
-			// this is failing because it includes the parent div too...
-			Assert.AreEqual(3, result.Count);
+			Assert.AreEqual(4, result.Count);
 			Assert.AreEqual("div", result[0].Name);
 			Assert.AreEqual("p", result[1].Name);
 		}
