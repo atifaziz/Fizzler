@@ -34,6 +34,27 @@ namespace Fizzler.Parser
 			return match;
 		}
 
+		public bool IsUpwardMatch(Chunk previousChunk, HtmlNode node)
+		{
+			bool match = false;
+		
+			// are any parent nodes affected by the previous chunk?
+			var parent = node.ParentNode;
+
+			while (parent != null)
+			{
+				match = IsDownwardMatch(parent, previousChunk, null);
+
+				if (match)
+				{
+					break;
+				}
+
+				parent = parent.ParentNode;
+			}
+			return match;
+		}
+
 		private bool MatchId(HtmlNode node, Chunk chunk, Chunk previousChunk)
 		{
 			bool match = false;
@@ -78,27 +99,6 @@ namespace Fizzler.Parser
 			return previousChunk == null || IsUpwardMatch(previousChunk, node);
 		}
 
-		private bool IsUpwardMatch(Chunk previousChunk, HtmlNode node)
-		{
-			bool match = false;
-		
-			// are any parent nodes affected by the previous chunk?
-			var parent = node.ParentNode;
-
-			while (parent != null)
-			{
-				match = IsDownwardMatch(parent, previousChunk, null);
-
-				if (match)
-				{
-					break;
-				}
-
-				parent = parent.ParentNode;
-			}
-			return match;
-		}
-
 		private bool MatchClass(HtmlNode node, Chunk chunk, Chunk previousChunk)
 		{
 			bool match = false;
@@ -124,27 +124,7 @@ namespace Fizzler.Parser
 				{
 					if (idValues.Contains(chunkParts[0]))
 					{
-						if (previousChunk != null)
-						{
-							// are any parent nodes affected by the previous chunk?
-							var parent = node.ParentNode;
-
-							while (parent != null)
-							{
-								match = IsDownwardMatch(parent, previousChunk, null);
-
-								if (match)
-								{
-									break;
-								}
-
-								parent = parent.ParentNode;
-							}
-						}
-						else
-						{
-							match = true;
-						}
+						match = previousChunk == null || IsUpwardMatch(previousChunk, node);
 					}
 				}
 			}
