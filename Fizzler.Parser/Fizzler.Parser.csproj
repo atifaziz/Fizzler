@@ -52,6 +52,7 @@
     <Compile Include="ChunkType.cs" />
     <Compile Include="Extensions\HtmlNodeListExtensions.cs" />
     <Compile Include="Extensions\HtmlNodeCollectionExtensions.cs" />
+    <Compile Include="Extensions\StringListExtensions.cs" />
     <Compile Include="NodeMatcher.cs" />
     <Compile Include="SelectorEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

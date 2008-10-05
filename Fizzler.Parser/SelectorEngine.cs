@@ -28,29 +28,29 @@ namespace Fizzle.Parser
 			HtmlNode documentNode = GetDocumentNode();
 
 			// we also need to check if a chunk contains a "." character....
-			var initialChunks = selector.Split(" >".ToCharArray());
-			var chunks = new List<string>();
-			foreach (var chunk in initialChunks)
-			{
-				// check if there is a dot at any position other than the first character, aka index zero.
-				if(chunk.Trim().LastIndexOf(".") > 0)
-				{
-					var miniChunks = chunk.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+			var chunks = selector.Split(" >".ToCharArray());
+			//var chunks = new List<string>();
+			//foreach (var chunk in initialChunks)
+			//{
+			//    // check if there is a dot at any position other than the first character, aka index zero.
+			//    if(chunk.Trim().LastIndexOf(".") > 0)
+			//    {
+			//        var miniChunks = chunk.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-					foreach (var miniChunk in miniChunks)
-					{
-						chunks.Add("." + miniChunk);
-					}	
-				}
-				else
-				{
-					chunks.Add(chunk);
-				}
-			}
+			//        foreach (var miniChunk in miniChunks)
+			//        {
+			//            chunks.Add("." + miniChunk);
+			//        }	
+			//    }
+			//    else
+			//    {
+			//        chunks.Add(chunk);
+			//    }
+			//}
 
 			List<HtmlNode> list = documentNode.ChildNodes.ToList();
 
-			for (int i1 = 0; i1 < chunks.Count; i1++)
+			for (int i1 = 0; i1 < chunks.Length; i1++)
 			{
 				var chunk = chunks[i1];
 				var previousChunk = i1 > 0 ? chunks[i1 - 1] : null;

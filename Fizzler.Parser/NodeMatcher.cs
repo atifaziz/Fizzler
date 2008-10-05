@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using Fizzler.Parser.Extensions;
 using HtmlAgilityPack;
 
 namespace Fizzle.Parser
@@ -104,13 +106,17 @@ namespace Fizzle.Parser
 		
 			if (node.Attributes["class"] != null)
 			{
-				string idValue = node.Attributes["class"].Value;
-				string[] chunkParts = chunk.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+				List<string> idValues = new List<string>(node.Attributes["class"].Value.Split(" ".ToCharArray()));
+				List<string> chunkParts = new List<string>(chunk.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries));
 
 				// if length is greater than one, we could have an id selector with element
-				if (chunkParts.Length > 1)
+				if (chunkParts.Count > 1)
 				{
-					if (node.Name == chunkParts[0] && chunkParts[1] == idValue)
+					if(chunkParts.ContainsAll(idValues))
+					{
+						match = true;
+					}
+					else if (node.Name == chunkParts[0] && idValues.Contains(chunkParts[1]))
 					{
 						if (previousChunk != null)
 						{
@@ -124,11 +130,24 @@ namespace Fizzle.Parser
 				}
 				else
 				{
-					if (chunkParts[0] == idValue)
+					if (idValues.Contains(chunkParts[0]))
 					{
 						if (previousChunk != null)
 						{
-							match = IsMatch(node.ParentNode, previousChunk, null);
+							// are any parent nodes affected by the previous chunk?
+							var parent = node.ParentNode;
+
+							while (parent != null)
+							{
+								match = IsMatch(parent, previousChunk, null);
+
+								if (match)
+								{
+									break;
+								}
+
+								parent = parent.ParentNode;
+							}
 						}
 						else
 						{
