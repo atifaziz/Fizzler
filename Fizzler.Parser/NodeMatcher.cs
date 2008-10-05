@@ -8,7 +8,7 @@ namespace Fizzler.Parser
 {
 	public class NodeMatcher
 	{
-		public bool IsMatch(HtmlNode node, Chunk chunk, Chunk previousChunk)
+		public bool IsDownwardMatch(HtmlNode node, Chunk chunk, Chunk previousChunk)
 		{
 			bool match = false;
 
@@ -48,14 +48,14 @@ namespace Fizzler.Parser
 				{
 					if (node.Name == chunkParts[0] && chunkParts[1] == idValue)
 					{
-						match = previousChunk == null || IsMatch(node.ParentNode, previousChunk, null);
+						match = previousChunk == null || IsDownwardMatch(node.ParentNode, previousChunk, null);
 					}
 				}
 				else
 				{
 					if (chunkParts[0] == idValue)
 					{
-						match = previousChunk == null || IsMatch(node.ParentNode, previousChunk, null);
+						match = previousChunk == null || IsDownwardMatch(node.ParentNode, previousChunk, null);
 					}
 				}
 			}
@@ -68,7 +68,7 @@ namespace Fizzler.Parser
 		
 			if (node.Name == chunk.Body)
 			{
-				match = previousChunk == null || IsMatch(node.ParentNode, previousChunk, null);
+				match = previousChunk == null || IsDownwardMatch(node.ParentNode, previousChunk, null);
 			}
 			return match;
 		}
@@ -84,7 +84,7 @@ namespace Fizzler.Parser
 
 				while (parent != null)
 				{
-					match = IsMatch(parent, previousChunk, null);
+					match = IsDownwardMatch(parent, previousChunk, null);
 
 					if (match)
 					{
@@ -120,7 +120,7 @@ namespace Fizzler.Parser
 					}
 					else if (node.Name == chunkParts[0] && idValues.Contains(chunkParts[1]))
 					{
-						match = previousChunk == null || IsMatch(node.ParentNode, previousChunk, null);
+						match = previousChunk == null || IsDownwardMatch(node.ParentNode, previousChunk, null);
 					}
 				}
 				else
@@ -134,7 +134,7 @@ namespace Fizzler.Parser
 
 							while (parent != null)
 							{
-								match = IsMatch(parent, previousChunk, null);
+								match = IsDownwardMatch(parent, previousChunk, null);
 
 								if (match)
 								{

@@ -48,7 +48,7 @@ namespace Fizzler.Parser
 
 					list = list.Flatten();
 					
-					list.RemoveAll(node => !_nodeMatcher.IsMatch(node, chunk, previousChunk));
+					list.RemoveAll(node => !_nodeMatcher.IsDownwardMatch(node, chunk, previousChunk));
 				}
 
 				selectedNodes.AddRange(list);
