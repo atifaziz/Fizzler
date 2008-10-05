@@ -75,30 +75,27 @@ namespace Fizzler.Parser
 
 		private bool MatchStar(HtmlNode node, Chunk previousChunk)
 		{
+			return previousChunk == null || IsUpwardMatch(previousChunk, node);
+		}
+
+		private bool IsUpwardMatch(Chunk previousChunk, HtmlNode node)
+		{
 			bool match = false;
 		
-			if (previousChunk != null)
-			{
-				// are any parent nodes affected by the previous chunk?
-				var parent = node.ParentNode;
+			// are any parent nodes affected by the previous chunk?
+			var parent = node.ParentNode;
 
-				while (parent != null)
+			while (parent != null)
+			{
+				match = IsDownwardMatch(parent, previousChunk, null);
+
+				if (match)
 				{
-					match = IsDownwardMatch(parent, previousChunk, null);
-
-					if (match)
-					{
-						break;
-					}
-
-					parent = parent.ParentNode;
+					break;
 				}
-			}
-			else
-			{
-				match = true;
-			}
 
+				parent = parent.ParentNode;
+			}
 			return match;
 		}
 
