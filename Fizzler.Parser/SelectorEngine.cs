@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
 using Fizzle.Parser.Extensions;
+using Fizzler.Parser;
+using Fizzler.Parser.ChunkHandling;
 using HtmlAgilityPack;
 
-namespace Fizzle.Parser
+namespace Fizzler.Parser
 {
 	public class SelectorEngine
 	{
@@ -30,16 +32,15 @@ namespace Fizzle.Parser
 
 			var selectors = selectorChain.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 			
+			// This enables us to support "," by simply treating comma-separated parts as separate selectors
 			foreach (string rawSelector in selectors)
 			{
-				string selector = rawSelector.Trim();
-			
 				// we also need to check if a chunk contains a "." character....
-				var chunks = selector.Split(" >".ToCharArray());
+				var chunks = new ChunkParser().GetChunks(rawSelector.Trim());
 
 				List<HtmlNode> list = documentNode.ChildNodes.ToList();
 
-				for (int i1 = 0; i1 < chunks.Length; i1++)
+				for (int i1 = 0; i1 < chunks.Count; i1++)
 				{
 					var chunk = chunks[i1];
 					var previousChunk = i1 > 0 ? chunks[i1 - 1] : null;

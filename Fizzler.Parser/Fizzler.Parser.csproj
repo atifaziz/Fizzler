@@ -49,7 +49,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChunkType.cs" />
+    <Compile Include="ChunkHandling\Chunk.cs" />
+    <Compile Include="ChunkHandling\ChunkParser.cs" />
+    <Compile Include="ChunkHandling\ChunkType.cs" />
+    <Compile Include="DescendantSelectionType.cs" />
     <Compile Include="Extensions\HtmlNodeListExtensions.cs" />
     <Compile Include="Extensions\HtmlNodeCollectionExtensions.cs" />
     <Compile Include="Extensions\StringListExtensions.cs" />

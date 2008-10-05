@@ -1,5 +1,5 @@
 using System.IO;
-using Fizzle.Parser;
+using Fizzler.Parser;
 
 namespace Fizzler.Tests
 {

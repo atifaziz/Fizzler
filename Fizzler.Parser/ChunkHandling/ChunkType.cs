@@ -1,4 +1,4 @@
-namespace Fizzle.Parser
+namespace Fizzler.Parser.ChunkHandling
 {
 	public enum ChunkType
 	{

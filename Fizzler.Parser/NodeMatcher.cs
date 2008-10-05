@@ -1,21 +1,21 @@
 using System;
 using System.Collections.Generic;
+using Fizzler.Parser.ChunkHandling;
 using Fizzler.Parser.Extensions;
 using HtmlAgilityPack;
 
-namespace Fizzle.Parser
+namespace Fizzler.Parser
 {
 	public class NodeMatcher
 	{
-		public bool IsMatch(HtmlNode node, string chunk, string previousChunk)
+		public bool IsMatch(HtmlNode node, Chunk chunk, Chunk previousChunk)
 		{
 			bool match = false;
-			ChunkType chunkType = GetChunkType(chunk);
 
 			if (node.NodeType != HtmlNodeType.Element)
 				return false;
 
-			if (chunkType == ChunkType.Star)
+			if (chunk.ChunkType == ChunkType.Star)
 			{
 				if (previousChunk != null)
 				{
@@ -40,9 +40,9 @@ namespace Fizzle.Parser
 				}
 			}
 
-			if (chunkType == ChunkType.TagName)
+			if (chunk.ChunkType == ChunkType.TagName)
 			{
-				if (node.Name == chunk)
+				if (node.Name == chunk.Body)
 				{
 					if (previousChunk != null)
 					{
@@ -55,12 +55,12 @@ namespace Fizzle.Parser
 				}
 			}
 
-			if (chunkType == ChunkType.Id)
+			if (chunk.ChunkType == ChunkType.Id)
 			{
 				if (node.Attributes["id"] != null)
 				{
 					string idValue = node.Attributes["id"].Value;
-					string[] chunkParts = chunk.Split("#".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+					string[] chunkParts = chunk.Body.Split("#".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
 					// if length is greater than one, we could have an id selector with element
 					if (chunkParts.Length > 1)
@@ -94,20 +94,20 @@ namespace Fizzle.Parser
 				}
 			}
 
-			if(chunkType == ChunkType.Class)
+			if (chunk.ChunkType == ChunkType.Class)
 				match = MatchClass(node, chunk, previousChunk);
 
 			return match;
 		}
 
-		private bool MatchClass(HtmlNode node, string chunk, string previousChunk)
+		private bool MatchClass(HtmlNode node, Chunk chunk, Chunk previousChunk)
 		{
 			bool match = false;
 		
 			if (node.Attributes["class"] != null)
 			{
 				List<string> idValues = new List<string>(node.Attributes["class"].Value.Split(" ".ToCharArray()));
-				List<string> chunkParts = new List<string>(chunk.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries));
+				List<string> chunkParts = new List<string>(chunk.Body.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries));
 
 				// if length is greater than one, we could have an id selector with element
 				if (chunkParts.Count > 1)
@@ -158,20 +158,6 @@ namespace Fizzle.Parser
 			}
 
 			return match;
-		}
-
-		private ChunkType GetChunkType(string chunk)
-		{
-			if (chunk.Trim() == "*")
-				return ChunkType.Star;
-
-			if (chunk.Contains("#"))
-				return ChunkType.Id;
-
-			if (chunk.Contains("."))
-				return ChunkType.Class;
-
-			return ChunkType.TagName;
 		}
 	}
 }
