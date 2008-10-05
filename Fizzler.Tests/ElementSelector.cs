@@ -27,7 +27,7 @@ namespace Fizzler.Tests
 			Assert.AreEqual("p", Parser.Parse("p")[1].Name);
 			Assert.AreEqual("p", Parser.Parse("p")[2].Name);
 		}
-
+		
 		[TestMethod]
 		public void Basic_Negative_Precedence()
 		{
@@ -35,9 +35,16 @@ namespace Fizzler.Tests
 		}
 
 		[TestMethod]
-		public void Basic_Positive_Precedence()
+		public void Basic_Positive_Precedence_Two_Tags()
 		{
 			Assert.AreEqual(2, Parser.Parse("div p").Count);
+		}
+
+		[TestMethod]
+		public void Basic_Positive_Precedence_Three_Tags()
+		{
+			Assert.AreEqual(1, Parser.Parse("div p a").Count);
+			Assert.AreEqual("a", Parser.Parse("div p a")[0].Name);
 		}
 
 		[TestMethod]
