@@ -38,13 +38,16 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void All_Children()
 		{
-			Assert.AreEqual(1, Parser.Parse("p > *").Count);
+			// match <a href="">hi</a><span>test</span> so that's 2
+			Assert.AreEqual(2, Parser.Parse("p > *").Count);
 		}
 
 		[TestMethod]
 		public void All_GrandChildren()
 		{
-			Assert.AreEqual(1, Parser.Parse("div > * > *").Count);
+			// match <a href="">hi</a><span>test</span> so that's 2
+			// *any* second level children under any div
+			Assert.AreEqual(2, Parser.Parse("div > * > *").Count);
 		}
 
 		[TestMethod]

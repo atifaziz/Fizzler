@@ -8,9 +8,11 @@ namespace Fizzler.Parser.ChunkHandling
 	/// </summary>
 	public class ChunkParser
 	{
-		public IList<Chunk> GetChunks(string rawSelector)
+		public List<Chunk> GetChunks(string rawSelector)
 		{
-			IList<Chunk> chunks = new List<Chunk>();
+			rawSelector = rawSelector.Replace(" >", ">").Replace("> ", ">");
+		
+			List<Chunk> chunks = new List<Chunk>();
 		
 			string[] spaceSeparated = rawSelector.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 

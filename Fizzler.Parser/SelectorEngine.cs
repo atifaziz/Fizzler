@@ -43,12 +43,10 @@ namespace Fizzler.Parser
 
 				for (int chunkCounter = 0; chunkCounter < chunks.Count; chunkCounter++)
 				{
-					Chunk chunk = chunks[chunkCounter];
-					Chunk previousChunk = chunkCounter > 0 ? chunks[chunkCounter - 1] : null;
 
 					list = list.Flatten();
-					
-					list.RemoveAll(node => !_nodeMatcher.IsDownwardMatch(node, chunk, previousChunk));
+
+					list.RemoveAll(node => !_nodeMatcher.IsDownwardMatch(node, chunks, chunkCounter));
 				}
 
 				selectedNodes.AddRange(list);
