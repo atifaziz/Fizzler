@@ -45,9 +45,9 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void All_GrandChildren()
 		{
-			// match <a href="">hi</a><span>test</span> so that's 2
+			// match <a href="">hi</a><span>test</span> so that's 3
 			// *any* second level children under any div
-			Assert.AreEqual(2, Parser.Parse("div > * > *").Count);
+			Assert.AreEqual(3, Parser.Parse("div > * > *").Count);
 		}
 
 		[TestMethod]

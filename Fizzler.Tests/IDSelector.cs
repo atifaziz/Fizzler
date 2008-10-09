@@ -54,7 +54,7 @@ namespace Fizzler.Tests
 		{
 			var result = Parser.Parse("#myDiv *");
 
-			Assert.AreEqual(4, result.Count);
+			Assert.AreEqual(5, result.Count);
 			Assert.AreEqual("div", result[0].Name);
 			Assert.AreEqual("p", result[1].Name);
 		}
