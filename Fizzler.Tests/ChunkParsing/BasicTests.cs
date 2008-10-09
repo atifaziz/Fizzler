@@ -61,5 +61,33 @@ namespace Fizzler.Tests.ChunkParsing
 			Assert.AreEqual(ChunkType.TagName, results[1].ChunkType);
 			Assert.AreEqual(DescendantSelectionType.LastSelector, results[1].DescendantSelectionType);
 		}
+		
+		[TestMethod]
+		public void Adj_No_Spaces()
+		{
+			var results = _chunkParser.GetChunks("body+p");
+
+			Assert.AreEqual(2, results.Count);
+			Assert.AreEqual("body", results[0].Body);
+			Assert.AreEqual(ChunkType.TagName, results[0].ChunkType);
+			Assert.AreEqual(DescendantSelectionType.Adjacent, results[0].DescendantSelectionType);
+			Assert.AreEqual("p", results[1].Body);
+			Assert.AreEqual(ChunkType.TagName, results[1].ChunkType);
+			Assert.AreEqual(DescendantSelectionType.LastSelector, results[1].DescendantSelectionType);
+		}
+
+		[TestMethod]
+		public void Adj_Spaces()
+		{
+			var results = _chunkParser.GetChunks("body + p");
+
+			Assert.AreEqual(2, results.Count);
+			Assert.AreEqual("body", results[0].Body);
+			Assert.AreEqual(ChunkType.TagName, results[0].ChunkType);
+			Assert.AreEqual(DescendantSelectionType.Adjacent, results[0].DescendantSelectionType);
+			Assert.AreEqual("p", results[1].Body);
+			Assert.AreEqual(ChunkType.TagName, results[1].ChunkType);
+			Assert.AreEqual(DescendantSelectionType.LastSelector, results[1].DescendantSelectionType);
+		}
 	}
 }

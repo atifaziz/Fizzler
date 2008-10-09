@@ -13,6 +13,11 @@ namespace Fizzler.Parser
 		Children,
 		
 		/// <summary>
+		/// Only elements immediately next to this one, i.e. the + selector.
+		/// </summary>
+		Adjacent,
+		
+		/// <summary>
 		/// Tip means the last selector in the sequence, therefore no descendant type is applicable.
 		/// </summary>
 		LastSelector

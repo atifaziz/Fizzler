@@ -28,6 +28,15 @@ namespace Fizzler.Parser.ChunkHandling
 						chunks.Add(new Chunk(GetChunkType(childSeparated[j]), childSeparated[j], j == childSeparated.Length - 1 ? DescendantSelectionType.LastSelector : DescendantSelectionType.Children));
 					}
 				}
+				else if (space.Contains("+"))
+				{
+					string[] adjSeparated = space.Split("+".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+					for (int j = 0; j < adjSeparated.Length; j++)
+					{
+						chunks.Add(new Chunk(GetChunkType(adjSeparated[j]), adjSeparated[j], j == adjSeparated.Length - 1 ? DescendantSelectionType.LastSelector : DescendantSelectionType.Adjacent));
+					}
+				}
 				else
 				{
 					chunks.Add(new Chunk(GetChunkType(space), space, i == spaceSeparated.Length - 1 ? DescendantSelectionType.LastSelector : DescendantSelectionType.Descendant));
