@@ -10,7 +10,7 @@ namespace Fizzler.Parser.ChunkHandling
 	{
 		public List<Chunk> GetChunks(string rawSelector)
 		{
-			rawSelector = rawSelector.Replace(" >", ">").Replace("> ", ">");
+			rawSelector = rawSelector.Replace(" >", ">").Replace("> ", ">").Replace(" +", "+").Replace("+ ", "+");
 		
 			List<Chunk> chunks = new List<Chunk>();
 		

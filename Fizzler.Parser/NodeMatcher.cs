@@ -141,6 +141,10 @@ namespace Fizzler.Parser
 					{
 						match = true;
 					}
+					else if (previousChunk.DescendantSelectionType == DescendantSelectionType.Adjacent)
+					{
+						return IsDownwardMatch(node.PreviousSibling, chunks, currentChunk - 1);
+					}
 					else
 					{
 						// Check if the previous chunk matched the parent node
@@ -150,6 +154,16 @@ namespace Fizzler.Parser
 				else
 				{
 					match = true;
+				}
+			}
+			else
+			{
+				if(node.PreviousSibling != null)
+				{
+					if (node.PreviousSibling.Name == chunk.Body && chunk.DescendantSelectionType == DescendantSelectionType.Adjacent)
+					{
+						match = true;
+					}
 				}
 			}
 			return match;
