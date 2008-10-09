@@ -38,8 +38,8 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void All_Children()
 		{
-			// match <a href="">hi</a><span>test</span> so that's 2
-			Assert.AreEqual(2, Parser.Parse("p > *").Count);
+			// match <a href="">hi</a><span>test</span> so that's 3
+			Assert.AreEqual(3, Parser.Parse("p > *").Count);
 		}
 
 		[TestMethod]
