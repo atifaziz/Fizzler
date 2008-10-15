@@ -25,7 +25,7 @@ namespace Fizzler.Parser.ChunkHandling
 
 					for (int j = 0; j < childSeparated.Length; j++)
 					{
-						chunks.Add(new Chunk(GetChunkType(childSeparated[j]), childSeparated[j], j == childSeparated.Length - 1 ? DescendantSelectionType.LastSelector : DescendantSelectionType.Children));
+						chunks.Add(new Chunk(GetChunkType(childSeparated[j]), GetBody(childSeparated[j]), j == childSeparated.Length - 1 ? DescendantSelectionType.LastSelector : DescendantSelectionType.Children, GetPseudoData(childSeparated[j])));
 					}
 				}
 				else if (space.Contains("+"))
@@ -34,20 +34,53 @@ namespace Fizzler.Parser.ChunkHandling
 
 					for (int j = 0; j < adjSeparated.Length; j++)
 					{
-						chunks.Add(new Chunk(GetChunkType(adjSeparated[j]), adjSeparated[j], j == adjSeparated.Length - 1 ? DescendantSelectionType.LastSelector : DescendantSelectionType.Adjacent));
+						chunks.Add(new Chunk(GetChunkType(adjSeparated[j]), GetBody(adjSeparated[j]), j == adjSeparated.Length - 1 ? DescendantSelectionType.LastSelector : DescendantSelectionType.Adjacent, GetPseudoData(adjSeparated[j])));
 					}
 				}
 				else
 				{
-					chunks.Add(new Chunk(GetChunkType(space), space, i == spaceSeparated.Length - 1 ? DescendantSelectionType.LastSelector : DescendantSelectionType.Descendant));
+					string body = GetBody(space);
+					var finalDescendant = i == spaceSeparated.Length - 1 ? DescendantSelectionType.LastSelector : DescendantSelectionType.Descendant;
+
+					chunks.Add(new Chunk(GetChunkType(body), body, finalDescendant, GetPseudoData(space)));
 				}
 			}
 
 			return chunks;
 		}
-
-		private ChunkType GetChunkType(string chunk)
+		
+		private static string GetPseudoData(string chunk)
 		{
+			if(!chunk.Contains(":"))
+				return null;
+		
+			string[] parts = chunk.Split(":".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+			
+			if(parts.Length > 1)
+				return parts[1];
+			
+			return parts[0];
+		}
+
+		private static string GetBody(string chunk)
+		{
+			if(chunk.Contains(":"))
+			{
+				string[] parts = chunk.Split(":".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+			
+				if(parts.Length > 1)
+					return parts[0];
+				else
+					return "*";
+			}
+			
+			return chunk;
+		}
+
+		private static ChunkType GetChunkType(string chunk)
+		{
+			chunk = chunk.Split(":".ToCharArray())[0];
+		
 			if (chunk.Trim() == "*")
 				return ChunkType.Star;
 

@@ -132,6 +132,9 @@ namespace Fizzler.Parser
 
 			Chunk chunk = chunks[currentChunk];
 			Chunk previousChunk = currentChunk > 0 ? chunks[currentChunk - 1] : null;
+
+			if (!new PseudoclassMatcher().Match(chunk.PseudoclassData, node))
+				return false;
 					
 			if (node.Name == chunk.Body)
 			{
@@ -171,10 +174,13 @@ namespace Fizzler.Parser
 
 		private bool MatchStar(HtmlNode node, List<Chunk> chunks, int currentChunk)
 		{
+			Chunk chunk = chunks[currentChunk];
 			Chunk previousChunk = currentChunk > 0 ? chunks[currentChunk - 1] : null;
 			bool match = true;
 
-
+			if(!new PseudoclassMatcher().Match(chunk.PseudoclassData, node))
+				return false;
+	
 			if (previousChunk != null)
 			{
 				if (previousChunk.DescendantSelectionType == DescendantSelectionType.Children)

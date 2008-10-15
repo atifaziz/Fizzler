@@ -57,6 +57,7 @@
     <Compile Include="Extensions\HtmlNodeCollectionExtensions.cs" />
     <Compile Include="Extensions\StringListExtensions.cs" />
     <Compile Include="NodeMatcher.cs" />
+    <Compile Include="PseudoclassMatcher.cs" />
     <Compile Include="SelectorEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -46,12 +46,14 @@
     <Compile Include="AttributeSelectors.cs" />
     <Compile Include="ChildAndAdjacentSelectors.cs" />
     <Compile Include="ChunkParsing\BasicTests.cs" />
+    <Compile Include="ChunkParsing\PseudoclassTests.cs" />
     <Compile Include="ClassSelector.cs" />
     <Compile Include="IDSelector.cs" />
     <Compile Include="MultipleSelectors.cs" />
     <Compile Include="NthChild.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ElementSelector.cs" />
+    <Compile Include="PseudoclassMatching\NthChild.cs" />
     <Compile Include="PsuedoSelectors.cs" />
     <Compile Include="SelectorBaseTest.cs" />
   </ItemGroup>
