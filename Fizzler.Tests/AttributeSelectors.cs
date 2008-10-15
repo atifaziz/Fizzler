@@ -6,7 +6,7 @@ namespace Fizzler.Tests
 	public class AttributeSelectors : SelectorBaseTest
 	{
 		[TestMethod]
-		public void Exists()
+		public void Element_Attr_Exists()
 		{
 			var results = Parser.Parse("div[id]");
 		}
