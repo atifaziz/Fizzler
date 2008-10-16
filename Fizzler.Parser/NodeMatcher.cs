@@ -135,6 +135,9 @@ namespace Fizzler.Parser
 
 			if (!new PseudoclassMatcher().Match(chunk.PseudoclassData, node))
 				return false;
+
+			if (!new AttributeMatcher().Match(chunk.AttributeSelectorData, node))
+				return false;
 					
 			if (node.Name == chunk.Body)
 			{

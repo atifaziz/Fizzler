@@ -47,7 +47,7 @@ namespace Fizzler.Parser.ChunkHandling
 			string body = GetBody(space);
 			var finalDescendant = i == spaceSeparated.Count - 1 ? DescendantSelectionType.LastSelector : DescendantSelectionType.Descendant;
 
-			chunks.Add(new Chunk(GetChunkType(body), body, finalDescendant, GetPseudoData(space), GetAttributeSelectorData(body)));
+			chunks.Add(new Chunk(GetChunkType(body), body, finalDescendant, GetPseudoData(space), GetAttributeSelectorData(space)));
 		}
 
 		private static void HandleAdjacent(string space, ICollection<Chunk> chunks)
@@ -79,7 +79,7 @@ namespace Fizzler.Parser.ChunkHandling
 			
 			if(isAttr)
 			{
-				string selector = chunk.Replace("[", string.Empty).Replace("]", string.Empty);
+				string selector = Regex.Match(chunk, @".*?\[(.*?)\]").Groups[1].Captures[0].Value;
 				
 				if(selector.Contains("|="))
 				{
