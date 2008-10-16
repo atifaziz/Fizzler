@@ -49,6 +49,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChunkHandling\AttributeComparator.cs" />
+    <Compile Include="ChunkHandling\AttributeSelectorData.cs" />
     <Compile Include="ChunkHandling\Chunk.cs" />
     <Compile Include="ChunkHandling\ChunkParser.cs" />
     <Compile Include="ChunkHandling\ChunkType.cs" />
