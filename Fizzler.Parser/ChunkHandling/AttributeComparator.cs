@@ -5,6 +5,6 @@ namespace Fizzler.Parser.ChunkHandling
 		Unknown,
 		Exact,
 		SpaceSeparated,
-		CommaSeparated
+		HyphenSeparated
 	}
 }

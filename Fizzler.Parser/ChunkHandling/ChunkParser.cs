@@ -113,7 +113,7 @@ namespace Fizzler.Parser.ChunkHandling
 			switch(split)
 			{
 				case "|":
-					comparator = AttributeComparator.CommaSeparated;
+					comparator = AttributeComparator.HyphenSeparated;
 					break;
 				case "=":
 					comparator = AttributeComparator.Exact;

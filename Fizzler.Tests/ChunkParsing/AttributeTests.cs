@@ -30,11 +30,11 @@ namespace Fizzler.Tests.ChunkParsing
 		}
 
 		[TestMethod]
-		public void Element_Attr_Comma_Separated()
+		public void Element_Attr_Hyphen_Separated()
 		{
-			Assert_Element_Attr_Comparison(_chunkParser.GetChunks("div[id|=\"someOtherDiv\"]"), AttributeComparator.CommaSeparated);
-			Assert_Element_Attr_Comparison(_chunkParser.GetChunks("div[id|='someOtherDiv']"), AttributeComparator.CommaSeparated);
-			Assert_Element_Attr_Comparison(_chunkParser.GetChunks("div[id|=someOtherDiv]"), AttributeComparator.CommaSeparated);
+			Assert_Element_Attr_Comparison(_chunkParser.GetChunks("div[id|=\"someOtherDiv\"]"), AttributeComparator.HyphenSeparated);
+			Assert_Element_Attr_Comparison(_chunkParser.GetChunks("div[id|='someOtherDiv']"), AttributeComparator.HyphenSeparated);
+			Assert_Element_Attr_Comparison(_chunkParser.GetChunks("div[id|=someOtherDiv]"), AttributeComparator.HyphenSeparated);
 		}
 
 		[TestMethod]

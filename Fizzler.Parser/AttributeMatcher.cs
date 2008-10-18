@@ -1,3 +1,5 @@
+using System;
+using System.Collections.Generic;
 using Fizzler.Parser.ChunkHandling;
 using HtmlAgilityPack;
 
@@ -21,7 +23,30 @@ namespace Fizzler.Parser
 						return false;
 
 					return attribute.Value == attributeSelectorData.Value;
-					
+				}
+
+				if (attributeSelectorData.Comparison == AttributeComparator.SpaceSeparated)
+				{
+					HtmlAttribute attribute = node.Attributes[attributeSelectorData.Attribute];
+
+					if (attribute == null)
+						return false;
+
+					List<string> strings = new List<string>(attribute.Value.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries));
+
+					return strings.Contains(attributeSelectorData.Value);
+				}
+
+				if (attributeSelectorData.Comparison == AttributeComparator.HyphenSeparated)
+				{
+					HtmlAttribute attribute = node.Attributes[attributeSelectorData.Attribute];
+
+					if (attribute == null)
+						return false;
+
+					List<string> strings = new List<string>(attribute.Value.Split("-".ToCharArray(), StringSplitOptions.RemoveEmptyEntries));
+
+					return strings.Contains(attributeSelectorData.Value);
 				}
 			}
 		
