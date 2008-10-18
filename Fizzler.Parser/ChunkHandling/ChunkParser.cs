@@ -91,7 +91,14 @@ namespace Fizzler.Parser.ChunkHandling
 				}
 				else if(selector.Contains("="))
 				{
-					
+					string[] selectorParts = selector.Split("=".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+				
+					data = new AttributeSelectorData
+					       	{
+								Attribute = selectorParts[0],
+								Comparison = AttributeComparator.Exact,
+								Value = selectorParts[1].Replace("\"", string.Empty)
+					       	};
 				}
 				else
 				{
