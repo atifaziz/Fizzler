@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Fizzler.Parser;
 using Fizzler.Parser.ChunkHandling;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -21,15 +22,36 @@ namespace Fizzler.Tests.ChunkParsing
 		}
 
 		[TestMethod]
-		public void Element_Attr_Equals__With_Double_Quotes()
+		public void Element_Attr_Equals()
 		{
-			var result = _chunkParser.GetChunks("div[id=\"someOtherDiv\"]");
+			Assert_Element_Attr_Comparison(_chunkParser.GetChunks("div[id=\"someOtherDiv\"]"), AttributeComparator.Exact);
+			Assert_Element_Attr_Comparison(_chunkParser.GetChunks("div[id='someOtherDiv']"), AttributeComparator.Exact);
+			Assert_Element_Attr_Comparison(_chunkParser.GetChunks("div[id=someOtherDiv]"), AttributeComparator.Exact);
+		}
 
+		[TestMethod]
+		public void Element_Attr_Comma_Separated()
+		{
+			Assert_Element_Attr_Comparison(_chunkParser.GetChunks("div[id|=\"someOtherDiv\"]"), AttributeComparator.CommaSeparated);
+			Assert_Element_Attr_Comparison(_chunkParser.GetChunks("div[id|='someOtherDiv']"), AttributeComparator.CommaSeparated);
+			Assert_Element_Attr_Comparison(_chunkParser.GetChunks("div[id|=someOtherDiv]"), AttributeComparator.CommaSeparated);
+		}
+
+		[TestMethod]
+		public void Element_Attr_Space_Separated()
+		{
+			Assert_Element_Attr_Comparison(_chunkParser.GetChunks("div[id~=\"someOtherDiv\"]"), AttributeComparator.SpaceSeparated);
+			Assert_Element_Attr_Comparison(_chunkParser.GetChunks("div[id~='someOtherDiv']"), AttributeComparator.SpaceSeparated);
+			Assert_Element_Attr_Comparison(_chunkParser.GetChunks("div[id~=someOtherDiv]"), AttributeComparator.SpaceSeparated);
+		}
+
+		private static void Assert_Element_Attr_Comparison(IList<Chunk> result, AttributeComparator comparison)
+		{
 			Assert.AreEqual(DescendantSelectionType.LastSelector, result[0].DescendantSelectionType);
 			Assert.AreEqual("div", result[0].Body);
 			Assert.AreEqual("id", result[0].AttributeSelectorData.Attribute);
 			Assert.AreEqual("someOtherDiv", result[0].AttributeSelectorData.Value);
-			Assert.AreEqual(AttributeComparator.Exact, result[0].AttributeSelectorData.Comparison);
+			Assert.AreEqual(comparison, result[0].AttributeSelectorData.Comparison);
 		}
 	}
 }

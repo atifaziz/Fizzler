@@ -83,22 +83,15 @@ namespace Fizzler.Parser.ChunkHandling
 				
 				if(selector.Contains("|="))
 				{
-					
+					data = GetData(selector.Replace("=", string.Empty), "|");
 				}
 				else if(selector.Contains("~="))
 				{
-					
+					data = GetData(selector.Replace("=", string.Empty), "~");
 				}
 				else if(selector.Contains("="))
 				{
-					string[] selectorParts = selector.Split("=".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-				
-					data = new AttributeSelectorData
-					       	{
-								Attribute = selectorParts[0],
-								Comparison = AttributeComparator.Exact,
-								Value = selectorParts[1].Replace("\"", string.Empty)
-					       	};
+					data = GetData(selector, "=");
 				}
 				else
 				{
@@ -109,6 +102,33 @@ namespace Fizzler.Parser.ChunkHandling
 			}
 		
 			return data;
+		}
+
+		private static AttributeSelectorData GetData(string selector, string split)
+		{
+			string[] selectorParts = selector.Split(split.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+
+			AttributeComparator comparator = AttributeComparator.Unknown;
+			
+			switch(split)
+			{
+				case "|":
+					comparator = AttributeComparator.CommaSeparated;
+					break;
+				case "=":
+					comparator = AttributeComparator.Exact;
+					break;
+				case "~":
+					comparator = AttributeComparator.SpaceSeparated;
+					break;	
+			}
+
+			return new AttributeSelectorData
+			       	{
+			       		Attribute = selectorParts[0],
+						Comparison = comparator,
+			       		Value = selectorParts[1].Replace("\"", string.Empty).Replace("'", string.Empty)
+			       	};
 		}
 
 		private static string GetPseudoData(string chunk)
