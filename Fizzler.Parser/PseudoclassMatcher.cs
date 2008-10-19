@@ -12,10 +12,32 @@ namespace Fizzler.Parser
 			{
 				if (pseudoclassData.Contains("nth-child"))
 					return NthChild(pseudoclassData, node);
+				if (pseudoclassData.Contains("first-child"))
+					return FirstChild(node);
+				
 
 			}
 
 			return true;
+		}
+
+		private bool FirstChild(HtmlNode node)
+		{
+			List<HtmlNode> siblings = new List<HtmlNode>();
+
+			foreach (var sibling in node.ParentNode.ChildNodes)
+			{
+				if (sibling.NodeType == HtmlNodeType.Element)
+				{
+					siblings.Add(sibling);
+				}
+			}
+			
+			
+			if(siblings[0] == node)
+				return true;
+
+			return false;
 		}
 
 		private bool NthChild(string pseudoclassData, HtmlNode node)
