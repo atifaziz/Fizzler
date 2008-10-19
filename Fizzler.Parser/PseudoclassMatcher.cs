@@ -18,9 +18,16 @@ namespace Fizzler.Parser
 					return LastChild(node);
 				if (pseudoclassData.Contains("only-child"))
 					return OnlyChild(node);
+				if (pseudoclassData.Contains("empty"))
+					return Empty(node);
 			}
 
 			return true;
+		}
+
+		private bool Empty(HtmlNode node)
+		{
+			return node.ChildNodes.Count == 0;
 		}
 
 		private bool OnlyChild(HtmlNode node)

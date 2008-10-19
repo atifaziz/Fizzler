@@ -22,7 +22,12 @@ namespace Fizzler.Tests
 			Assert.AreEqual(2, Parser.Parse("*:only-child").Count);
 			Assert.AreEqual(1, Parser.Parse("p:only-child").Count);
 		}
-		[TestMethod]public void Empty(){}
+		[TestMethod]public void Empty()
+		{
+			var results = Parser.Parse("*:empty");
+			Assert.AreEqual(1, results.Count);
+			Assert.AreEqual("head", results[0].Name);
+		}
 		[TestMethod]public void Selected(){}
 		[TestMethod]public void Enabled(){}
 		[TestMethod]public void Not() { }
