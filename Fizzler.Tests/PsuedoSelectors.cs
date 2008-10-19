@@ -28,14 +28,5 @@ namespace Fizzler.Tests
 			Assert.AreEqual(1, results.Count);
 			Assert.AreEqual("head", results[0].Name);
 		}
-		[TestMethod]public void Selected(){}
-		[TestMethod]public void Enabled(){}
-		[TestMethod]public void Not() { }
-		[TestMethod]public void Radio() { }
-		[TestMethod]public void Checkbox() { }
-		[TestMethod]public void Checked() { }
-		[TestMethod]public void Eq() { }
-		[TestMethod]public void Gt() { }
-		[TestMethod]public void Lt() { }
 	}
 }
