@@ -14,7 +14,8 @@ namespace Fizzler.Parser
 					return NthChild(pseudoclassData, node);
 				if (pseudoclassData.Contains("first-child"))
 					return FirstChild(node);
-				
+				if (pseudoclassData.Contains("last-child"))
+					return LastChild(node);
 
 			}
 
@@ -35,6 +36,25 @@ namespace Fizzler.Parser
 			
 			
 			if(siblings[0] == node)
+				return true;
+
+			return false;
+		}
+
+		private bool LastChild(HtmlNode node)
+		{
+			List<HtmlNode> siblings = new List<HtmlNode>();
+
+			foreach (var sibling in node.ParentNode.ChildNodes)
+			{
+				if (sibling.NodeType == HtmlNodeType.Element)
+				{
+					siblings.Add(sibling);
+				}
+			}
+
+
+			if (siblings[siblings.Count - 1] == node && node.ParentNode.Name != "#document")
 				return true;
 
 			return false;
