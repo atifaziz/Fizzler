@@ -16,10 +16,30 @@ namespace Fizzler.Parser
 					return FirstChild(node);
 				if (pseudoclassData.Contains("last-child"))
 					return LastChild(node);
-
+				if (pseudoclassData.Contains("only-child"))
+					return OnlyChild(node);
 			}
 
 			return true;
+		}
+
+		private bool OnlyChild(HtmlNode node)
+		{
+			List<HtmlNode> siblings = new List<HtmlNode>();
+
+			foreach (var sibling in node.ParentNode.ChildNodes)
+			{
+				if (sibling.NodeType == HtmlNodeType.Element)
+				{
+					siblings.Add(sibling);
+				}
+			}
+
+
+			if (siblings.Count == 1 && node.ParentNode.Name != "#document")
+				return true;
+
+			return false;
 		}
 
 		private bool FirstChild(HtmlNode node)

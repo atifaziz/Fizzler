@@ -16,7 +16,12 @@ namespace Fizzler.Tests
 			Assert.AreEqual(6, Parser.Parse("*:last-child").Count);
 			Assert.AreEqual(2, Parser.Parse("p:last-child").Count);
 		}
-		[TestMethod]public void Only_Child(){}
+		
+		[TestMethod]public void Only_Child()
+		{
+			Assert.AreEqual(2, Parser.Parse("*:only-child").Count);
+			Assert.AreEqual(1, Parser.Parse("p:only-child").Count);
+		}
 		[TestMethod]public void Empty(){}
 		[TestMethod]public void Selected(){}
 		[TestMethod]public void Enabled(){}
