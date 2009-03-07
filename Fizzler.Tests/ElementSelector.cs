@@ -41,6 +41,12 @@ namespace Fizzler.Tests
 		}
 
 		[TestMethod]
+		public void Basic_Positive_Precedence_Two_Tags_With_Grandchild_Descendant()
+		{
+			Assert.AreEqual(2, Parser.Parse("div a").Count);
+		}
+
+		[TestMethod]
 		public void Basic_Positive_Precedence_Three_Tags()
 		{
 			Assert.AreEqual(1, Parser.Parse("div p a").Count);

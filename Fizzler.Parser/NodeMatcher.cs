@@ -11,8 +11,7 @@ namespace Fizzler.Parser
 		public bool IsDownwardMatch(HtmlNode node, List<Chunk> chunks, int currentChunk)
 		{
 			Chunk chunk = chunks[currentChunk];
-	
-		
+
 			bool match = false;
 
 			if (node.NodeType != HtmlNodeType.Element)
@@ -153,8 +152,8 @@ namespace Fizzler.Parser
 					}
 					else
 					{
-						// Check if the previous chunk matched the parent node
-						match = IsDownwardMatch(node.ParentNode, chunks, currentChunk - 1);
+						// Descendant
+						match = IsUpwardMatch(chunks, currentChunk, node);
 					}
 				}
 				else
