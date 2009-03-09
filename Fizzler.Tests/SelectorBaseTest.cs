@@ -1,4 +1,5 @@
 using System.IO;
+using System.Reflection;
 using Fizzler.Parser;
 
 namespace Fizzler.Tests
@@ -10,6 +11,11 @@ namespace Fizzler.Tests
 
 		protected SelectorBaseTest()
 		{
+			Assembly assembly = Assembly.GetExecutingAssembly();
+			Stream stream = assembly.GetManifestResourceStream("Fizzler.Tests.Data.SelectorTest.html");
+			StreamReader streamReader = new StreamReader(stream);
+			_html = streamReader.ReadToEnd();
+		
 			_html = File.ReadAllText("SelectorTest.html"); 
 			_parser = new SelectorEngine(Html);
 		}

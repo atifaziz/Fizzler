@@ -58,9 +58,9 @@
     <Compile Include="SelectorBaseTest.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Data\SelectorTest.html">
+    <EmbeddedResource Include="Data\SelectorTest.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fizzler.Parser\Fizzler.Parser.csproj">
