@@ -16,7 +16,7 @@ namespace Fizzler.Tests
 			StreamReader streamReader = new StreamReader(stream);
 			_html = streamReader.ReadToEnd();
 		
-			_html = File.ReadAllText("SelectorTest.html"); 
+			//_html = File.ReadAllText("SelectorTest.html"); 
 			_parser = new SelectorEngine(Html);
 		}
 
