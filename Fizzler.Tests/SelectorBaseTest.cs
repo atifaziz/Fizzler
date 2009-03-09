@@ -12,7 +12,7 @@ namespace Fizzler.Tests
 		protected SelectorBaseTest()
 		{
 			Assembly assembly = Assembly.GetExecutingAssembly();
-			Stream stream = assembly.GetManifestResourceStream("Fizzler.Tests.Data.SelectorTest.html");
+			Stream stream = assembly.GetManifestResourceStream("Fizzler.Tests.Data.SelectorTest.html"); 
 			StreamReader streamReader = new StreamReader(stream);
 			_html = streamReader.ReadToEnd();
 		
