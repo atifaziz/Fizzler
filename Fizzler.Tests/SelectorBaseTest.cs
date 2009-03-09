@@ -10,7 +10,7 @@ namespace Fizzler.Tests
 
 		protected SelectorBaseTest()
 		{
-			_html = File.ReadAllText("SelectorTest.html");
+			_html = File.ReadAllText("SelectorTest.html"); 
 			_parser = new SelectorEngine(Html);
 		}
 
