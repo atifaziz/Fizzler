@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using Fizzler.Parser.ChunkHandling;
-using HtmlAgilityPack;
+using Fizzler.Parser.Document;
 
-namespace Fizzler.Parser
+namespace Fizzler.Parser.Matchers
 {
 	public class AttributeMatcher
 	{
@@ -27,7 +27,7 @@ namespace Fizzler.Parser
 
 				if (attributeSelectorData.Comparison == AttributeComparator.SpaceSeparated)
 				{
-                    IAttribute attribute = node.Attributes[attributeSelectorData.Attribute];
+					IAttribute attribute = node.Attributes[attributeSelectorData.Attribute];
 
 					if (attribute == null)
 						return false;
@@ -39,7 +39,7 @@ namespace Fizzler.Parser
 
 				if (attributeSelectorData.Comparison == AttributeComparator.HyphenSeparated)
 				{
-                    IAttribute attribute = node.Attributes[attributeSelectorData.Attribute];
+					IAttribute attribute = node.Attributes[attributeSelectorData.Attribute];
 
 					if (attribute == null)
 						return false;

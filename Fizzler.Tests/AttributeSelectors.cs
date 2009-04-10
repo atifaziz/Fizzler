@@ -1,6 +1,5 @@
+using Fizzler.DocumentParsers.HtmlAgilityPack;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Fizzler.Parser;
-using Fizzler.Parser.Html;
 
 namespace Fizzler.Tests
 {
@@ -10,7 +9,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Element_Attr_Exists()
 		{
-			var results = Parser.Parse("div[id]");
+			var results = Parser.Select("div[id]");
 			
 			Assert.AreEqual(2, results.Count);
 			Assert.AreEqual("div", results[0].Name);
@@ -20,7 +19,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Element_Attr_Equals_With_Double_Quotes()
 		{
-			var results = Parser.Parse("div[id=\"someOtherDiv\"]");
+			var results = Parser.Select("div[id=\"someOtherDiv\"]");
 
 			Assert.AreEqual(1, results.Count);
 			Assert.AreEqual("div", results[0].Name);
@@ -29,7 +28,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Element_Attr_Space_Separated_With_Double_Quotes()
 		{
-			var results = Parser.Parse("p[class~=\"ohyeah\"]");
+			var results = Parser.Select("p[class~=\"ohyeah\"]");
 
 			Assert.AreEqual(1, results.Count);
 			Assert.AreEqual("p", results[0].Name);
@@ -39,7 +38,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Element_Attr_Hyphen_Separated_With_Double_Quotes()
 		{
-			var results = Parser.Parse("span[class|=\"separated\"]");
+			var results = Parser.Select("span[class|=\"separated\"]");
 
 			Assert.AreEqual(1, results.Count);
 			Assert.AreEqual("span", results[0].Name);

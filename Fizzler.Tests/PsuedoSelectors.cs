@@ -7,24 +7,24 @@ namespace Fizzler.Tests
 	{
 		[TestMethod]public void First_Child()
 		{
-			Assert.AreEqual(7, Parser.Parse("*:first-child").Count);
-			Assert.AreEqual(1, Parser.Parse("p:first-child").Count);
+			Assert.AreEqual(7, Parser.Select("*:first-child").Count);
+			Assert.AreEqual(1, Parser.Select("p:first-child").Count);
 		}
 		
 		[TestMethod]public void Last_Child()
 		{
-			Assert.AreEqual(6, Parser.Parse("*:last-child").Count);
-			Assert.AreEqual(2, Parser.Parse("p:last-child").Count);
+			Assert.AreEqual(6, Parser.Select("*:last-child").Count);
+			Assert.AreEqual(2, Parser.Select("p:last-child").Count);
 		}
 		
 		[TestMethod]public void Only_Child()
 		{
-			Assert.AreEqual(2, Parser.Parse("*:only-child").Count);
-			Assert.AreEqual(1, Parser.Parse("p:only-child").Count);
+			Assert.AreEqual(2, Parser.Select("*:only-child").Count);
+			Assert.AreEqual(1, Parser.Select("p:only-child").Count);
 		}
 		[TestMethod]public void Empty()
 		{
-			var results = Parser.Parse("*:empty");
+			var results = Parser.Select("*:empty");
 			Assert.AreEqual(1, results.Count);
 			Assert.AreEqual("head", results[0].Name);
 		}

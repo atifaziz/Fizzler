@@ -1,28 +1,54 @@
 using System;
 using System.Collections.Generic;
 using Fizzle.Parser.Extensions;
-using Fizzler.Parser;
 using Fizzler.Parser.ChunkHandling;
-using HtmlAgilityPack;
+using Fizzler.Parser.Document;
+using Fizzler.Parser.Matchers;
 
 namespace Fizzler.Parser
 {
-	public class SelectorEngine
+	public class SelectorEngine : ISelectorEngine
 	{
 		private readonly ChunkParser _chunkParser = new ChunkParser();
 		private readonly NodeMatcher _nodeMatcher = new NodeMatcher();
-        private IDocument _document;
+        private readonly IDocument _document;
 
+		/// <summary>
+		/// Empty constructor
+		/// </summary>
         public SelectorEngine()
         {
         }
 
+		/// <summary>
+		/// Allows use of the Select(string) method by initialising the engine with a document.
+		/// </summary>
+		/// <param name="document"></param>
 		public SelectorEngine(IDocument document)
 		{
 			_document = document;
 		}
 
-        public IList<IDocumentNode> Parse(string selectorChain)
+		/// <summary>
+		/// Select from the IDocument which was used to initialise the engine.
+		/// </summary>
+		/// <param name="selectorChain"></param>
+		/// <returns></returns>
+		public IList<IDocumentNode> Select(string selectorChain)
+		{
+			if(_document == null)
+				throw new NullReferenceException("The engine IDocument was null. Either pass it in via the SelectorEngine(IDocument) constructor or use Select(IDocument, string).");
+
+			return Select(_document, selectorChain);
+		}
+
+		/// <summary>
+		/// Select from the passed IDocument.
+		/// </summary>
+		/// <param name="document"></param>
+		/// <param name="selectorChain"></param>
+		/// <returns></returns>
+		public IList<IDocumentNode> Select(IDocument document, string selectorChain)
 		{
             List<IDocumentNode> selectedNodes = new List<IDocumentNode>();
 
@@ -38,7 +64,6 @@ namespace Fizzler.Parser
 
 				for (int chunkCounter = 0; chunkCounter < chunks.Count; chunkCounter++)
 				{
-
 					list = list.Flatten();
 
 					list.RemoveAll(node => !_nodeMatcher.IsDownwardMatch( node, chunks, chunkCounter));

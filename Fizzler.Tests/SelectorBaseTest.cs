@@ -1,8 +1,8 @@
 using System.IO;
 using System.Reflection;
+using Fizzler.DocumentParsers.HtmlAgilityPack;
 using Fizzler.Parser;
 using HtmlAgilityPack;
-using Fizzler.Parser.Html;
 
 namespace Fizzler.Tests
 {

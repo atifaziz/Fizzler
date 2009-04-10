@@ -1,6 +1,5 @@
 using System.Collections.Generic;
-using HtmlAgilityPack;
-using Fizzler.Parser;
+using Fizzler.Parser.Document;
 
 namespace Fizzle.Parser.Extensions
 {

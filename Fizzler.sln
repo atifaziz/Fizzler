@@ -16,6 +16,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Tests", "Fizzler.Tests\Fizzler.Tests.csproj", "{61EDF5C0-1854-4867-AE8A-7A1216E116C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.DocumentParsers.HtmlAgilityPack", "Fizzler.DocumentParsers.HtmlAgilityPack\Fizzler.DocumentParsers.HtmlAgilityPack.csproj", "{DBEAD205-BD5C-461F-873D-DE643016F14C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DocumentParsers", "DocumentParsers", "{7AA23AC0-0852-45AC-8661-6FFBD3BD265D}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Fizzler6.vsmdi
@@ -33,9 +37,16 @@ Global
 		{61EDF5C0-1854-4867-AE8A-7A1216E116C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61EDF5C0-1854-4867-AE8A-7A1216E116C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61EDF5C0-1854-4867-AE8A-7A1216E116C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBEAD205-BD5C-461F-873D-DE643016F14C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBEAD205-BD5C-461F-873D-DE643016F14C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBEAD205-BD5C-461F-873D-DE643016F14C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBEAD205-BD5C-461F-873D-DE643016F14C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DBEAD205-BD5C-461F-873D-DE643016F14C} = {7AA23AC0-0852-45AC-8661-6FFBD3BD265D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		VisualSVNWorkingCopyRoot = 

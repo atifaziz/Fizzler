@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using Fizzler.Parser.ChunkHandling;
+using Fizzler.Parser.Document;
 using Fizzler.Parser.Extensions;
-using HtmlAgilityPack;
 
-namespace Fizzler.Parser
+namespace Fizzler.Parser.Matchers
 {
 	public class NodeMatcher
 	{
@@ -60,7 +60,7 @@ namespace Fizzler.Parser
 			return match;
 		}
 
-        public bool IsImmediateUpwardMatch(List<Chunk> chunks, int currentChunk, IDocumentNode node)
+		public bool IsImmediateUpwardMatch(List<Chunk> chunks, int currentChunk, IDocumentNode node)
 		{
 			bool match = false;
 
@@ -74,12 +74,12 @@ namespace Fizzler.Parser
 				if (previousChunk != null)
 					match = IsDownwardMatch(parent, chunks, currentChunk - 1);
 
-					break;
+				break;
 			}
 			return match;
 		}
 
-        private bool MatchId(IDocumentNode node, List<Chunk> chunks, int currentChunk)
+		private bool MatchId(IDocumentNode node, List<Chunk> chunks, int currentChunk)
 		{
 			bool match = false;
 			Chunk chunk = chunks[currentChunk];
@@ -87,7 +87,7 @@ namespace Fizzler.Parser
 		
 			if (node.Id != null)
 			{
-                string idValue = node.Id;
+				string idValue = node.Id;
 				string[] chunkParts = chunk.Body.Split("#".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
 				// if length is greater than one, we could have an id selector with element
@@ -169,7 +169,7 @@ namespace Fizzler.Parser
 			return match;
 		}
 
-        private bool MatchStar(IDocumentNode node, List<Chunk> chunks, int currentChunk)
+		private bool MatchStar(IDocumentNode node, List<Chunk> chunks, int currentChunk)
 		{
 			Chunk chunk = chunks[currentChunk];
 			Chunk previousChunk = currentChunk > 0 ? chunks[currentChunk - 1] : null;
@@ -201,7 +201,7 @@ namespace Fizzler.Parser
 			return match;
 		}
 
-        private bool MatchClass(IDocumentNode node, List<Chunk> chunks, int currentChunk)
+		private bool MatchClass(IDocumentNode node, List<Chunk> chunks, int currentChunk)
 		{
 			bool match = false;
 			Chunk chunk = chunks[currentChunk];
@@ -209,7 +209,7 @@ namespace Fizzler.Parser
 		
 			if (node.Class != null)
 			{
-                List<string> idValues = new List<string>(node.Class.Split(" ".ToCharArray()));
+				List<string> idValues = new List<string>(node.Class.Split(" ".ToCharArray()));
 				List<string> chunkParts = new List<string>(chunk.Body.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries));
 
 				// if length is greater than one, we could have an id selector with element
