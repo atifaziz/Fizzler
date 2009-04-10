@@ -1,6 +1,8 @@
 using System.IO;
 using System.Reflection;
 using Fizzler.Parser;
+using HtmlAgilityPack;
+using Fizzler.Parser.Html;
 
 namespace Fizzler.Tests
 {
@@ -15,9 +17,11 @@ namespace Fizzler.Tests
 			Stream stream = assembly.GetManifestResourceStream("Fizzler.Tests.Data.SelectorTest.html"); 
 			StreamReader streamReader = new StreamReader(stream);
 			_html = streamReader.ReadToEnd();
-		
-			//_html = File.ReadAllText("SelectorTest.html"); 
-			_parser = new SelectorEngine(Html);
+
+            var htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(_html);
+                        			
+			_parser = new SelectorEngine(new HtmlDocumentWrapper(htmlDocument));
 		}
 
 		public SelectorEngine Parser

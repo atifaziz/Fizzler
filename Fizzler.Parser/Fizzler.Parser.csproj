@@ -59,6 +59,10 @@
     <Compile Include="Extensions\HtmlNodeListExtensions.cs" />
     <Compile Include="Extensions\HtmlNodeCollectionExtensions.cs" />
     <Compile Include="Extensions\StringListExtensions.cs" />
+    <Compile Include="Html\HtmlDocumentWrapper.cs" />
+    <Compile Include="Html\HtmlNodeWrapper.cs" />
+    <Compile Include="IDocument.cs" />
+    <Compile Include="IDocumentNode.cs" />
     <Compile Include="NodeMatcher.cs" />
     <Compile Include="PseudoclassMatcher.cs" />
     <Compile Include="SelectorEngine.cs" />

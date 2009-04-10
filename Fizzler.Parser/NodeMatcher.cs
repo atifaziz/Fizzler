@@ -8,13 +8,13 @@ namespace Fizzler.Parser
 {
 	public class NodeMatcher
 	{
-		public bool IsDownwardMatch(HtmlNode node, List<Chunk> chunks, int currentChunk)
+		public bool IsDownwardMatch(IDocumentNode node, List<Chunk> chunks, int currentChunk)
 		{
 			Chunk chunk = chunks[currentChunk];
 
 			bool match = false;
 
-			if (node.NodeType != HtmlNodeType.Element)
+			if (!node.IsElement)
 				return false;
 
 			switch(chunk.ChunkType)
@@ -36,7 +36,7 @@ namespace Fizzler.Parser
 			return match;
 		}
 
-		public bool IsUpwardMatch(List<Chunk> chunks, int currentChunk, HtmlNode node)
+		public bool IsUpwardMatch(List<Chunk> chunks, int currentChunk, IDocumentNode node)
 		{
 			bool match = false;
 		
@@ -60,7 +60,7 @@ namespace Fizzler.Parser
 			return match;
 		}
 
-		public bool IsImmediateUpwardMatch(List<Chunk> chunks, int currentChunk, HtmlNode node)
+        public bool IsImmediateUpwardMatch(List<Chunk> chunks, int currentChunk, IDocumentNode node)
 		{
 			bool match = false;
 
@@ -74,25 +74,20 @@ namespace Fizzler.Parser
 				if (previousChunk != null)
 					match = IsDownwardMatch(parent, chunks, currentChunk - 1);
 
-				//if (match)
-				//{
 					break;
-				//}
-
-				parent = parent.ParentNode;
 			}
 			return match;
 		}
 
-		private bool MatchId(HtmlNode node, List<Chunk> chunks, int currentChunk)
+        private bool MatchId(IDocumentNode node, List<Chunk> chunks, int currentChunk)
 		{
 			bool match = false;
 			Chunk chunk = chunks[currentChunk];
 			Chunk previousChunk = currentChunk > 0 ? chunks[currentChunk - 1] : null;
 		
-			if (node.Attributes["id"] != null)
+			if (node.Id != null)
 			{
-				string idValue = node.Attributes["id"].Value;
+                string idValue = node.Id;
 				string[] chunkParts = chunk.Body.Split("#".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
 				// if length is greater than one, we could have an id selector with element
@@ -125,7 +120,7 @@ namespace Fizzler.Parser
 			return match;
 		}
 
-		private bool MatchTag(HtmlNode node, List<Chunk> chunks, int currentChunk)
+		private bool MatchTag(IDocumentNode node, List<Chunk> chunks, int currentChunk)
 		{
 			bool match = false;
 
@@ -174,7 +169,7 @@ namespace Fizzler.Parser
 			return match;
 		}
 
-		private bool MatchStar(HtmlNode node, List<Chunk> chunks, int currentChunk)
+        private bool MatchStar(IDocumentNode node, List<Chunk> chunks, int currentChunk)
 		{
 			Chunk chunk = chunks[currentChunk];
 			Chunk previousChunk = currentChunk > 0 ? chunks[currentChunk - 1] : null;
@@ -206,15 +201,15 @@ namespace Fizzler.Parser
 			return match;
 		}
 
-		private bool MatchClass(HtmlNode node, List<Chunk> chunks, int currentChunk)
+        private bool MatchClass(IDocumentNode node, List<Chunk> chunks, int currentChunk)
 		{
 			bool match = false;
 			Chunk chunk = chunks[currentChunk];
 			Chunk previousChunk = currentChunk > 0 ? chunks[currentChunk - 1] : null;
 		
-			if (node.Attributes["class"] != null)
+			if (node.Class != null)
 			{
-				List<string> idValues = new List<string>(node.Attributes["class"].Value.Split(" ".ToCharArray()));
+                List<string> idValues = new List<string>(node.Class.Split(" ".ToCharArray()));
 				List<string> chunkParts = new List<string>(chunk.Body.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries));
 
 				// if length is greater than one, we could have an id selector with element

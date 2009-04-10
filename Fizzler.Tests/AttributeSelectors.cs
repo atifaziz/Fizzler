@@ -1,4 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Fizzler.Parser;
+using Fizzler.Parser.Html;
 
 namespace Fizzler.Tests
 {
@@ -31,7 +33,7 @@ namespace Fizzler.Tests
 
 			Assert.AreEqual(1, results.Count);
 			Assert.AreEqual("p", results[0].Name);
-			Assert.AreEqual("eeeee", results[0].InnerText);
+            Assert.AreEqual("eeeee", ((HtmlNodeWrapper)results[0]).HtmlNode.InnerText);
 		}
 
 		[TestMethod]
@@ -41,7 +43,7 @@ namespace Fizzler.Tests
 
 			Assert.AreEqual(1, results.Count);
 			Assert.AreEqual("span", results[0].Name);
-			Assert.AreEqual("test", results[0].InnerText);
+            Assert.AreEqual("test", ((HtmlNodeWrapper)results[0]).HtmlNode.InnerText);
 		}
 	}
 }

@@ -6,7 +6,7 @@ namespace Fizzler.Parser
 {
 	public class PseudoclassMatcher
 	{
-		public bool Match(string pseudoclassData, HtmlNode node)
+        public bool Match(string pseudoclassData, IDocumentNode node)
 		{
 			if (!string.IsNullOrEmpty(pseudoclassData))
 			{
@@ -25,18 +25,18 @@ namespace Fizzler.Parser
 			return true;
 		}
 
-		private bool Empty(HtmlNode node)
+        private bool Empty(IDocumentNode node)
 		{
-			return node.ChildNodes.Count == 0;
+            return node.ChildNodes.Count == 0;
 		}
 
-		private bool OnlyChild(HtmlNode node)
+        private bool OnlyChild(IDocumentNode node)
 		{
-			List<HtmlNode> siblings = new List<HtmlNode>();
+            List<IDocumentNode> siblings = new List<IDocumentNode>();
 
-			foreach (var sibling in node.ParentNode.ChildNodes)
+            foreach (var sibling in node.ParentNode.ChildNodes)
 			{
-				if (sibling.NodeType == HtmlNodeType.Element)
+				if (sibling.IsElement)
 				{
 					siblings.Add(sibling);
 				}
@@ -49,53 +49,53 @@ namespace Fizzler.Parser
 			return false;
 		}
 
-		private bool FirstChild(HtmlNode node)
+        private bool FirstChild(IDocumentNode node)
 		{
-			List<HtmlNode> siblings = new List<HtmlNode>();
+            List<IDocumentNode> siblings = new List<IDocumentNode>();
 
-			foreach (var sibling in node.ParentNode.ChildNodes)
+            foreach (var sibling in node.ParentNode.ChildNodes)
 			{
-				if (sibling.NodeType == HtmlNodeType.Element)
+                if (sibling.IsElement)
 				{
 					siblings.Add(sibling);
 				}
 			}
 			
 			
-			if(siblings[0] == node)
+			if(siblings[0].Equals(node))
 				return true;
 
 			return false;
 		}
 
-		private bool LastChild(HtmlNode node)
+        private bool LastChild(IDocumentNode node)
 		{
-			List<HtmlNode> siblings = new List<HtmlNode>();
+            List<IDocumentNode> siblings = new List<IDocumentNode>();
 
-			foreach (var sibling in node.ParentNode.ChildNodes)
+            foreach (var sibling in node.ParentNode.ChildNodes)
 			{
-				if (sibling.NodeType == HtmlNodeType.Element)
+				if (sibling.IsElement)
 				{
 					siblings.Add(sibling);
 				}
 			}
 
 
-			if (siblings[siblings.Count - 1] == node && node.ParentNode.Name != "#document")
+            if (siblings[siblings.Count - 1].Equals(node) && node.ParentNode.Name != "#document")
 				return true;
 
 			return false;
 		}
 
-		private bool NthChild(string pseudoclassData, HtmlNode node)
+        private bool NthChild(string pseudoclassData, IDocumentNode node)
 		{
 			int digit = Convert.ToInt32(pseudoclassData.Replace("nth-child(", string.Empty).Replace(")", string.Empty)) - 1;
-		
-			List<HtmlNode> nodes = new List<HtmlNode>();
 
-			foreach (var sibling in node.ParentNode.ChildNodes)
+            List<IDocumentNode> nodes = new List<IDocumentNode>();
+
+            foreach (var sibling in node.ParentNode.ChildNodes)
 			{
-				if(sibling.NodeType == HtmlNodeType.Element)
+				if(sibling.IsElement)
 				{
 					nodes.Add(sibling);
 				}
@@ -105,7 +105,7 @@ namespace Fizzler.Parser
 
 			for (int i = 0; i < nodes.Count; i++)
 			{
-				if(nodes[i] == node)
+				if(nodes[i].Equals(node))
 				{
 					foundAt = i;
 				}

@@ -11,25 +11,20 @@ namespace Fizzler.Parser
 	{
 		private readonly ChunkParser _chunkParser = new ChunkParser();
 		private readonly NodeMatcher _nodeMatcher = new NodeMatcher();
-		private readonly string _html;
+        private IDocument _document;
 
-		public SelectorEngine(string html)
+        public SelectorEngine()
+        {
+        }
+
+		public SelectorEngine(IDocument document)
 		{
-			_html = html;
+			_document = document;
 		}
 
-		private HtmlNode GetDocumentNode()
+        public IList<IDocumentNode> Parse(string selectorChain)
 		{
-			var document = new HtmlDocument();
-			document.LoadHtml(_html);
-
-			return document.DocumentNode;
-		}
-
-		public IList<HtmlNode> Parse(string selectorChain)
-		{
-			HtmlNode documentNode = GetDocumentNode();
-			List<HtmlNode> selectedNodes = new List<HtmlNode>();
+            List<IDocumentNode> selectedNodes = new List<IDocumentNode>();
 
 			string[] selectors = selectorChain.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 			
@@ -39,14 +34,14 @@ namespace Fizzler.Parser
 				// we also need to check if a chunk contains a "." character....
 				var chunks = _chunkParser.GetChunks(rawSelector.Trim());
 
-				List<HtmlNode> list = documentNode.ChildNodes.ToList();
+                List<IDocumentNode> list = _document.ChildNodes;
 
 				for (int chunkCounter = 0; chunkCounter < chunks.Count; chunkCounter++)
 				{
 
 					list = list.Flatten();
 
-					list.RemoveAll(node => !_nodeMatcher.IsDownwardMatch(node, chunks, chunkCounter));
+					list.RemoveAll(node => !_nodeMatcher.IsDownwardMatch( node, chunks, chunkCounter));
 				}
 
 				selectedNodes.AddRange(list);

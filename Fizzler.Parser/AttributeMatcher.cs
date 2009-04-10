@@ -7,7 +7,7 @@ namespace Fizzler.Parser
 {
 	public class AttributeMatcher
 	{
-		public bool Match(AttributeSelectorData attributeSelectorData, HtmlNode node)
+		public bool Match(AttributeSelectorData attributeSelectorData, IDocumentNode node)
 		{
 			if(attributeSelectorData != null)
 			{
@@ -17,7 +17,7 @@ namespace Fizzler.Parser
 				}
 				if(attributeSelectorData.Comparison == AttributeComparator.Exact)
 				{
-					HtmlAttribute attribute = node.Attributes[attributeSelectorData.Attribute];
+					IAttribute attribute = node.Attributes[attributeSelectorData.Attribute];
 				
 					if(attribute == null)
 						return false;
@@ -27,7 +27,7 @@ namespace Fizzler.Parser
 
 				if (attributeSelectorData.Comparison == AttributeComparator.SpaceSeparated)
 				{
-					HtmlAttribute attribute = node.Attributes[attributeSelectorData.Attribute];
+                    IAttribute attribute = node.Attributes[attributeSelectorData.Attribute];
 
 					if (attribute == null)
 						return false;
@@ -39,7 +39,7 @@ namespace Fizzler.Parser
 
 				if (attributeSelectorData.Comparison == AttributeComparator.HyphenSeparated)
 				{
-					HtmlAttribute attribute = node.Attributes[attributeSelectorData.Attribute];
+                    IAttribute attribute = node.Attributes[attributeSelectorData.Attribute];
 
 					if (attribute == null)
 						return false;
