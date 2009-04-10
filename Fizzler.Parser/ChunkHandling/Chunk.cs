@@ -1,5 +1,8 @@
 namespace Fizzler.Parser.ChunkHandling
 {
+	/// <summary>
+	/// A Chunk describers the part of the selector we are working with.
+	/// </summary>
 	public class Chunk
 	{
 		public AttributeSelectorData AttributeSelectorData { get; set; }
