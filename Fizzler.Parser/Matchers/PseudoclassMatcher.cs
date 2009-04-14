@@ -4,21 +4,30 @@ using Fizzler.Parser.Document;
 
 namespace Fizzler.Parser.Matchers
 {
+	/// <summary>
+	/// Matches against a pseudoclass.
+	/// </summary>
 	public class PseudoclassMatcher
 	{
+		/// <summary>
+		/// Is the specified node a match against the pseudoclass?
+		/// </summary>
+		/// <param name="pseudoclassData"></param>
+		/// <param name="node"></param>
+		/// <returns></returns>
 		public bool Match(string pseudoclassData, IDocumentNode node)
 		{
-			if (!string.IsNullOrEmpty(pseudoclassData))
+			if(!string.IsNullOrEmpty(pseudoclassData))
 			{
-				if (pseudoclassData.Contains("nth-child"))
+				if(pseudoclassData.Contains("nth-child"))
 					return NthChild(pseudoclassData, node);
-				if (pseudoclassData.Contains("first-child"))
+				if(pseudoclassData.Contains("first-child"))
 					return FirstChild(node);
-				if (pseudoclassData.Contains("last-child"))
+				if(pseudoclassData.Contains("last-child"))
 					return LastChild(node);
-				if (pseudoclassData.Contains("only-child"))
+				if(pseudoclassData.Contains("only-child"))
 					return OnlyChild(node);
-				if (pseudoclassData.Contains("empty"))
+				if(pseudoclassData.Contains("empty"))
 					return Empty(node);
 			}
 
@@ -34,16 +43,16 @@ namespace Fizzler.Parser.Matchers
 		{
 			List<IDocumentNode> siblings = new List<IDocumentNode>();
 
-			foreach (var sibling in node.ParentNode.ChildNodes)
+			foreach(var sibling in node.ParentNode.ChildNodes)
 			{
-				if (sibling.IsElement)
+				if(sibling.IsElement)
 				{
 					siblings.Add(sibling);
 				}
 			}
 
 
-			if (siblings.Count == 1 && node.ParentNode.Name != "#document")
+			if(siblings.Count == 1 && node.ParentNode.Name != "#document")
 				return true;
 
 			return false;
@@ -53,15 +62,15 @@ namespace Fizzler.Parser.Matchers
 		{
 			List<IDocumentNode> siblings = new List<IDocumentNode>();
 
-			foreach (var sibling in node.ParentNode.ChildNodes)
+			foreach(var sibling in node.ParentNode.ChildNodes)
 			{
-				if (sibling.IsElement)
+				if(sibling.IsElement)
 				{
 					siblings.Add(sibling);
 				}
 			}
-			
-			
+
+
 			if(siblings[0].Equals(node))
 				return true;
 
@@ -72,16 +81,16 @@ namespace Fizzler.Parser.Matchers
 		{
 			List<IDocumentNode> siblings = new List<IDocumentNode>();
 
-			foreach (var sibling in node.ParentNode.ChildNodes)
+			foreach(var sibling in node.ParentNode.ChildNodes)
 			{
-				if (sibling.IsElement)
+				if(sibling.IsElement)
 				{
 					siblings.Add(sibling);
 				}
 			}
 
 
-			if (siblings[siblings.Count - 1].Equals(node) && node.ParentNode.Name != "#document")
+			if(siblings[siblings.Count - 1].Equals(node) && node.ParentNode.Name != "#document")
 				return true;
 
 			return false;
@@ -93,7 +102,7 @@ namespace Fizzler.Parser.Matchers
 
 			List<IDocumentNode> nodes = new List<IDocumentNode>();
 
-			foreach (var sibling in node.ParentNode.ChildNodes)
+			foreach(var sibling in node.ParentNode.ChildNodes)
 			{
 				if(sibling.IsElement)
 				{
@@ -103,14 +112,14 @@ namespace Fizzler.Parser.Matchers
 
 			int foundAt = -1;
 
-			for (int i = 0; i < nodes.Count; i++)
+			for(int i = 0; i < nodes.Count; i++)
 			{
 				if(nodes[i].Equals(node))
 				{
 					foundAt = i;
 				}
 			}
-			
+
 			if(foundAt == digit)
 			{
 				return true;

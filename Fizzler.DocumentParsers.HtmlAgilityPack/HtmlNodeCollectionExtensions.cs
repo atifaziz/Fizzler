@@ -10,9 +10,9 @@ namespace Fizzler.DocumentParsers.HtmlAgilityPack
 		{
 			List<IDocumentNode> list = new List<IDocumentNode>();
 
-			foreach (var node in t)
+			foreach(var node in t)
 			{
-				list.Add((IDocumentNode)node);
+				list.Add((IDocumentNode) node);
 			}
 
 			return list;

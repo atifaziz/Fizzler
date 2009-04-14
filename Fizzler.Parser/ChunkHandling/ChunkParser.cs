@@ -9,15 +9,20 @@ namespace Fizzler.Parser.ChunkHandling
 	/// </summary>
 	public class ChunkParser
 	{
+		/// <summary>
+		/// Break up a raw selector string into <see cref="Chunk">Chunk</see>s.
+		/// </summary>
+		/// <param name="rawSelector"></param>
+		/// <returns></returns>
 		public List<Chunk> GetChunks(string rawSelector)
 		{
 			rawSelector = rawSelector.Replace(" >", ">").Replace("> ", ">").Replace(" +", "+").Replace("+ ", "+");
-		
+
 			List<Chunk> chunks = new List<Chunk>();
-		
+
 			string[] spaceSeparated = rawSelector.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-			for (int i = 0; i < spaceSeparated.Length; i++)
+			for(int i = 0; i < spaceSeparated.Length; i++)
 			{
 				HandleChunk(i, spaceSeparated, chunks);
 			}
@@ -28,11 +33,11 @@ namespace Fizzler.Parser.ChunkHandling
 		private static void HandleChunk(int i, string[] spaceSeparated, ICollection<Chunk> chunks)
 		{
 			string space = spaceSeparated[i];
-			if (space.Contains(">"))
+			if(space.Contains(">"))
 			{
 				HandleChildren(space, chunks);
 			}
-			else if (space.Contains("+"))
+			else if(space.Contains("+"))
 			{
 				HandleAdjacent(space, chunks);
 			}
@@ -54,7 +59,7 @@ namespace Fizzler.Parser.ChunkHandling
 		{
 			string[] adjSeparated = space.Split("+".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-			for (int j = 0; j < adjSeparated.Length; j++)
+			for(int j = 0; j < adjSeparated.Length; j++)
 			{
 				chunks.Add(new Chunk(GetChunkType(adjSeparated[j]), GetBody(adjSeparated[j]), j == adjSeparated.Length - 1 ? DescendantSelectionType.LastSelector : DescendantSelectionType.Adjacent, GetPseudoData(adjSeparated[j]), GetAttributeSelectorData(adjSeparated[j])));
 			}
@@ -64,7 +69,7 @@ namespace Fizzler.Parser.ChunkHandling
 		{
 			string[] childSeparated = space.Split(">".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
-			for (int j = 0; j < childSeparated.Length; j++)
+			for(int j = 0; j < childSeparated.Length; j++)
 			{
 				chunks.Add(new Chunk(GetChunkType(childSeparated[j]), GetBody(childSeparated[j]), j == childSeparated.Length - 1 ? DescendantSelectionType.LastSelector : DescendantSelectionType.Children, GetPseudoData(childSeparated[j]), GetAttributeSelectorData(childSeparated[j])));
 			}
@@ -73,14 +78,14 @@ namespace Fizzler.Parser.ChunkHandling
 		private static AttributeSelectorData GetAttributeSelectorData(string chunk)
 		{
 			AttributeSelectorData data = null;
-		
+
 			// does the chunk even contain an attribute selector?
 			bool isAttr = chunk.Contains("[");
-			
+
 			if(isAttr)
 			{
 				string selector = Regex.Match(chunk, @".*?\[(.*?)\]").Groups[1].Captures[0].Value;
-				
+
 				if(selector.Contains("|="))
 				{
 					data = GetData(selector.Replace("=", string.Empty), "|");
@@ -98,9 +103,8 @@ namespace Fizzler.Parser.ChunkHandling
 					// we now have to assume we've got a selector such as a[id], i.e. an attribute existence match
 					data = new AttributeSelectorData {Attribute = selector};
 				}
-				
 			}
-		
+
 			return data;
 		}
 
@@ -109,7 +113,7 @@ namespace Fizzler.Parser.ChunkHandling
 			string[] selectorParts = selector.Split(split.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
 			AttributeComparator comparator = AttributeComparator.Unknown;
-			
+
 			switch(split)
 			{
 				case "|":
@@ -120,14 +124,14 @@ namespace Fizzler.Parser.ChunkHandling
 					break;
 				case "~":
 					comparator = AttributeComparator.SpaceSeparated;
-					break;	
+					break;
 			}
 
 			return new AttributeSelectorData
 			       	{
-			       		Attribute = selectorParts[0],
-						Comparison = comparator,
-			       		Value = selectorParts[1].Replace("\"", string.Empty).Replace("'", string.Empty)
+			       			Attribute = selectorParts[0],
+			       			Comparison = comparator,
+			       			Value = selectorParts[1].Replace("\"", string.Empty).Replace("'", string.Empty)
 			       	};
 		}
 
@@ -135,22 +139,22 @@ namespace Fizzler.Parser.ChunkHandling
 		{
 			if(!chunk.Contains(":"))
 				return null;
-		
+
 			string[] parts = chunk.Split(":".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-			
+
 			if(parts.Length > 1)
 				return parts[1];
-			
+
 			return parts[0];
 		}
 
 		private static string GetBody(string chunk)
 		{
-			if (chunk.Contains("["))
+			if(chunk.Contains("["))
 			{
 				chunk = Regex.Replace(chunk, @"\[.*\]", string.Empty);
 			}
-		
+
 			if(chunk.Contains(":"))
 			{
 				string[] parts = chunk.Split(":".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
@@ -165,14 +169,14 @@ namespace Fizzler.Parser.ChunkHandling
 		private static ChunkType GetChunkType(string chunk)
 		{
 			chunk = chunk.Split(":".ToCharArray())[0];
-		
-			if (chunk.Trim() == "*")
+
+			if(chunk.Trim() == "*")
 				return ChunkType.Star;
 
-			if (chunk.Contains("#"))
+			if(chunk.Contains("#"))
 				return ChunkType.Id;
 
-			if (chunk.Contains("."))
+			if(chunk.Contains("."))
 				return ChunkType.Class;
 
 			return ChunkType.TagName;

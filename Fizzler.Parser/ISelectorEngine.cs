@@ -3,6 +3,9 @@ using Fizzler.Parser.Document;
 
 namespace Fizzler.Parser
 {
+	/// <summary>
+	/// SelectorEngine.
+	/// </summary>
 	public interface ISelectorEngine
 	{
 		/// <summary>

@@ -16,6 +16,11 @@ namespace Fizzler.DocumentParsers.HtmlAgilityPack
 			_htmlNode = htmlNode;
 		}
 
+		public HtmlNode HtmlNode
+		{
+			get { return _htmlNode; }
+		}
+
 		public List<IDocumentNode> ChildNodes
 		{
 			get
@@ -23,7 +28,7 @@ namespace Fizzler.DocumentParsers.HtmlAgilityPack
 				HtmlNodeCollection htmlNodes = _htmlNode.ChildNodes;
 
 				List<IDocumentNode> documentNodes = new List<IDocumentNode>();
-				foreach (HtmlNode htmlNode in htmlNodes)
+				foreach(HtmlNode htmlNode in htmlNodes)
 				{
 					documentNodes.Add(new HtmlNodeWrapper(htmlNode));
 				}
@@ -32,79 +37,39 @@ namespace Fizzler.DocumentParsers.HtmlAgilityPack
 			}
 		}
 
-		public HtmlNode HtmlNode
-		{
-			get
-			{
-				return _htmlNode;
-			}
-		}
-
 		public string Name
 		{
-			get
-			{
-				return _htmlNode.Name;
-			}
+			get { return _htmlNode.Name; }
 		}
 
 		public string Id
 		{
-			get
-			{
-				return _htmlNode.Attributes["id"]!=null ? _htmlNode.Attributes["id"].Value : null;
-			}
+			get { return _htmlNode.Attributes["id"] != null ? _htmlNode.Attributes["id"].Value : null; }
 		}
 
 		public string Class
 		{
-			get
-			{
-				return _htmlNode.Attributes["class"] != null ? _htmlNode.Attributes["class"].Value : null;
-			}
+			get { return _htmlNode.Attributes["class"] != null ? _htmlNode.Attributes["class"].Value : null; }
 		}
 
 		public IDocumentNode ParentNode
 		{
-			get
-			{
-				return _htmlNode.ParentNode!=null ? new HtmlNodeWrapper(_htmlNode.ParentNode) : null;
-			}
+			get { return _htmlNode.ParentNode != null ? new HtmlNodeWrapper(_htmlNode.ParentNode) : null; }
 		}
 
 		public IDocumentNode PreviousSibling
 		{
-			get
-			{
-				return _htmlNode.PreviousSibling!=null ? new HtmlNodeWrapper(_htmlNode.PreviousSibling) : null;
-			}
+			get { return _htmlNode.PreviousSibling != null ? new HtmlNodeWrapper(_htmlNode.PreviousSibling) : null; }
 		}
 
 		public bool IsElement
 		{
-			get
-			{
-				return _htmlNode.NodeType == HtmlNodeType.Element;
-			}
+			get { return _htmlNode.NodeType == HtmlNodeType.Element; }
 		}
 
 		public string InnerText
 		{
-			get
-			{
-				return _htmlNode.InnerText;
-			}
-		}
-
-		public override bool Equals(object obj)
-		{
-			HtmlNodeWrapper otherNode = obj as HtmlNodeWrapper;
-			return otherNode!=null ? otherNode._htmlNode.Equals(_htmlNode) : false;
-		}
-
-		public override int GetHashCode()
-		{
-			return _htmlNode.GetHashCode();
+			get { return _htmlNode.InnerText; }
 		}
 
 		public IAttributeCollection Attributes
@@ -112,30 +77,22 @@ namespace Fizzler.DocumentParsers.HtmlAgilityPack
 			get { return new HtmlAttributeWrapperCollection(_htmlNode.Attributes); }
 		}
 
-		public class HtmlAttributeWrapperCollection : IAttributeCollection
+		public override bool Equals(object obj)
 		{
-			HtmlAttributeCollection _htmlAttributeCollection;
-
-			public HtmlAttributeWrapperCollection(HtmlAttributeCollection htmlAttributeCollection)
-			{
-				_htmlAttributeCollection = htmlAttributeCollection;
-			}
-        
-
-			public IAttribute  this[string name]
-			{
-				get
-				{
-					HtmlAttribute attribute = _htmlAttributeCollection[name];
-					return attribute != null ? new HtmlAttributeWrapper(attribute) : null;
-				}
-			}
-
+			HtmlNodeWrapper otherNode = obj as HtmlNodeWrapper;
+			return otherNode != null ? otherNode._htmlNode.Equals(_htmlNode) : false;
 		}
+
+		public override int GetHashCode()
+		{
+			return _htmlNode.GetHashCode();
+		}
+
+		#region Nested type: HtmlAttributeWrapper
 
 		public class HtmlAttributeWrapper : IAttribute
 		{
-			HtmlAttribute _attribute;
+			private readonly HtmlAttribute _attribute;
 
 			public HtmlAttributeWrapper(HtmlAttribute attribute)
 			{
@@ -147,5 +104,31 @@ namespace Fizzler.DocumentParsers.HtmlAgilityPack
 				get { return _attribute.Value; }
 			}
 		}
+
+		#endregion
+
+		#region Nested type: HtmlAttributeWrapperCollection
+
+		public class HtmlAttributeWrapperCollection : IAttributeCollection
+		{
+			private readonly HtmlAttributeCollection _htmlAttributeCollection;
+
+			public HtmlAttributeWrapperCollection(HtmlAttributeCollection htmlAttributeCollection)
+			{
+				_htmlAttributeCollection = htmlAttributeCollection;
+			}
+
+
+			public IAttribute this[string name]
+			{
+				get
+				{
+					HtmlAttribute attribute = _htmlAttributeCollection[name];
+					return attribute != null ? new HtmlAttributeWrapper(attribute) : null;
+				}
+			}
+		}
+
+		#endregion
 	}
 }
