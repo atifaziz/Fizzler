@@ -34,12 +34,12 @@ namespace Fizzler.Parser.Matchers
 			return true;
 		}
 
-		private bool Empty(IDocumentNode node)
+		private static bool Empty(IDocumentNode node)
 		{
 			return node.ChildNodes.Count == 0;
 		}
 
-		private bool OnlyChild(IDocumentNode node)
+		private static bool OnlyChild(IDocumentNode node)
 		{
 			List<IDocumentNode> siblings = new List<IDocumentNode>();
 
@@ -58,7 +58,7 @@ namespace Fizzler.Parser.Matchers
 			return false;
 		}
 
-		private bool FirstChild(IDocumentNode node)
+		private static bool FirstChild(IDocumentNode node)
 		{
 			List<IDocumentNode> siblings = new List<IDocumentNode>();
 
@@ -77,7 +77,7 @@ namespace Fizzler.Parser.Matchers
 			return false;
 		}
 
-		private bool LastChild(IDocumentNode node)
+		private static bool LastChild(IDocumentNode node)
 		{
 			List<IDocumentNode> siblings = new List<IDocumentNode>();
 
@@ -96,7 +96,7 @@ namespace Fizzler.Parser.Matchers
 			return false;
 		}
 
-		private bool NthChild(string pseudoclassData, IDocumentNode node)
+		private static bool NthChild(string pseudoclassData, IDocumentNode node)
 		{
 			int digit = Convert.ToInt32(pseudoclassData.Replace("nth-child(", string.Empty).Replace(")", string.Empty)) - 1;
 
