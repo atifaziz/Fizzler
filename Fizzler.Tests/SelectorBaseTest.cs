@@ -21,7 +21,7 @@ namespace Fizzler.Tests
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(_html);
                         			
-			_parser = new SelectorEngine(new HtmlDocumentWrapper(htmlDocument));
+			_parser = new SelectorEngine(new HtmlNodeWrapper(htmlDocument.DocumentNode.SelectSingleNode("html")));
 		}
 
 		public SelectorEngine Parser

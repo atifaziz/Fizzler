@@ -13,7 +13,7 @@ namespace Fizzler.Parser
 	public class SelectorEngine : ISelectorEngine
 	{
 		private readonly ChunkParser _chunkParser = new ChunkParser();
-		private readonly IDocument _document;
+		private readonly IDocumentNode _scopeNode;
 		private readonly NodeMatcher _nodeMatcher = new NodeMatcher();
 
 		/// <summary>
@@ -27,9 +27,9 @@ namespace Fizzler.Parser
 		/// Allows use of the Select(string) method by initialising the engine with a document.
 		/// </summary>
 		/// <param name="document"></param>
-		public SelectorEngine(IDocument document)
+		public SelectorEngine(IDocumentNode document)
 		{
-			_document = document;
+			_scopeNode = document;
 		}
 
 		/// <summary>
@@ -39,20 +39,23 @@ namespace Fizzler.Parser
 		/// <returns></returns>
 		public IList<IDocumentNode> Select(string selectorChain)
 		{
-			if(_document == null)
-				throw new NullReferenceException("The engine IDocument was null. Either pass it in via the SelectorEngine(IDocument) constructor or use Select(IDocument, string).");
+			if(_scopeNode == null)
+				throw new NullReferenceException("The engine scope node was null. Either pass it in via the SelectorEngine(IDocumentNode) constructor or use Select(IDocumentNode, string).");
 
-			return Select(_document, selectorChain);
+			return Select(_scopeNode, selectorChain);
 		}
 
 		/// <summary>
 		/// Select from the passed IDocument.
 		/// </summary>
-		/// <param name="document"></param>
+		/// <param name="scopeNode"></param>
 		/// <param name="selectorChain"></param>
 		/// <returns></returns>
-		public IList<IDocumentNode> Select(IDocument document, string selectorChain)
+		public IList<IDocumentNode> Select(IDocumentNode scopeNode, string selectorChain)
 		{
+            if (!scopeNode.IsElement)
+                throw new ArgumentException("Node is not is an element.", "scopeNode");
+
 			List<IDocumentNode> selectedNodes = new List<IDocumentNode>();
 
 			string[] selectors = selectorChain.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
@@ -63,12 +66,11 @@ namespace Fizzler.Parser
 				// we also need to check if a chunk contains a "." character....
 				var chunks = _chunkParser.GetChunks(rawSelector.Trim());
 
-				List<IDocumentNode> list = _document.ChildNodes;
+                var list = new List<IDocumentNode> { scopeNode };
 
-				for(int chunkCounter = 0; chunkCounter < chunks.Count; chunkCounter++)
+			    for(int chunkCounter = 0; chunkCounter < chunks.Count; chunkCounter++)
 				{
 					list = list.Flatten();
-
 					list.RemoveAll(node => !_nodeMatcher.IsDownwardMatch(node, chunks, chunkCounter));
 				}
 

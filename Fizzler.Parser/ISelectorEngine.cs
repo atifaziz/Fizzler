@@ -19,9 +19,9 @@ namespace Fizzler.Parser
 		/// <summary>
 		/// Select from the passed IDocument.
 		/// </summary>
-		/// <param name="document"></param>
+		/// <param name="node"></param>
 		/// <param name="selectorChain"></param>
 		/// <returns></returns>
-		IList<IDocumentNode> Select(IDocument document, string selectorChain);
+		IList<IDocumentNode> Select(IDocumentNode node, string selectorChain);
 	}
 }

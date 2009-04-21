@@ -7,7 +7,6 @@
       <FormatSettings>
         <CONTINUOUS_INDENT_MULTIPLIER>2</CONTINUOUS_INDENT_MULTIPLIER>
         <INDENT_SIZE>4</INDENT_SIZE>
-        <INSERT_TABS>True</INSERT_TABS>
         <MODIFIERS_ORDER IsNull="False">
           <Item>public</Item>
           <Item>protected</Item>
@@ -257,7 +256,6 @@ II.2.12 <HandlesEvent />
     <VB>
       <FormatSettings>
         <INDENT_SIZE>4</INDENT_SIZE>
-        <INSERT_TABS>True</INSERT_TABS>
       </FormatSettings>
       <ImportsSettings />
       <Naming2 />
