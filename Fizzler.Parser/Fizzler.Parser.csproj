@@ -43,6 +43,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ISelectable.cs" />
     <Compile Include="Matchers\AttributeMatcher.cs" />
     <Compile Include="ChunkHandling\AttributeComparator.cs" />
     <Compile Include="ChunkHandling\AttributeSelectorData.cs" />

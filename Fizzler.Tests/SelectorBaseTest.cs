@@ -14,8 +14,9 @@ namespace Fizzler.Tests
 	{
 		private readonly string _html;
 		private readonly SelectorEngine _parser;
+	    private readonly ISelectable _source;
 
-		protected SelectorBaseTest()
+	    protected SelectorBaseTest()
 		{
 			Assembly assembly = Assembly.GetExecutingAssembly();
 			Stream stream = assembly.GetManifestResourceStream("Fizzler.Tests.Data.SelectorTest.html"); 
@@ -25,13 +26,19 @@ namespace Fizzler.Tests
             var htmlDocument = new HtmlDocument();
             htmlDocument.LoadHtml(_html);
                         			
-			_parser = new SelectorEngine(new HtmlNodeWrapper(htmlDocument.DocumentNode.SelectSingleNode("html")));
+			_parser = new SelectorEngine();
+		    _source = _parser.ToSelectable(new HtmlNodeWrapper(htmlDocument.DocumentNode.SelectSingleNode("html")));
 		}
 
 	    protected SelectorEngine Parser
 		{
 			get { return _parser; }
 		}
+
+	    public ISelectable Source
+	    {
+	        get { return _source; }
+	    }
 
 	    protected string Html
 		{
@@ -40,12 +47,12 @@ namespace Fizzler.Tests
 
         protected IEnumerable<IDocumentNode> Select(string selectorChain)
         {
-            return Parser.Select(selectorChain);
+            return Source.Select(selectorChain);
         }
 
         protected IList<IDocumentNode> SelectList(string selectorChain)
         {
-            return new ReadOnlyCollection<IDocumentNode>(Parser.Select(selectorChain).ToArray());
+            return new ReadOnlyCollection<IDocumentNode>(Source.Select(selectorChain).ToArray());
         }
 	}
 }
