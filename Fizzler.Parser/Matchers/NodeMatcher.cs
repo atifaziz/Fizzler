@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Fizzler.Parser.ChunkHandling;
 using Fizzler.Parser.Document;
-using Fizzler.Parser.Extensions;
 
 namespace Fizzler.Parser.Matchers
 {
@@ -22,30 +21,22 @@ namespace Fizzler.Parser.Matchers
 		/// <returns></returns>
 		public bool IsDownwardMatch(IDocumentNode node, IList<Chunk> chunks, int currentChunk)
 		{
-			Chunk chunk = chunks[currentChunk];
+            if (!node.IsElement)
+                return false;
 
-			bool match = false;
-
-			if(!node.IsElement)
-				return false;
-
-			switch(chunk.ChunkType)
+		    switch(chunks[currentChunk].ChunkType)
 			{
 				case ChunkType.Star:
-					match = MatchStar(node, chunks, currentChunk);
-					break;
+                    return MatchStar(node, chunks, currentChunk);
 				case ChunkType.TagName:
-					match = MatchTag(node, chunks, currentChunk);
-					break;
+                    return MatchTag(node, chunks, currentChunk);
 				case ChunkType.Id:
-					match = MatchId(node, chunks, currentChunk);
-					break;
+                    return MatchId(node, chunks, currentChunk);
 				case ChunkType.Class:
-					match = MatchClass(node, chunks, currentChunk);
-					break;
+                    return MatchClass(node, chunks, currentChunk);
 			}
 
-			return match;
+		    return false;
 		}
 
 		/// <summary>
