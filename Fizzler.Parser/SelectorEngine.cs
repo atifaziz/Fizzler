@@ -85,7 +85,7 @@ namespace Fizzler.Parser
             };
         }
 
-	    private Func<IDocumentNode, bool> ChunkToFilter(List<Chunk> chunks, int index)
+	    private Func<IDocumentNode, bool> ChunkToFilter(IList<Chunk> chunks, int index)
 	    {
             Debug.Assert(chunks != null);
             Debug.Assert(index >= 0);

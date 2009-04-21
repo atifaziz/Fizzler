@@ -14,7 +14,7 @@ namespace Fizzler.Parser.ChunkHandling
 		/// </summary>
 		/// <param name="rawSelector"></param>
 		/// <returns></returns>
-		public List<Chunk> GetChunks(string rawSelector)
+		public IList<Chunk> GetChunks(string rawSelector)
 		{
 			rawSelector = rawSelector.Replace(" >", ">").Replace("> ", ">").Replace(" +", "+").Replace("+ ", "+");
 

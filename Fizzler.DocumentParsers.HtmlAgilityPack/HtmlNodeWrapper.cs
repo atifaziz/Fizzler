@@ -21,7 +21,7 @@ namespace Fizzler.DocumentParsers.HtmlAgilityPack
 			get { return _htmlNode; }
 		}
 
-		public List<IDocumentNode> ChildNodes
+		public IList<IDocumentNode> ChildNodes
 		{
 			get
 			{

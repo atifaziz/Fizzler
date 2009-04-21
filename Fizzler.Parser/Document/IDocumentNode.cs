@@ -15,7 +15,7 @@ namespace Fizzler.Parser.Document
 		/// <summary>
 		/// This nodes children
 		/// </summary>
-		List<IDocumentNode> ChildNodes { get; }
+		IList<IDocumentNode> ChildNodes { get; }
 
 		/// <summary>
 		/// This nodes parent

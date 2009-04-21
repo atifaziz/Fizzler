@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Fizzler.Parser.ChunkHandling;
 using Fizzler.Parser.Document;
 using Fizzler.Parser.Extensions;
@@ -19,7 +20,7 @@ namespace Fizzler.Parser.Matchers
 		/// <param name="chunks"></param>
 		/// <param name="currentChunk"></param>
 		/// <returns></returns>
-		public bool IsDownwardMatch(IDocumentNode node, List<Chunk> chunks, int currentChunk)
+		public bool IsDownwardMatch(IDocumentNode node, IList<Chunk> chunks, int currentChunk)
 		{
 			Chunk chunk = chunks[currentChunk];
 
@@ -54,7 +55,7 @@ namespace Fizzler.Parser.Matchers
 		/// <param name="currentChunk"></param>
 		/// <param name="node"></param>
 		/// <returns></returns>
-		public bool IsUpwardMatch(List<Chunk> chunks, int currentChunk, IDocumentNode node)
+		public bool IsUpwardMatch(IList<Chunk> chunks, int currentChunk, IDocumentNode node)
 		{
 			bool match = false;
 
@@ -85,7 +86,7 @@ namespace Fizzler.Parser.Matchers
 		/// <param name="currentChunk"></param>
 		/// <param name="node"></param>
 		/// <returns></returns>
-		public bool IsImmediateUpwardMatch(List<Chunk> chunks, int currentChunk, IDocumentNode node)
+		public bool IsImmediateUpwardMatch(IList<Chunk> chunks, int currentChunk, IDocumentNode node)
 		{
 			bool match = false;
 
@@ -104,7 +105,7 @@ namespace Fizzler.Parser.Matchers
 			return match;
 		}
 
-		private bool MatchId(IDocumentNode node, List<Chunk> chunks, int currentChunk)
+		private bool MatchId(IDocumentNode node, IList<Chunk> chunks, int currentChunk)
 		{
 			bool match = false;
 			Chunk chunk = chunks[currentChunk];
@@ -145,7 +146,7 @@ namespace Fizzler.Parser.Matchers
 			return match;
 		}
 
-		private bool MatchTag(IDocumentNode node, List<Chunk> chunks, int currentChunk)
+		private bool MatchTag(IDocumentNode node, IList<Chunk> chunks, int currentChunk)
 		{
 			bool match = false;
 
@@ -194,7 +195,7 @@ namespace Fizzler.Parser.Matchers
 			return match;
 		}
 
-		private bool MatchStar(IDocumentNode node, List<Chunk> chunks, int currentChunk)
+		private bool MatchStar(IDocumentNode node, IList<Chunk> chunks, int currentChunk)
 		{
 			Chunk chunk = chunks[currentChunk];
 			Chunk previousChunk = currentChunk > 0 ? chunks[currentChunk - 1] : null;
@@ -212,7 +213,7 @@ namespace Fizzler.Parser.Matchers
 				}
 				else
 				{
-					if(chunks.Exists(c => c.DescendantSelectionType == DescendantSelectionType.Children))
+					if(chunks.Any(c => c.DescendantSelectionType == DescendantSelectionType.Children))
 					{
 						match = false;
 					}
@@ -226,7 +227,7 @@ namespace Fizzler.Parser.Matchers
 			return match;
 		}
 
-		private bool MatchClass(IDocumentNode node, List<Chunk> chunks, int currentChunk)
+		private bool MatchClass(IDocumentNode node, IList<Chunk> chunks, int currentChunk)
 		{
 			bool match = false;
 			Chunk chunk = chunks[currentChunk];
