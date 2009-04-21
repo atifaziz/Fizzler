@@ -43,6 +43,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\IDocumentNodeExtensions.cs" />
     <Compile Include="ISelectable.cs" />
     <Compile Include="Matchers\AttributeMatcher.cs" />
     <Compile Include="ChunkHandling\AttributeComparator.cs" />
@@ -51,7 +52,6 @@
     <Compile Include="ChunkHandling\ChunkParser.cs" />
     <Compile Include="ChunkHandling\ChunkType.cs" />
     <Compile Include="DescendantSelectionType.cs" />
-    <Compile Include="Extensions\HtmlNodeListExtensions.cs" />
     <Compile Include="Extensions\StringListExtensions.cs" />
     <Compile Include="Document\IAttribute.cs" />
     <Compile Include="Document\IAttributeCollection.cs" />

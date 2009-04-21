@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using Fizzler.Parser.ChunkHandling;
 using Fizzler.Parser.Document;
 using Fizzler.Parser.Extensions;
@@ -33,37 +34,64 @@ namespace Fizzler.Parser
 		/// <summary>
 		/// Select from the passed node.
 		/// </summary>
-		/// <param name="scopeNode"></param>
+        /// <param name="node"></param>
 		/// <param name="selectorChain"></param>
 		/// <returns></returns>
-		public IEnumerable<IDocumentNode> Select(IDocumentNode scopeNode, string selectorChain)
+		public IEnumerable<IDocumentNode> Select(IDocumentNode node, string selectorChain)
 		{
-            if (!scopeNode.IsElement)
-                throw new ArgumentException("Node is not is an element.", "scopeNode");
+		    if (node == null) 
+                throw new ArgumentNullException("node");
+		    if (!node.IsElement)
+                throw new ArgumentException("Node is not is an element.", "node");
 
-			List<IDocumentNode> selectedNodes = new List<IDocumentNode>();
-
-			string[] selectors = selectorChain.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-
-			// This enables us to support "," by simply treating comma-separated parts as separate selectors
-			foreach(string rawSelector in selectors)
-			{
-				// we also need to check if a chunk contains a "." character....
-				var chunks = _chunkParser.GetChunks(rawSelector.Trim());
-
-                var list = new List<IDocumentNode> { scopeNode };
-
-			    for(int chunkCounter = 0; chunkCounter < chunks.Count; chunkCounter++)
-				{
-					list = list.Flatten();
-					list.RemoveAll(node => !_nodeMatcher.IsDownwardMatch(node, chunks, chunkCounter));
-				}
-
-				selectedNodes.AddRange(list);
-			}
-
-			return selectedNodes;
+            var filters = selectorChain.Split(',')                          // tokenize
+                                       .Select(s => s.Trim())               // compress
+                                       .Where(s => s.Length > 0)            // none empty, please
+                                       .Select(s => SelectorToFilter(s));   // compile
+		    
+            return SelectImpl(Enumerable.Repeat(node, 1), filters);
 		}
+
+	    private static IEnumerable<IDocumentNode> SelectImpl(IEnumerable<IDocumentNode> nodes, 
+            IEnumerable<Func<IEnumerable<IDocumentNode>, IEnumerable<IDocumentNode>>> selectors)
+	    {
+            Debug.Assert(nodes != null);
+            Debug.Assert(selectors != null);
+
+            foreach (var selector in selectors)
+	        {
+	            foreach (var selection in selector(nodes))
+	                yield return selection;
+	        }
+	    }
+
+	    private Func<IEnumerable<IDocumentNode>, IEnumerable<IDocumentNode>> SelectorToFilter(string selector)
+        {
+            Debug.Assert(selector != null);
+            Debug.Assert(selector.Length > 0);
+
+            // we also need to check if a chunk contains a "." character....
+            var chunks = _chunkParser.GetChunks(selector);
+            var filters = chunks.Select((c, i) => ChunkToFilter(chunks, i));
+            return selections =>
+            {
+                foreach (var filter in filters)
+                {
+                    selections = selections.SelectMany(s => s.DescendantsAndSelf())
+                                           .Distinct()
+                                           .Where(filter);
+                }
+                return selections;
+            };
+        }
+
+	    private Func<IDocumentNode, bool> ChunkToFilter(List<Chunk> chunks, int index)
+	    {
+            Debug.Assert(chunks != null);
+            Debug.Assert(index >= 0);
+            Debug.Assert(index < chunks.Count);
+            return node => _nodeMatcher.IsDownwardMatch(node, chunks, index);
+	    }
 
 	    private sealed class SelectableDocumentNode : ISelectable
         {
