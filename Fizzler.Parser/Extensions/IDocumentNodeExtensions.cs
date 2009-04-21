@@ -12,6 +12,15 @@ namespace Fizzler.Parser.Extensions
     public static class IDocumentNodeExtensions
 	{
         /// <summary>
+        /// Returns a collections of child elements of this node.
+        /// </summary>
+        public static IEnumerable<IDocumentNode> Elements(this IDocumentNode node)
+        {
+            if (node == null) throw new ArgumentNullException("node");
+            return node.ChildNodes.Where(child => child.IsElement);
+        }
+
+        /// <summary>
         /// Returns a collection of nodes that contains this element 
         /// followed by all descendant nodes of this element.
         /// </summary>

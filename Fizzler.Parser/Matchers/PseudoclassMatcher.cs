@@ -1,6 +1,7 @@
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using Fizzler.Parser.Document;
+using Fizzler.Parser.Extensions;
 
 namespace Fizzler.Parser.Matchers
 {
@@ -41,91 +42,36 @@ namespace Fizzler.Parser.Matchers
 
 		private static bool OnlyChild(IDocumentNode node)
 		{
-			List<IDocumentNode> siblings = new List<IDocumentNode>();
-
-			foreach(var sibling in node.ParentNode.ChildNodes)
-			{
-				if(sibling.IsElement)
-				{
-					siblings.Add(sibling);
-				}
-			}
-
-
-			if(siblings.Count == 1 && node.ParentNode.Name != "#document")
-				return true;
-
-			return false;
+		    var parent = node.ParentNode;
+            return parent.Elements().Count() == 1 
+                && parent.Name != "#document";
 		}
 
-		private static bool FirstChild(IDocumentNode node)
+	    private static bool FirstChild(IDocumentNode node)
+	    {
+	        return node.ParentNode.ChildNodes.Where(child => child.IsElement).First().Equals(node);
+	    }
+
+	    private static bool LastChild(IDocumentNode node)
 		{
-			List<IDocumentNode> siblings = new List<IDocumentNode>();
-
-			foreach(var sibling in node.ParentNode.ChildNodes)
-			{
-				if(sibling.IsElement)
-				{
-					siblings.Add(sibling);
-				}
-			}
-
-
-			if(siblings[0].Equals(node))
-				return true;
-
-			return false;
-		}
-
-		private static bool LastChild(IDocumentNode node)
-		{
-			List<IDocumentNode> siblings = new List<IDocumentNode>();
-
-			foreach(var sibling in node.ParentNode.ChildNodes)
-			{
-				if(sibling.IsElement)
-				{
-					siblings.Add(sibling);
-				}
-			}
-
-
-			if(siblings[siblings.Count - 1].Equals(node) && node.ParentNode.Name != "#document")
-				return true;
-
-			return false;
-		}
+            var parent = node.ParentNode;
+            return parent.Elements().Last().Equals(node)
+                && parent.Name != "#document";
+        }
 
 		private static bool NthChild(string pseudoclassData, IDocumentNode node)
 		{
-			int digit = Convert.ToInt32(pseudoclassData.Replace("nth-child(", string.Empty).Replace(")", string.Empty)) - 1;
-
-			List<IDocumentNode> nodes = new List<IDocumentNode>();
-
-			foreach(var sibling in node.ParentNode.ChildNodes)
-			{
-				if(sibling.IsElement)
-				{
-					nodes.Add(sibling);
-				}
-			}
-
-			int foundAt = -1;
-
-			for(int i = 0; i < nodes.Count; i++)
-			{
-				if(nodes[i].Equals(node))
-				{
-					foundAt = i;
-				}
-			}
-
-			if(foundAt == digit)
-			{
-				return true;
-			}
-
-			return false;
+			var sought = Convert.ToInt32(pseudoclassData.Replace("nth-child(", string.Empty).Replace(")", string.Empty));
+            var found = 0;
+		    var position = 1;
+		    var e = node.ParentNode.Elements().GetEnumerator();
+            while (e.MoveNext())
+            {
+				if (e.Current.Equals(node))
+					found = position;
+                position++;
+            }
+			return found == sought;
 		}
 	}
 }
