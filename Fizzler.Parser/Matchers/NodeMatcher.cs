@@ -241,7 +241,7 @@ namespace Fizzler.Parser.Matchers
 				// if length is greater than one, we could have an id selector with element
 				if(chunkParts.Count > 1)
 				{
-					if(chunkParts.ContainsAll(idValues))
+					if(chunkParts.All(idValues.Contains))
 					{
 						match = true;
 					}

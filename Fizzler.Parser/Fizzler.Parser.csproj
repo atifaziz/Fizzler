@@ -52,7 +52,6 @@
     <Compile Include="ChunkHandling\ChunkParser.cs" />
     <Compile Include="ChunkHandling\ChunkType.cs" />
     <Compile Include="DescendantSelectionType.cs" />
-    <Compile Include="Extensions\StringListExtensions.cs" />
     <Compile Include="Document\IAttribute.cs" />
     <Compile Include="Document\IAttributeCollection.cs" />
     <Compile Include="Document\IDocumentNode.cs" />
