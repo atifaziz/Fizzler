@@ -9,7 +9,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Basic_Selector()
 		{
-			var result = Parser.Select("#myDiv");
+			var result = SelectList("#myDiv");
 			
 			Assert.AreEqual(1, result.Count);
 			Assert.AreEqual("div", result[0].Name);
@@ -18,7 +18,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void With_Element()
 		{
-			var result = Parser.Select("div#myDiv");
+			var result = SelectList("div#myDiv");
 
 			Assert.AreEqual(1, result.Count);
 			Assert.AreEqual("div", result[0].Name);
@@ -27,7 +27,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void With_Existing_ID_Descendant()
 		{
-			var result = Parser.Select("#theBody #myDiv");
+			var result = SelectList("#theBody #myDiv");
 
 			Assert.AreEqual(1, result.Count);
 			Assert.AreEqual("div", result[0].Name);
@@ -36,7 +36,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void With_Non_Existant_ID_Descendant()
 		{
-			var result = Parser.Select("#theBody #whatwhatwhat");
+			var result = SelectList("#theBody #whatwhatwhat");
 
 			Assert.AreEqual(0, result.Count);
 		}
@@ -44,7 +44,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void With_Non_Existant_ID_Ancestor()
 		{
-			var result = Parser.Select("#whatwhatwhat #someOtherDiv");
+			var result = SelectList("#whatwhatwhat #someOtherDiv");
 
 			Assert.AreEqual(0, result.Count);
 		}
@@ -52,7 +52,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void All_Descendants_Of_ID()
 		{
-			var result = Parser.Select("#myDiv *");
+			var result = SelectList("#myDiv *");
 
 			Assert.AreEqual(5, result.Count);
 			Assert.AreEqual("div", result[0].Name);
@@ -62,7 +62,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Child_ID()
 		{
-			var result = Parser.Select("#theBody>#myDiv");
+			var result = SelectList("#theBody>#myDiv");
 
 			Assert.AreEqual(1, result.Count);
 			Assert.AreEqual("div", result[0].Name);
@@ -71,7 +71,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Not_A_Child_ID()
 		{
-			var result = Parser.Select("#theBody>#someOtherDiv");
+			var result = SelectList("#theBody>#someOtherDiv");
 
 			Assert.AreEqual(0, result.Count);
 		}
@@ -79,7 +79,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void All_Children_Of_ID()
 		{
-			var result = Parser.Select("#myDiv>*");
+			var result = SelectList("#myDiv>*");
 
 			Assert.AreEqual(2, result.Count);
 			Assert.AreEqual("div", result[0].Name);
@@ -89,7 +89,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void All_Children_of_ID_with_no_children()
 		{
-			var result = Parser.Select("#someOtherDiv>*");
+			var result = SelectList("#someOtherDiv>*");
 
 			Assert.AreEqual(0, result.Count);
 		}

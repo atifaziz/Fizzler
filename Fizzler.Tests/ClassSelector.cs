@@ -9,7 +9,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Basic()
 		{
-			var result = Parser.Select(".checkit");
+			var result = SelectList(".checkit");
 
 			Assert.AreEqual(2, result.Count);
 			Assert.AreEqual("div", result[0].Name);
@@ -22,7 +22,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Chained()
 		{
-		    var result = Parser.Select(".omg.ohyeah");
+		    var result = SelectList(".omg.ohyeah");
 
 		    Assert.AreEqual(1, result.Count);
 		    Assert.AreEqual("p", result[0].Name);
@@ -32,7 +32,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void With_Element()
 		{
-			var result = Parser.Select("p.ohyeah");
+			var result = SelectList("p.ohyeah");
 
 			Assert.AreEqual(1, result.Count);
 			Assert.AreEqual("p", result[0].Name);
@@ -42,7 +42,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Parent_Class_Selector()
 		{
-			var result = Parser.Select("div .ohyeah");
+			var result = SelectList("div .ohyeah");
 
 			Assert.AreEqual(1, result.Count);
 			Assert.AreEqual("p", result[0].Name);

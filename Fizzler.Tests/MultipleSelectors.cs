@@ -8,7 +8,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void CommaSupport_With_No_Space()
 		{
-			var result = Parser.Select("p.hiclass,a");
+			var result = SelectList("p.hiclass,a");
 
 			Assert.AreEqual(3, result.Count);
 			Assert.AreEqual("p", result[0].Name);
@@ -18,7 +18,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void CommaSupport_With_Post_Pended_Space()
 		{
-			var result = Parser.Select("p.hiclass, a");
+			var result = SelectList("p.hiclass, a");
 			
 			Assert.AreEqual(3, result.Count);
 			Assert.AreEqual("p", result[0].Name);
@@ -28,7 +28,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void CommaSupport_With_Pre_Post_Pended_Space()
 		{
-			var result = Parser.Select("p.hiclass , a");
+			var result = SelectList("p.hiclass , a");
 
 			Assert.AreEqual(3, result.Count);
 			Assert.AreEqual("p", result[0].Name);
@@ -38,7 +38,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void CommaSupport_With_Pre_Pended_Space()
 		{
-			var result = Parser.Select("p.hiclass ,a");
+			var result = SelectList("p.hiclass ,a");
 
 			Assert.AreEqual(3, result.Count);
 			Assert.AreEqual("p", result[0].Name);

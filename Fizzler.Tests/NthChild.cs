@@ -11,7 +11,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void No_Prefix_With_Digit()
 		{
-			var result = Parser.Select(":nth-child(2)");
+			var result = SelectList(":nth-child(2)");
 
 			Assert.AreEqual(4, result.Count);
 			Assert.AreEqual("body", result[0].Name);
@@ -23,7 +23,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Star_Prefix_With_Digit()
 		{
-			var result = Parser.Select("*:nth-child(2)");
+			var result = SelectList("*:nth-child(2)");
 
 			Assert.AreEqual(4, result.Count);
 			Assert.AreEqual("body", result[0].Name);
@@ -35,7 +35,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Element_Prefix_With_Digit()
 		{
-			var result = Parser.Select("p:nth-child(2)");
+			var result = SelectList("p:nth-child(2)");
 
 			Assert.AreEqual(2, result.Count);
 			Assert.AreEqual("p", result[0].Name);

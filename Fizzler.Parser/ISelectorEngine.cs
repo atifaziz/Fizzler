@@ -14,7 +14,7 @@ namespace Fizzler.Parser
 		/// <remarks>Implementors should ensure that their constructor supplies something to select against.</remarks>
 		/// <param name="selectorChain"></param>
 		/// <returns></returns>
-		IList<IDocumentNode> Select(string selectorChain);
+		IEnumerable<IDocumentNode> Select(string selectorChain);
 
 		/// <summary>
 		/// Select from the passed IDocument.
@@ -22,6 +22,6 @@ namespace Fizzler.Parser
 		/// <param name="node"></param>
 		/// <param name="selectorChain"></param>
 		/// <returns></returns>
-		IList<IDocumentNode> Select(IDocumentNode node, string selectorChain);
+		IEnumerable<IDocumentNode> Select(IDocumentNode node, string selectorChain);
 	}
 }

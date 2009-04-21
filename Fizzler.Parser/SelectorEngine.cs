@@ -37,7 +37,7 @@ namespace Fizzler.Parser
 		/// </summary>
 		/// <param name="selectorChain"></param>
 		/// <returns></returns>
-		public IList<IDocumentNode> Select(string selectorChain)
+		public IEnumerable<IDocumentNode> Select(string selectorChain)
 		{
 			if(_scopeNode == null)
 				throw new NullReferenceException("The engine scope node was null. Either pass it in via the SelectorEngine(IDocumentNode) constructor or use Select(IDocumentNode, string).");
@@ -51,7 +51,7 @@ namespace Fizzler.Parser
 		/// <param name="scopeNode"></param>
 		/// <param name="selectorChain"></param>
 		/// <returns></returns>
-		public IList<IDocumentNode> Select(IDocumentNode scopeNode, string selectorChain)
+		public IEnumerable<IDocumentNode> Select(IDocumentNode scopeNode, string selectorChain)
 		{
             if (!scopeNode.IsElement)
                 throw new ArgumentException("Node is not is an element.", "scopeNode");

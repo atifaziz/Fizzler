@@ -9,7 +9,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Element_Attr_Exists()
 		{
-			var results = Parser.Select("div[id]");
+			var results = SelectList("div[id]");
 			
 			Assert.AreEqual(2, results.Count);
 			Assert.AreEqual("div", results[0].Name);
@@ -19,7 +19,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Element_Attr_Equals_With_Double_Quotes()
 		{
-			var results = Parser.Select("div[id=\"someOtherDiv\"]");
+			var results = SelectList("div[id=\"someOtherDiv\"]");
 
 			Assert.AreEqual(1, results.Count);
 			Assert.AreEqual("div", results[0].Name);
@@ -28,7 +28,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Element_Attr_Space_Separated_With_Double_Quotes()
 		{
-			var results = Parser.Select("p[class~=\"ohyeah\"]");
+			var results = SelectList("p[class~=\"ohyeah\"]");
 
 			Assert.AreEqual(1, results.Count);
 			Assert.AreEqual("p", results[0].Name);
@@ -38,7 +38,7 @@ namespace Fizzler.Tests
 		[TestMethod]
 		public void Element_Attr_Hyphen_Separated_With_Double_Quotes()
 		{
-			var results = Parser.Select("span[class|=\"separated\"]");
+			var results = SelectList("span[class|=\"separated\"]");
 
 			Assert.AreEqual(1, results.Count);
 			Assert.AreEqual("span", results[0].Name);

@@ -1,7 +1,11 @@
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Fizzler.DocumentParsers.HtmlAgilityPack;
 using Fizzler.Parser;
+using Fizzler.Parser.Document;
 using HtmlAgilityPack;
 
 namespace Fizzler.Tests
@@ -24,14 +28,24 @@ namespace Fizzler.Tests
 			_parser = new SelectorEngine(new HtmlNodeWrapper(htmlDocument.DocumentNode.SelectSingleNode("html")));
 		}
 
-		public SelectorEngine Parser
+	    protected SelectorEngine Parser
 		{
 			get { return _parser; }
 		}
 
-		public string Html
+	    protected string Html
 		{
 			get { return _html; }
 		}
+
+        protected IEnumerable<IDocumentNode> Select(string selectorChain)
+        {
+            return Parser.Select(selectorChain);
+        }
+
+        protected IList<IDocumentNode> SelectList(string selectorChain)
+        {
+            return new ReadOnlyCollection<IDocumentNode>(Parser.Select(selectorChain).ToArray());
+        }
 	}
 }
