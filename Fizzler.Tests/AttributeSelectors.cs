@@ -44,5 +44,29 @@ namespace Fizzler.Tests
 			Assert.AreEqual("span", results[0].Name);
             Assert.AreEqual("test", ((HtmlNodeWrapper)results[0]).HtmlNode.InnerText);
 		}
-	}
+
+        [TestMethod]
+        public void Implicit_Star_Attr_Exact_With_Double_Quotes()
+        {
+            var results = SelectList("[class=\"checkit\"]");
+
+            Assert.AreEqual(2, results.Count);
+            Assert.AreEqual("div", results[0].Name);
+            Assert.AreEqual("woooeeeee", results[0].InnerText);
+            Assert.AreEqual("div", results[1].Name);
+            Assert.AreEqual("woootooowe", results[1].InnerText);
+        }
+
+        [TestMethod]
+        public void Star_Attr_Exact_With_Double_Quotes()
+        {
+            var results = SelectList("*[class=\"checkit\"]");
+
+            Assert.AreEqual(2, results.Count);
+            Assert.AreEqual("div", results[0].Name);
+            Assert.AreEqual("woooeeeee", results[0].InnerText);
+            Assert.AreEqual("div", results[1].Name);
+            Assert.AreEqual("woootooowe", results[1].InnerText);
+        }
+    }
 }

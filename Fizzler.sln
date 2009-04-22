@@ -11,6 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Fizzler2.vsmdi = Fizzler2.vsmdi
 		Fizzler3.vsmdi = Fizzler3.vsmdi
 		Fizzler6.vsmdi = Fizzler6.vsmdi
+		Fizzler7.vsmdi = Fizzler7.vsmdi
 		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 	EndProjectSection
 EndProject
@@ -22,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DocumentParsers", "Document
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = Fizzler6.vsmdi
+		CategoryFile = Fizzler7.vsmdi
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

@@ -195,6 +195,9 @@ namespace Fizzler.Parser.Matchers
 			if(!new PseudoclassMatcher().Match(chunk.PseudoclassData, node))
 				return false;
 
+			if (!new AttributeMatcher().Match(chunk.AttributeSelectorData, node))
+				return false;
+
 			if(previousChunk != null)
 			{
 				if(previousChunk.DescendantSelectionType == DescendantSelectionType.Children)

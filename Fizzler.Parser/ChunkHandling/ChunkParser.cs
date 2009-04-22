@@ -162,8 +162,7 @@ namespace Fizzler.Parser.ChunkHandling
 				chunk = parts.Length > 1 ? parts[0] : "*";
 			}
 
-
-			return chunk;
+			return chunk.Trim().Length == 0 ? "*" : chunk;
 		}
 
 		private static ChunkType GetChunkType(string chunk)
