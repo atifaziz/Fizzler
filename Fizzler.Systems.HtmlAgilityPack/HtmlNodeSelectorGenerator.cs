@@ -1,11 +1,10 @@
-using Fizzler.Parser;
 using HtmlAgilityPack;
 
-namespace Fizzler.DocumentParsers.HtmlAgilityPack
+namespace Fizzler.Systems.HtmlAgilityPack
 {
     public class HtmlNodeSelectorGenerator : SelectorGenerator<HtmlNode>
     {
         public HtmlNodeSelectorGenerator() : 
-                base(new HtmlNodeOps()) {}
+            base(new HtmlNodeOps()) {}
     }
 }

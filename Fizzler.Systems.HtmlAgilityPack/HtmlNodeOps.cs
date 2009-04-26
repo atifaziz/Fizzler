@@ -1,8 +1,8 @@
 ﻿using System.Linq;
-using Fizzler.Parser;
+using Fizzler;
 using HtmlAgilityPack;
 
-namespace Fizzler.DocumentParsers.HtmlAgilityPack
+namespace Fizzler.Systems.HtmlAgilityPack
 {
     /// <summary>
     /// An <see cref="INodeOps{TNode}"/> implementation for <see cref="HtmlNode"/>
