@@ -7,7 +7,7 @@ using System.Text;
 namespace Fizzler.Parser
 {
     /// <summary>
-    /// 
+    /// Lexer for tokens in CSS selector grammar.
     /// </summary>
     public static class Tokener
     {
