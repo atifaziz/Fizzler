@@ -29,7 +29,7 @@ namespace Fizzler.DocumentParsers.HtmlAgilityPack
         public static IEnumerable<HtmlNode> QuerySelectorAll(this HtmlNode node, string selector)
         {
             var generator = new HtmlNodeSelectorGenerator();
-            Fizzler.Parser.Parse(selector, generator);
+            Parser.Parse(selector, generator);
             return generator.Selector(Enumerable.Repeat(node, 1));
         }
 
