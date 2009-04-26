@@ -8,12 +8,6 @@ namespace Fizzler.DocumentParsers.HtmlAgilityPack
     public class HtmlNodeOps : INodeOps<HtmlNode>
     {
         /// <summary>FIXDOC</summary>
-        public Selector<HtmlNode> Distinct()
-        {
-            return nodes => nodes.Distinct();
-        }
-
-        /// <summary>FIXDOC</summary>
         public Selector<HtmlNode> Type(string type)
         {
             return nodes => nodes.Elements().Where(n => n.Name == type);
