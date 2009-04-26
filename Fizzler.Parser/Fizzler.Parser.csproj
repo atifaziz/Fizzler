@@ -43,18 +43,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChunkHandling\AttributeComparator.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ChunkHandling\AttributeSelectorData.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ChunkHandling\Chunk.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="ChunkHandling\ChunkType.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Extensions\IDocumentNodeExtensions.cs" />
     <Compile Include="INodeOps.cs">
       <SubType>Code</SubType>
