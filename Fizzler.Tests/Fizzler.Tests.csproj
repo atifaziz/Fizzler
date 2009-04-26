@@ -46,9 +46,6 @@
   <ItemGroup>
     <Compile Include="AttributeSelectors.cs" />
     <Compile Include="ChildAndAdjacentSelectors.cs" />
-    <Compile Include="ChunkParsing\AttributeTests.cs" />
-    <Compile Include="ChunkParsing\BasicTests.cs" />
-    <Compile Include="ChunkParsing\PseudoclassTests.cs" />
     <Compile Include="ClassSelector.cs" />
     <Compile Include="IDSelector.cs" />
     <Compile Include="MultipleSelectors.cs" />

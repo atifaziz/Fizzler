@@ -43,6 +43,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChunkHandling\AttributeComparator.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ChunkHandling\AttributeSelectorData.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ChunkHandling\Chunk.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ChunkHandling\ChunkType.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Extensions\IDocumentNodeExtensions.cs" />
     <Compile Include="INodeOps.cs">
       <SubType>Code</SubType>
@@ -50,11 +62,6 @@
     <Compile Include="ISelectable.cs" />
     <Compile Include="ISelectorGenerator.cs" />
     <Compile Include="Matchers\AttributeMatcher.cs" />
-    <Compile Include="ChunkHandling\AttributeComparator.cs" />
-    <Compile Include="ChunkHandling\AttributeSelectorData.cs" />
-    <Compile Include="ChunkHandling\Chunk.cs" />
-    <Compile Include="ChunkHandling\ChunkParser.cs" />
-    <Compile Include="ChunkHandling\ChunkType.cs" />
     <Compile Include="DescendantSelectionType.cs" />
     <Compile Include="Document\IAttribute.cs" />
     <Compile Include="Document\IAttributeCollection.cs" />
