@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using HtmlAgilityPack;
 
-namespace Fizzler.DocumentParsers.HtmlAgilityPack
+namespace Fizzler.Systems.HtmlAgilityPack
 {
     /// <summary>
     /// HtmlNode extension methods.

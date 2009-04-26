@@ -17,9 +17,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Tests", "Fizzler.Tests\Fizzler.Tests.csproj", "{61EDF5C0-1854-4867-AE8A-7A1216E116C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.DocumentParsers.HtmlAgilityPack", "Fizzler.DocumentParsers.HtmlAgilityPack\Fizzler.DocumentParsers.HtmlAgilityPack.csproj", "{DBEAD205-BD5C-461F-873D-DE643016F14C}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Systems", "Systems", "{7AA23AC0-0852-45AC-8661-6FFBD3BD265D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DocumentParsers", "DocumentParsers", "{7AA23AC0-0852-45AC-8661-6FFBD3BD265D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Systems.HtmlAgilityPack", "Fizzler.Systems.HtmlAgilityPack\Fizzler.Systems.HtmlAgilityPack.csproj", "{DBEAD205-BD5C-461F-873D-DE643016F14C}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution

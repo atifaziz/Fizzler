@@ -63,13 +63,13 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fizzler.DocumentParsers.HtmlAgilityPack\Fizzler.DocumentParsers.HtmlAgilityPack.csproj">
+    <ProjectReference Include="..\Fizzler.Systems.HtmlAgilityPack\Fizzler.Systems.HtmlAgilityPack.csproj">
       <Project>{DBEAD205-BD5C-461F-873D-DE643016F14C}</Project>
-      <Name>Fizzler.DocumentParsers.HtmlAgilityPack</Name>
+      <Name>Fizzler.Systems.HtmlAgilityPack</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fizzler\Fizzler.csproj">
       <Project>{939036D6-29FD-46E4-B6CD-52618F51081B}</Project>
-      <Name>Fizzler.Parser</Name>
+      <Name>Fizzler</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

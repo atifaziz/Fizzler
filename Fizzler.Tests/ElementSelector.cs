@@ -1,5 +1,4 @@
-﻿using Fizzler.Tests;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Fizzler.Tests
 {
