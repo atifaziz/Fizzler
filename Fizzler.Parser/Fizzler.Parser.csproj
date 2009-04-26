@@ -60,13 +60,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ISelectorGenerator.cs" />
-    <Compile Include="Matchers\AttributeMatcher.cs" />
     <Compile Include="DescendantSelectionType.cs" />
     <Compile Include="Document\IAttribute.cs" />
     <Compile Include="Document\IAttributeCollection.cs" />
     <Compile Include="Document\IDocumentNode.cs" />
-    <Compile Include="Matchers\NodeMatcher.cs" />
-    <Compile Include="Matchers\PseudoclassMatcher.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Reader.cs" />
     <Compile Include="Selector.cs" />
