@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using Fizzler.Parser;
+using Fizzler;
 using HtmlAgilityPack;
 
 namespace Fizzler.DocumentParsers.HtmlAgilityPack

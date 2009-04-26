@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Fizzler.Parser
+namespace Fizzler
 {
     /// <summary>
     /// Represents a selector implementation over an arbitrary type of nodes.

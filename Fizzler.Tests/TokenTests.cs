@@ -1,5 +1,5 @@
 ﻿using System;
-using Fizzler.Parser;
+using Fizzler;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Fizzler.Tests

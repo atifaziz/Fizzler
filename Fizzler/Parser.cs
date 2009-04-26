@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 
-namespace Fizzler.Parser
+namespace Fizzler
 {
     /// <summary>
     /// Semantic parser for CSS selector grammar.

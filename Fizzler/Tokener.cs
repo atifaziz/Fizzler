@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-namespace Fizzler.Parser
+namespace Fizzler
 {
     /// <summary>
     /// Lexer for tokens in CSS selector grammar.

@@ -1,6 +1,6 @@
 using System;
 using System.Linq;
-using Fizzler.Parser;
+using Fizzler;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Fizzler.Tests

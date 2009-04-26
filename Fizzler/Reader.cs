@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace Fizzler.Parser
+namespace Fizzler
 {
     /// <summary>
     /// Adds reading semantics to a base <see cref="IEnumerator{T}"/> with the 

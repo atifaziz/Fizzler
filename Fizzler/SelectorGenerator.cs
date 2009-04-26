@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Fizzler.Parser
+namespace Fizzler
 {
     /// <summary>
     /// A selector generator implementation for an arbitrary document/node system.

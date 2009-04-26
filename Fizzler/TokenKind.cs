@@ -1,4 +1,4 @@
-namespace Fizzler.Parser
+namespace Fizzler
 {
     /// <summary>
     /// Represents the classification of a token.

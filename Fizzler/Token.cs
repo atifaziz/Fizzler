@@ -1,6 +1,6 @@
 using System;
 
-namespace Fizzler.Parser
+namespace Fizzler
 {
     /// <summary>
     /// Represent a token and optionally any text associated with it.
