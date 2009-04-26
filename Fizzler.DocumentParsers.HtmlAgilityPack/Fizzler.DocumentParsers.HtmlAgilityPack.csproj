@@ -42,7 +42,6 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HtmlNodeCollectionExtensions.cs" />
     <Compile Include="HtmlNodeExtensions.cs" />
     <Compile Include="HtmlNodeOps.cs" />
     <Compile Include="HtmlNodeSelectorGenerator.cs" />
