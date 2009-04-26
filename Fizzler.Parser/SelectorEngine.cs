@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -113,74 +112,4 @@ namespace Fizzler.Parser
             }
         }
 	}
-
-    /// <summary>
-    /// CSS selector engine.
-    /// </summary>
-    public static class SelectorEngine2
-    {
-        private static readonly Dictionary<object, Func<object, ISelectorEngine2>> _resolvers = new Dictionary<object, Func<object, ISelectorEngine2>>();
-
-        /// <summary>FIXDOC</summary>
-        public static bool Install(object cookie, Func<object, ISelectorEngine2> resolver)
-        {
-            if (_resolvers.ContainsKey(cookie))
-                return false;
-
-            _resolvers.Add(cookie, resolver);
-            return true;
-        }
-
-        /// <summary>FIXDOC</summary>
-        public static bool UnInstall(object cookie)
-        {
-            return _resolvers.Remove(cookie);
-        }
-
-        /// <summary>
-        /// Similar to <see cref="QuerySelectorAll" /> except it returns 
-        /// only the first element matching the supplied selector strings.
-        /// </summary>
-        public static object QuerySelector(object context, string selector)
-        {
-            return QuerySelectorAll(context, selector).Cast<object>().FirstOrDefault();
-        }
-
-        /// <summary>
-        /// Retrieves all element nodes from descendants of the starting 
-        /// element node that match any selector within the supplied 
-        /// selector strings. 
-        /// </summary>
-        public static IEnumerable QuerySelectorAll(object context, string selector)
-        {
-            return Compile(context, selector).Select(context);
-        }
-
-        /// <summary>
-        /// Compiles a selector.
-        /// </summary>
-        public static CompiledSelector Compile(object context, string selector)
-        {
-            var engine = FindEngine(context);
-            if (engine == null)
-                throw new NotSupportedException();
-            var generator = engine.CreateGenerator();
-            Parser.Parse(selector, generator);
-            return new CompiledSelector(engine.GetSelector(generator), engine);
-        }
-
-        /// <summary>
-        /// Returns <see cref="ISelectorEngine2"/> for the given <paramref name="context"/>.
-        /// </summary>
-        public static ISelectorEngine2 FindEngine(object context)
-        {
-            foreach(var resolver in _resolvers.Values)
-            {
-                var engine = resolver(context);
-                if (engine != null)
-                    return engine;
-            }
-            return null;
-        }
-    }
 }

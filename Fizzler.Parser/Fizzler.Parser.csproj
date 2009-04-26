@@ -43,7 +43,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CompiledSelector.cs" />
     <Compile Include="Extensions\IDocumentNodeExtensions.cs" />
     <Compile Include="INodeOps.cs">
       <SubType>Code</SubType>

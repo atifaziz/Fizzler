@@ -39,13 +39,11 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="HtmlNodeExtensions.cs" />
     <Compile Include="HtmlNodeOps.cs" />
-    <Compile Include="HtmlNodeSelectorEngine.cs" />
     <Compile Include="HtmlNodeSelectorGenerator.cs" />
     <Compile Include="HtmlNodeWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
