@@ -47,12 +47,15 @@ namespace Fizzler.Tests
 
         protected IEnumerable<IDocumentNode> Select(string selectorChain)
         {
-            return Source.Select(selectorChain);
+            //return Source.Select(selectorChain);
+            var htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(_html);
+            return htmlDocument.DocumentNode.QuerySelectorAll(selectorChain).Select(n => new HtmlNodeWrapper(n)).Cast<IDocumentNode>();
         }
 
         protected IList<IDocumentNode> SelectList(string selectorChain)
         {
-            return new ReadOnlyCollection<IDocumentNode>(Source.Select(selectorChain).ToArray());
+            return new ReadOnlyCollection<IDocumentNode>(Select(selectorChain).ToArray());
         }
 	}
 }
