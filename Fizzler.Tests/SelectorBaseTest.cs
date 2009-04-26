@@ -11,29 +11,25 @@ namespace Fizzler.Tests
 {
 	public abstract class SelectorBaseTest
 	{
-		private readonly string _html;
-
-        protected SelectorBaseTest()
+	    protected SelectorBaseTest()
 		{
-			Assembly assembly = Assembly.GetExecutingAssembly();
-			Stream stream = assembly.GetManifestResourceStream("Fizzler.Tests.Data.SelectorTest.html"); 
-			StreamReader streamReader = new StreamReader(stream);
-			_html = streamReader.ReadToEnd();
-
-            var htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(_html);
+            string html;
+			var assembly = Assembly.GetExecutingAssembly();
+			using (var stream = assembly.GetManifestResourceStream("Fizzler.Tests.Data.SelectorTest.html"))
+			using (var streamReader = new StreamReader(stream))
+			    html = streamReader.ReadToEnd();
+            var document = new HtmlDocument();
+            document.LoadHtml(html);
+            Document = document;
         }
 
-	    protected string Html
-		{
-			get { return _html; }
-		}
+	    protected HtmlDocument Document { get; private set; }
 
-        protected IEnumerable<IDocumentNode> Select(string selectorChain)
+	    protected IEnumerable<IDocumentNode> Select(string selectorChain)
         {
-            var htmlDocument = new HtmlDocument();
-            htmlDocument.LoadHtml(_html);
-            return htmlDocument.DocumentNode.QuerySelectorAll(selectorChain).Select(n => new HtmlNodeWrapper(n)).Cast<IDocumentNode>();
+            return Document.DocumentNode
+                           .QuerySelectorAll(selectorChain)
+                           .Select(n => new HtmlNodeWrapper(n)).Cast<IDocumentNode>();
         }
 
         protected IList<IDocumentNode> SelectList(string selectorChain)
