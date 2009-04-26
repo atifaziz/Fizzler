@@ -21,6 +21,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Systems", "Systems", "{7AA2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Systems.HtmlAgilityPack", "Fizzler.Systems.HtmlAgilityPack\Fizzler.Systems.HtmlAgilityPack.csproj", "{DBEAD205-BD5C-461F-873D-DE643016F14C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualFizzler", "VisualFizzler\VisualFizzler.csproj", "{46AA901E-21D1-4720-B173-532B91105CE7}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Fizzler7.vsmdi
@@ -42,6 +44,10 @@ Global
 		{DBEAD205-BD5C-461F-873D-DE643016F14C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DBEAD205-BD5C-461F-873D-DE643016F14C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DBEAD205-BD5C-461F-873D-DE643016F14C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46AA901E-21D1-4720-B173-532B91105CE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46AA901E-21D1-4720-B173-532B91105CE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46AA901E-21D1-4720-B173-532B91105CE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46AA901E-21D1-4720-B173-532B91105CE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
