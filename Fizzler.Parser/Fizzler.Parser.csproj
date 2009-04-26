@@ -48,7 +48,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ISelectorGenerator.cs" />
-    <Compile Include="DescendantSelectionType.cs" />
     <Compile Include="Document\IAttribute.cs" />
     <Compile Include="Document\IAttributeCollection.cs" />
     <Compile Include="Document\IDocumentNode.cs" />
