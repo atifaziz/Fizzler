@@ -43,14 +43,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\IDocumentNodeExtensions.cs" />
     <Compile Include="INodeOps.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="ISelectorGenerator.cs" />
-    <Compile Include="Document\IAttribute.cs" />
-    <Compile Include="Document\IAttributeCollection.cs" />
-    <Compile Include="Document\IDocumentNode.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Reader.cs" />
     <Compile Include="Selector.cs" />

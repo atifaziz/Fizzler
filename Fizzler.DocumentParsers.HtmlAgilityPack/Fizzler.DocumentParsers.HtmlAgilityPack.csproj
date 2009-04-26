@@ -45,7 +45,6 @@
     <Compile Include="HtmlNodeExtensions.cs" />
     <Compile Include="HtmlNodeOps.cs" />
     <Compile Include="HtmlNodeSelectorGenerator.cs" />
-    <Compile Include="HtmlNodeWrapper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

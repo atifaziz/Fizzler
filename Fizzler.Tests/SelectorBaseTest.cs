@@ -4,7 +4,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Fizzler.DocumentParsers.HtmlAgilityPack;
-using Fizzler.Parser.Document;
 using HtmlAgilityPack;
 
 namespace Fizzler.Tests
@@ -25,16 +24,15 @@ namespace Fizzler.Tests
 
 	    protected HtmlDocument Document { get; private set; }
 
-	    protected IEnumerable<IDocumentNode> Select(string selectorChain)
+	    protected IEnumerable<HtmlNode> Select(string selectorChain)
         {
             return Document.DocumentNode
-                           .QuerySelectorAll(selectorChain)
-                           .Select(n => new HtmlNodeWrapper(n)).Cast<IDocumentNode>();
+                           .QuerySelectorAll(selectorChain);
         }
 
-        protected IList<IDocumentNode> SelectList(string selectorChain)
+        protected IList<HtmlNode> SelectList(string selectorChain)
         {
-            return new ReadOnlyCollection<IDocumentNode>(Select(selectorChain).ToArray());
+            return new ReadOnlyCollection<HtmlNode>(Select(selectorChain).ToArray());
         }
 	}
 }
