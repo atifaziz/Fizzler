@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{61EDF5C0-1854-4867-AE8A-7A1216E116C9}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -40,6 +40,7 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
@@ -56,6 +57,8 @@
     <Compile Include="ElementSelector.cs" />
     <Compile Include="PsuedoSelectors.cs" />
     <Compile Include="SelectorBaseTest.cs" />
+    <Compile Include="TokenerTests.cs" />
+    <Compile Include="TokenTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Data\SelectorTest.html">

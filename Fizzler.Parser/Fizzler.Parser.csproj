@@ -60,6 +60,9 @@
     <Compile Include="Matchers\PseudoclassMatcher.cs" />
     <Compile Include="SelectorEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Token.cs" />
+    <Compile Include="Tokener.cs" />
+    <Compile Include="TokenKind.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Fizzler.snk" />
