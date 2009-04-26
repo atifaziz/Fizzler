@@ -59,7 +59,6 @@
     <Compile Include="INodeOps.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ISelectable.cs" />
     <Compile Include="ISelectorGenerator.cs" />
     <Compile Include="Matchers\AttributeMatcher.cs" />
     <Compile Include="DescendantSelectionType.cs" />
