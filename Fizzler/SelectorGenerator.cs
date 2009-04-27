@@ -17,14 +17,14 @@ namespace Fizzler
         /// of <see cref="INodeOps{TNode}"/> and the default equality
         /// comparer that is used for determining if two nodes are equal.
         /// </summary>
-        protected SelectorGenerator(INodeOps<TNode> ops) : this(ops, null) {}
+        public SelectorGenerator(INodeOps<TNode> ops) : this(ops, null) {}
 
         /// <summary>
         /// Initializes a new instance of this object with an instance
         /// of <see cref="INodeOps{TNode}"/> and an equality comparer
         /// used for determining if two nodes are equal.
         /// </summary>
-        protected SelectorGenerator(INodeOps<TNode> ops, IEqualityComparer<TNode> equalityComparer)
+        public SelectorGenerator(INodeOps<TNode> ops, IEqualityComparer<TNode> equalityComparer)
         {
             if(ops == null) throw new ArgumentNullException("ops");
             Ops = ops;
