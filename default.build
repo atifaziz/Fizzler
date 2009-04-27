@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="Fizzler" basedir="." default="test">
+	<target name="clean">
+		<delete dir="build" />
+		<delete dir="Fizzler.Systems.HtmlAgilityPack\bin" />
+		<delete dir="Fizzler.Systems.HtmlAgilityPack\obj" />
+		<delete dir="Fizzler\bin" />
+		<delete dir="Fizzler\obj" />
+		<delete dir="Fizzler.Tests\bin" />
+		<delete dir="Fizzler.Tests\obj" />
+	</target>
+	<target name="prep" depends="clean">
+		<mkdir dir="build" />
+	</target>
+	<target name="build-fizzler" depends="prep">
+		<csc target="library" output="build\Fizzler.dll" debug="true">
+			<sources>
+				<include name="Fizzler/**/*.cs" />
+			</sources>
+			<references>
+				<include name="System.dll" />
+				<include name="System.Core.dll" />
+			</references>
+		</csc>
+	</target>
+	<target name="build-htmlagilitypack" depends="build-fizzler">
+		<csc target="library" output="build\Fizzler.Systems.HtmlAgilityPack.dll" debug="true">
+			<sources>
+				<include name="Fizzler.Systems.HtmlAgilityPack/**/*.cs" />
+			</sources>
+			<references>
+				<include name="build/Fizzler.dll" />
+				<include name="libs/HtmlAgilityPack.dll" />
+				<include name="System.dll" />
+				<include name="System.Core.dll" />
+				<include name="System.XML.dll" />
+			</references>
+		</csc>
+	</target>
+	<target name="build-tests" depends="build-htmlagilitypack">
+		<csc target="library" output="build\Fizzler.Tests.dll" debug="true">
+			<sources>
+				<include name="Fizzler.Tests/**/*.cs" />
+			</sources>
+			<resources dynamicprefix="true">
+				<include name="Fizzler.Tests/Data/**" />
+			</resources>
+			<references>
+				<include name="build\Fizzler.dll" />
+				<include name="build\Fizzler.Systems.HtmlAgilityPack.dll" />
+				<include name="libs\HtmlAgilityPack.dll" />
+				<include name="libs\nunit.framework.dll" />
+				<include name="System.dll" />
+				<include name="System.Core.dll" />
+				<include name="System.XML.dll" />
+			</references>
+		</csc>
+	</target>
+	<target name="test" depends="build-tests">
+		<copy file="libs\HtmlAgilityPack.dll" todir="build" />
+		<nunit2>
+			<formatter type="Plain" />
+			<test assemblyname="build\Fizzler.Tests.dll" appconfig="Fizzler.Tests/App.config" />
+		</nunit2>
+	</target>
+</project>
