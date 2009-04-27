@@ -1,11 +1,11 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Fizzler.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class ClassSelector : SelectorBaseTest
 	{
-		[TestMethod]
+		[Test]
 		public void Basic()
 		{
 			var result = SelectList(".checkit");
@@ -18,7 +18,7 @@ namespace Fizzler.Tests
 		/// <summary>
 		/// Should match class="omg ohyeah"
 		/// </summary>
-		[TestMethod]
+		[Test]
 		public void Chained()
 		{
 		    var result = SelectList(".omg.ohyeah");
@@ -28,7 +28,7 @@ namespace Fizzler.Tests
 		    Assert.AreEqual("eeeee", result[0].InnerText);
 		}
 
-		[TestMethod]
+		[Test]
 		public void With_Element()
 		{
 			var result = SelectList("p.ohyeah");
@@ -38,7 +38,7 @@ namespace Fizzler.Tests
 			Assert.AreEqual("eeeee", result[0].InnerText);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Parent_Class_Selector()
 		{
 			var result = SelectList("div .ohyeah");

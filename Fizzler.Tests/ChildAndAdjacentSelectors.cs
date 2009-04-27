@@ -1,48 +1,48 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Fizzler.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class ChildAndAdjacentSelectors : SelectorBaseTest
 	{	
-		[TestMethod]
+		[Test]
 		public void Child_With_Pre_And_Post_Space()
 		{
 			Assert.AreEqual(2, SelectList("div > p").Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Child_With_Post_Space()
 		{
 			Assert.AreEqual(2, SelectList("div> p").Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Child_With_Pre_Space()
 		{
 			Assert.AreEqual(2, SelectList("div >p").Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Child_With_No_Space()
 		{
 			Assert.AreEqual(2, SelectList("div>p").Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Child_With_Class()
 		{
 			Assert.AreEqual(1, SelectList("div > p.ohyeah").Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void All_Children()
 		{
 			// match <a href="">hi</a><span>test</span> so that's 3
 			Assert.AreEqual(3, SelectList("p > *").Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void All_GrandChildren()
 		{
 			// match <a href="">hi</a><span>test</span> so that's 3
@@ -50,31 +50,31 @@ namespace Fizzler.Tests
 			Assert.AreEqual(3, SelectList("div > * > *").Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Adjacent_With_Pre_And_Post_Space()
 		{
 			Assert.AreEqual(1, SelectList("a + span").Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Adjacent_With_Post_Space()
 		{
 			Assert.AreEqual(1, SelectList("a+ span").Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Adjacent_With_Pre_Space()
 		{
 			Assert.AreEqual(1, SelectList("a +span").Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Adjacent_With_No_Space()
 		{
 			Assert.AreEqual(1, SelectList("a+span").Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Comma_Child_And_Adjacent()
 		{
 			Assert.AreEqual(3, SelectList("a + span, div > p").Count);

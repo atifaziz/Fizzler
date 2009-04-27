@@ -1,205 +1,205 @@
 using System;
 using System.Linq;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Fizzler.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class TokenerTests
     {
-        [TestMethod]
+        [Test]
         public void NullInput()
         {
             Assert.AreEqual(Token.Eoi(), Tokener.Tokenize((string) null).Single());
         }
 
-        [TestMethod]
+        [Test]
         public void EmptyInput()
         {
             Assert.AreEqual(Token.Eoi(), Tokener.Tokenize(string.Empty).Single());
         }
 
-        [TestMethod]
+        [Test]
         public void WhiteSpace()
         {
             Assert.AreEqual(Token.WhiteSpace(" \r \n \f \t "), Tokener.Tokenize(" \r \n \f \t etc").First());
         }
 
-        [TestMethod]
+        [Test]
         public void Colon()
         {
             Assert.AreEqual(Token.Colon(), Tokener.Tokenize(":").First());
         }
 
-        [TestMethod]
+        [Test]
         public void Comma()
         {
             Assert.AreEqual(Token.Comma(), Tokener.Tokenize(",").First());
         }
 
-        [TestMethod]
+        [Test]
         public void CommaWhiteSpacePrepended()
         {
             Assert.AreEqual(Token.Comma(), Tokener.Tokenize("  ,").First());
         }
 
-        [TestMethod]
+        [Test]
         public void Plus()
         {
             Assert.AreEqual(Token.Plus(), Tokener.Tokenize("+").First());
         }
 
-        [TestMethod]
+        [Test]
         public void Equals()
         {
             Assert.AreEqual(Token.Equals(), Tokener.Tokenize("=").First());
         }
 
-        [TestMethod]
+        [Test]
         public void LeftBracket()
         {
             Assert.AreEqual(Token.LeftBracket(), Tokener.Tokenize("[").First());
         }
 
-        [TestMethod]
+        [Test]
         public void RightBracket()
         {
             Assert.AreEqual(Token.RightBracket(), Tokener.Tokenize("]").First());
         }
 
-        [TestMethod]
+        [Test]
         public void PlusWhiteSpacePrepended()
         {
             Assert.AreEqual(Token.Plus(), Tokener.Tokenize("  +").First());
         }
 
-        [TestMethod]
+        [Test]
         public void RightParenthesis()
         {
             Assert.AreEqual(Token.RightParenthesis(), Tokener.Tokenize(")").First());
         }
 
-        [TestMethod]
+        [Test]
         public void Greater()
         {
             Assert.AreEqual(Token.Greater(), Tokener.Tokenize(">").First());
         }
 
-        [TestMethod]
+        [Test]
         public void GreaterWhiteSpacePrepended()
         {
             Assert.AreEqual(Token.Greater(), Tokener.Tokenize("  >").First());
         }
 
-        [TestMethod]
+        [Test]
         public void IdentifierLowerCaseOnly()
         {
             Assert.AreEqual(Token.Ident("foo"), Tokener.Tokenize("foo").First());
         }
 
-        [TestMethod]
+        [Test]
         public void IdentifierMixedCase()
         {
             Assert.AreEqual(Token.Ident("FoObAr"), Tokener.Tokenize("FoObAr").First());
         }
 
-        [TestMethod]
+        [Test]
         public void IdentifierIncludingDigits()
         {
             Assert.AreEqual(Token.Ident("foobar42"), Tokener.Tokenize("foobar42").First());
         }
 
-        [TestMethod]
+        [Test]
         public void IdentifierWithUnderscores()
         {
             Assert.AreEqual(Token.Ident("_foo_BAR_42_"), Tokener.Tokenize("_foo_BAR_42_").First());
         }
 
-        [TestMethod]
+        [Test]
         public void IdentifierWithHypens()
         {
             Assert.AreEqual(Token.Ident("foo-BAR-42"), Tokener.Tokenize("foo-BAR-42").First());
         }
 
-        [TestMethod]
+        [Test]
         public void IdentifierUsingVendorExtensionSyntax()
         {
             Assert.AreEqual(Token.Ident("-foo-BAR-42"), Tokener.Tokenize("-foo-BAR-42").First());
         }
 
-        [TestMethod, ExpectedException(typeof(FormatException))]
+        [Test, ExpectedException(typeof(FormatException))]
         public void IdentifierUsingVendorExtensionSyntaxCannotBeginWithDigit()
         {
             Tokener.Tokenize("-42").ToArray();
         }
 
-        [TestMethod]
+        [Test]
         public void Hash()
         {
             Assert.AreEqual(Token.Hash("foo_BAR-baz-42"), Tokener.Tokenize("#foo_BAR-baz-42").First());
         }
 
-        [TestMethod]
+        [Test]
         public void Includes()
         {
             Assert.AreEqual(TokenKind.Includes, Tokener.Tokenize("~=").First().Kind);
         }
 
-        [TestMethod, ExpectedException(typeof(FormatException))]
+        [Test, ExpectedException(typeof(FormatException))]
         public void BadIncludes()
         {
             Tokener.Tokenize("~~").ToArray();
         }
 
-        [TestMethod]
+        [Test]
         public void DashMatch()
         {
             Assert.AreEqual(TokenKind.DashMatch, Tokener.Tokenize("|=").First().Kind);
         }
 
-        [TestMethod, ExpectedException(typeof(FormatException))]
+        [Test, ExpectedException(typeof(FormatException))]
         public void BadDashMatch()
         {
             Tokener.Tokenize("||").ToArray();
         }
 
-        [TestMethod]
+        [Test]
         public void StringSingleQuoted()
         {
             Assert.AreEqual(Token.String("foo bar"), Tokener.Tokenize("'foo bar'").First());
         }
 
-        [TestMethod]
+        [Test]
         public void StringDoubleQuoted()
         {
             Assert.AreEqual(Token.String("foo bar"), Tokener.Tokenize("\"foo bar\"").First());
         }
 
-        [TestMethod]
+        [Test]
         public void StringDoubleQuotedWithEscapedDoubleQuotes()
         {
             Assert.AreEqual(Token.String("foo \"bar\" baz"), Tokener.Tokenize("\"foo \\\"bar\\\" baz\"").First());
         }
 
-        [TestMethod]
+        [Test]
         public void StringSingleQuotedWithEscapedSingleQuotes()
         {
             Assert.AreEqual(Token.String("foo 'bar' baz"), Tokener.Tokenize(@"'foo \'bar\' baz'").First());
         }
 
-        [TestMethod]
+        [Test]
         public void StringDoubleQuotedWithEscapedBackslashes()
         {
             Assert.AreEqual(Token.String(@"foo \bar\ baz"), Tokener.Tokenize("\"foo \\\\bar\\\\ baz\"").First());
         }
 
-        [TestMethod]
+        [Test]
         public void StringSingleQuotedWithEscapedBackslashes()
         {
             Assert.AreEqual(Token.String(@"foo \bar\ baz"), Tokener.Tokenize(@"'foo \\bar\\ baz'").First());
         }
 
-        [TestMethod]
+        [Test]
         public void BracketedIdent()
         {
             var token = Tokener.Tokenize("[foo]").GetEnumerator();
@@ -210,13 +210,13 @@ namespace Fizzler.Tests
             Assert.IsFalse(token.MoveNext());
         }
         
-        [TestMethod, ExpectedException(typeof(FormatException))]
+        [Test, ExpectedException(typeof(FormatException))]
         public void BadHash()
         {
             Tokener.Tokenize("#").ToArray();
         }
 
-        [TestMethod]
+        [Test]
         public void HashDelimitedCorrectly()
         {
             var token = Tokener.Tokenize("#foo.").GetEnumerator();
@@ -226,13 +226,13 @@ namespace Fizzler.Tests
             Assert.IsFalse(token.MoveNext());
         }
 
-        [TestMethod]
+        [Test]
         public void Function()
         {
             Assert.AreEqual(Token.Function("funky"), Tokener.Tokenize("funky(").First());
         }
 
-        [TestMethod]
+        [Test]
         public void FunctionWithEnclosedIdent()
         {
             var token = Tokener.Tokenize("foo(bar)").GetEnumerator();
@@ -243,13 +243,13 @@ namespace Fizzler.Tests
             Assert.IsFalse(token.MoveNext());
         }
 
-        [TestMethod]
+        [Test]
         public void Integer()
         {
             Assert.AreEqual(Token.Integer("42"), Tokener.Tokenize("42").First());
         }
 
-        [TestMethod]
+        [Test]
         public void IntegerEnclosed()
         {
             var token = Tokener.Tokenize("[42]").GetEnumerator();

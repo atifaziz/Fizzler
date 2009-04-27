@@ -1,14 +1,14 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Fizzler.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class NthChild : SelectorBaseTest
 	{
 		/// <summary>
 		/// Behaves the same as *:nth-child(2)
 		/// </summary>
-		[TestMethod]
+		[Test]
 		public void No_Prefix_With_Digit()
 		{
 			var result = SelectList(":nth-child(2)");
@@ -20,7 +20,7 @@ namespace Fizzler.Tests
 			Assert.AreEqual("p", result[3].Name);
 		}
 	
-		[TestMethod]
+		[Test]
 		public void Star_Prefix_With_Digit()
 		{
 			var result = SelectList("*:nth-child(2)");
@@ -32,7 +32,7 @@ namespace Fizzler.Tests
 			Assert.AreEqual("p", result[3].Name);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Element_Prefix_With_Digit()
 		{
 			var result = SelectList("p:nth-child(2)");

@@ -1,11 +1,11 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Fizzler.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class AttributeSelectors : SelectorBaseTest
 	{
-		[TestMethod]
+		[Test]
 		public void Element_Attr_Exists()
 		{
 			var results = SelectList("div[id]");
@@ -15,7 +15,7 @@ namespace Fizzler.Tests
 			Assert.AreEqual("div", results[1].Name);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Element_Attr_Equals_With_Double_Quotes()
 		{
 			var results = SelectList("div[id=\"someOtherDiv\"]");
@@ -24,7 +24,7 @@ namespace Fizzler.Tests
 			Assert.AreEqual("div", results[0].Name);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Element_Attr_Space_Separated_With_Double_Quotes()
 		{
 			var results = SelectList("p[class~=\"ohyeah\"]");
@@ -34,7 +34,7 @@ namespace Fizzler.Tests
             Assert.AreEqual("eeeee", results[0].InnerText);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Element_Attr_Hyphen_Separated_With_Double_Quotes()
 		{
 			var results = SelectList("span[class|=\"separated\"]");
@@ -44,7 +44,7 @@ namespace Fizzler.Tests
             Assert.AreEqual("test", results[0].InnerText);
 		}
 
-        [TestMethod]
+        [Test]
         public void Implicit_Star_Attr_Exact_With_Double_Quotes()
         {
             var results = SelectList("[class=\"checkit\"]");
@@ -56,7 +56,7 @@ namespace Fizzler.Tests
             Assert.AreEqual("woootooowe", results[1].InnerText);
         }
 
-        [TestMethod]
+        [Test]
         public void Star_Attr_Exact_With_Double_Quotes()
         {
             var results = SelectList("*[class=\"checkit\"]");

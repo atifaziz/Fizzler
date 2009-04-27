@@ -1,11 +1,11 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Fizzler.Tests
 {
-	[TestClass]
+	[TestFixture]
 	public class IDSelector : SelectorBaseTest
 	{
-		[TestMethod]
+		[Test]
 		public void Basic_Selector()
 		{
 			var result = SelectList("#myDiv");
@@ -14,7 +14,7 @@ namespace Fizzler.Tests
 			Assert.AreEqual("div", result[0].Name);
 		}
 
-		[TestMethod]
+		[Test]
 		public void With_Element()
 		{
 			var result = SelectList("div#myDiv");
@@ -23,7 +23,7 @@ namespace Fizzler.Tests
 			Assert.AreEqual("div", result[0].Name);
 		}
 		
-		[TestMethod]
+		[Test]
 		public void With_Existing_ID_Descendant()
 		{
 			var result = SelectList("#theBody #myDiv");
@@ -32,7 +32,7 @@ namespace Fizzler.Tests
 			Assert.AreEqual("div", result[0].Name);
 		}
 
-		[TestMethod]
+		[Test]
 		public void With_Non_Existant_ID_Descendant()
 		{
 			var result = SelectList("#theBody #whatwhatwhat");
@@ -40,7 +40,7 @@ namespace Fizzler.Tests
 			Assert.AreEqual(0, result.Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void With_Non_Existant_ID_Ancestor()
 		{
 			var result = SelectList("#whatwhatwhat #someOtherDiv");
@@ -48,7 +48,7 @@ namespace Fizzler.Tests
 			Assert.AreEqual(0, result.Count);
 		}
 
-		[TestMethod]
+		[Test]
 		public void All_Descendants_Of_ID()
 		{
 			var result = SelectList("#myDiv *");
@@ -58,7 +58,7 @@ namespace Fizzler.Tests
 			Assert.AreEqual("p", result[1].Name);
 		}
 		
-		[TestMethod]
+		[Test]
 		public void Child_ID()
 		{
 			var result = SelectList("#theBody>#myDiv");
@@ -67,7 +67,7 @@ namespace Fizzler.Tests
 			Assert.AreEqual("div", result[0].Name);
 		}
 
-		[TestMethod]
+		[Test]
 		public void Not_A_Child_ID()
 		{
 			var result = SelectList("#theBody>#someOtherDiv");
@@ -75,7 +75,7 @@ namespace Fizzler.Tests
 			Assert.AreEqual(0, result.Count);
 		}
 		
-		[TestMethod]
+		[Test]
 		public void All_Children_Of_ID()
 		{
 			var result = SelectList("#myDiv>*");
@@ -85,7 +85,7 @@ namespace Fizzler.Tests
 			Assert.AreEqual("p", result[1].Name);
 		}
 		
-		[TestMethod]
+		[Test]
 		public void All_Children_of_ID_with_no_children()
 		{
 			var result = SelectList("#someOtherDiv>*");

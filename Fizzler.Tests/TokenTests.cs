@@ -1,144 +1,144 @@
 ﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace Fizzler.Tests
 {
-    [TestClass]
+    [TestFixture]
     public class TokenTests
     {
-        [TestMethod]
+        [Test]
         public void DefaultState()
         {
             AssertToken(TokenKind.Eoi, new Token());
         }
 
-        [TestMethod]
+        [Test]
         public void Star()
         {
             AssertToken(TokenKind.Star, Token.Star());
         }
 
-        [TestMethod]
+        [Test]
         public void Dot()
         {
             AssertToken(TokenKind.Dot, Token.Dot());
         }
 
-        [TestMethod]
+        [Test]
         public void Colon()
         {
             AssertToken(TokenKind.Colon, Token.Colon());
         }
 
-        [TestMethod]
+        [Test]
         public void Comma()
         {
             AssertToken(TokenKind.Comma, Token.Comma());
         }
 
-        [TestMethod]
+        [Test]
         public void Equals()
         {
             AssertToken(TokenKind.Equals, Token.Equals());
         }
 
-        [TestMethod]
+        [Test]
         public void LeftBracket()
         {
             AssertToken(TokenKind.LeftBracket, Token.LeftBracket());
         }
 
-        [TestMethod]
+        [Test]
         public void RightBracket()
         {
             AssertToken(TokenKind.RightBracket, Token.RightBracket());
         }
 
-        [TestMethod]
+        [Test]
         public void Plus()
         {
             AssertToken(TokenKind.Plus, Token.Plus());
         }
 
-        [TestMethod]
+        [Test]
         public void Greater()
         {
             AssertToken(TokenKind.Greater, Token.Greater());
         }
 
-        [TestMethod]
+        [Test]
         public void RightParenthesis()
         {
             AssertToken(TokenKind.RightParenthesis, Token.RightParenthesis());
         }
 
-        [TestMethod]
+        [Test]
         public void Eoi()
         {
             AssertToken(TokenKind.Eoi, Token.Eoi());
         }
 
-        [TestMethod]
+        [Test]
         public void Includes()
         {
             AssertToken(TokenKind.Includes, Token.Includes());
         }
 
-        [TestMethod]
+        [Test]
         public void DashMatch()
         {
             AssertToken(TokenKind.DashMatch, Token.DashMatch());
         }
 
-        [TestMethod]
+        [Test]
         public void Ident()
         {
             AssertToken(TokenKind.Ident, "foo", Token.Ident("foo"));
         }
 
-        [TestMethod,ExpectedException(typeof(ArgumentNullException))]
+        [Test,ExpectedException(typeof(ArgumentNullException))]
         public void IdentNullText()
         {
             Token.Ident(null);
         }
 
-        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        [Test, ExpectedException(typeof(ArgumentException))]
         public void IdentEmptyText()
         {
             Token.Ident(string.Empty);
         }
 
-        [TestMethod]
+        [Test]
         public void Hash()
         {
             AssertToken(TokenKind.Hash, "foo", Token.Hash("foo"));
         }
 
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        [Test, ExpectedException(typeof(ArgumentNullException))]
         public void HashNullText()
         {
             Token.Hash(null);
         }
 
-        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        [Test, ExpectedException(typeof(ArgumentException))]
         public void HashEmptyText()
         {
             Token.Hash(string.Empty);
         }
 
-        [TestMethod]
+        [Test]
         public void String()
         {
             AssertToken(TokenKind.String, "foo", Token.String("foo"));
         }
 
-        [TestMethod]
+        [Test]
         public void StringNullText()
         {
             Token.String(null);
         }
 
-        [TestMethod]
+        [Test]
         public void StringEmptyText()
         {
             AssertToken(TokenKind.String, string.Empty, Token.String(string.Empty));
@@ -149,13 +149,13 @@ namespace Fizzler.Tests
             AssertToken(TokenKind.Function, "foo", Token.Function("foo"));
         }
 
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        [Test, ExpectedException(typeof(ArgumentNullException))]
         public void FunctionNullText()
         {
             Token.Function(null);
         }
 
-        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        [Test, ExpectedException(typeof(ArgumentException))]
         public void FunctionEmptyText()
         {
             Token.Function(string.Empty);
@@ -166,13 +166,13 @@ namespace Fizzler.Tests
             AssertToken(TokenKind.WhiteSpace, " \n ", Token.WhiteSpace("foo"));
         }
 
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        [Test, ExpectedException(typeof(ArgumentNullException))]
         public void WhiteSpaceNullText()
         {
             Token.WhiteSpace(null);
         }
 
-        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        [Test, ExpectedException(typeof(ArgumentException))]
         public void WhiteSpaceEmptyText()
         {
             Token.WhiteSpace(string.Empty);
@@ -183,13 +183,13 @@ namespace Fizzler.Tests
             AssertToken(TokenKind.Integer, "123", Token.Integer("123"));
         }
 
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        [Test, ExpectedException(typeof(ArgumentNullException))]
         public void IntegerNullText()
         {
             Token.Integer(null);
         }
 
-        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        [Test, ExpectedException(typeof(ArgumentException))]
         public void IntegerEmptyText()
         {
             Token.Integer(string.Empty);
