@@ -13,7 +13,7 @@
 		<mkdir dir="build" />
 	</target>
 	<target name="build-fizzler" depends="prep">
-		<csc target="library" output="build\Fizzler.dll" debug="true">
+		<csc target="library" output="build//Fizzler.dll" debug="true">
 			<sources>
 				<include name="Fizzler/**/*.cs" />
 			</sources>
@@ -24,7 +24,7 @@
 		</csc>
 	</target>
 	<target name="build-htmlagilitypack" depends="build-fizzler">
-		<csc target="library" output="build\Fizzler.Systems.HtmlAgilityPack.dll" debug="true">
+		<csc target="library" output="build//Fizzler.Systems.HtmlAgilityPack.dll" debug="true">
 			<sources>
 				<include name="Fizzler.Systems.HtmlAgilityPack/**/*.cs" />
 			</sources>
@@ -38,7 +38,7 @@
 		</csc>
 	</target>
 	<target name="build-tests" depends="build-htmlagilitypack">
-		<csc target="library" output="build\Fizzler.Tests.dll" debug="true">
+		<csc target="library" output="build//Fizzler.Tests.dll" debug="true">
 			<sources>
 				<include name="Fizzler.Tests/**/*.cs" />
 			</sources>
@@ -57,10 +57,11 @@
 		</csc>
 	</target>
 	<target name="test" depends="build-tests">
-		<copy file="libs\HtmlAgilityPack.dll" todir="build" />
+		<copy file="libs/HtmlAgilityPack.dll" todir="build" />
+		<copy file="libs/nunit.framework.dll" todir="build" />
 		<nunit2>
 			<formatter type="Plain" />
-			<test assemblyname="build\Fizzler.Tests.dll" appconfig="Fizzler.Tests/App.config" />
+			<test assemblyname="build//Fizzler.Tests.dll" appconfig="Fizzler.Tests/App.config" />
 		</nunit2>
 	</target>
 </project>
