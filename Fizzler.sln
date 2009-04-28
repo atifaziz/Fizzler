@@ -6,14 +6,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8FC1F69B-FAFC-484C-984B-78FA7E224BCB}"
 	ProjectSection(SolutionItems) = preProject
 		default.build = default.build
-		Fizzle.vsmdi = Fizzle.vsmdi
-		Fizzler.vsmdi = Fizzler.vsmdi
-		Fizzler1.vsmdi = Fizzler1.vsmdi
-		Fizzler2.vsmdi = Fizzler2.vsmdi
-		Fizzler3.vsmdi = Fizzler3.vsmdi
-		Fizzler6.vsmdi = Fizzler6.vsmdi
-		Fizzler7.vsmdi = Fizzler7.vsmdi
-		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Tests", "Fizzler.Tests\Fizzler.Tests.csproj", "{61EDF5C0-1854-4867-AE8A-7A1216E116C9}"
