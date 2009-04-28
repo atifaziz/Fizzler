@@ -5,12 +5,12 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DBEAD205-BD5C-461F-873D-DE643016F14C}</ProjectGuid>
+    <ProjectGuid>{48822D9C-C17E-412B-96AE-F740EEF87990}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Fizzler.Systems.HtmlAgilityPack</RootNamespace>
     <AssemblyName>Fizzler.Systems.HtmlAgilityPack</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -31,27 +31,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BackLinq, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\BackLinq.dll</HintPath>
+    </Reference>
     <Reference Include="HtmlAgilityPack, Version=1.3.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
     <Reference Include="System.Data" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HtmlNodeExtensions.cs" />
-    <Compile Include="HtmlNodeOps.cs" />
-    <Compile Include="HtmlNodeSelection.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="..\Fizzler.Systems.HtmlAgilityPack\HtmlNodeExtensions.cs" />
+    <Compile Include="..\Fizzler.Systems.HtmlAgilityPack\HtmlNodeOps.cs" />
+    <Compile Include="..\Fizzler.Systems.HtmlAgilityPack\HtmlNodeSelection.cs" />
+    <Compile Include="..\Fizzler.Systems.HtmlAgilityPack\Properties\AssemblyInfo.cs" />
+    <Compile Include="ExtensionAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fizzler\Fizzler.csproj">
-      <Project>{939036D6-29FD-46E4-B6CD-52618F51081B}</Project>
-      <Name>Fizzler.Parser</Name>
+    <ProjectReference Include="..\Fizzler.Net20\Fizzler.csproj">
+      <Project>{278E9225-9FE5-4D63-9C9B-206FC68BAA37}</Project>
+      <Name>Fizzler %28NET20\Fizzler%29</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -26,8 +26,7 @@ namespace Fizzler.Tests
 
 	    protected IEnumerable<HtmlNode> Select(string selectorChain)
         {
-            return Document.DocumentNode
-                           .QuerySelectorAll(selectorChain);
+            return Document.DocumentNode.QuerySelectorAll(selectorChain);
         }
 
         protected IList<HtmlNode> SelectList(string selectorChain)
