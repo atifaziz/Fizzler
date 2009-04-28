@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="ControlOps.cs" />
     <Compile Include="ControlExtensions.cs" />
+    <Compile Include="ControlSelection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

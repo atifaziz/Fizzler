@@ -13,27 +13,6 @@ namespace Fizzler.Systems.HtmlAgilityPack
     public static class HtmlNodeExtensions
     {
         /// <summary>
-        /// Similar to <see cref="QuerySelectorAll" /> except it returns 
-        /// only the first element matching the supplied selector strings.
-        /// </summary>
-        public static HtmlNode QuerySelector(this HtmlNode node, string selector)
-        {
-            return node.QuerySelectorAll(selector).FirstOrDefault();
-        }
-
-        /// <summary>
-        /// Retrieves all element nodes from descendants of the starting 
-        /// element node that match any selector within the supplied 
-        /// selector strings. 
-        /// </summary>
-        public static IEnumerable<HtmlNode> QuerySelectorAll(this HtmlNode node, string selector)
-        {
-            var generator = new HtmlNodeSelectorGenerator();
-            Parser.Parse(selector, generator);
-            return generator.Selector(Enumerable.Repeat(node, 1));
-        }
-
-        /// <summary>
         /// Determines whether this node is an element or not.
         /// </summary>
         public static bool IsElement(this HtmlNode node)

@@ -13,26 +13,6 @@ namespace Fizzler.Systems.WinForms
     public static class ControlExtensions
     {
         /// <summary>
-        /// Similar to <see cref="QuerySelectorAll" /> except it returns 
-        /// only the first control matching the supplied selector strings.
-        /// </summary>
-        public static Control QuerySelector(this Control control, string selector)
-        {
-            return control.QuerySelectorAll(selector).FirstOrDefault();
-        }
-
-        /// <summary>
-        /// Retrieves all controls from descendants of the starting control 
-        /// that match any selector within the supplied selector strings. 
-        /// </summary>
-        public static IEnumerable<Control> QuerySelectorAll(this Control control, string selector)
-        {
-            var generator = new SelectorGenerator<Control>(new ControlOps());
-            Parser.Parse(selector, generator);
-            return generator.Selector(Enumerable.Repeat(control, 1));
-        }
-
-        /// <summary>
         /// Returns a collection of all properties on the control.
         /// </summary>
         public static PropertyDescriptorCollection Properties(this Control control)
