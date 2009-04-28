@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using Fizzler;
 using Fizzler.Systems.HtmlAgilityPack;
 using HtmlAgilityPack;
 using Microsoft.VisualBasic;
@@ -15,6 +16,8 @@ namespace VisualFizzler
 {
     public partial class MainForm : Form
     {
+		private static HumanReadableSelectorGenerator _humanReadableSelectorGenerator = new HumanReadableSelectorGenerator();
+
         private static readonly Regex _tagExpression = new Regex(@"\<(?:(?<t>[a-z]+)(?:""[^""]*""|'[^']*'|[^""'>])*|/(?<t>[a-z]+))\>",
             RegexOptions.IgnoreCase
             | RegexOptions.Singleline
@@ -176,12 +179,13 @@ namespace VisualFizzler
         {
             if (_document == null)
                 return;
-            _selectorMatches = Evaluate(_document, _selectorBox, _matchBox, _statusLabel, _selectorMatches, _documentBox);
+            _selectorMatches = Evaluate(_document, _selectorBox, _matchBox, _statusLabel, _selectorMatches, _documentBox, _readableSelector);
         }
 
-        private static Match[] Evaluate(HtmlDocument document, Control tb, ListBox lb, ToolStripItem status, IEnumerable<Match> oldMatches, RichTextBox rtb)
+        private static Match[] Evaluate(HtmlDocument document, Control tb, ListBox lb, ToolStripItem status, IEnumerable<Match> oldMatches, RichTextBox rtb, Control humanReadable)
         {
             var input = tb.Text.Trim();
+
             tb.ForeColor = SystemColors.WindowText;
             
             var nodes = new HtmlNode[0];
@@ -211,6 +215,7 @@ namespace VisualFizzler
             try
             {
                 lb.Items.Clear();
+            	humanReadable.Text = string.Empty;
                 if (!nodes.Any())
                     return new Match[0];
 
@@ -225,6 +230,10 @@ namespace VisualFizzler
                 }
                 
                 Highlight(rtb, matches, null, Color.Yellow, null);
+
+				Parser.Parse(input, _humanReadableSelectorGenerator);
+
+				humanReadable.Text = _humanReadableSelectorGenerator.Selector;
                 
                 lb.Items.AddRange(nodes.Select(n => n.GetBeginTagString()).ToArray());
                 
