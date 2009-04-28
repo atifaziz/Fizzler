@@ -26,9 +26,14 @@ namespace Fizzler
         public static IEnumerable<Token> Tokenize(string input)
         {
             var reader = new Reader(input ?? string.Empty);
+
             while (reader.Read() != null)
             {
                 var ch = reader.Value;
+
+                //
+                // Identifier or function
+                //
                 if (ch == '-' || IsNmStart(ch))
                 {
                     reader.Mark();
@@ -43,12 +48,18 @@ namespace Fizzler
                     else
                         yield return Token.Ident(reader.MarkedWithUnread());
                 }
+                //
+                // Integer
+                //
                 else if (IsDigit(ch))
                 {
                     reader.Mark();
                     do { /* NOP */ } while (IsDigit(reader.Read()));
                     yield return Token.Integer(reader.MarkedWithUnread());
                 }
+                //
+                // Whitespace, including that which is coupled with some punctuation
+                //
                 else if (IsS(ch))
                 {
                     var space = ParseWhiteSpace(reader);
@@ -70,12 +81,18 @@ namespace Fizzler
                     case '~':
                     case '|':
                     {
-                        if(reader.Read() != '=')
+                        //
+                        // ~= |=
+                        //
+                        if (reader.Read() != '=')
                             throw new FormatException(string.Format("Invalid character at position {0}.", reader.Position));
                         yield return ch == '|' ? Token.DashMatch() : Token.Includes();
                         break;
                     }
-                    case '*':  yield return Token.Star(); break;
+                    //
+                    // Single-character punctuation
+                    //
+                    case '*': yield return Token.Star(); break;
                     case '.':  yield return Token.Dot(); break;
                     case ':':  yield return Token.Colon(); break;
                     case ',':  yield return Token.Comma(); break;
@@ -86,6 +103,9 @@ namespace Fizzler
                     case '+': yield return Token.Plus(); break;
                     case '>':  yield return Token.Greater(); break;
                     case '#':  yield return Token.Hash(ParseHash(reader)); break;
+                    //
+                    // Single- or double-quoted strings
+                    //
                     case '\"':
                     case '\'': yield return ParseString(reader, /* quote */ ch.Value); break;
                     
@@ -121,28 +141,52 @@ namespace Fizzler
         {
             Debug.Assert(reader != null);
 
+            //
+            // TODO Support full string syntax!
+            //
+            // string    {string1}|{string2}
+            // string1   \"([^\n\r\f\\"]|\\{nl}|{nonascii}|{escape})*\"
+            // string2   \'([^\n\r\f\\']|\\{nl}|{nonascii}|{escape})*\'
+            // nonascii  [^\0-\177]
+            // escape    {unicode}|\\[^\n\r\f0-9a-f]
+            // unicode   \\[0-9a-f]{1,6}(\r\n|[ \n\r\t\f])?
+            //
+
             var strpos = reader.Position;
             reader.MarkFromNext(); // skipping quote
+
             char? ch;
             StringBuilder sb = null;
+            
             while ((ch = reader.Read()) != quote)
             {
                 if (ch == null)
                     throw new FormatException(string.Format("Unterminated string at position {0}.", strpos));
+                
                 if (ch == '\\')
                 {
                     ch = reader.Read();
+
+                    //
+                    // NOTE: Only escaping of quote and backslash supported!
+                    //
+                    
                     if (ch != quote && ch != '\\')
                         throw new FormatException(string.Format("Invalid escape sequence at position {0} in a string at position {1}.", reader.Position, strpos));
+                    
                     if (sb == null)
                         sb = new StringBuilder();
+                    
                     sb.Append(reader.MarkedExceptLast());
                     reader.Mark();
                 }
             }
+            
             var text = reader.Marked();
+
             if (sb != null)
                 text = sb.Append(text).ToString();
+
             return Token.String(text);
         }
 
