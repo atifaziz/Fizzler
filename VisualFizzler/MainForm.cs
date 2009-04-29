@@ -157,7 +157,7 @@ namespace VisualFizzler
                     "The downloaded resource is rather large ({0} bytes). Proceed anyway?",
                     size.ToString("N0"));
 
-                if (DialogResult.Yes != MessageBox.Show(this, msg, "Non-HTML Content", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+                if (DialogResult.Yes != MessageBox.Show(this, msg, "Large Content", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
                     return;
             }
 
