@@ -23,7 +23,7 @@ namespace Fizzler.Tests
 			Run("p a", "Select all nodes with the <p> tag which have descendants with the <a> tag.");
 		}
 
-		[Test,Ignore("Pending fix.")]
+		[Test,Ignore("Pending issue #16 fix.")]
 		public void Three_Levels_Of_Descendant()
 		{
 			Run("p a img", "Select all nodes with the <p> tag which have descendants with the <a> tag, which in turn have descendants with the <img> tag.");
