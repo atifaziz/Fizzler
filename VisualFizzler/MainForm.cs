@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Net.Mime;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using Fizzler;
@@ -107,20 +109,70 @@ namespace VisualFizzler
             }
             while (url == null);
 
+            //
+            // Download
+            //
+
+            string content;
+            var wc = new WebClient();
+
             try
             {
                 using (CurrentCursorScope.EnterWait())
-                {
-                    var document = new HtmlDocument();
-                    document.LoadHtml(new WebClient().DownloadString(url));
-                    Open(document);
-                    _lastKnownGoodImportedUrl = url;
-                }
+                    content = wc.DownloadString(url);
             }
             catch (WebException e)
             {
                 Program.ShowExceptionDialog(e, "Import Error", this);
+                return;
             }
+
+            //
+            // Make sure it's HTML otherwise get confirmation to proceed.
+            //
+
+            var typeHeader = wc.ResponseHeaders[HttpResponseHeader.ContentType];
+            var contentType = new ContentType(typeHeader);
+            if (string.IsNullOrEmpty(typeHeader) || !contentType.IsHtml())
+            {
+                var msg = string.Format(
+                    "The downloaded resource is \u201c{0}\u201d rather than HTML, "
+                    + "which could produce undesired results. Proceed anyway?",
+                    contentType.MediaType);
+
+                if (DialogResult.Yes != MessageBox.Show(this, msg, "Non-HTML Content", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+                    return;
+            }
+
+            //
+            // If it's too big (> 512KB), get confirmation to proceed.
+            //
+
+            var lengthHeader = wc.ResponseHeaders[HttpResponseHeader.ContentLength];
+            long size;
+            if (long.TryParse(lengthHeader, NumberStyles.None, CultureInfo.InvariantCulture, out size)
+                && size > 512 * 1024)
+            {
+                var msg = string.Format(
+                    "The downloaded resource is rather large ({0} bytes). Proceed anyway?",
+                    size.ToString("N0"));
+
+                if (DialogResult.Yes != MessageBox.Show(this, msg, "Non-HTML Content", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation))
+                    return;
+            }
+
+            //
+            // Load 'er up!
+            //
+
+            using (CurrentCursorScope.EnterWait())
+            {
+                var document = new HtmlDocument();
+                document.LoadHtml(content);
+                Open(document);
+            }
+
+            _lastKnownGoodImportedUrl = url;
         }
 
         private void SelectorBox_TextChanged(object sender, EventArgs e)
