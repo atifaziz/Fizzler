@@ -63,7 +63,12 @@ namespace VisualFizzler
                 if (string.IsNullOrEmpty(input))
                     return;
 
+                //
+                // If some entered just the DNS name to get the home page 
+                // then we prepend "http://" for the user to prevent typing.
+                //
                 // http://www.shauninman.com/archive/2006/05/08/validating_domain_names
+                //
 
                 if (Regex.IsMatch(input, @"^([a-z0-9] ([-a-z0-9]*[a-z0-9])? \.)+ 
                                             ( (a[cdefgilmnoqrstuwxz]|aero|arpa)
@@ -91,7 +96,9 @@ namespace VisualFizzler
                                               |w[fs]
                                               |y[etu]
                                               |z[amw])", RegexOptions.IgnoreCase | RegexOptions.CultureInvariant | RegexOptions.IgnorePatternWhitespace | RegexOptions.ExplicitCapture))
+                {
                     input = "http://" + input;
+                }
 
                 if (!Uri.IsWellFormedUriString(input, UriKind.Absolute))
                     MessageBox.Show(this, "The entered URL does not appear to be correctly formatted.", "Invalid URL", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
