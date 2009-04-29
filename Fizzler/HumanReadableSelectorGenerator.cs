@@ -200,7 +200,7 @@ namespace Fizzler
 		/// </summary>
 		public void Descendant()
 		{
-			if (_chainCount > 1)
+			if (_chainCount > 0)
 			{
 				Add(", which in turn have descendants");
 			}
