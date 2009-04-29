@@ -207,7 +207,7 @@ namespace VisualFizzler
                     var helper = new HumanReadableSelectorGenerator();
                     Parser.Parse(input, new SelectorGeneratorTee(generator, helper));
                     if (document != null)
-                        generator.Selector(Enumerable.Repeat(document.DocumentNode, 1)).ToArray();
+                        nodes = generator.Selector(Enumerable.Repeat(document.DocumentNode, 1)).ToArray();
                     hb.Text = helper.Selector;
 
                     status.Text = "Matches: " + nodes.Length.ToString("N0");
