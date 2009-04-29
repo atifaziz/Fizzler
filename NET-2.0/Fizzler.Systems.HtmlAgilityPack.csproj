@@ -53,7 +53,7 @@
   <ItemGroup>
     <ProjectReference Include="Fizzler.csproj">
       <Project>{278E9225-9FE5-4D63-9C9B-206FC68BAA37}</Project>
-      <Name>Fizzler %28NET20\Fizzler%29</Name>
+      <Name>Fizzler %28NET-2.0\Fizzler%29</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
