@@ -49,6 +49,12 @@ namespace Fizzler.Tests
 			Run("#nodeId", "Select all nodes with an id of 'nodeId'.");
 		}
 
+		[Test]
+		public void SelectorGroup()
+		{
+			Run("a, span", "Select all nodes with the <a> tag, then combined with previous, select all nodes with the <span> tag.");
+		}
+
 		private void Run(string selector, string message)
 		{
 			Parser.Parse(selector, _humanReadableSelectorGenerator);

@@ -14,6 +14,7 @@ namespace Fizzler
 		/// </summary>
 		public virtual void OnInit()
 		{
+			Selector = null;
 		}
 
 		private string _selector;
@@ -36,7 +37,10 @@ namespace Fizzler
 		/// </summary>
 		public virtual void OnSelector()
 		{
-			Selector = "Select all nodes";
+			if (string.IsNullOrEmpty(Selector))
+				Selector = "Select all nodes";
+			else
+				Selector += ", then combined with previous, select all nodes";
 		}
 
 		/// <summary>
