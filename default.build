@@ -37,7 +37,22 @@
 			</references>
 		</csc>
 	</target>
-	<target name="build-visualfizzler" depends="build-htmlagilitypack">
+	<target name="build-consolefizzler" depends="build-htmlagilitypack">
+		<csc target="exe" output="build//ConsoleFizzler.exe" debug="true">
+			<sources>
+				<include name="ConsoleFizzler/**/*.cs" />
+			</sources>
+			<references>
+				<include name="build/Fizzler.dll" />
+				<include name="build/Fizzler.Systems.HtmlAgilityPack.dll" />
+				<include name="libs/HtmlAgilityPack.dll" />
+				<include name="System.dll" />
+				<include name="System.Core.dll" />
+				<include name="System.XML.dll" />
+			</references>
+		</csc>
+	</target>
+	<target name="build-visualfizzler" depends="build-consolefizzler">
 		<csc target="exe" output="build//VisualFizzler.exe" debug="true">
 			<sources>
 				<include name="VisualFizzler/**/*.cs" />

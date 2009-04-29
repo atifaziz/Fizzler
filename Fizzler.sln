@@ -26,6 +26,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Systems.HtmlAgility
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Tests", "NET-2.0\Fizzler.Tests.csproj", "{CA756450-AB7A-4FB0-97C4-35B8FBE89021}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleFizzler", "ConsoleFizzler\ConsoleFizzler.csproj", "{296C2824-A7D7-42A0-9B4C-1BC8FA0A1859}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +66,10 @@ Global
 		{CA756450-AB7A-4FB0-97C4-35B8FBE89021}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA756450-AB7A-4FB0-97C4-35B8FBE89021}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA756450-AB7A-4FB0-97C4-35B8FBE89021}.Release|Any CPU.Build.0 = Release|Any CPU
+		{296C2824-A7D7-42A0-9B4C-1BC8FA0A1859}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{296C2824-A7D7-42A0-9B4C-1BC8FA0A1859}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{296C2824-A7D7-42A0-9B4C-1BC8FA0A1859}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{296C2824-A7D7-42A0-9B4C-1BC8FA0A1859}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
