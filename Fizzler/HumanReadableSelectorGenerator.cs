@@ -84,7 +84,7 @@ namespace Fizzler
 		/// </summary>
 		public void Id(string id)
 		{
-			Add(" with id of " + id);
+			Add(string.Format(" with an id of '{0}'", id));
 		}
 
 		void ISelectorGenerator.Class(string clazz)

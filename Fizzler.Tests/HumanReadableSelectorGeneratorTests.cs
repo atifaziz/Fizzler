@@ -43,6 +43,12 @@ namespace Fizzler.Tests
 			Run("a + span", "Select all nodes with the <a> tag which is immediately preceeded by a sibling node with the <span> tag.");
 		}
 
+		[Test]
+		public void Id()
+		{
+			Run("#nodeId", "Select all nodes with an id of 'nodeId'.");
+		}
+
 		private void Run(string selector, string message)
 		{
 			Parser.Parse(selector, _humanReadableSelectorGenerator);
