@@ -8,8 +8,8 @@
     <ProjectGuid>{80456F6D-6853-4244-8E3D-F22ECA0980EC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fizzler.Systems.WinForms</RootNamespace>
-    <AssemblyName>Fizzler.Systems.WinForms</AssemblyName>
+    <RootNamespace>Fizzler</RootNamespace>
+    <AssemblyName>Fizzler.Sandbox</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

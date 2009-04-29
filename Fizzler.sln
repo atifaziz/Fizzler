@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Systems.HtmlAgility
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualFizzler", "VisualFizzler\VisualFizzler.csproj", "{46AA901E-21D1-4720-B173-532B91105CE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Systems.WinForms", "Fizzler.Systems.WinForms\Fizzler.Systems.WinForms.csproj", "{80456F6D-6853-4244-8E3D-F22ECA0980EC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Sandbox", "Fizzler.Sandbox\Fizzler.Sandbox.csproj", "{80456F6D-6853-4244-8E3D-F22ECA0980EC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NET-2.0", "NET-2.0", "{1A630545-B74B-4EEE-B0B6-DD8E2A6CAB02}"
 EndProject
