@@ -16,8 +16,6 @@ namespace VisualFizzler
 {
     public partial class MainForm : Form
     {
-		private static HumanReadableSelectorGenerator _humanReadableSelectorGenerator = new HumanReadableSelectorGenerator();
-
         private static readonly Regex _tagExpression = new Regex(@"\<(?:(?<t>[a-z]+)(?:""[^""]*""|'[^']*'|[^""'>])*|/(?<t>[a-z]+))\>",
             RegexOptions.IgnoreCase
             | RegexOptions.Singleline
@@ -177,15 +175,12 @@ namespace VisualFizzler
 
         private void Evaluate()
         {
-            if (_document == null)
-                return;
-            _selectorMatches = Evaluate(_document, _selectorBox, _matchBox, _statusLabel, _selectorMatches, _documentBox, _readableSelector);
+            _selectorMatches = Evaluate(_document, _selectorBox, _matchBox, _helpBox, _statusLabel, _selectorMatches, _documentBox);
         }
 
-        private static Match[] Evaluate(HtmlDocument document, Control tb, ListBox lb, ToolStripItem status, IEnumerable<Match> oldMatches, RichTextBox rtb, Control humanReadable)
+        private static Match[] Evaluate(HtmlDocument document, Control tb, ListBox lb, Control hb, ToolStripItem status, IEnumerable<Match> oldMatches, RichTextBox rtb)
         {
             var input = tb.Text.Trim();
-
             tb.ForeColor = SystemColors.WindowText;
             
             var nodes = new HtmlNode[0];
@@ -198,7 +193,23 @@ namespace VisualFizzler
             {
                 try
                 {
-                    nodes = document.DocumentNode.QuerySelectorAll(input).ToArray();
+                    //
+                    // Simple way to query for nodes:
+                    //
+                    // nodes = document.DocumentNode.QuerySelectorAll(input).ToArray();
+                    //
+                    // However, we want to generate the human readable text and
+                    // the node selector in a single pass so go the bare metal way 
+                    // here to make all the parties to talk to each other.
+                    //
+                    
+                    var generator = new SelectorGenerator<HtmlNode>(new HtmlNodeOps());
+                    var helper = new HumanReadableSelectorGenerator();
+                    Parser.Parse(input, new SelectorGeneratorTee(generator, helper));
+                    if (document != null)
+                        generator.Selector(Enumerable.Repeat(document.DocumentNode, 1)).ToArray();
+                    hb.Text = helper.Selector;
+
                     status.Text = "Matches: " + nodes.Length.ToString("N0");
                 }
                 catch (FormatException e)
@@ -215,7 +226,6 @@ namespace VisualFizzler
             try
             {
                 lb.Items.Clear();
-            	humanReadable.Text = string.Empty;
                 if (!nodes.Any())
                     return new Match[0];
 
@@ -230,10 +240,6 @@ namespace VisualFizzler
                 }
                 
                 Highlight(rtb, matches, null, Color.Yellow, null);
-
-				Parser.Parse(input, _humanReadableSelectorGenerator);
-
-				humanReadable.Text = _humanReadableSelectorGenerator.Selector;
                 
                 lb.Items.AddRange(nodes.Select(n => n.GetBeginTagString()).ToArray());
                 
