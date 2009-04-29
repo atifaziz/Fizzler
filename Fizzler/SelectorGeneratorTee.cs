@@ -84,6 +84,7 @@ namespace Fizzler
         public void Id(string id)
         {
             Primary.Id(id);
+            Secondary.Id(id);
         }
 
         /// <summary>
@@ -137,6 +138,7 @@ namespace Fizzler
         public void FirstChild()
         {
             Primary.FirstChild();
+            Secondary.FirstChild();
         }
 
         /// <summary>
@@ -145,6 +147,7 @@ namespace Fizzler
         public void LastChild()
         {
             Primary.LastChild();
+            Secondary.LastChild();
         }
 
         /// <summary>
