@@ -67,7 +67,7 @@ namespace ConsoleFizzler
 			Parser.Parse(_selector, new SelectorGeneratorTee(generator, helper));
 			HtmlNode[] nodes = generator.Selector(Enumerable.Repeat(document.DocumentNode, 1)).ToArray();
 
-			Console.WriteLine(helper.Selector);
+			Console.WriteLine(helper.Text);
 
 			foreach (var node in nodes)
 			{

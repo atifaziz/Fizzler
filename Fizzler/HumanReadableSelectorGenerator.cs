@@ -3,21 +3,21 @@ using System;
 namespace Fizzler
 {
 	/// <summary>
-	/// Generates a human-readable selector.
+    /// An <see cref="ISelectorGenerator"/> implementation that generates
+    /// human-readable description of the selector.
 	/// </summary>
 	public class HumanReadableSelectorGenerator : ISelectorGenerator
 	{
-		private int _chainCount = 0;
+		private int _chainCount;
+        private string _text;
 
 		/// <summary>
 		/// Delimits the initialization of a generation.
 		/// </summary>
 		public virtual void OnInit()
 		{
-			Selector = null;
+			Text = null;
 		}
-
-		private string _selector;
 
 		/// <summary>
 		/// Gets the selector implementation.
@@ -26,10 +26,10 @@ namespace Fizzler
 		/// If the generation is not complete, this property returns the 
 		/// last generated selector.
 		/// </remarks>
-		public string Selector
+		public string Text
 		{
-			get { return _selector; }
-			private set { _selector = value; }
+			get { return _text; }
+			private set { _text = value; }
 		}
 
 		/// <summary>
@@ -37,10 +37,10 @@ namespace Fizzler
 		/// </summary>
 		public virtual void OnSelector()
 		{
-			if (string.IsNullOrEmpty(Selector))
-				Selector = "Select all nodes";
+			if (string.IsNullOrEmpty(Text))
+				Text = "Select all nodes";
 			else
-				Selector += ", then combined with previous, select all nodes";
+				Text += ", then combined with previous, select all nodes";
 		}
 
 		/// <summary>
@@ -48,8 +48,8 @@ namespace Fizzler
 		/// </summary>
 		public virtual void OnClose()
 		{
-			Selector = Selector.Trim();
-			Selector += ".";
+			Text = Text.Trim();
+			Text += ".";
 		}
 
 		/// <summary>
@@ -58,7 +58,7 @@ namespace Fizzler
 		protected void Add(string selector)
 		{
 			if (selector == null) throw new ArgumentNullException("selector");
-			Selector += selector;
+			Text += selector;
 		}
 
 		/// <summary>

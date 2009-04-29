@@ -268,7 +268,7 @@ namespace VisualFizzler
                     Parser.Parse(input, new SelectorGeneratorTee(generator, helper));
                     if (document != null)
                         nodes = generator.Selector(Enumerable.Repeat(document.DocumentNode, 1)).ToArray();
-                    hb.Text = helper.Selector;
+                    hb.Text = helper.Text;
 
                     status.Text = "Matches: " + nodes.Length.ToString("N0");
                 }

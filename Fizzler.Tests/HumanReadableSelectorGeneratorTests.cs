@@ -57,7 +57,7 @@ namespace Fizzler.Tests
 		{
 		    var generator = new HumanReadableSelectorGenerator();
 			Parser.Parse(selector, generator);
-			Assert.AreEqual(message, generator.Selector);
+			Assert.AreEqual(message, generator.Text);
 		}
 	}
 }
