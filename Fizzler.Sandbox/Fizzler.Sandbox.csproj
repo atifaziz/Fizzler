@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{80456F6D-6853-4244-8E3D-F22ECA0980EC}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -40,10 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlOps.cs" />
-    <Compile Include="ControlExtensions.cs" />
-    <Compile Include="ControlSelection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WinForms\ControlExtensions.cs" />
+    <Compile Include="WinForms\ControlOps.cs" />
+    <Compile Include="WinForms\ControlSelection.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fizzler\Fizzler.csproj">
