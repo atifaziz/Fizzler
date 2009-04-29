@@ -247,6 +247,7 @@ namespace VisualFizzler
             if (string.IsNullOrEmpty(input))
             {
                 status.Text = "Ready";
+                hb.Text = null;
             }
             else
             {
@@ -275,6 +276,7 @@ namespace VisualFizzler
                 {
                     tb.ForeColor = Color.FromKnownColor(KnownColor.Red);
                     status.Text = "Error: " + e.Message;
+                    hb.Text = "Oops! " + e.Message;
                 }
             }
             
