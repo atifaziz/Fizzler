@@ -54,7 +54,7 @@
     <Compile Include="Selector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectorGenerator.cs" />
-    <Compile Include="TeeSelectorGenerator.cs" />
+    <Compile Include="SelectorGeneratorTee.cs" />
     <Compile Include="Token.cs" />
     <Compile Include="Tokener.cs" />
     <Compile Include="TokenKind.cs" />

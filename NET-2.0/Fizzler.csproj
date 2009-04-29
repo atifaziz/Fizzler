@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{278E9225-9FE5-4D63-9C9B-206FC68BAA37}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -53,6 +53,9 @@
     <Compile Include="..\Fizzler\Selector.cs" />
     <Compile Include="..\Fizzler\Properties\AssemblyInfo.cs" />
     <Compile Include="..\Fizzler\SelectorGenerator.cs" />
+    <Compile Include="..\Fizzler\SelectorGeneratorTee.cs">
+      <Link>SelectorGeneratorTee.cs</Link>
+    </Compile>
     <Compile Include="..\Fizzler\Token.cs" />
     <Compile Include="..\Fizzler\Tokener.cs" />
     <Compile Include="..\Fizzler\TokenKind.cs" />
