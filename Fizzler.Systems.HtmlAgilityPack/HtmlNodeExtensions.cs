@@ -103,12 +103,6 @@ namespace Fizzler.Systems.HtmlAgilityPack
         public static IEnumerable<HtmlNode> DescendantsAndSelf(this HtmlNode node)
         {
             if (node == null) throw new ArgumentNullException("node");
-            return DescendantsAndSelfImpl(node);
-        }
-
-        private static IEnumerable<HtmlNode> DescendantsAndSelfImpl(HtmlNode node)
-        {
-            Debug.Assert(node != null);
             return Enumerable.Repeat(node, 1).Concat(node.Descendants());
         }
 
