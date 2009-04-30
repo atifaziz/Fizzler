@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{296C2824-A7D7-42A0-9B4C-1BC8FA0A1859}</ProjectGuid>
     <OutputType>Exe</OutputType>
@@ -36,12 +36,22 @@
       <HintPath>..\Libs\HtmlAgilityPack.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
+    <Reference Include="System.Data" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommandLine.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="ExplainCommand.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="NameValueCollectionExtensions.cs" />
+    <Compile Include="NodeOutputFormat.cs" />
+    <Compile Include="SelectCommand.cs" />
+    <Compile Include="StringExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -54,6 +64,9 @@
       <Project>{939036D6-29FD-46E4-B6CD-52618F51081B}</Project>
       <Name>Fizzler</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

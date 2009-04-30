@@ -1,56 +1,59 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Net;
-using Fizzler;
-using Fizzler.Systems.HtmlAgilityPack;
-using HtmlAgilityPack;
+
+using CommandNames = System.Collections.Generic.KeyValuePair<
+          /* key   */ System.Func<ConsoleFizzler.ICommand>,
+          /* value */ System.Collections.Generic.IEnumerable<string>>;
 
 namespace ConsoleFizzler
 {
-	class Program
+    internal static class Program
 	{
-		private static readonly WebClient Webclient = new WebClient();
-		private static string _selector;
+        internal static int Main(string[] args)
+        {
+            try
+            {
+                return Run(args);
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.Message);
+                Trace.TraceError(e.ToString());
+                return 100;
+            }
+        }
 
-		static void Main(string[] args)
+		static int Run(string[] args)
 		{
-			if (args.Length < 1)
-			{
-				Console.WriteLine("Please supply a uri as the first argument and a CSS selector, enclosed in quotes, as the second argument.");
-				return;
-			}
+			if (args.Length == 0)
+                throw new ApplicationException("Missing command.");
 
-			if (args[0] == "/?")
-			{
-				Console.WriteLine("First argument: url. Second argument: css selector enclosed in quotes.");
-				return;
-			}
+		    var commands = new[] 
+            {
+	            new CommandNames(() => new SelectCommand(), Aliases("select", "sel")),
+	            new CommandNames(() => new ExplainCommand(), Aliases("explain", "describe", "desc")),
+	        }
+		    .SelectMany(e => e.Value.Select(v => new KeyValuePair<string, Func<ICommand>>(v, e.Key)))
+		    .ToDictionary(e => e.Key, e => e.Value);
 
-			if (args.Length < 2)
-			{
-				Console.WriteLine("Please supply a selector as the second argument.");
-				return;
-			}
+		    var name = args[0];
+		    
+            Func<ICommand> command;
+            if (!commands.TryGetValue(name, out command))
+                throw new ApplicationException("Invalid command.");
 
-			if (args.Length > 2)
-			{
-				Console.WriteLine("You only need two arguments. Perhaps you forgot to enclose the second selector argument in \"quotes\"?");
-				return;
-			}
-
-			string rawuri = args[0];
-			_selector = args[1];
-
-			if (!Uri.IsWellFormedUriString(rawuri, UriKind.Absolute))
-			{
-				Console.WriteLine("Your url is invalid.");
-				return;
-			}
-
-			RunUri(rawuri);
+		    return command().Run(args.Skip(1).ToArray());
+           
 		}
 
-		private static void RunUri(string rawuri)
+        static IEnumerable<string> Aliases(params string[] values)
+        {
+            return values;
+        }
+        /*
+	    private static void RunUri(string rawuri)
 		{
 			Console.WriteLine("Please wait...");
 
@@ -73,6 +76,6 @@ namespace ConsoleFizzler
 			{
 				Console.WriteLine(node.OuterHtml);
 			}
-		}
+		}*/
 	}
 }
