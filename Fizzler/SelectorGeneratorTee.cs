@@ -180,10 +180,10 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void NthChild(int position)
+        public void NthChild(int a, int b)
         {
-            Primary.NthChild(position);
-            Secondary.NthChild(position);
+            Primary.NthChild(a, b);
+            Secondary.NthChild(a, b);
         }
 
         /// <summary>

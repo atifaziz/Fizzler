@@ -222,8 +222,8 @@ namespace Fizzler
             // TODO Add support for the full syntax
             // At present, only INTEGER is allowed
 
-            var pos = int.Parse(Read(TokenKind.Integer).Text, CultureInfo.InvariantCulture);
-            _generator.NthChild(pos);
+            var b = int.Parse(Read(TokenKind.Integer).Text, CultureInfo.InvariantCulture);
+            _generator.NthChild(1, b);
         }
 
         private void Attrib()

@@ -112,7 +112,7 @@ namespace Fizzler
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that is the N-th child of some other element.
         /// </summary>
-        Selector<TElement> NthChild(int position);
+        Selector<TElement> NthChild(int a, int b);
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,

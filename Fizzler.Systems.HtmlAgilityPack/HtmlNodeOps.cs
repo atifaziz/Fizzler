@@ -174,11 +174,14 @@ namespace Fizzler.Systems.HtmlAgilityPack
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that is the N-th child of some other element.
         /// </summary>
-        public virtual Selector<HtmlNode> NthChild(int position)
+        public virtual Selector<HtmlNode> NthChild(int a, int b)
         {
+            if (a != 1)
+                throw new NotSupportedException("The nth-child(an+b) selector where a in is not 1 are not supported.");
+
             return nodes => from n in nodes
-                            let elements = n.ParentNode.Elements().Take(position).ToArray()
-                            where elements.Length == position && elements.Last().Equals(n)
+                            let elements = n.ParentNode.Elements().Take(b).ToArray()
+                            where elements.Length == b && elements.Last().Equals(n)
                             select n;
         }
 

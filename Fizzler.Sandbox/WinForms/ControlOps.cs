@@ -166,7 +166,7 @@ namespace Fizzler.Systems.WinForms
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents a control that is the N-th child of some other control.
         /// </summary>
-        public virtual Selector<Control> NthChild(int position)
+        public virtual Selector<Control> NthChild(int position, int i)
         {
             return controls => from c in controls
                                let parent = c.Parent

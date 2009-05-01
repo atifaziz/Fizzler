@@ -239,9 +239,9 @@ namespace Fizzler
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that is the N-th child of some other element.
         /// </summary>
-        public virtual void NthChild(int position)
+        public virtual void NthChild(int a, int b)
         {
-            Add(Ops.NthChild(position));
+            Add(Ops.NthChild(a, b));
         }
 
         /// <summary>

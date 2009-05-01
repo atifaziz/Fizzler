@@ -190,9 +190,9 @@ namespace Fizzler
 		/// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
 		/// which represents an element that is the N-th child of some other element.
 		/// </summary>
-		public void NthChild(int position)
+		public void NthChild(int a, int b)
 		{
-			Add(string.Format(" where the element is the {0}th child", position));
+			Add(string.Format(" where the element has {0}n+{1}-1 sibling before it", a, b));
 		}
 
 		/// <summary>
