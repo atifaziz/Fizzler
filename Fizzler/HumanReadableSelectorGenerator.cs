@@ -145,7 +145,7 @@ namespace Fizzler
         /// </summary>
         public void AttributePrefixMatch(string name, string value)
 	    {
-            Add(string.Format(" which have a {0} attribute whose value beg'{1}'", name, value));
+            Add(string.Format(" which have a {0} attribute whose value begins with '{1}'", name, value));
         }
 
 	    /// <summary>
