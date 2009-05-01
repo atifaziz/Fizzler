@@ -308,7 +308,7 @@ namespace Fizzler
             if (token == null)
             {
                 throw new FormatException(
-                    string.Format(@"Unexpected token {0} where {1} was expected.",
+                    string.Format(@"Unexpected token {{{0}}} where {{{1}}} was expected.",
                     Peek().Kind, kind));
             }
             return token.Value;
@@ -320,7 +320,7 @@ namespace Fizzler
             if (token == null)
             {
                 throw new FormatException(string.Format(
-                    @"Unexpected token {0} where one of {{{1}}} was expected.", 
+                    @"Unexpected token {{{0}}} where one of [{1}] was expected.", 
                     Peek().Kind, string.Join(", ", kinds.Select(k => k.ToString()).ToArray())));
             }
             return token.Value;
