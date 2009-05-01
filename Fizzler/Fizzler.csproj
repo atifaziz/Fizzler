@@ -43,6 +43,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Common\SolutionInfo.cs">
+      <Link>SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="INodeOps.cs">
       <SubType>Code</SubType>
     </Compile>

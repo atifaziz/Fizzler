@@ -21,6 +21,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
+    <NoWarn>3001,3002</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -29,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <WarningsAsErrors>3001,3002</WarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BackLinq, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -44,6 +48,9 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Common\SolutionInfo.cs">
+      <Link>SolutionInfo.cs</Link>
+    </Compile>
     <Compile Include="..\Fizzler.Systems.HtmlAgilityPack\HtmlNodeExtensions.cs" />
     <Compile Include="..\Fizzler.Systems.HtmlAgilityPack\HtmlNodeOps.cs" />
     <Compile Include="..\Fizzler.Systems.HtmlAgilityPack\HtmlNodeSelection.cs" />
