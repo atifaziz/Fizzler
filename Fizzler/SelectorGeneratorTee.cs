@@ -144,6 +144,15 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
+        public void AttributeSuffixMatch(string name, string value)
+        {
+            Primary.AttributeSuffixMatch(name, value);
+            Secondary.AttributeSuffixMatch(name, value);
+        }
+
+        /// <summary>
+        /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
+        /// </summary>
         public void FirstChild()
         {
             Primary.FirstChild();

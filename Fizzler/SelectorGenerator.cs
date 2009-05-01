@@ -198,6 +198,16 @@ namespace Fizzler
         }
 
         /// <summary>
+        /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
+        /// that represents an element with the attribute <paramref name="name"/> 
+        /// whose value ends with the suffix <paramref name="value"/>.
+        /// </summary>
+        public void AttributeSuffixMatch(string name, string value)
+        {
+            Add(Ops.AttributeSuffixMatch(name, value));
+        }
+
+        /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that is the first child of some other element.
         /// </summary>

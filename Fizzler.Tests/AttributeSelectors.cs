@@ -85,7 +85,25 @@ namespace Fizzler.Tests
         [Test,Ignore("Pending clarification of spec.")]
         public void Star_Attr_Prefix_With_Empty_Value()
         {
-            Assert.AreEqual(0, SelectList("*[class^=check]").Count);
+            Assert.AreEqual(0, SelectList("*[class^='']").Count);
+        }
+
+        [Test]
+        public void Star_Attr_Suffix()
+        {
+            var results = SelectList("*[class$=it]");
+
+            Assert.AreEqual(2, results.Count);
+            Assert.AreEqual("div", results[0].Name);
+            Assert.AreEqual("woooeeeee", results[0].InnerText);
+            Assert.AreEqual("div", results[1].Name);
+            Assert.AreEqual("woootooowe", results[1].InnerText);
+        }
+
+        [Test, Ignore("Pending clarification of spec.")]
+        public void Star_Attr_Suffix_With_Empty_Value()
+        {
+            Assert.AreEqual(0, SelectList("*[class$='']").Count);
         }
     }
 }

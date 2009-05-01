@@ -81,14 +81,17 @@ namespace Fizzler
                     case '~': // ~=
                     case '|': // |=
                     case '^': // ^=
+                    case '$': // $=
                     {
                         if (reader.Read() != '=')
                             throw new FormatException(string.Format("Invalid character at position {0}.", reader.Position));
-                        yield return ch == '~' 
-                                   ? Token.Includes()
-                                   : ch == '|'
-                                   ? Token.DashMatch()
-                                   : Token.PrefixMatch();
+                        switch (ch)
+                        {
+                            case '~': yield return Token.Includes(); break;
+                            case '|': yield return Token.DashMatch(); break;
+                            case '^': yield return Token.PrefixMatch(); break;
+                            case '$': yield return Token.SuffixMatch(); break;
+                        }
                         break;
                     }
                     //
