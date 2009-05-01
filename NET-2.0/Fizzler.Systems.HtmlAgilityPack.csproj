@@ -32,7 +32,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <WarningsAsErrors>3001,3002</WarningsAsErrors>
+    <WarningsAsErrors>
+    </WarningsAsErrors>
+    <NoWarn>3001,3002</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BackLinq, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
