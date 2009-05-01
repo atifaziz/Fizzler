@@ -38,9 +38,9 @@ namespace Fizzler
 		public virtual void OnSelector()
 		{
 			if (string.IsNullOrEmpty(Text))
-				Text = "Select all nodes";
+				Text = "Select all elements";
 			else
-				Text += ", then combined with previous, select all nodes";
+				Text += ", then combined with previous, select all elements";
 		}
 
 		/// <summary>
