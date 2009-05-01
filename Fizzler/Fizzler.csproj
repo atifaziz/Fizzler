@@ -46,9 +46,7 @@
     <Compile Include="..\Common\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="INodeOps.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <Compile Include="IElementOps.cs" />
     <Compile Include="ISelectorGenerator.cs" />
     <Compile Include="Parser.cs" />
     <Compile Include="Reader.cs" />

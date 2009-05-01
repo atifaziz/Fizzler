@@ -5,31 +5,31 @@ using System.Linq;
 namespace Fizzler
 {
     /// <summary>
-    /// A selector generator implementation for an arbitrary document/node system.
+    /// A selector generator implementation for an arbitrary document/element system.
     /// </summary>
-    public class SelectorGenerator<TNode> : ISelectorGenerator
+    public class SelectorGenerator<TElement> : ISelectorGenerator
     {
-        private readonly IEqualityComparer<TNode> _equalityComparer;
-        private readonly Stack<Selector<TNode>> _selectors;
+        private readonly IEqualityComparer<TElement> _equalityComparer;
+        private readonly Stack<Selector<TElement>> _selectors;
 
         /// <summary>
         /// Initializes a new instance of this object with an instance
-        /// of <see cref="INodeOps{TNode}"/> and the default equality
-        /// comparer that is used for determining if two nodes are equal.
+        /// of <see cref="IElementOps{TElement}"/> and the default equality
+        /// comparer that is used for determining if two elements are equal.
         /// </summary>
-        public SelectorGenerator(INodeOps<TNode> ops) : this(ops, null) {}
+        public SelectorGenerator(IElementOps<TElement> ops) : this(ops, null) {}
 
         /// <summary>
         /// Initializes a new instance of this object with an instance
-        /// of <see cref="INodeOps{TNode}"/> and an equality comparer
-        /// used for determining if two nodes are equal.
+        /// of <see cref="IElementOps{TElement}"/> and an equality comparer
+        /// used for determining if two elements are equal.
         /// </summary>
-        public SelectorGenerator(INodeOps<TNode> ops, IEqualityComparer<TNode> equalityComparer)
+        public SelectorGenerator(IElementOps<TElement> ops, IEqualityComparer<TElement> equalityComparer)
         {
             if(ops == null) throw new ArgumentNullException("ops");
             Ops = ops;
-            _equalityComparer = equalityComparer ?? EqualityComparer<TNode>.Default;
-            _selectors = new Stack<Selector<TNode>>();
+            _equalityComparer = equalityComparer ?? EqualityComparer<TElement>.Default;
+            _selectors = new Stack<Selector<TElement>>();
         }
 
         /// <summary>
@@ -39,13 +39,13 @@ namespace Fizzler
         /// If the generation is not complete, this property returns the 
         /// last generated selector.
         /// </remarks>
-        public Selector<TNode> Selector { get; private set; }
+        public Selector<TElement> Selector { get; private set; }
 
         /// <summary>
-        /// Gets the <see cref="INodeOps{TNode}"/> instance that this object
+        /// Gets the <see cref="IElementOps{TElement}"/> instance that this object
         /// was initialized with.
         /// </summary>
-        public INodeOps<TNode> Ops { get; private set; }
+        public IElementOps<TElement> Ops { get; private set; }
 
         /// <summary>
         /// Returns the collection of selector implementations representing 
@@ -55,7 +55,7 @@ namespace Fizzler
         /// If the generation is not complete, this method return the 
         /// selectors generated so far in a group.
         /// </remarks>
-        public IEnumerable<Selector<TNode>> GetSelectors()
+        public IEnumerable<Selector<TElement>> GetSelectors()
         {
             var selectors = _selectors;
             var top = Selector;
@@ -67,12 +67,12 @@ namespace Fizzler
         /// <summary>
         /// Adds a generated selector.
         /// </summary>
-        protected void Add(Selector<TNode> selector)
+        protected void Add(Selector<TElement> selector)
         {
             if(selector == null) throw new ArgumentNullException("selector");
             
             var top = Selector;
-            Selector = top == null ? selector : (nodes => selector(top(nodes)));
+            Selector = top == null ? selector : (elements => selector(top(elements)));
         }
 
         /// <summary>
@@ -99,9 +99,9 @@ namespace Fizzler
         /// </summary>
         public virtual void OnClose()
         {
-            var sum = GetSelectors().Aggregate((a, b) => (nodes => a(nodes).Concat(b(nodes))));
+            var sum = GetSelectors().Aggregate((a, b) => (elements => a(elements).Concat(b(elements))));
             var normalize = Ops.Descendant();
-            Selector = nodes => sum(normalize(nodes)).Distinct(_equalityComparer);
+            Selector = elements => sum(normalize(elements)).Distinct(_equalityComparer);
             _selectors.Clear();
         }
 

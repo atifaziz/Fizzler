@@ -3,7 +3,7 @@ namespace Fizzler
     /// <summary>
     /// Represents a selectors implementation for an arbitrary document/node system.
     /// </summary>
-    public interface INodeOps<TNode>
+    public interface IElementOps<TElement>
     {
         //
         // Selectors
@@ -13,7 +13,7 @@ namespace Fizzler
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#type-selectors">type selector</a>,
         /// which represents an instance of the element type in the document tree. 
         /// </summary>
-        Selector<TNode> Type(string type);
+        Selector<TElement> Type(string type);
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#universal-selector">universal selector</a>,
@@ -21,21 +21,21 @@ namespace Fizzler
         /// (including those without a namespace) if no default namespace 
         /// has been specified for selectors. 
         /// </summary>
-        Selector<TNode> Universal();
+        Selector<TElement> Universal();
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#Id-selectors">ID selector</a>,
         /// which represents an element instance that has an identifier that 
         /// matches the identifier in the ID selector.
         /// </summary>
-        Selector<TNode> Id(string id);
+        Selector<TElement> Id(string id);
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#class-html">class selector</a>,
         /// which is an alternative <see cref="AttributeIncludes"/> when 
         /// representing the <c>class</c> attribute. 
         /// </summary>
-        Selector<TNode> Class(string clazz);
+        Selector<TElement> Class(string clazz);
 
         //
         // Attribute selectors
@@ -46,14 +46,14 @@ namespace Fizzler
         /// that represents an element with the given attribute <paramref name="name"/>
         /// whatever the values of the attribute.
         /// </summary>
-        Selector<TNode> AttributeExists(string name);
+        Selector<TElement> AttributeExists(string name);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
         /// that represents an element with the given attribute <paramref name="name"/>
         /// and whose value is exactly <paramref name="value"/>.
         /// </summary>
-        Selector<TNode> AttributeExact(string name, string value);
+        Selector<TElement> AttributeExact(string name, string value);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
@@ -61,7 +61,7 @@ namespace Fizzler
         /// and whose value is a whitespace-separated list of words, one of 
         /// which is exactly <paramref name="value"/>.
         /// </summary>
-        Selector<TNode> AttributeIncludes(string name, string value);
+        Selector<TElement> AttributeIncludes(string name, string value);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
@@ -69,28 +69,28 @@ namespace Fizzler
         /// its value either being exactly <paramref name="value"/> or beginning 
         /// with <paramref name="value"/> immediately followed by "-" (U+002D).
         /// </summary>
-        Selector<TNode> AttributeDashMatch(string name, string value);
+        Selector<TElement> AttributeDashMatch(string name, string value);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
         /// that represents an element with the attribute <paramref name="name"/> 
         /// whose value begins with the prefix <paramref name="value"/>.
         /// </summary>
-        Selector<TNode> AttributePrefixMatch(string name, string value);
+        Selector<TElement> AttributePrefixMatch(string name, string value);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
         /// that represents an element with the attribute <paramref name="name"/> 
         /// whose value ends with the suffix <paramref name="value"/>.
         /// </summary>
-        Selector<TNode> AttributeSuffixMatch(string name, string value);
+        Selector<TElement> AttributeSuffixMatch(string name, string value);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
         /// that represents an element with the attribute <paramref name="name"/> 
         /// whose value contains at least one instance of the substring <paramref name="value"/>.
         /// </summary>
-        Selector<TNode> AttributeSubstring(string name, string value);
+        Selector<TElement> AttributeSubstring(string name, string value);
 
         //
         // Pseudo-class selectors
@@ -100,32 +100,32 @@ namespace Fizzler
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that is the first child of some other element.
         /// </summary>
-        Selector<TNode> FirstChild();
+        Selector<TElement> FirstChild();
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that is the last child of some other element.
         /// </summary>
-        Selector<TNode> LastChild();
+        Selector<TElement> LastChild();
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that is the N-th child of some other element.
         /// </summary>
-        Selector<TNode> NthChild(int position);
+        Selector<TElement> NthChild(int position);
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an elementthat has a parent element and whose parent 
         /// element has no other element children.
         /// </summary>
-        Selector<TNode> OnlyChild();
+        Selector<TElement> OnlyChild();
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that has no children at all.
         /// </summary>
-        Selector<TNode> Empty();
+        Selector<TElement> Empty();
 
         //
         // Combinators
@@ -135,20 +135,20 @@ namespace Fizzler
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#combinators">combinator</a>,
         /// which represents a childhood relationship between two elements.
         /// </summary>
-        Selector<TNode> Child();
+        Selector<TElement> Child();
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#combinators">combinator</a>,
         /// which represents a relationship between two elements where one element is an 
         /// arbitrary descendant of some ancestor element.
         /// </summary>
-        Selector<TNode> Descendant();
+        Selector<TElement> Descendant();
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#combinators">combinator</a>,
         /// which represents elements that share the same parent in the document tree and 
         /// where the first element immediately precedes the second element.
         /// </summary>
-        Selector<TNode> Adjacent();
+        Selector<TElement> Adjacent();
     }
 }

@@ -6,10 +6,10 @@ using HtmlAgilityPack;
 namespace Fizzler.Systems.HtmlAgilityPack
 {
     /// <summary>
-    /// An <see cref="INodeOps{TNode}"/> implementation for <see cref="HtmlNode"/>
+    /// An <see cref="IElementOps{TElement}"/> implementation for <see cref="HtmlNode"/>
     /// from <a href="http://www.codeplex.com/htmlagilitypack">HtmlAgilityPack</a>.
     /// </summary>
-    public class HtmlNodeOps : INodeOps<HtmlNode>
+    public class HtmlNodeOps : IElementOps<HtmlNode>
     {
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#type-selectors">type selector</a>,
@@ -43,7 +43,7 @@ namespace Fizzler.Systems.HtmlAgilityPack
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#class-html">class selector</a>,
-        /// which is an alternative <see cref="INodeOps{TNode}.AttributeIncludes"/> when 
+        /// which is an alternative <see cref="IElementOps{TElement}.AttributeIncludes"/> when 
         /// representing the <c>class</c> attribute. 
         /// </summary>
         public virtual Selector<HtmlNode> Class(string clazz)

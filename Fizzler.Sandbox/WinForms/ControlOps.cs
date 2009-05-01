@@ -5,10 +5,10 @@ using System.Windows.Forms;
 namespace Fizzler.Systems.WinForms
 {
     /// <summary>
-    /// An <see cref="INodeOps{TNode}"/> implementation for <see cref="Control"/>
+    /// An <see cref="IElementOps{TElement}"/> implementation for <see cref="Control"/>
     /// from Windows Forms.
     /// </summary>
-    public class ControlOps : INodeOps<Control>
+    public class ControlOps : IElementOps<Control>
     {
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#type-selectors">type selector</a>,
@@ -64,7 +64,7 @@ namespace Fizzler.Systems.WinForms
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#class-html">class selector</a>,
-        /// which is an alternative <see cref="INodeOps{TNode}.AttributeIncludes"/> when 
+        /// which is an alternative <see cref="IElementOps{TElement}.AttributeIncludes"/> when 
         /// representing the <c>class</c> attribute. 
         /// </summary>
         public virtual Selector<Control> Class(string clazz)
