@@ -80,7 +80,7 @@
 				<include name="Fizzler.Tests/**/*.cs" />
 			</sources>
 			<resources dynamicprefix="true">
-				<include name="Fizzler.Tests/Data/**" />
+				<include name="Fizzler.Tests/*.html" />
 			</resources>
 			<references>
 				<include name="build\Fizzler.dll" />

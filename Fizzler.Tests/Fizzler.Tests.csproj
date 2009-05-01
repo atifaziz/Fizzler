@@ -61,11 +61,6 @@
     <Compile Include="TokenTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Data\SelectorTest.html">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Fizzler.Systems.HtmlAgilityPack\Fizzler.Systems.HtmlAgilityPack.csproj">
       <Project>{DBEAD205-BD5C-461F-873D-DE643016F14C}</Project>
       <Name>Fizzler.Systems.HtmlAgilityPack %28Systems\Fizzler.Systems.HtmlAgilityPack%29</Name>
@@ -77,6 +72,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="SelectorTest.html" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -14,7 +14,7 @@ namespace Fizzler.Tests
 		{
             string html;
 			var assembly = Assembly.GetExecutingAssembly();
-			using (var stream = assembly.GetManifestResourceStream("Fizzler.Tests.Data.SelectorTest.html"))
+			using (var stream = assembly.GetManifestResourceStream("Fizzler.Tests.SelectorTest.html"))
 			using (var streamReader = new StreamReader(stream))
 			    html = streamReader.ReadToEnd();
             var document = new HtmlDocument();
