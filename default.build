@@ -38,7 +38,7 @@
 		</csc>
 	</target>
 	<target name="build-consolefizzler" depends="build-htmlagilitypack">
-		<csc target="exe" output="build//ConsoleFizzler.exe" debug="true">
+		<csc target="exe" output="build//fizz.exe" debug="true">
 			<sources>
 				<include name="ConsoleFizzler/**/*.cs" />
 			</sources>
