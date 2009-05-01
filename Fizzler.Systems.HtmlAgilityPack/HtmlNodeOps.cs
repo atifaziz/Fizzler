@@ -98,10 +98,12 @@ namespace Fizzler.Systems.HtmlAgilityPack
         /// </summary>
         public virtual Selector<HtmlNode> AttributeDashMatch(string name, string value)
         {
-            return nodes => from n in nodes.Elements()                            
+            return string.IsNullOrEmpty(value)
+                ? (Selector<HtmlNode>) (nodes => Enumerable.Empty<HtmlNode>()) 
+                : (nodes => from n in nodes.Elements()                            
                             let a = n.Attributes[name]
                             where a != null && a.Value.Split('-').Contains(value)
-                            select n;
+                            select n);
         }
 
         /// <summary>
@@ -111,10 +113,12 @@ namespace Fizzler.Systems.HtmlAgilityPack
         /// </summary>
         public Selector<HtmlNode> AttributePrefixMatch(string name, string value)
         {
-            return nodes => from n in nodes.Elements()
-                            let a = n.Attributes[name]
-                            where a != null && a.Value.StartsWith(value)
-                            select n;
+            return string.IsNullOrEmpty(value) 
+                 ? (Selector<HtmlNode>) (nodes => Enumerable.Empty<HtmlNode>()) 
+                 : (nodes => from n in nodes.Elements()
+                             let a = n.Attributes[name]
+                             where a != null && a.Value.StartsWith(value)
+                             select n);
         }
 
         /// <summary>
@@ -124,10 +128,12 @@ namespace Fizzler.Systems.HtmlAgilityPack
         /// </summary>
         public Selector<HtmlNode> AttributeSuffixMatch(string name, string value)
         {
-            return nodes => from n in nodes.Elements()
-                            let a = n.Attributes[name]
-                            where a != null && a.Value.EndsWith(value)
-                            select n;
+            return string.IsNullOrEmpty(value)
+                 ? (Selector<HtmlNode>)(nodes => Enumerable.Empty<HtmlNode>())
+                 : (nodes => from n in nodes.Elements()
+                             let a = n.Attributes[name]
+                             where a != null && a.Value.EndsWith(value)
+                             select n);
         }
 
         /// <summary>

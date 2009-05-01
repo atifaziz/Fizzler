@@ -36,7 +36,13 @@ namespace Fizzler.Tests
             Assert.AreEqual("eeeee", results[0].InnerText);
 		}
 
-		[Test]
+        [Test]
+        public void Element_Attr_Space_Separated_With_Empty_Value()
+        {
+            Assert.AreEqual(0, SelectList("p[class~='']").Count);
+        }
+        
+        [Test]
 		public void Element_Attr_Hyphen_Separated_With_Double_Quotes()
 		{
 			var results = SelectList("span[class|=\"separated\"]");
@@ -82,7 +88,7 @@ namespace Fizzler.Tests
             Assert.AreEqual("woootooowe", results[1].InnerText);
         }
 
-        [Test,Ignore("Pending clarification of spec.")]
+        [Test]
         public void Star_Attr_Prefix_With_Empty_Value()
         {
             Assert.AreEqual(0, SelectList("*[class^='']").Count);
@@ -100,7 +106,7 @@ namespace Fizzler.Tests
             Assert.AreEqual("woootooowe", results[1].InnerText);
         }
 
-        [Test, Ignore("Pending clarification of spec.")]
+        [Test]
         public void Star_Attr_Suffix_With_Empty_Value()
         {
             Assert.AreEqual(0, SelectList("*[class$='']").Count);
