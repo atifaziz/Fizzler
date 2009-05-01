@@ -122,13 +122,37 @@ namespace Fizzler
         }
 
         /// <summary>
-        /// Creates an dash-match token.
+        /// Creates a dash-match token.
         /// </summary>
         public static Token DashMatch()
         {
             return new Token(TokenKind.DashMatch);
         }
-        
+
+        /// <summary>
+        /// Creates a prefix-match token.
+        /// </summary>
+        public static Token PrefixMatch()
+        {
+            return new Token(TokenKind.PrefixMatch);
+        }
+
+        /// <summary>
+        /// Creates a suffix-match token.
+        /// </summary>
+        public static Token SuffixMatch()
+        {
+            return new Token(TokenKind.SuffixMatch);
+        }
+
+        /// <summary>
+        /// Creates a substring-match token.
+        /// </summary>
+        public static Token SubstringMatch()
+        {
+            return new Token(TokenKind.SubstringMatch);
+        }
+
         /// <summary>
         /// Creates an identifier token.
         /// </summary>

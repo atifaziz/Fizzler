@@ -208,5 +208,23 @@ namespace Fizzler.Tests
             else
                 Assert.AreEqual(expectedText, token.Text);
         }
+
+        [Test]
+        public void PrefixMatch()
+        {
+            AssertToken(TokenKind.PrefixMatch, Token.PrefixMatch());
+        }
+
+        [Test]
+        public void SuffixMatch()
+        {
+            AssertToken(TokenKind.SuffixMatch, Token.SuffixMatch());
+        }
+
+        [Test]
+        public void SubstringMatch()
+        {
+            AssertToken(TokenKind.SubstringMatch, Token.SubstringMatch());
+        }
     }
 }

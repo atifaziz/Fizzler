@@ -31,6 +31,21 @@ namespace Fizzler
         DashMatch,
 
         /// <summary>
+        /// Represents "^="
+        /// </summary>
+        PrefixMatch,
+
+        /// <summary>
+        /// Represents "$="
+        /// </summary>
+        SuffixMatch,
+
+        /// <summary>
+        /// Represents "*="
+        /// </summary>
+        SubstringMatch,
+        
+        /// <summary>
         /// Represents {string}
         /// </summary>
         String,
