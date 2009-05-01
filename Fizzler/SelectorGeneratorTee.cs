@@ -153,6 +153,15 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
+        public void AttributeSubstring(string name, string value)
+        {
+            Primary.AttributeSubstring(name, value);
+            Secondary.AttributeSubstring(name, value);
+        }
+
+        /// <summary>
+        /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
+        /// </summary>
         public void FirstChild()
         {
             Primary.FirstChild();

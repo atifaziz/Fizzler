@@ -101,6 +101,13 @@ namespace Fizzler
         /// </summary>
         void AttributeSuffixMatch(string name, string value);
 
+        /// <summary>
+        /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
+        /// that represents an element with the attribute <paramref name="name"/> 
+        /// whose value contains at least one instance of the substring <paramref name="value"/>.
+        /// </summary>
+        void AttributeSubstring(string name, string value);
+
         //
         // Pseudo-class selectors
         //

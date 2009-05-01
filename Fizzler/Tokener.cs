@@ -82,23 +82,45 @@ namespace Fizzler
                     case '|': // |=
                     case '^': // ^=
                     case '$': // $=
+                    case '*': // * or *=
                     {
                         if (reader.Read() != '=')
-                            throw new FormatException(string.Format("Invalid character at position {0}.", reader.Position));
-                        switch (ch)
                         {
-                            case '~': yield return Token.Includes(); break;
-                            case '|': yield return Token.DashMatch(); break;
-                            case '^': yield return Token.PrefixMatch(); break;
-                            case '$': yield return Token.SuffixMatch(); break;
+                            if (ch != '*')
+                                throw new FormatException(string.Format("Invalid character at position {0}.", reader.Position));
+                            reader.Unread();
+                            yield return Token.Star();
+                        }
+                        else
+                        {
+                            switch (ch)
+                            {
+                                case '~': yield return Token.Includes(); break;
+                                case '|': yield return Token.DashMatch(); break;
+                                case '^': yield return Token.PrefixMatch(); break;
+                                case '$': yield return Token.SuffixMatch(); break;
+                                case '*': yield return Token.SubstringMatch(); break;
+                            }
                         }
                         break;
                     }
+                        /*
+                    case '*': 
+                    {
+                        if (reader.Read() == '=')
+                        {
+                            yield return Token.SubstringMatch();
+                        }
+                        else
+                        {
+                            reader.Unread();
+                            yield return Token.Star(); break;
+                        }
+                    }*/
                     //
                     // Single-character punctuation
                     //
-                    case '*': yield return Token.Star(); break;
-                    case '.':  yield return Token.Dot(); break;
+                    case '.': yield return Token.Dot(); break;
                     case ':':  yield return Token.Colon(); break;
                     case ',':  yield return Token.Comma(); break;
                     case '=':  yield return Token.Equals(); break;

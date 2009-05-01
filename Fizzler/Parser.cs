@@ -230,7 +230,7 @@ namespace Fizzler
             //  : '[' S* [ namespace_prefix ]? IDENT S*
             //        [ [ PREFIXMATCH |
             //            SUFFIXMATCH |
-            //            SUBSTRINGMATCH |  <-- TODO SUBSTRINGMATCH
+            //            SUBSTRINGMATCH |
             //            '=' |
             //            INCLUDES |
             //            DASHMATCH ] S* [ IDENT | STRING ] S*
@@ -248,7 +248,8 @@ namespace Fizzler
                     TokenKind.Includes, 
                     TokenKind.DashMatch, 
                     TokenKind.PrefixMatch, 
-                    TokenKind.SuffixMatch);
+                    TokenKind.SuffixMatch,
+                    TokenKind.SubstringMatch);
                 
                 if(op == null) 
                     break;
@@ -263,6 +264,7 @@ namespace Fizzler
                     case TokenKind.DashMatch: _generator.AttributeDashMatch(name, value); break;
                     case TokenKind.PrefixMatch: _generator.AttributePrefixMatch(name, value); break;
                     case TokenKind.SuffixMatch: _generator.AttributeSuffixMatch(name, value); break;
+                    case TokenKind.SubstringMatch: _generator.AttributeSubstring(name, value); break;
                 }
             }
             

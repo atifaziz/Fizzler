@@ -111,5 +111,23 @@ namespace Fizzler.Tests
         {
             Assert.AreEqual(0, SelectList("*[class$='']").Count);
         }
+
+        [Test]
+        public void Star_Attr_Substring()
+        {
+            var results = SelectList("*[class*=heck]");
+
+            Assert.AreEqual(2, results.Count);
+            Assert.AreEqual("div", results[0].Name);
+            Assert.AreEqual("woooeeeee", results[0].InnerText);
+            Assert.AreEqual("div", results[1].Name);
+            Assert.AreEqual("woootooowe", results[1].InnerText);
+        }
+
+        [Test]
+        public void Star_Attr_Substring_With_Empty_Value()
+        {
+            Assert.AreEqual(0, SelectList("*[class*='']").Count);
+        }
     }
 }

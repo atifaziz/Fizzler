@@ -137,6 +137,21 @@ namespace Fizzler.Systems.HtmlAgilityPack
         }
 
         /// <summary>
+        /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
+        /// that represents an element with the attribute <paramref name="name"/> 
+        /// whose value contains at least one instance of the substring <paramref name="value"/>.
+        /// </summary>
+        public Selector<HtmlNode> AttributeSubstring(string name, string value)
+        {
+            return string.IsNullOrEmpty(value)
+                 ? (Selector<HtmlNode>)(nodes => Enumerable.Empty<HtmlNode>())
+                 : (nodes => from n in nodes.Elements()
+                             let a = n.Attributes[name]
+                             where a != null && a.Value.Contains(value)
+                             select n);
+        }
+
+        /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that is the first child of some other element.
         /// </summary>

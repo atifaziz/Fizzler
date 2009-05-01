@@ -259,5 +259,23 @@ namespace Fizzler.Tests
             Assert.IsTrue(token.MoveNext()); Assert.AreEqual(Token.Eoi(), token.Current);
             Assert.IsFalse(token.MoveNext());
         }
+
+        [Test]
+        public void SubstringMatch()
+        {
+            Assert.AreEqual(TokenKind.SubstringMatch, Tokener.Tokenize("*=").First().Kind);
+        }
+
+        [Test]
+        public void Star()
+        {
+            Assert.AreEqual(TokenKind.Star, Tokener.Tokenize("*").First().Kind);
+        }
+
+        [Test]
+        public void StarStar()
+        {
+            Assert.AreEqual(new[] { TokenKind.Star, TokenKind.Star }, Tokener.Tokenize("**").Take(2).Select(t => t.Kind).ToArray());
+        }
     }
 }

@@ -159,6 +159,16 @@ namespace Fizzler
         }
 
 	    /// <summary>
+	    /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
+	    /// that represents an element with the attribute <paramref name="name"/> 
+	    /// whose value contains at least one instance of the substring <paramref name="value"/>.
+	    /// </summary>
+	    public void AttributeSubstring(string name, string value)
+	    {
+            Add(string.Format(" which have a {0} attribute whose value contains '{1}'", name, value));
+        }
+
+	    /// <summary>
 		/// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
 		/// which represents an element that is the first child of some other element.
 		/// </summary>
