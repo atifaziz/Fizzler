@@ -52,30 +52,5 @@ namespace ConsoleFizzler
         {
             return values;
         }
-        /*
-	    private static void RunUri(string rawuri)
-		{
-			Console.WriteLine("Please wait...");
-
-			Uri uri = new Uri(rawuri);
-
-			string result = Webclient.DownloadString(uri);
-
-			var document = new HtmlDocument();
-			document.LoadHtml(result);
-
-			var generator = new SelectorGenerator<HtmlNode>(new HtmlNodeOps());
-			var helper = new HumanReadableSelectorGenerator();
-
-			Parser.Parse(_selector, new SelectorGeneratorTee(generator, helper));
-			HtmlNode[] nodes = generator.Selector(Enumerable.Repeat(document.DocumentNode, 1)).ToArray();
-
-			Console.WriteLine(helper.Text);
-
-			foreach (var node in nodes)
-			{
-				Console.WriteLine(node.OuterHtml);
-			}
-		}*/
 	}
 }
