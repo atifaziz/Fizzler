@@ -132,7 +132,7 @@ namespace Fizzler
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
-        /// which represents an elementthat has a parent element and whose parent 
+        /// which represents an element that has a parent element and whose parent 
         /// element has no other element children.
         /// </summary>
         void OnlyChild();
