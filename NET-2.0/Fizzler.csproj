@@ -47,8 +47,8 @@
     <Compile Include="..\Common\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="..\Fizzler\INodeOps.cs">
-      <SubType>Code</SubType>
+    <Compile Include="..\Fizzler\IElementOps.cs">
+      <Link>IElementOps.cs</Link>
     </Compile>
     <Compile Include="..\Fizzler\ISelectorGenerator.cs" />
     <Compile Include="..\Fizzler\Parser.cs" />
