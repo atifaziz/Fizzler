@@ -116,7 +116,7 @@ namespace Fizzler.Systems.WinForms
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
-        /// that represents an element with the attribute <paramref name="name"/> 
+        /// that represents an control with the attribute <paramref name="name"/> 
         /// whose value begins with the prefix <paramref name="value"/>.
         /// </summary>
         public Selector<Control> AttributePrefixMatch(string name, string value)
@@ -126,7 +126,7 @@ namespace Fizzler.Systems.WinForms
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
-        /// that represents an element with the attribute <paramref name="name"/> 
+        /// that represents an control with the attribute <paramref name="name"/> 
         /// whose value ends with the suffix <paramref name="value"/>.
         /// </summary>
         public Selector<Control> AttributeSuffixMatch(string name, string value)
@@ -206,7 +206,7 @@ namespace Fizzler.Systems.WinForms
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#combinators">combinator</a>,
-        /// which represents elements that share the same parent in the document tree and 
+        /// which represents controls that share the same parent in the document tree and 
         /// where the first control immediately precedes the second control.
         /// </summary>
         public virtual Selector<Control> Adjacent()
