@@ -61,6 +61,8 @@ namespace Fizzler
                 TryRead(TokenKind.WhiteSpace);
                 Selector();
             }
+
+            Read(TokenKind.Eoi);
         }
 
         private void Selector()

@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 
 namespace Fizzler.Tests
 {
@@ -57,5 +58,11 @@ namespace Fizzler.Tests
 		{
 			Assert.AreEqual(1, SelectList("div div").Count);
 		}
-	}
+
+        [Test,ExpectedException(typeof(FormatException))]
+        public void Type_Star()
+        {
+            SelectList("a*");
+        }
+    }
 }
