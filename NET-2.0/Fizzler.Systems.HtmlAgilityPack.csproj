@@ -23,7 +23,7 @@
     <WarningLevel>4</WarningLevel>
     <WarningsAsErrors>
     </WarningsAsErrors>
-    <NoWarn>3001,3002</NoWarn>
+    <NoWarn>3001,3002,1685</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
     <WarningsAsErrors>
     </WarningsAsErrors>
-    <NoWarn>3001,3002</NoWarn>
+    <NoWarn>3001,3002,1685</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BackLinq, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -57,7 +57,9 @@
     <Compile Include="..\Fizzler.Systems.HtmlAgilityPack\HtmlNodeOps.cs" />
     <Compile Include="..\Fizzler.Systems.HtmlAgilityPack\HtmlNodeSelection.cs" />
     <Compile Include="..\Fizzler.Systems.HtmlAgilityPack\Properties\AssemblyInfo.cs" />
-    <Compile Include="ExtensionAttribute.cs" />
+    <Compile Include="ExtensionAttribute.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Fizzler.csproj">
