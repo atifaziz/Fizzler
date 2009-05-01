@@ -78,15 +78,17 @@ namespace Fizzler
                 }
                 else switch(ch)
                 {
-                    case '~':
-                    case '|':
+                    case '~': // ~=
+                    case '|': // |=
+                    case '^': // ^=
                     {
-                        //
-                        // ~= |=
-                        //
                         if (reader.Read() != '=')
                             throw new FormatException(string.Format("Invalid character at position {0}.", reader.Position));
-                        yield return ch == '|' ? Token.DashMatch() : Token.Includes();
+                        yield return ch == '~' 
+                                   ? Token.Includes()
+                                   : ch == '|'
+                                   ? Token.DashMatch()
+                                   : Token.PrefixMatch();
                         break;
                     }
                     //

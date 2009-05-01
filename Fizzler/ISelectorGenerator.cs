@@ -87,6 +87,13 @@ namespace Fizzler
         /// </summary>
         void AttributeDashMatch(string name, string value);
 
+        /// <summary>
+        /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
+        /// that represents an element with the attribute <paramref name="name"/> 
+        /// whose value begins with the prefix <paramref name="value"/>.
+        /// </summary>
+        void AttributePrefixMatch(string name, string value);
+
         //
         // Pseudo-class selectors
         //

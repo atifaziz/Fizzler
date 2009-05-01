@@ -124,7 +124,7 @@ namespace Fizzler
 		/// </summary>
 		public void AttributeIncludes(string name, string value)
 		{
-			Add(string.Format(" which have a {0} attribute which includes the value'{1}'", name, value));
+			Add(string.Format(" which have a {0} attribute which includes the value '{1}'", name, value));
 		}
 
 		/// <summary>
@@ -138,7 +138,17 @@ namespace Fizzler
 			Add(" which have a {0} attribute with a hyphen separated value matching '{1}'");
 		}
 
-		/// <summary>
+        /// <summary>
+        /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
+        /// that represents an element with the attribute <paramref name="name"/> 
+        /// whose value begins with the prefix <paramref name="value"/>.
+        /// </summary>
+        public void AttributePrefixMatch(string name, string value)
+	    {
+            Add(string.Format(" which have a {0} attribute whose value beg'{1}'", name, value));
+        }
+
+	    /// <summary>
 		/// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
 		/// which represents an element that is the first child of some other element.
 		/// </summary>

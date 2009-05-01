@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using HtmlAgilityPack;
 using NUnit.Framework;
 
 namespace Fizzler.Tests
@@ -66,6 +68,24 @@ namespace Fizzler.Tests
             Assert.AreEqual("woooeeeee", results[0].InnerText);
             Assert.AreEqual("div", results[1].Name);
             Assert.AreEqual("woootooowe", results[1].InnerText);
+        }
+
+        [Test]
+        public void Star_Attr_Prefix()
+        {
+            var results = SelectList("*[class^=check]");
+
+            Assert.AreEqual(2, results.Count);
+            Assert.AreEqual("div", results[0].Name);
+            Assert.AreEqual("woooeeeee", results[0].InnerText);
+            Assert.AreEqual("div", results[1].Name);
+            Assert.AreEqual("woootooowe", results[1].InnerText);
+        }
+
+        [Test,Ignore("Pending clarification of spec.")]
+        public void Star_Attr_Prefix_With_Empty_Value()
+        {
+            Assert.AreEqual(0, SelectList("*[class^=check]").Count);
         }
     }
 }

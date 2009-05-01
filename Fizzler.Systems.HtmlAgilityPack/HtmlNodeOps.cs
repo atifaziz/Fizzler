@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Fizzler;
 using HtmlAgilityPack;
 
@@ -100,6 +101,19 @@ namespace Fizzler.Systems.HtmlAgilityPack
             return nodes => from n in nodes.Elements()                            
                             let a = n.Attributes[name]
                             where a != null && a.Value.Split('-').Contains(value)
+                            select n;
+        }
+
+        /// <summary>
+        /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
+        /// that represents an element with the attribute <paramref name="name"/> 
+        /// whose value begins with the prefix <paramref name="value"/>.
+        /// </summary>
+        public Selector<HtmlNode> AttributePrefixMatch(string name, string value)
+        {
+            return nodes => from n in nodes.Elements()
+                            let a = n.Attributes[name]
+                            where a != null && a.Value.StartsWith(value)
                             select n;
         }
 

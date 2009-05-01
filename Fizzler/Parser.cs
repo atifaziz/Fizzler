@@ -227,8 +227,14 @@ namespace Fizzler
         private void Attrib()
         {
             //attrib
-            //  : '[' S* IDENT S* [ [ '=' | INCLUDES | DASHMATCH ] S*
-            //    [ IDENT | STRING ] S* ]? ']'
+            //  : '[' S* [ namespace_prefix ]? IDENT S*
+            //        [ [ PREFIXMATCH |
+            //            SUFFIXMATCH |     <-- TODO SUFFIXMATCH
+            //            SUBSTRINGMATCH |  <-- TODO SUBSTRINGMATCH
+            //            '=' |
+            //            INCLUDES |
+            //            DASHMATCH ] S* [ IDENT | STRING ] S*
+            //        ]? ']'
             //  ;
 
             Read(TokenKind.LeftBracket);
@@ -236,7 +242,7 @@ namespace Fizzler
             var hasValue = false;
             while (true)
             {
-                var op = TryRead(TokenKind.Equals, TokenKind.Includes, TokenKind.DashMatch);
+                var op = TryRead(TokenKind.Equals, TokenKind.Includes, TokenKind.DashMatch, TokenKind.PrefixMatch);
                 if(op == null) 
                     break;
                 hasValue = true;
@@ -246,6 +252,7 @@ namespace Fizzler
                     case TokenKind.Equals: _generator.AttributeExact(name, value); break;
                     case TokenKind.Includes: _generator.AttributeIncludes(name, value); break;
                     case TokenKind.DashMatch: _generator.AttributeDashMatch(name, value); break;
+                    case TokenKind.PrefixMatch: _generator.AttributePrefixMatch(name, value); break;
                 }
             }
             if (!hasValue)
