@@ -242,7 +242,7 @@ namespace VisualFizzler
             var input = tb.Text.Trim();
             tb.ForeColor = SystemColors.WindowText;
             
-            var nodes = new HtmlNode[0];
+            var elements = new HtmlNode[0];
             
             if (string.IsNullOrEmpty(input))
             {
@@ -254,12 +254,12 @@ namespace VisualFizzler
                 try
                 {
                     //
-                    // Simple way to query for nodes:
+                    // Simple way to query for elements:
                     //
                     // nodes = document.DocumentNode.QuerySelectorAll(input).ToArray();
                     //
                     // However, we want to generate the human readable text and
-                    // the node selector in a single pass so go the bare metal way 
+                    // the element selector in a single pass so go the bare metal way 
                     // here to make all the parties to talk to each other.
                     //
                     
@@ -267,10 +267,10 @@ namespace VisualFizzler
                     var helper = new HumanReadableSelectorGenerator();
                     Parser.Parse(input, new SelectorGeneratorTee(generator, helper));
                     if (document != null)
-                        nodes = generator.Selector(Enumerable.Repeat(document.DocumentNode, 1)).ToArray();
+                        elements = generator.Selector(Enumerable.Repeat(document.DocumentNode, 1)).ToArray();
                     hb.Text = helper.Text;
 
-                    status.Text = "Matches: " + nodes.Length.ToString("N0");
+                    status.Text = "Matches: " + elements.Length.ToString("N0");
                 }
                 catch (FormatException e)
                 {
@@ -287,14 +287,14 @@ namespace VisualFizzler
             try
             {
                 lb.Items.Clear();
-                if (!nodes.Any())
+                if (!elements.Any())
                     return new Match[0];
 
                 var html = rtb.Text;
-                var matches  = new List<Match>(nodes.Length);
-                foreach (var node in nodes)
+                var matches  = new List<Match>(elements.Length);
+                foreach (var element in elements)
                 {
-                    var index = rtb.GetFirstCharIndexFromLine(node.Line - 1) + node.LinePosition - 1;
+                    var index = rtb.GetFirstCharIndexFromLine(element.Line - 1) + element.LinePosition - 1;
                     var match = _tagExpression.Match(html, index);
                     if (match.Success)
                         matches.Add(match);
@@ -302,7 +302,7 @@ namespace VisualFizzler
                 
                 Highlight(rtb, matches, null, Color.Yellow, null);
                 
-                lb.Items.AddRange(nodes.Select(n => n.GetBeginTagString()).ToArray());
+                lb.Items.AddRange(elements.Select(n => n.GetBeginTagString()).ToArray());
                 
                 return matches.ToArray();
             }
