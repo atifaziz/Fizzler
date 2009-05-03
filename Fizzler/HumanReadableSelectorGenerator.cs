@@ -248,7 +248,7 @@ namespace Fizzler
 		/// </summary>
 		public void Adjacent()
 		{
-            Add(" whose immediately preceding sibling is");
+            Add(" whose next sibling is");
 		}
 	}
 }

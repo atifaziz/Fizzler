@@ -38,7 +38,7 @@ namespace Fizzler.Tests
 		[Test]
 		public void Adjacent()
 		{
-			Run("a + span", "Select <a> whose immediately preceding sibling is <span>.");
+			Run("a + span", "Select <a> whose next sibling is <span>.");
 		}
 
 		[Test]
