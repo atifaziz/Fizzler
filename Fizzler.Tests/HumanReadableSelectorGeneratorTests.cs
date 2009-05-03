@@ -6,51 +6,51 @@ namespace Fizzler.Tests
 	public class HumanReadableSelectorGeneratorTests
 	{
 		[Test]
-		public void All_Nodes()
+		public void All_Elements()
 		{
-			Run("*", "Select all elements.");
+			Run("*", "Select any element.");
 		}
 
 		[Test]
 		public void Tag()
 		{
-			Run("p", "Select all elements with the <p> tag.");
+			Run("p", "Select <p>.");
 		}
 
 		[Test]
 		public void Descendant()
 		{
-			Run("p a", "Select all elements with the <p> tag which have descendants with the <a> tag.");
+			Run("p a", "Select <p> whose descendant is <a>.");
 		}
 
 		[Test]
 		public void Three_Levels_Of_Descendant()
 		{
-			Run("p a img", "Select all elements with the <p> tag which have descendants with the <a> tag, which in turn have descendants with the <img> tag.");
+			Run("p a img", "Select <p> whose descendant is <a>, that in turn has a descendant that is <img>.");
 		}
 
 		[Test]
 		public void Attribute()
 		{
-			Run("a[href]", "Select all elements with the <a> tag which have a href attribute.");
+			Run("a[href]", "Select <a> which has attribute href defined.");
 		}
 
 		[Test]
 		public void Adjacent()
 		{
-			Run("a + span", "Select all elements with the <a> tag which is immediately preceeded by a sibling node with the <span> tag.");
+			Run("a + span", "Select <a> whose immediately preceding sibling is <span>.");
 		}
 
 		[Test]
 		public void Id()
 		{
-			Run("#nodeId", "Select all elements with an id of 'nodeId'.");
+			Run("#nodeId", "Select any element with an ID of 'nodeId'.");
 		}
 
 		[Test]
 		public void SelectorGroup()
 		{
-			Run("a, span", "Select all elements with the <a> tag, then combined with previous, select all elements with the <span> tag.");
+			Run("a, span", "Select <a>. Combined with previous, select <span>.");
 		}
 
 		private static void Run(string selector, string message)

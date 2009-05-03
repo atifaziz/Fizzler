@@ -67,7 +67,7 @@ namespace Fizzler
 		/// </summary>
 		public void Type(string type)
 		{
-			Add(string.Format(" <{0}> elements", type));
+			Add(string.Format(" <{0}>", type));
 		}
 
 		/// <summary>
@@ -78,7 +78,7 @@ namespace Fizzler
 		/// </summary>
 		public void Universal()
 		{
-			Add(" all elements");
+			Add(" any element");
 		}
 
 		/// <summary>
@@ -103,7 +103,7 @@ namespace Fizzler
 		/// </summary>
 		public void AttributeExists(string name)
 		{
-            Add(string.Format(" which have attribute {0} defined", name));
+            Add(string.Format(" which has attribute {0} defined", name));
 		}
 
 		/// <summary>
@@ -113,7 +113,7 @@ namespace Fizzler
 		/// </summary>
 		public void AttributeExact(string name, string value)
 		{
-            Add(string.Format(" which have attribute {0} with a value of '{1}'", name, value));
+            Add(string.Format(" which has attribute {0} with a value of '{1}'", name, value));
 		}
 
 		/// <summary>
@@ -124,7 +124,7 @@ namespace Fizzler
 		/// </summary>
 		public void AttributeIncludes(string name, string value)
 		{
-            Add(string.Format(" which have a attribute {0} that includes the word '{1}'", name, value));
+            Add(string.Format(" which has a attribute {0} that includes the word '{1}'", name, value));
 		}
 
 		/// <summary>
@@ -135,7 +135,7 @@ namespace Fizzler
 		/// </summary>
 		public void AttributeDashMatch(string name, string value)
 		{
-			Add(" which have attribute {0} with a hyphen separated value matching '{1}'");
+			Add(" which has attribute {0} with a hyphen separated value matching '{1}'");
 		}
 
         /// <summary>
@@ -145,7 +145,7 @@ namespace Fizzler
         /// </summary>
         public void AttributePrefixMatch(string name, string value)
 	    {
-            Add(string.Format(" which have attribute {0} whose value begins with '{1}'", name, value));
+            Add(string.Format(" which has attribute {0} whose value begins with '{1}'", name, value));
         }
 
 	    /// <summary>
@@ -155,7 +155,7 @@ namespace Fizzler
 	    /// </summary>
 	    public void AttributeSuffixMatch(string name, string value)
 	    {
-            Add(string.Format(" which have attribute {0} whose value ends with '{1}'", name, value));
+            Add(string.Format(" which has attribute {0} whose value ends with '{1}'", name, value));
         }
 
 	    /// <summary>
@@ -165,7 +165,7 @@ namespace Fizzler
 	    /// </summary>
 	    public void AttributeSubstring(string name, string value)
 	    {
-            Add(string.Format(" which have attribute {0} whose value contains '{1}'", name, value));
+            Add(string.Format(" which has attribute {0} whose value contains '{1}'", name, value));
         }
 
 	    /// <summary>
@@ -220,7 +220,7 @@ namespace Fizzler
 		/// </summary>
 		public void Child()
 		{
-			Add(" child of");
+			Add(" whose child element is");
 		}
 
 		/// <summary>
@@ -232,11 +232,11 @@ namespace Fizzler
 		{
 			if (_chainCount > 0)
 			{
-				Add(", which in turn have descendants");
+				Add(", that in turn has a descendant that is");
 			}
 			else
 			{
-				Add(" which have descendants");
+				Add(" whose descendant is");
 				_chainCount++;
 			}
 		}
@@ -248,7 +248,7 @@ namespace Fizzler
 		/// </summary>
 		public void Adjacent()
 		{
-			Add(" which is immediately preceeded by a sibling element");
+            Add(" whose immediately preceding sibling is");
 		}
 	}
 }

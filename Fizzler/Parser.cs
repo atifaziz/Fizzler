@@ -128,20 +128,24 @@ namespace Fizzler
                     ElementName();
                     named = true;
                 }
-                else if (token.Value.Kind == TokenKind.Hash)
-                {
-                    _generator.Id(token.Value.Text);
-                }
                 else
                 {
                     if (modifiers == 0 && !named) 
                         _generator.Universal(); // implied
-                    Unread(token.Value);
-                    switch (token.Value.Kind)
+                    
+                    if (token.Value.Kind == TokenKind.Hash)
                     {
-                        case TokenKind.Dot: Class(); break;
-                        case TokenKind.LeftBracket: Attrib(); break;
-                        case TokenKind.Colon: Pseudo(); break;
+                        _generator.Id(token.Value.Text);
+                    }
+                    else
+                    {
+                        Unread(token.Value);
+                        switch (token.Value.Kind)
+                        {
+                            case TokenKind.Dot: Class(); break;
+                            case TokenKind.LeftBracket: Attrib(); break;
+                            case TokenKind.Colon: Pseudo(); break;
+                        }
                     }
                 }
             }
