@@ -62,6 +62,7 @@ namespace VisualFizzler
         
         public SingletonScope(T temp)
         {
+            _disposed = false;
             _old = Helper.Install(temp);
         }
 
