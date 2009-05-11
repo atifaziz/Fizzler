@@ -215,8 +215,7 @@ namespace ConsoleFizzler
             if (string.IsNullOrEmpty(switchToken))
             {
                 var platform = Environment.OSVersion.Platform;
-                switchToken = platform == PlatformID.Unix || platform == PlatformID.MacOSX
-                            ? "--" : "/";
+                switchToken = platform == PlatformID.Unix ? "--" : "/";
             }
 
             return ArgsFromImpl(args, switchToken);

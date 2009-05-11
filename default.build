@@ -49,6 +49,7 @@
 				<include name="System.dll" />
 				<include name="System.Core.dll" />
 				<include name="System.XML.dll" />
+				<include name="System.Configuration.dll" />
 			</references>
 		</csc>
 	</target>
