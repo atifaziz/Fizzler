@@ -28,6 +28,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Tests", "NET-2.0\Fi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleFizzler", "ConsoleFizzler\ConsoleFizzler.csproj", "{296C2824-A7D7-42A0-9B4C-1BC8FA0A1859}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Systems.XmlNodeQuery", "NET-2.0\Fizzler.Systems.XmlNodeQuery.csproj", "{1D34B151-2657-4A2B-AB2A-C7FBBB3935E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Systems.XmlNodeQuery", "Fizzler.Systems.XmlNodeQuery\Fizzler.Systems.XmlNodeQuery.csproj", "{CFAC3EC4-8F3C-405D-9440-ED63CAB524C8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -70,15 +74,25 @@ Global
 		{296C2824-A7D7-42A0-9B4C-1BC8FA0A1859}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{296C2824-A7D7-42A0-9B4C-1BC8FA0A1859}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{296C2824-A7D7-42A0-9B4C-1BC8FA0A1859}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D34B151-2657-4A2B-AB2A-C7FBBB3935E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D34B151-2657-4A2B-AB2A-C7FBBB3935E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D34B151-2657-4A2B-AB2A-C7FBBB3935E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D34B151-2657-4A2B-AB2A-C7FBBB3935E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFAC3EC4-8F3C-405D-9440-ED63CAB524C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFAC3EC4-8F3C-405D-9440-ED63CAB524C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFAC3EC4-8F3C-405D-9440-ED63CAB524C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFAC3EC4-8F3C-405D-9440-ED63CAB524C8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{DBEAD205-BD5C-461F-873D-DE643016F14C} = {7AA23AC0-0852-45AC-8661-6FFBD3BD265D}
+		{CFAC3EC4-8F3C-405D-9440-ED63CAB524C8} = {7AA23AC0-0852-45AC-8661-6FFBD3BD265D}
 		{278E9225-9FE5-4D63-9C9B-206FC68BAA37} = {1A630545-B74B-4EEE-B0B6-DD8E2A6CAB02}
 		{48822D9C-C17E-412B-96AE-F740EEF87990} = {1A630545-B74B-4EEE-B0B6-DD8E2A6CAB02}
 		{CA756450-AB7A-4FB0-97C4-35B8FBE89021} = {1A630545-B74B-4EEE-B0B6-DD8E2A6CAB02}
+		{1D34B151-2657-4A2B-AB2A-C7FBBB3935E8} = {1A630545-B74B-4EEE-B0B6-DD8E2A6CAB02}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		VisualSVNWorkingCopyRoot = 

@@ -36,7 +36,7 @@
 			</references>
 		</csc>
 	</target>
-	<target name="build-htmlagilitypack" depends="build-fizzler">
+	<target name="build-htmlagilitypack" depends="build-xmlnodequery">
 		<csc target="library" output="bin//${configuration}//Fizzler.Systems.HtmlAgilityPack.dll" debug="${debug}">
 			<sources>
 				<include name="Fizzler.Systems.HtmlAgilityPack/**/*.cs" />
@@ -50,6 +50,22 @@
 			</references>
 		</csc>
 	</target>
+
+	<target name="build-xmlnodequery" depends="build-fizzler">
+		<csc target="library" output="bin//${configuration}//Fizzler.Systems.XmlNodeQuery.dll" debug="${debug}">
+			<sources>
+				<include name="Fizzler.Systems.XmlNodeQuery/**/*.cs" />
+			</sources>
+			<references>
+				<include name="bin/${configuration}/Fizzler.dll" />
+				<include name="libs/SgmlReaderDll.dll" />
+				<include name="System.dll" />
+				<include name="System.Core.dll" />
+				<include name="System.XML.dll" />
+			</references>
+		</csc>
+	</target>
+
 	<target name="build-consolefizzler" depends="build-htmlagilitypack">
 		<csc target="exe" output="bin//${configuration}//fizz.exe" debug="${debug}">
 			<sources>
@@ -99,7 +115,9 @@
 			<references>
 				<include name="bin/${configuration}/Fizzler.dll" />
 				<include name="bin/${configuration}/Fizzler.Systems.HtmlAgilityPack.dll" />
+				<include name="bin/${configuration}/Fizzler.Systems.XmlNodeQuery.dll" />
 				<include name="libs\HtmlAgilityPack.dll" />
+				<include name="libs\SgmlReaderDll.dll" />
 				<include name="libs\nunit.framework.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" />
@@ -109,6 +127,7 @@
 	</target>
 	<target name="test" depends="build-tests">
 		<copy file="libs/HtmlAgilityPack.dll" todir="bin//${configuration}" />
+		<copy file="libs/SgmlReaderDll.dll" todir="bin//${configuration}" />
 		<copy file="libs/nunit.framework.dll" todir="bin//${configuration}" />
 		<nunit2>
 			<formatter type="Plain" />

@@ -2,7 +2,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
+    <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{CA756450-AB7A-4FB0-97C4-35B8FBE89021}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -44,6 +44,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="SgmlReaderDll, Version=1.8.3.13761, Culture=neutral, PublicKeyToken=46b2db9ca481831b, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\SgmlReaderDll.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.XML" />
@@ -73,6 +77,10 @@
     <ProjectReference Include="Fizzler.Systems.HtmlAgilityPack.csproj">
       <Project>{48822D9C-C17E-412B-96AE-F740EEF87990}</Project>
       <Name>Fizzler.Systems.HtmlAgilityPack %28NET-2.0\Fizzler.Systems.HtmlAgilityPack%29</Name>
+    </ProjectReference>
+    <ProjectReference Include="Fizzler.Systems.XmlNodeQuery.csproj">
+      <Project>{1D34B151-2657-4A2B-AB2A-C7FBBB3935E8}</Project>
+      <Name>Fizzler.Systems.XmlNodeQuery %28NET-2.0\Fizzler.Systems.XmlNodeQuery%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

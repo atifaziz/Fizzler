@@ -1,14 +1,15 @@
-﻿<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.21022</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{61EDF5C0-1854-4867-AE8A-7A1216E116C9}</ProjectGuid>
+    <ProjectGuid>{CFAC3EC4-8F3C-405D-9440-ED63CAB524C8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fizzler.Tests</RootNamespace>
-    <AssemblyName>Fizzler.Tests</AssemblyName>
+    <RootNamespace>Fizzler.Systems.XmlNodeQuery</RootNamespace>
+    <AssemblyName>Fizzler.Systems.XmlNodeQuery</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <NoWarn>3001,3002,1685</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -30,14 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack, Version=1.3.0.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\HtmlAgilityPack.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\nunit.framework.dll</HintPath>
-    </Reference>
     <Reference Include="SgmlReaderDll, Version=1.8.3.13761, Culture=neutral, PublicKeyToken=46b2db9ca481831b, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\SgmlReaderDll.dll</HintPath>
@@ -46,45 +40,21 @@
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
-    <Reference Include="System.Data" />
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AttributeSelectors.cs" />
-    <Compile Include="ChildAndAdjacentSelectors.cs" />
-    <Compile Include="ClassSelector.cs" />
-    <Compile Include="HumanReadableSelectorGeneratorTests.cs" />
-    <Compile Include="IDSelector.cs" />
-    <Compile Include="MultipleSelectors.cs" />
-    <Compile Include="NthChild.cs" />
+    <Compile Include="XmlNodeOps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ElementSelector.cs" />
-    <Compile Include="PsuedoSelectors.cs" />
-    <Compile Include="SelectorBaseTest.cs" />
-    <Compile Include="TokenerTests.cs" />
-    <Compile Include="TokenTests.cs" />
+    <Compile Include="XmlNodeExtensions.cs" />
+    <Compile Include="XmlNodeSelection.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fizzler.Systems.HtmlAgilityPack\Fizzler.Systems.HtmlAgilityPack.csproj">
-      <Project>{DBEAD205-BD5C-461F-873D-DE643016F14C}</Project>
-      <Name>Fizzler.Systems.HtmlAgilityPack %28Systems\Fizzler.Systems.HtmlAgilityPack%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fizzler.Systems.XmlNodeQuery\Fizzler.Systems.XmlNodeQuery.csproj">
-      <Project>{CFAC3EC4-8F3C-405D-9440-ED63CAB524C8}</Project>
-      <Name>Fizzler.Systems.XmlNodeQuery %28Systems\Fizzler.Systems.XmlNodeQuery%29</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Fizzler\Fizzler.csproj">
       <Project>{939036D6-29FD-46E4-B6CD-52618F51081B}</Project>
       <Name>Fizzler</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="SelectorTest.html" />
-  </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

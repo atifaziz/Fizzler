@@ -9,7 +9,7 @@ namespace Fizzler.Tests
 		[Test]
 		public void Star()
 		{
-			Assert.AreEqual(14, SelectList("*").Count);
+			Assert.AreEqual(16, SelectList("*").Count);
 		}
 		
 		[Test]
@@ -57,6 +57,15 @@ namespace Fizzler.Tests
 		public void Basic_Positive_Precedence_With_Same_Tags()
 		{
 			Assert.AreEqual(1, SelectList("div div").Count);
+		}
+
+		/// <summary>
+		/// This test covers an issue with HtmlAgilityPack where form childnodes().length == 0.
+		/// </summary>
+		[Test]
+		public void Basic_Positive_Precedence_Within_Form()
+		{
+			Assert.AreEqual(1, SelectList("form input").Count);
 		}
 
         [Test,ExpectedException(typeof(FormatException))]
