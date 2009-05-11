@@ -1,7 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project name="Fizzler" basedir="." default="test">
+	<property name="configuration" value="Debug" />
 	<target name="clean">
-		<delete dir="build" />
+		<delete dir="bin" />
 		<delete dir="Fizzler.Systems.HtmlAgilityPack\bin" />
 		<delete dir="Fizzler.Systems.HtmlAgilityPack\obj" />
 		<delete dir="Fizzler\bin" />
@@ -10,10 +11,10 @@
 		<delete dir="Fizzler.Tests\obj" />
 	</target>
 	<target name="prep" depends="clean">
-		<mkdir dir="build" />
+		<mkdir dir="bin//${configuration}" />
 	</target>
 	<target name="build-fizzler" depends="prep">
-		<csc target="library" output="build//Fizzler.dll" debug="true">
+		<csc target="library" output="bin//${configuration}//Fizzler.dll" debug="true">
 			<sources>
 				<include name="Fizzler/**/*.cs" />
 			</sources>
@@ -24,12 +25,12 @@
 		</csc>
 	</target>
 	<target name="build-htmlagilitypack" depends="build-fizzler">
-		<csc target="library" output="build//Fizzler.Systems.HtmlAgilityPack.dll" debug="true">
+		<csc target="library" output="bin//${configuration}//Fizzler.Systems.HtmlAgilityPack.dll" debug="true">
 			<sources>
 				<include name="Fizzler.Systems.HtmlAgilityPack/**/*.cs" />
 			</sources>
 			<references>
-				<include name="build/Fizzler.dll" />
+				<include name="bin/${configuration}/Fizzler.dll" />
 				<include name="libs/HtmlAgilityPack.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" />
@@ -38,13 +39,13 @@
 		</csc>
 	</target>
 	<target name="build-consolefizzler" depends="build-htmlagilitypack">
-		<csc target="exe" output="build//fizz.exe" debug="true">
+		<csc target="exe" output="bin//${configuration}//fizz.exe" debug="true">
 			<sources>
 				<include name="ConsoleFizzler/**/*.cs" />
 			</sources>
 			<references>
-				<include name="build/Fizzler.dll" />
-				<include name="build/Fizzler.Systems.HtmlAgilityPack.dll" />
+				<include name="bin/${configuration}/Fizzler.dll" />
+				<include name="bin/${configuration}/Fizzler.Systems.HtmlAgilityPack.dll" />
 				<include name="libs/HtmlAgilityPack.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" />
@@ -54,7 +55,7 @@
 		</csc>
 	</target>
 	<target name="build-visualfizzler" depends="build-consolefizzler">
-		<csc target="exe" output="build//VisualFizzler.exe" debug="true">
+		<csc target="exe" output="bin//${configuration}//VisualFizzler.exe" debug="true">
 			<sources>
 				<include name="VisualFizzler/**/*.cs" />
 			</sources>
@@ -62,8 +63,8 @@
 				<include name="VisualFizzler/**/*.resx" />
 			</resources>
 			<references>
-				<include name="build/Fizzler.dll" />
-				<include name="build/Fizzler.Systems.HtmlAgilityPack.dll" />
+				<include name="bin/${configuration}/Fizzler.dll" />
+				<include name="bin/${configuration}/Fizzler.Systems.HtmlAgilityPack.dll" />
 				<include name="libs/HtmlAgilityPack.dll" />
 				<include name="Microsoft.VisualBasic.dll" />
 				<include name="System.dll" />
@@ -76,7 +77,7 @@
 		</csc>
 	</target>
 	<target name="build-tests" depends="build-visualfizzler">
-		<csc target="library" output="build//Fizzler.Tests.dll" debug="true">
+		<csc target="library" output="bin//${configuration}//Fizzler.Tests.dll" debug="true">
 			<sources>
 				<include name="Fizzler.Tests/**/*.cs" />
 			</sources>
@@ -84,8 +85,8 @@
 				<include name="Fizzler.Tests/*.html" />
 			</resources>
 			<references>
-				<include name="build\Fizzler.dll" />
-				<include name="build\Fizzler.Systems.HtmlAgilityPack.dll" />
+				<include name="bin/${configuration}/Fizzler.dll" />
+				<include name="bin/${configuration}/Fizzler.Systems.HtmlAgilityPack.dll" />
 				<include name="libs\HtmlAgilityPack.dll" />
 				<include name="libs\nunit.framework.dll" />
 				<include name="System.dll" />
@@ -95,11 +96,11 @@
 		</csc>
 	</target>
 	<target name="test" depends="build-tests">
-		<copy file="libs/HtmlAgilityPack.dll" todir="build" />
-		<copy file="libs/nunit.framework.dll" todir="build" />
+		<copy file="libs/HtmlAgilityPack.dll" todir="bin//${configuration}" />
+		<copy file="libs/nunit.framework.dll" todir="bin//${configuration}" />
 		<nunit2>
 			<formatter type="Plain" />
-			<test assemblyname="build//Fizzler.Tests.dll" appconfig="Fizzler.Tests/App.config" />
+			<test assemblyname="bin//${configuration}//Fizzler.Tests.dll" appconfig="Fizzler.Tests/App.config" />
 		</nunit2>
 	</target>
 </project>
