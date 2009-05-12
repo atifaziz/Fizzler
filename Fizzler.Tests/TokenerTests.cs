@@ -145,10 +145,10 @@ namespace Fizzler.Tests
             Assert.AreEqual(TokenKind.Includes, Tokener.Tokenize("~=").First().Kind);
         }
 
-        [Test, ExpectedException(typeof(FormatException))]
-        public void BadIncludes()
+        [Test]
+        public void TildeTilde()
         {
-            Tokener.Tokenize("~~").ToArray();
+            Assert.AreEqual(new[] { Token.Tilde(), Token.Tilde() }, Tokener.Tokenize("~~").Take(2).ToArray());
         }
 
         [Test]

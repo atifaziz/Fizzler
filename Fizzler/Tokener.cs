@@ -79,36 +79,34 @@ namespace Fizzler
                 }
                 else switch(ch)
                 {
-                    case '~': // ~=
-                    case '|': // |=
-                    case '^': // ^=
-                    case '$': // $=
                     case '*': // * or *=
+                    case '~': // ~ or ~=
                     {
-                    	char? next = reader.Read();
-
-						if (next != '=')
+                        if (reader.Read() == '=')
                         {
-							if ((ch != '*' && ch != '~') || next == '~')
-                                throw new FormatException(string.Format("Invalid character at position {0}.", reader.Position));
-
-                            reader.Unread();
-
-							if(ch == '*')
-								yield return Token.Star();
-							else if(ch == '~')
-								yield return Token.Tilde();
+                            yield return ch == '*' ? Token.SubstringMatch() : Token.Includes();
                         }
                         else
                         {
-                            switch (ch)
-                            {
-                                case '~': yield return Token.Includes(); break;
-                                case '|': yield return Token.DashMatch(); break;
-                                case '^': yield return Token.PrefixMatch(); break;
-                                case '$': yield return Token.SuffixMatch(); break;
-                                case '*': yield return Token.SubstringMatch(); break;
-                            }
+                            reader.Unread();
+                            yield return ch == '*' ? Token.Star() : Token.Tilde();
+                        }
+                        break;
+                    }
+                    case '|': // |=
+                    case '^': // ^=
+                    case '$': // $=
+                    {
+                        if (reader.Read() != '=')
+                            throw new FormatException(string.Format("Invalid character at position {0}.", reader.Position));
+                        
+                        switch (ch)
+                        {
+                            case '~': yield return Token.Includes(); break;
+                            case '|': yield return Token.DashMatch(); break;
+                            case '^': yield return Token.PrefixMatch(); break;
+                            case '$': yield return Token.SuffixMatch(); break;
+                            case '*': yield return Token.SubstringMatch(); break;
                         }
                         break;
                     }
