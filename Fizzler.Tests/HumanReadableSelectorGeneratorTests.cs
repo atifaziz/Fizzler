@@ -53,6 +53,12 @@ namespace Fizzler.Tests
 			Run("a, span", "Select <a>. Combined with previous, select <span>.");
 		}
 
+		[Test]
+		public void GeneralSibling()
+		{
+			Run("div ~ p", "Select <div> which has siblings that are <p>.");
+		}
+
 		private static void Run(string selector, string message)
 		{
 		    var generator = new HumanReadableSelectorGenerator();

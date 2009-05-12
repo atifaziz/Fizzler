@@ -277,5 +277,18 @@ namespace Fizzler.Tests
         {
             Assert.AreEqual(new[] { TokenKind.Star, TokenKind.Star }, Tokener.Tokenize("**").Take(2).Select(t => t.Kind).ToArray());
         }
-    }
+
+		[Test]
+		public void GeneralSibling()
+		{
+			Assert.AreEqual(TokenKind.GeneralSibling, Tokener.Tokenize("~").First().Kind);
+		}
+
+		[Test]
+		public void GeneralSiblingWhitespacePrepended()
+		{
+			Assert.AreEqual(TokenKind.GeneralSibling, Tokener.Tokenize("  ~").First().Kind);
+		}
+
+	}
 }

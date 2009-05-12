@@ -230,5 +230,14 @@ namespace Fizzler
             Primary.Adjacent();
             Secondary.Adjacent();
         }
+
+		/// <summary>
+		/// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
+		/// </summary>
+		public void GeneralSibling()
+		{
+			Primary.GeneralSibling();
+			Secondary.GeneralSibling();
+		}
     }
 }

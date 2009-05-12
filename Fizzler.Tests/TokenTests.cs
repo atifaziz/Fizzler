@@ -226,5 +226,11 @@ namespace Fizzler.Tests
         {
             AssertToken(TokenKind.SubstringMatch, Token.SubstringMatch());
         }
+
+		[Test]
+		public void GeneralSibling()
+		{
+			AssertToken(TokenKind.GeneralSibling, Token.GeneralSibling());
+		}
     }
 }

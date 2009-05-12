@@ -114,5 +114,10 @@ namespace Fizzler
         /// Represents [0-9]+
         /// </summary>
         Integer,
+
+		/// <summary>
+		/// Represents "~"
+		/// </summary>
+		GeneralSibling,
     }
 }

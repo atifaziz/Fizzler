@@ -166,5 +166,14 @@ namespace Fizzler
         /// where the first element immediately precedes the second element.
         /// </summary>
         void Adjacent();
+
+		/// <summary>
+		/// Generates a <a href="http://www.w3.org/TR/css3-selectors/#combinators">combinator</a>,
+		/// which separates two sequences of simple selectors. The elements represented
+		/// by the two sequences share the same parent in the document tree and the
+		/// element represented by the first sequence precedes (not necessarily
+		/// immediately) the element represented by the second one.
+		/// </summary>
+		void GeneralSibling();
     }
 }

@@ -79,5 +79,12 @@ namespace Fizzler.Tests
 		{
 			Assert.AreEqual(3, SelectList("a + span, div > p").Count);
 		}
+
+		[Test]
+		public void General_Sibling_Combinator()
+		{
+			Assert.AreEqual(1, SelectList("div ~ form").Count);
+			Assert.AreEqual("form", SelectList("div ~ form")[0].Name);
+		}
 	}	
 }

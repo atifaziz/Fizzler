@@ -69,6 +69,7 @@ namespace Fizzler
                         case ',': yield return Token.Comma(); break;
                         case '+': yield return Token.Plus(); break;
                         case '>': yield return Token.Greater(); break;
+                        case '~': yield return Token.GeneralSibling(); break;
 
                         default:
                             reader.Unread();
@@ -84,12 +85,19 @@ namespace Fizzler
                     case '$': // $=
                     case '*': // * or *=
                     {
-                        if (reader.Read() != '=')
+                    	char? next = reader.Read();
+
+						if (next != '=')
                         {
-                            if (ch != '*')
+							if ((ch != '*' && ch != '~') || next == '~')
                                 throw new FormatException(string.Format("Invalid character at position {0}.", reader.Position));
+
                             reader.Unread();
-                            yield return Token.Star();
+
+							if(ch == '*')
+								yield return Token.Star();
+							else if(ch == '~')
+								yield return Token.GeneralSibling();
                         }
                         else
                         {

@@ -153,6 +153,14 @@ namespace Fizzler
             return new Token(TokenKind.SubstringMatch);
         }
 
+		/// <summary>
+		/// Creates a general sibling token.
+		/// </summary>
+		public static Token GeneralSibling()
+		{
+			return new Token(TokenKind.GeneralSibling);
+		}
+
         /// <summary>
         /// Creates an identifier token.
         /// </summary>
