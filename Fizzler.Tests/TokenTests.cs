@@ -230,7 +230,7 @@ namespace Fizzler.Tests
 		[Test]
 		public void GeneralSibling()
 		{
-			AssertToken(TokenKind.GeneralSibling, Token.GeneralSibling());
+			AssertToken(TokenKind.Tilde, Token.Tilde());
 		}
     }
 }

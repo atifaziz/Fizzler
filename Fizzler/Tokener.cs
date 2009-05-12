@@ -69,7 +69,7 @@ namespace Fizzler
                         case ',': yield return Token.Comma(); break;
                         case '+': yield return Token.Plus(); break;
                         case '>': yield return Token.Greater(); break;
-                        case '~': yield return Token.GeneralSibling(); break;
+                        case '~': yield return Token.Tilde(); break;
 
                         default:
                             reader.Unread();
@@ -97,7 +97,7 @@ namespace Fizzler
 							if(ch == '*')
 								yield return Token.Star();
 							else if(ch == '~')
-								yield return Token.GeneralSibling();
+								yield return Token.Tilde();
                         }
                         else
                         {

@@ -81,12 +81,11 @@ namespace Fizzler
         private bool TryCombinator()
         {
             //combinator
-            //  : PLUS S*
-            //  | GREATER S*
-            //  | S
+            //  /* combinators can be surrounded by whitespace */
+            //  : PLUS S* | GREATER S* | TILDE S* | S+
             //  ;
 
-            var token = TryRead(TokenKind.Plus, TokenKind.Greater, TokenKind.GeneralSibling, TokenKind.WhiteSpace);
+            var token = TryRead(TokenKind.Plus, TokenKind.Greater, TokenKind.Tilde, TokenKind.WhiteSpace);
             
             if (token == null)
                 return false;
@@ -99,7 +98,7 @@ namespace Fizzler
             {
                 switch (token.Value.Kind)
                 {
-                    case TokenKind.GeneralSibling: _generator.GeneralSibling(); break;
+                    case TokenKind.Tilde: _generator.GeneralSibling(); break;
                     case TokenKind.Greater: _generator.Child(); break;
                     case TokenKind.Plus: _generator.Adjacent(); break;
                 }

@@ -116,8 +116,8 @@ namespace Fizzler
         Integer,
 
 		/// <summary>
-		/// Represents "~"
+		/// Represents S* "~"
 		/// </summary>
-		GeneralSibling,
+		Tilde,
     }
 }

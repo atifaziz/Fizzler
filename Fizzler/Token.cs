@@ -156,9 +156,9 @@ namespace Fizzler
 		/// <summary>
 		/// Creates a general sibling token.
 		/// </summary>
-		public static Token GeneralSibling()
+		public static Token Tilde()
 		{
-			return new Token(TokenKind.GeneralSibling);
+			return new Token(TokenKind.Tilde);
 		}
 
         /// <summary>

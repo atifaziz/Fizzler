@@ -281,13 +281,13 @@ namespace Fizzler.Tests
 		[Test]
 		public void GeneralSibling()
 		{
-			Assert.AreEqual(TokenKind.GeneralSibling, Tokener.Tokenize("~").First().Kind);
+			Assert.AreEqual(TokenKind.Tilde, Tokener.Tokenize("~").First().Kind);
 		}
 
 		[Test]
 		public void GeneralSiblingWhitespacePrepended()
 		{
-			Assert.AreEqual(TokenKind.GeneralSibling, Tokener.Tokenize("  ~").First().Kind);
+			Assert.AreEqual(TokenKind.Tilde, Tokener.Tokenize("  ~").First().Kind);
 		}
 
 	}
