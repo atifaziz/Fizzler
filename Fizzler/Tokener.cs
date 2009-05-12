@@ -112,19 +112,6 @@ namespace Fizzler
                         }
                         break;
                     }
-                        /*
-                    case '*': 
-                    {
-                        if (reader.Read() == '=')
-                        {
-                            yield return Token.SubstringMatch();
-                        }
-                        else
-                        {
-                            reader.Unread();
-                            yield return Token.Star(); break;
-                        }
-                    }*/
                     //
                     // Single-character punctuation
                     //
