@@ -71,41 +71,41 @@ namespace Fizzler.Systems.XmlNodeQuery
 		public Selector<XmlNode> AttributeDashMatch(string name, string value)
 		{
 			return string.IsNullOrEmpty(value)
-			       		? (Selector<XmlNode>)(nodes => Enumerable.Empty<XmlNode>())
-			       		: (nodes => from n in nodes.Elements()
-			       		            let a = n.Attributes[name]
-			       		            where a != null && a.Value.Split('-').Contains(value)
+			     ? (Selector<XmlNode>)(nodes => Enumerable.Empty<XmlNode>())
+			     : (nodes => from n in nodes.Elements()
+			                 let a = n.Attributes[name]
+			                 where a != null && a.Value.Split('-').Contains(value)
 			       		            select n);
 		}
 
 		public Selector<XmlNode> AttributePrefixMatch(string name, string value)
 		{
 			return string.IsNullOrEmpty(value)
-			       		? (Selector<XmlNode>)(nodes => Enumerable.Empty<XmlNode>())
-			       		: (nodes => from n in nodes.Elements()
-			       		            let a = n.Attributes[name]
-			       		            where a != null && a.Value.StartsWith(value)
-			       		            select n);
+			     ? (Selector<XmlNode>)(nodes => Enumerable.Empty<XmlNode>())
+			     : (nodes => from n in nodes.Elements()
+			                 let a = n.Attributes[name]
+			                 where a != null && a.Value.StartsWith(value)
+			                 select n);
 		}
 
 		public Selector<XmlNode> AttributeSuffixMatch(string name, string value)
 		{
 			return string.IsNullOrEmpty(value)
-			       		? (Selector<XmlNode>)(nodes => Enumerable.Empty<XmlNode>())
-			       		: (nodes => from n in nodes.Elements()
-			       		            let a = n.Attributes[name]
-			       		            where a != null && a.Value.EndsWith(value)
-			       		            select n);
+			     ? (Selector<XmlNode>)(nodes => Enumerable.Empty<XmlNode>())
+			     : (nodes => from n in nodes.Elements()
+			                 let a = n.Attributes[name]
+			                 where a != null && a.Value.EndsWith(value)
+			                 select n);
 		}
 
 		public Selector<XmlNode> AttributeSubstring(string name, string value)
 		{
 			return string.IsNullOrEmpty(value)
-			       		? (Selector<XmlNode>)(nodes => Enumerable.Empty<XmlNode>())
-			       		: (nodes => from n in nodes.Elements()
-			       		            let a = n.Attributes[name]
-			       		            where a != null && a.Value.Contains(value)
-			       		            select n);
+			     ? (Selector<XmlNode>)(nodes => Enumerable.Empty<XmlNode>())
+			     : (nodes => from n in nodes.Elements()
+			                 let a = n.Attributes[name]
+			                 where a != null && a.Value.Contains(value)
+			                 select n);
 		}
 
 		public Selector<XmlNode> FirstChild()
@@ -120,7 +120,7 @@ namespace Fizzler.Systems.XmlNodeQuery
 		public virtual Selector<XmlNode> LastChild()
 		{
 			return nodes => nodes.Where(n => n.ParentNode.NodeType != XmlNodeType.Document
-			                                 && !n.ElementsAfterSelf().Any());
+			                              && !n.ElementsAfterSelf().Any());
 		}
 
 		/// <summary>
@@ -146,7 +146,7 @@ namespace Fizzler.Systems.XmlNodeQuery
 		public virtual Selector<XmlNode> OnlyChild()
 		{
 			return nodes => nodes.Where(n => n.ParentNode.NodeType != XmlNodeType.Document
-			                                 && !n.ElementsAfterSelf().Concat(n.ElementsBeforeSelf()).Any());
+			                              && !n.ElementsAfterSelf().Concat(n.ElementsBeforeSelf()).Any());
 		}
 
 		/// <summary>

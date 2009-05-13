@@ -99,11 +99,11 @@ namespace Fizzler.Systems.HtmlAgilityPack
         public virtual Selector<HtmlNode> AttributeDashMatch(string name, string value)
         {
             return string.IsNullOrEmpty(value)
-                ? (Selector<HtmlNode>) (nodes => Enumerable.Empty<HtmlNode>()) 
-                : (nodes => from n in nodes.Elements()                            
-                            let a = n.Attributes[name]
-                            where a != null && a.Value.Split('-').Contains(value)
-                            select n);
+                 ? (Selector<HtmlNode>) (nodes => Enumerable.Empty<HtmlNode>()) 
+                 : (nodes => from n in nodes.Elements()                            
+                             let a = n.Attributes[name]
+                             where a != null && a.Value.Split('-').Contains(value)
+                             select n);
         }
 
         /// <summary>
