@@ -19,32 +19,12 @@ namespace Fizzler.Systems.XmlNodeQuery
 
 		public Selector<XmlNode> Id(string id)
 		{
-			return nodes => nodes.Elements().Where(n =>
-			                                       	{
-			                                       		XmlAttribute idAttrib = n.Attributes["id"];
-
-			                                       		if(idAttrib != null)
-			                                       		{
-			                                       			if (idAttrib.Value == id) return true;
-			                                       		}
-
-			                                       		return false;
-			                                       	});
+			return AttributeExact("id", id);
 		}
 
 		public Selector<XmlNode> Class(string clazz)
 		{
-			return nodes => nodes.Elements().Where(n =>
-			                                       	{
-			                                       		XmlAttribute idAttrib = n.Attributes["class"];
-
-			                                       		if(idAttrib != null)
-			                                       		{
-			                                       			if (idAttrib.Value.Split(' ').Contains(clazz)) return true;
-			                                       		}
-
-			                                       		return false;
-			                                       	});
+			return AttributeIncludes("class", clazz);
 		}
 
 		public Selector<XmlNode> AttributeExists(string name)
