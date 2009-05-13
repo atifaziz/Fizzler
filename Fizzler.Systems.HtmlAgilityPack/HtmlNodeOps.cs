@@ -241,7 +241,7 @@ namespace Fizzler.Systems.HtmlAgilityPack
     	/// element represented by the first sequence precedes (not necessarily
     	/// immediately) the element represented by the second one.
     	/// </summary>
-    	public Selector<HtmlNode> GeneralSibling()
+    	public virtual Selector<HtmlNode> GeneralSibling()
     	{
 			return nodes => nodes.SelectMany(n => n.ElementsAfterSelf());
     	}

@@ -119,7 +119,7 @@ namespace Fizzler.Systems.WinForms
         /// that represents an control with the attribute <paramref name="name"/> 
         /// whose value begins with the prefix <paramref name="value"/>.
         /// </summary>
-        public Selector<Control> AttributePrefixMatch(string name, string value)
+        public virtual Selector<Control> AttributePrefixMatch(string name, string value)
         {
             return controls => controls.Where(c => c.FindPropertyValueString(name).StartsWith(value));
         }
@@ -129,7 +129,7 @@ namespace Fizzler.Systems.WinForms
         /// that represents an control with the attribute <paramref name="name"/> 
         /// whose value ends with the suffix <paramref name="value"/>.
         /// </summary>
-        public Selector<Control> AttributeSuffixMatch(string name, string value)
+        public virtual Selector<Control> AttributeSuffixMatch(string name, string value)
         {
             return controls => controls.Where(c => c.FindPropertyValueString(name).EndsWith(value));
         }
@@ -139,7 +139,7 @@ namespace Fizzler.Systems.WinForms
         /// that represents an element with the attribute <paramref name="name"/> 
         /// whose value contains at least one instance of the substring <paramref name="value"/>.
         /// </summary>
-        public Selector<Control> AttributeSubstring(string name, string value)
+        public virtual Selector<Control> AttributeSubstring(string name, string value)
         {
             return controls => controls.Where(c => c.FindPropertyValueString(name).Contains(value));
         }
@@ -231,7 +231,7 @@ namespace Fizzler.Systems.WinForms
     	/// element represented by the first sequence precedes (not necessarily
     	/// immediately) the element represented by the second one.
     	/// </summary>
-    	public Selector<Control> GeneralSibling()
+    	public virtual Selector<Control> GeneralSibling()
     	{
 			return nodes => nodes.SelectMany(n => n.ControlsAfterSelf());
     	}

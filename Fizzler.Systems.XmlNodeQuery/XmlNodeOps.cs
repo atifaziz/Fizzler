@@ -4,35 +4,34 @@ using System.Xml;
 
 namespace Fizzler.Systems.XmlNodeQuery
 {
-	public class 
-		XmlNodeOps : IElementOps<XmlNode>
+	public class XmlNodeOps : IElementOps<XmlNode>
 	{
-		public Selector<XmlNode> Type(string type)
+		public virtual Selector<XmlNode> Type(string type)
 		{
 			return nodes => nodes.Where(n => n.Name == type);
 		}
 
-		public Selector<XmlNode> Universal()
+		public virtual Selector<XmlNode> Universal()
 		{
 			return nodes => nodes.Elements();
 		}
 
-		public Selector<XmlNode> Id(string id)
+		public virtual Selector<XmlNode> Id(string id)
 		{
 			return AttributeExact("id", id);
 		}
 
-		public Selector<XmlNode> Class(string clazz)
+		public virtual Selector<XmlNode> Class(string clazz)
 		{
 			return AttributeIncludes("class", clazz);
 		}
 
-		public Selector<XmlNode> AttributeExists(string name)
+		public virtual Selector<XmlNode> AttributeExists(string name)
 		{
 			return nodes => nodes.Elements().Where(n => n.Attributes[name] != null);
 		}
 
-		public Selector<XmlNode> AttributeExact(string name, string value)
+		public virtual Selector<XmlNode> AttributeExact(string name, string value)
 		{
 			return nodes => from n in nodes.Elements()
 			                let a = n.Attributes[name]
@@ -40,7 +39,7 @@ namespace Fizzler.Systems.XmlNodeQuery
 			                select n;
 		}
 
-		public Selector<XmlNode> AttributeIncludes(string name, string value)
+		public virtual Selector<XmlNode> AttributeIncludes(string name, string value)
 		{
 			return nodes => from n in nodes.Elements()
 			                let a = n.Attributes[name]
@@ -48,7 +47,7 @@ namespace Fizzler.Systems.XmlNodeQuery
 			                select n;
 		}
 
-		public Selector<XmlNode> AttributeDashMatch(string name, string value)
+		public virtual Selector<XmlNode> AttributeDashMatch(string name, string value)
 		{
 			return string.IsNullOrEmpty(value)
 			     ? (Selector<XmlNode>)(nodes => Enumerable.Empty<XmlNode>())
@@ -58,7 +57,7 @@ namespace Fizzler.Systems.XmlNodeQuery
 			       		            select n);
 		}
 
-		public Selector<XmlNode> AttributePrefixMatch(string name, string value)
+		public virtual Selector<XmlNode> AttributePrefixMatch(string name, string value)
 		{
 			return string.IsNullOrEmpty(value)
 			     ? (Selector<XmlNode>)(nodes => Enumerable.Empty<XmlNode>())
@@ -68,7 +67,7 @@ namespace Fizzler.Systems.XmlNodeQuery
 			                 select n);
 		}
 
-		public Selector<XmlNode> AttributeSuffixMatch(string name, string value)
+		public virtual Selector<XmlNode> AttributeSuffixMatch(string name, string value)
 		{
 			return string.IsNullOrEmpty(value)
 			     ? (Selector<XmlNode>)(nodes => Enumerable.Empty<XmlNode>())
@@ -78,7 +77,7 @@ namespace Fizzler.Systems.XmlNodeQuery
 			                 select n);
 		}
 
-		public Selector<XmlNode> AttributeSubstring(string name, string value)
+		public virtual Selector<XmlNode> AttributeSubstring(string name, string value)
 		{
 			return string.IsNullOrEmpty(value)
 			     ? (Selector<XmlNode>)(nodes => Enumerable.Empty<XmlNode>())
@@ -88,7 +87,7 @@ namespace Fizzler.Systems.XmlNodeQuery
 			                 select n);
 		}
 
-		public Selector<XmlNode> FirstChild()
+		public virtual Selector<XmlNode> FirstChild()
 		{
 			return nodes => nodes.Where(n => !n.ElementsBeforeSelf().Any());
 		}
@@ -174,7 +173,7 @@ namespace Fizzler.Systems.XmlNodeQuery
 		/// element represented by the first sequence precedes (not necessarily
 		/// immediately) the element represented by the second one.
 		/// </summary>
-		public Selector<XmlNode> GeneralSibling()
+		public virtual Selector<XmlNode> GeneralSibling()
 		{
 			return nodes => nodes.SelectMany(n => n.ElementsAfterSelf());
 		}
