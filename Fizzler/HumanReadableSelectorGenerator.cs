@@ -34,9 +34,9 @@ namespace Fizzler
         public virtual void OnSelector()
 		{
 			if (string.IsNullOrEmpty(Text))
-				Text = "Select";
+				Text = "Take all";
 			else
-				Text += ". Combined with previous, select";
+				Text += " and select them. Combined with previous, take all";
 		}
 
 		/// <summary>
@@ -45,7 +45,7 @@ namespace Fizzler
 		public virtual void OnClose()
 		{
 			Text = Text.Trim();
-			Text += ".";
+			Text += " and select them.";
 		}
 
 		/// <summary>
@@ -62,7 +62,7 @@ namespace Fizzler
         /// </summary>
         public void Type(string type)
 		{
-			Add(string.Format(" <{0}>", type));
+			Add(string.Format(" <{0}> elements", type));
 		}
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Fizzler
         /// </summary>
         public void Universal()
 		{
-			Add(" any element");
+			Add(" elements");
 		}
 
         /// <summary>
@@ -86,7 +86,7 @@ namespace Fizzler
         /// </summary>
         void ISelectorGenerator.Class(string clazz)
 		{
-			Add(string.Format(" with class '{0}'", clazz));
+			Add(string.Format(" with a class of '{0}'", clazz));
 		}
 
         /// <summary>
@@ -94,7 +94,7 @@ namespace Fizzler
         /// </summary>
         public void AttributeExists(string name)
 		{
-            Add(string.Format(" which has attribute {0} defined", name));
+            Add(string.Format(" which have attribute {0} defined", name));
 		}
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Fizzler
         /// </summary>
         public void AttributeExact(string name, string value)
 		{
-            Add(string.Format(" which has attribute {0} with a value of '{1}'", name, value));
+			Add(string.Format(" which have attribute {0} with a value of '{1}'", name, value));
 		}
 
         /// <summary>
@@ -110,7 +110,7 @@ namespace Fizzler
         /// </summary>
         public void AttributeIncludes(string name, string value)
 		{
-            Add(string.Format(" which has a attribute {0} that includes the word '{1}'", name, value));
+			Add(string.Format(" which have attribute {0} that includes the word '{1}'", name, value));
 		}
 
         /// <summary>
@@ -118,7 +118,7 @@ namespace Fizzler
         /// </summary>
         public void AttributeDashMatch(string name, string value)
 		{
-			Add(" which has attribute {0} with a hyphen separated value matching '{1}'");
+			Add(string.Format(" which have attribute {0} with a hyphen separated value matching '{1}'", name, value));
 		}
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace Fizzler
         /// </summary>
         public void AttributePrefixMatch(string name, string value)
 	    {
-            Add(string.Format(" which has attribute {0} whose value begins with '{1}'", name, value));
+			Add(string.Format(" which have attribute {0} whose value begins with '{1}'", name, value));
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace Fizzler
         /// </summary>
         public void AttributeSuffixMatch(string name, string value)
 	    {
-            Add(string.Format(" which has attribute {0} whose value ends with '{1}'", name, value));
+			Add(string.Format(" which have attribute {0} whose value ends with '{1}'", name, value));
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Fizzler
         /// </summary>
         public void AttributeSubstring(string name, string value)
 	    {
-            Add(string.Format(" which has attribute {0} whose value contains '{1}'", name, value));
+			Add(string.Format(" which have attribute {0} whose value contains '{1}'", name, value));
         }
 
         /// <summary>
@@ -150,7 +150,7 @@ namespace Fizzler
         /// </summary>
         public void FirstChild()
 		{
-			Add(" where the element is the first child");
+			Add(" which are the first child of their parent");
 		}
 
         /// <summary>
@@ -158,7 +158,7 @@ namespace Fizzler
         /// </summary>
         public void LastChild()
 		{
-			Add(" where the element is the last child");
+			Add(" which are the last child of their parent");
 		}
 
         /// <summary>
@@ -190,7 +190,7 @@ namespace Fizzler
         /// </summary>
         public void Child()
 		{
-			Add(" whose child element is");
+			Add(", then take their immediate children which are");
 		}
 
         /// <summary>
@@ -200,11 +200,11 @@ namespace Fizzler
 		{
 			if (_chainCount > 0)
 			{
-				Add(", that in turn has a descendant that is");
+				Add(". With those, take only their descendants which are");
 			}
 			else
 			{
-				Add(" whose descendant is");
+				Add(", then take their descendants which are");
 				_chainCount++;
 			}
 		}
@@ -214,7 +214,7 @@ namespace Fizzler
         /// </summary>
         public void Adjacent()
 		{
-            Add(" whose next sibling is");
+			Add(", then take their immediate siblings which are");
 		}
 
 		/// <summary>
@@ -226,7 +226,7 @@ namespace Fizzler
 		/// </summary>
 		public void GeneralSibling()
 		{
-			Add(" which has siblings that are");
+			Add(", then take their siblings which are");
 		}
 	}
 }
