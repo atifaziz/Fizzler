@@ -61,6 +61,8 @@
     <Compile Include="ElementSelector.cs" />
     <Compile Include="PsuedoSelectors.cs" />
     <Compile Include="SelectorBaseTest.cs" />
+    <Compile Include="SelectorGeneratorTeeTests.cs" />
+    <Compile Include="SelectorGeneratorTeeTestsBase.cs" />
     <Compile Include="TokenerTests.cs" />
     <Compile Include="TokenTests.cs" />
   </ItemGroup>
