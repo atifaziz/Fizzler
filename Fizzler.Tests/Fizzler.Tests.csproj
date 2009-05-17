@@ -65,6 +65,7 @@
     <Compile Include="SelectorGeneratorTeeTestsBase.cs" />
     <Compile Include="TokenerTests.cs" />
     <Compile Include="TokenTests.cs" />
+    <Compile Include="XmlNodeQueryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fizzler.Systems.HtmlAgilityPack\Fizzler.Systems.HtmlAgilityPack.csproj">
