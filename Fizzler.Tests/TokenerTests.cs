@@ -289,5 +289,17 @@ namespace Fizzler.Tests
 		{
 			Assert.AreEqual(TokenKind.Tilde, Tokener.Tokenize("  ~").First().Kind);
 		}
-	}
+
+        [Test,ExpectedException(typeof(FormatException))]
+        public void StringSingleQuoteUnterminated()
+        {
+            Tokener.Tokenize("'foo").ToArray();
+        }
+
+        [Test, ExpectedException(typeof(FormatException))]
+        public void StringDoubleQuoteUnterminated()
+        {
+            Tokener.Tokenize("\"foo").ToArray();
+        }
+    }
 }
