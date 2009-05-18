@@ -232,5 +232,33 @@ namespace Fizzler.Tests
 		{
 			AssertToken(TokenKind.Tilde, Token.Tilde());
 		}
+
+        [Test]
+        public void StringRepresentations()
+        {
+            Assert.AreEqual("Eoi", Token.Eoi().ToString());
+            Assert.AreEqual("Ident: foo", Token.Ident("foo").ToString());
+            Assert.AreEqual("Hash: foo", Token.Hash("foo").ToString());
+            Assert.AreEqual("Includes", Token.Includes().ToString());
+            Assert.AreEqual("DashMatch", Token.DashMatch().ToString());
+            Assert.AreEqual("PrefixMatch", Token.PrefixMatch().ToString());
+            Assert.AreEqual("SuffixMatch", Token.SuffixMatch().ToString());
+            Assert.AreEqual("SubstringMatch", Token.SubstringMatch().ToString());
+            Assert.AreEqual("String: foo", Token.String("foo").ToString());
+            Assert.AreEqual("Star", Token.Star().ToString());
+            Assert.AreEqual("Dot", Token.Dot().ToString());
+            Assert.AreEqual("Colon", Token.Colon().ToString());
+            Assert.AreEqual("Comma", Token.Comma().ToString());
+            Assert.AreEqual("Equals", Token.Equals().ToString());
+            Assert.AreEqual("LeftBracket", Token.LeftBracket().ToString());
+            Assert.AreEqual("RightBracket", Token.RightBracket().ToString());
+            Assert.AreEqual("Plus", Token.Plus().ToString());
+            Assert.AreEqual("Greater", Token.Greater().ToString());
+            Assert.AreEqual("WhiteSpace:  ", Token.WhiteSpace(" ").ToString());
+            Assert.AreEqual("Function: foo", Token.Function("foo").ToString());
+            Assert.AreEqual("RightParenthesis", Token.RightParenthesis().ToString());
+            Assert.AreEqual("Integer: 42", Token.Integer("42").ToString());
+		    Assert.AreEqual("Tilde", Token.Tilde().ToString());
+        }
     }
 }
