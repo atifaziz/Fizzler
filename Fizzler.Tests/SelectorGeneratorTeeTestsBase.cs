@@ -8,33 +8,18 @@ namespace Fizzler.Tests
 {
 	public class SelectorGeneratorTeeTestsBase
 	{
-		private SelectorGeneratorTee _tee;
-		private FakeSelectorGenerator _primary;
-		private FakeSelectorGenerator _secondary;
+	    protected SelectorGeneratorTee Tee { get; private set; }
+	    protected FakeSelectorGenerator Primary { get; private set; }
+	    protected FakeSelectorGenerator Secondary { get; private set; }
 
-		protected SelectorGeneratorTee Tee
-		{
-			get { return _tee; }
-		}
-
-		protected FakeSelectorGenerator Primary
-		{
-			get { return _primary; }
-		}
-
-		protected FakeSelectorGenerator Secondary
-		{
-			get { return _secondary; }
-		}
-
-		[SetUp]
+	    [SetUp]
 		public void Setup()
 		{
-			_primary = new FakeSelectorGenerator();
-			_secondary = new FakeSelectorGenerator();
+			Primary = new FakeSelectorGenerator();
+			Secondary = new FakeSelectorGenerator();
 
-			_tee = new SelectorGeneratorTee(
-					_primary, _secondary
+			Tee = new SelectorGeneratorTee(
+					Primary, Secondary
 					);
 		}
 
@@ -42,42 +27,29 @@ namespace Fizzler.Tests
 		/// Take the passed action, run it, and then check that the last method
 		/// and last args are the same for pri and sec.
 		/// </summary>
-		/// <param name="action"></param>
 		protected void Run(Expression<Action> action)
 		{
-			MethodCallExpression methodCall = ((MethodCallExpression)action.Body);
+			var methodCall = ((MethodCallExpression)action.Body);
 
-			object[] args = (from a in methodCall.Arguments select ((ConstantExpression) a).Value).ToArray();
+            var args = (from ConstantExpression a in methodCall.Arguments select a.Value).ToArray();
 
-			methodCall.Method.Invoke(_tee, args);
+		    var method = methodCall.Method;
+		    method.Invoke(Tee, args);
 
 			// Assert the fact that the pri and sec methods were both called
-			Assert.AreEqual(methodCall.Method.Name, _primary.LastMethod);
-			Assert.AreEqual(methodCall.Method.Name, _secondary.LastMethod);
+			Assert.AreEqual(method.Name, Primary.LastMethod);
+			Assert.AreEqual(method.Name, Secondary.LastMethod);
 
-			Assert.AreEqual(args, _primary.LastArgs);
-			Assert.AreEqual(args, _secondary.LastArgs);
+			Assert.AreEqual(args, Primary.LastArgs);
+			Assert.AreEqual(args, Secondary.LastArgs);
 		}
 
 		protected class FakeSelectorGenerator : ISelectorGenerator
 		{
-			private string _lastMethod;
-			private object[] _lastArgs;
+		    public string LastMethod { get; private set; }
+		    public object[] LastArgs { get; private set; }
 
-			public string LastMethod
-			{
-				get
-				{
-					return _lastMethod;
-				}
-			}
-
-			public object[] LastArgs
-			{
-				get { return _lastArgs; }
-			}
-
-			public void OnInit()
+		    public void OnInit()
 			{
 				OnInvoked(MethodBase.GetCurrentMethod());
 			}
@@ -194,8 +166,8 @@ namespace Fizzler.Tests
 			
 			private void OnInvoked(MethodBase method, params object[] args)
 			{
-			    _lastMethod = method.Name;
-				_lastArgs = args;
+			    LastMethod = method.Name;
+				LastArgs = args;
 			}
 		}
 	}
