@@ -279,16 +279,15 @@ namespace Fizzler.Tests
         }
 
 		[Test]
-		public void GeneralSibling()
+		public void Tilde()
 		{
 			Assert.AreEqual(TokenKind.Tilde, Tokener.Tokenize("~").First().Kind);
 		}
 
 		[Test]
-		public void GeneralSiblingWhitespacePrepended()
+        public void TildeWhitespacePrepended()
 		{
 			Assert.AreEqual(TokenKind.Tilde, Tokener.Tokenize("  ~").First().Kind);
 		}
-
 	}
 }
