@@ -301,5 +301,11 @@ namespace Fizzler.Tests
         {
             Tokener.Tokenize("\"foo").ToArray();
         }
+
+        [Test, ExpectedException(typeof(FormatException))]
+        public void StringInvalidEscaping()
+        {
+            Tokener.Tokenize(@"'f\oo").ToArray();
+        }
     }
 }
