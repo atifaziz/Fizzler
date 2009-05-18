@@ -1,7 +1,7 @@
 using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using NUnit.Framework;
 
 namespace Fizzler.Tests
@@ -84,128 +84,123 @@ namespace Fizzler.Tests
 
 			public void OnInit()
 			{
-				SetupMethodCallExpectations();
+				OnInvoked(MethodBase.GetCurrentMethod());
 			}
 
 			public void OnClose()
 			{
-				SetupMethodCallExpectations();
+				OnInvoked(MethodBase.GetCurrentMethod());
 			}
 
 			public void OnSelector()
 			{
-				SetupMethodCallExpectations();
+				OnInvoked(MethodBase.GetCurrentMethod());
 			}
 
 			public void Type(string type)
 			{
-				SetupMethodCallExpectations(type);
+				OnInvoked(MethodBase.GetCurrentMethod(), type);
 			}
 
 			public void Universal()
 			{
-				SetupMethodCallExpectations();
+				OnInvoked(MethodBase.GetCurrentMethod());
 			}
 
 			public void Id(string id)
 			{
-				SetupMethodCallExpectations(id);
+				OnInvoked(MethodBase.GetCurrentMethod(), id);
 			}
 
 			public void Class(string clazz)
 			{
-				SetupMethodCallExpectations(clazz);
+				OnInvoked(MethodBase.GetCurrentMethod(), clazz);
 			}
 
 			public void AttributeExists(string name)
 			{
-				SetupMethodCallExpectations(name);
+				OnInvoked(MethodBase.GetCurrentMethod(), name);
 			}
 
 			public void AttributeExact(string name, string value)
 			{
-				SetupMethodCallExpectations(name, value);
+				OnInvoked(MethodBase.GetCurrentMethod(), name, value);
 			}
 
 			public void AttributeIncludes(string name, string value)
 			{
-				SetupMethodCallExpectations(name, value);
+				OnInvoked(MethodBase.GetCurrentMethod(), name, value);
 			}
 
 			public void AttributeDashMatch(string name, string value)
 			{
-				SetupMethodCallExpectations(name, value);
+				OnInvoked(MethodBase.GetCurrentMethod(), name, value);
 			}
 
 			public void AttributePrefixMatch(string name, string value)
 			{
-				SetupMethodCallExpectations(name, value);
+				OnInvoked(MethodBase.GetCurrentMethod(), name, value);
 			}
 
 			public void AttributeSuffixMatch(string name, string value)
 			{
-				SetupMethodCallExpectations(name, value);
+				OnInvoked(MethodBase.GetCurrentMethod(), name, value);
 			}
 
 			public void AttributeSubstring(string name, string value)
 			{
-				SetupMethodCallExpectations(name, value);
+				OnInvoked(MethodBase.GetCurrentMethod(), name, value);
 			}
 
 			public void FirstChild()
 			{
-				SetupMethodCallExpectations();
+				OnInvoked(MethodBase.GetCurrentMethod());
 			}
 
 			public void LastChild()
 			{
-				SetupMethodCallExpectations();
+				OnInvoked(MethodBase.GetCurrentMethod());
 			}
 
 			public void NthChild(int a, int b)
 			{
-				SetupMethodCallExpectations(a,b);
+				OnInvoked(MethodBase.GetCurrentMethod(), a,b);
 			}
 
 			public void OnlyChild()
 			{
-				SetupMethodCallExpectations();
+				OnInvoked(MethodBase.GetCurrentMethod());
 			}
 
 			public void Empty()
 			{
-				SetupMethodCallExpectations();
+				OnInvoked(MethodBase.GetCurrentMethod());
 			}
 
 			public void Child()
 			{
-				SetupMethodCallExpectations();
+				OnInvoked(MethodBase.GetCurrentMethod());
 			}
 
 			public void Descendant()
 			{
-				SetupMethodCallExpectations();
+				OnInvoked(MethodBase.GetCurrentMethod());
 			}
 
 			public void Adjacent()
 			{
-				SetupMethodCallExpectations();
+				OnInvoked(MethodBase.GetCurrentMethod());
 			}
 
 			public void GeneralSibling()
 			{
-				SetupMethodCallExpectations();
+				OnInvoked(MethodBase.GetCurrentMethod());
 			}
 			
-			private void SetupMethodCallExpectations(params object[] ps)
+			private void OnInvoked(MethodBase method, params object[] args)
 			{
-				_lastMethod = GetCallingStackFrame().GetMethod().Name;
-				_lastArgs = ps;
-			}
-
-			private static StackFrame GetCallingStackFrame()
-			{
-				return new StackTrace(1, true).GetFrames()[1];
+			    _lastMethod = method.Name;
+				_lastArgs = args;
 			}
 		}
 	}
