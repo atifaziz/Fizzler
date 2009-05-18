@@ -102,11 +102,9 @@ namespace Fizzler
                         
                         switch (ch)
                         {
-                            case '~': yield return Token.Includes(); break;
                             case '|': yield return Token.DashMatch(); break;
                             case '^': yield return Token.PrefixMatch(); break;
                             case '$': yield return Token.SuffixMatch(); break;
-                            case '*': yield return Token.SubstringMatch(); break;
                         }
                         break;
                     }
