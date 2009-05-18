@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using System.Linq;
 using NUnit.Framework;
 
@@ -306,6 +307,25 @@ namespace Fizzler.Tests
         public void StringInvalidEscaping()
         {
             Tokener.Tokenize(@"'f\oo").ToArray();
+        }
+
+        [Test, ExpectedException(typeof(ArgumentNullException))]
+        public void NullReader()
+        {
+            Tokener.Tokenize((TextReader) null);
+        }
+
+        [Test]
+        public void StringReader()
+        {
+            Assert.AreEqual(new[] { Token.Integer("123"), Token.Comma(), Token.Star(), Token.Eoi() }, 
+                Tokener.Tokenize(new StringReader("123,*")).ToArray());
+        }
+
+        [Test, ExpectedException(typeof(FormatException))]
+        public void InvalidChar()
+        {
+            Tokener.Tokenize("what?").ToArray();
         }
     }
 }
