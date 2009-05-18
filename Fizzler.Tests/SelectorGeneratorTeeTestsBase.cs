@@ -55,13 +55,8 @@ namespace Fizzler.Tests
 			Assert.AreEqual(methodCall.Method.Name, _primary.LastMethod);
 			Assert.AreEqual(methodCall.Method.Name, _secondary.LastMethod);
 
-			// Assert that the arguments were called
-			for(int i = 0; i < args.Length; i++)
-			{
-				var o = args[i];
-				Assert.AreEqual(o, _primary.LastArgs[i]);
-				Assert.AreEqual(o, _secondary.LastArgs[i]);
-			}
+			Assert.AreEqual(args, _primary.LastArgs);
+			Assert.AreEqual(args, _secondary.LastArgs);
 		}
 
 		protected class FakeSelectorGenerator : ISelectorGenerator
