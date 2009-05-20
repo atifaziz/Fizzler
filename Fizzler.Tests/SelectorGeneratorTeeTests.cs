@@ -145,7 +145,7 @@ namespace Fizzler.Tests
 		[Test]
 		public void NthChildTest()
 		{
-			Run(tee.NthChild, 1, 2);
+			RunI(tee.NthChild, 1, 2);
 		}
 
 		[Test]
@@ -199,7 +199,10 @@ namespace Fizzler.Tests
 			Run(action.Method, args);
 		}
 
-		private static void Run(FzActionI2 action, params object[] args)
+		/// <summary>
+		/// This is named differently as Mono cannot work out the difference between this and Run(FzActionS2 action, params object[] args)
+		/// </summary>
+		private static void RunI(FzActionI2 action, params object[] args)
 		{
 			Run(action.Method, args);
 		}

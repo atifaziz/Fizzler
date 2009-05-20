@@ -4,13 +4,34 @@
 	<target name="debug">
 		<property name="debug" value="true" />
 		<property name="configuration" value="Debug" />
-		<call target="build" />
+		<if test="${framework::get-family(framework::get-runtime-framework()) != 'mono'}">
+			<call target="build" />
+		</if>
+
+		<if test="${framework::get-family(framework::get-runtime-framework()) == 'mono'}">
+			<echo message="Running MONO build." />
+			<property name="output.dir" value="" />
+			<property name="net-35" value="true" />
+			<property name="mono" value="true" />
+			<call target="test" />
+		</if>
 	</target>
 
 	<target name="release">
 		<property name="debug" value="false" />
 		<property name="configuration" value="Release" />
-		<call target="build" />
+
+		<if test="${framework::get-family(framework::get-runtime-framework()) != 'mono'}">
+			<call target="build" />
+		</if>
+
+		<if test="${framework::get-family(framework::get-runtime-framework()) == 'mono'}">
+			<echo message="Running MONO build." />
+			<property name="output.dir" value="" />
+			<property name="net-35" value="true" />
+			<property name="mono" value="true" />
+			<call target="test" />
+		</if>
 	</target>
 
 	<target name="clean">
@@ -29,6 +50,7 @@
 	</target>
 
 	<target name="build">
+		<property name="mono" value="false" />
 		<property name="output.dir" value="NET-2.0//" />
 		<property name="net-35" value="false" />
 		<call target="test" />
@@ -36,7 +58,7 @@
 		<property name="net-35" value="true" />
 		<call target="test" />
 	</target>
-	
+
 	<target name="build-fizzler" depends="prep">
 		<echo message="net-35 is: ${bool::parse(net-35)}" />
 		<csc target="library" noconfig="true" output="bin//${output.dir}${configuration}//Fizzler.dll" debug="${debug}">
@@ -50,7 +72,7 @@
 			</references>
 		</csc>
 	</target>
-	
+
 	<target name="build-htmlagilitypack" depends="build-xmlnodequery">
 		<csc target="library" noconfig="true" output="bin//${output.dir}${configuration}//Fizzler.Systems.HtmlAgilityPack.dll" debug="${debug}">
 			<sources>
@@ -69,7 +91,7 @@
 	</target>
 
 	<target name="build-xmlnodequery" depends="build-fizzler">
-		<csc target="library" noconfig="true" output="bin//${output.dir}${configuration}//Fizzler.Systems.XmlNodeQuery.dll" debug="${debug}">
+		<csc target="library" noconfig="${not bool::parse(mono)}" output="bin//${output.dir}${configuration}//Fizzler.Systems.XmlNodeQuery.dll" debug="${debug}">
 			<sources>
 				<include name="Fizzler.Systems.XmlNodeQuery/**/*.cs" />
 				<include name="NET-2.0/ExtensionAttribute.cs" unless="${bool::parse(net-35)}" />
@@ -128,7 +150,7 @@
 		</csc>
 	</target>
 	<target name="build-tests" depends="build-visualfizzler">
-		<csc target="library" noconfig="true" output="bin//${output.dir}${configuration}//Fizzler.Tests.dll" debug="${debug}">
+		<csc target="library" noconfig="${not bool::parse(mono)}" output="bin//${output.dir}${configuration}//Fizzler.Tests.dll" debug="${debug}">
 			<sources>
 				<include name="Fizzler.Tests/**/*.cs" />
 			</sources>
