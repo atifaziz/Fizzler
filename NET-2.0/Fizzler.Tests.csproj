@@ -63,6 +63,7 @@
     <Compile Include="..\Fizzler.Tests\ElementSelector.cs" />
     <Compile Include="..\Fizzler.Tests\PsuedoSelectors.cs" />
     <Compile Include="..\Fizzler.Tests\SelectorBaseTest.cs" />
+    <Compile Include="..\Fizzler.Tests\SelectorGeneratorTeeTests.cs" />
     <Compile Include="..\Fizzler.Tests\TokenerTests.cs" />
     <Compile Include="..\Fizzler.Tests\TokenTests.cs" />
   </ItemGroup>

@@ -33,6 +33,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Systems.XmlNodeQuery", "Fizzler.Systems.XmlNodeQuery\Fizzler.Systems.XmlNodeQuery.csproj", "{CFAC3EC4-8F3C-405D-9440-ED63CAB524C8}"
 EndProject
 Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = EnactJobs7.vsmdi
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
