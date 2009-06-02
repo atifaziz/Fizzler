@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace Fizzler
 {
@@ -63,7 +63,7 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void Type(string type)
+        public void Type(QName type)
         {
             Primary.Type(type);
             Secondary.Type(type);
@@ -99,7 +99,7 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void AttributeExists(string name)
+        public void AttributeExists(QName name)
         {
             Primary.AttributeExists(name);
             Secondary.AttributeExists(name);
@@ -108,7 +108,7 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void AttributeExact(string name, string value)
+        public void AttributeExact(QName name, string value)
         {
             Primary.AttributeExact(name, value);
             Secondary.AttributeExact(name, value);
@@ -117,7 +117,7 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void AttributeIncludes(string name, string value)
+        public void AttributeIncludes(QName name, string value)
         {
             Primary.AttributeIncludes(name, value);
             Secondary.AttributeIncludes(name, value);
@@ -126,7 +126,7 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void AttributeDashMatch(string name, string value)
+        public void AttributeDashMatch(QName name, string value)
         {
             Primary.AttributeDashMatch(name, value);
             Secondary.AttributeDashMatch(name, value);
@@ -135,7 +135,7 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void AttributePrefixMatch(string name, string value)
+        public void AttributePrefixMatch(QName name, string value)
         {
             Primary.AttributePrefixMatch(name, value);
             Secondary.AttributePrefixMatch(name, value);
@@ -144,7 +144,7 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void AttributeSuffixMatch(string name, string value)
+        public void AttributeSuffixMatch(QName name, string value)
         {
             Primary.AttributeSuffixMatch(name, value);
             Secondary.AttributeSuffixMatch(name, value);
@@ -153,7 +153,7 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void AttributeSubstring(string name, string value)
+        public void AttributeSubstring(QName name, string value)
         {
             Primary.AttributeSubstring(name, value);
             Secondary.AttributeSubstring(name, value);

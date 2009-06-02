@@ -129,7 +129,7 @@ namespace Fizzler
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#type-selectors">type selector</a>,
         /// which represents an instance of the element type in the document tree. 
         /// </summary>
-        public virtual void Type(string type)
+        public virtual void Type(QName type)
         {
             Add(Ops.Type(type));
         }
@@ -150,7 +150,7 @@ namespace Fizzler
         /// that represents an element with the given attribute <paramref name="name"/>
         /// whatever the values of the attribute.
         /// </summary>
-        public virtual void AttributeExists(string name)
+        public virtual void AttributeExists(QName name)
         {
             Add(Ops.AttributeExists(name));
         }
@@ -160,7 +160,7 @@ namespace Fizzler
         /// that represents an element with the given attribute <paramref name="name"/>
         /// and whose value is exactly <paramref name="value"/>.
         /// </summary>
-        public virtual void AttributeExact(string name, string value)
+        public virtual void AttributeExact(QName name, string value)
         {
             Add(Ops.AttributeExact(name, value));
         }
@@ -171,7 +171,7 @@ namespace Fizzler
         /// and whose value is a whitespace-separated list of words, one of 
         /// which is exactly <paramref name="value"/>.
         /// </summary>
-        public virtual void AttributeIncludes(string name, string value)
+        public virtual void AttributeIncludes(QName name, string value)
         {
             Add(Ops.AttributeIncludes(name, value));
         }
@@ -182,7 +182,7 @@ namespace Fizzler
         /// its value either being exactly <paramref name="value"/> or beginning 
         /// with <paramref name="value"/> immediately followed by "-" (U+002D).
         /// </summary>
-        public virtual void AttributeDashMatch(string name, string value)
+        public virtual void AttributeDashMatch(QName name, string value)
         {
             Add(Ops.AttributeDashMatch(name, value));
         }
@@ -192,7 +192,7 @@ namespace Fizzler
         /// that represents an element with the attribute <paramref name="name"/> 
         /// whose value begins with the prefix <paramref name="value"/>.
         /// </summary>
-        public void AttributePrefixMatch(string name, string value)
+        public void AttributePrefixMatch(QName name, string value)
         {
             Add(Ops.AttributePrefixMatch(name, value));
         }
@@ -202,7 +202,7 @@ namespace Fizzler
         /// that represents an element with the attribute <paramref name="name"/> 
         /// whose value ends with the suffix <paramref name="value"/>.
         /// </summary>
-        public void AttributeSuffixMatch(string name, string value)
+        public void AttributeSuffixMatch(QName name, string value)
         {
             Add(Ops.AttributeSuffixMatch(name, value));
         }
@@ -212,7 +212,7 @@ namespace Fizzler
         /// that represents an element with the attribute <paramref name="name"/> 
         /// whose value contains at least one instance of the substring <paramref name="value"/>.
         /// </summary>
-        public void AttributeSubstring(string name, string value)
+        public void AttributeSubstring(QName name, string value)
         {
             Add(Ops.AttributeSubstring(name, value));
         }

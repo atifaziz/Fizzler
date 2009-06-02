@@ -60,7 +60,7 @@ namespace Fizzler
         /// <summary>
         /// Generates human-readable text of this type selector.
         /// </summary>
-        public void Type(string type)
+        public void Type(QName type)
 		{
 			Add(string.Format(" <{0}> elements", type));
 		}
@@ -92,7 +92,7 @@ namespace Fizzler
         /// <summary>
         /// Generates human-readable text of this attribute selector.
         /// </summary>
-        public void AttributeExists(string name)
+        public void AttributeExists(QName name)
 		{
             Add(string.Format(" which have attribute {0} defined", name));
 		}
@@ -100,7 +100,7 @@ namespace Fizzler
         /// <summary>
         /// Generates human-readable text of this attribute selector.
         /// </summary>
-        public void AttributeExact(string name, string value)
+        public void AttributeExact(QName name, string value)
 		{
 			Add(string.Format(" which have attribute {0} with a value of '{1}'", name, value));
 		}
@@ -108,7 +108,7 @@ namespace Fizzler
         /// <summary>
         /// Generates human-readable text of this attribute selector.
         /// </summary>
-        public void AttributeIncludes(string name, string value)
+        public void AttributeIncludes(QName name, string value)
 		{
 			Add(string.Format(" which have attribute {0} that includes the word '{1}'", name, value));
 		}
@@ -116,7 +116,7 @@ namespace Fizzler
         /// <summary>
         /// Generates human-readable text of this attribute selector.
         /// </summary>
-        public void AttributeDashMatch(string name, string value)
+        public void AttributeDashMatch(QName name, string value)
 		{
 			Add(string.Format(" which have attribute {0} with a hyphen separated value matching '{1}'", name, value));
 		}
@@ -124,7 +124,7 @@ namespace Fizzler
         /// <summary>
         /// Generates human-readable text of this attribute selector.
         /// </summary>
-        public void AttributePrefixMatch(string name, string value)
+        public void AttributePrefixMatch(QName name, string value)
 	    {
 			Add(string.Format(" which have attribute {0} whose value begins with '{1}'", name, value));
         }
@@ -132,7 +132,7 @@ namespace Fizzler
         /// <summary>
         /// Generates human-readable text of this attribute selector.
         /// </summary>
-        public void AttributeSuffixMatch(string name, string value)
+        public void AttributeSuffixMatch(QName name, string value)
 	    {
 			Add(string.Format(" which have attribute {0} whose value ends with '{1}'", name, value));
         }
@@ -140,7 +140,7 @@ namespace Fizzler
         /// <summary>
         /// Generates human-readable text of this attribute selector.
         /// </summary>
-        public void AttributeSubstring(string name, string value)
+        public void AttributeSubstring(QName name, string value)
 	    {
 			Add(string.Format(" which have attribute {0} whose value contains '{1}'", name, value));
         }

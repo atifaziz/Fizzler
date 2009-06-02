@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -265,17 +265,17 @@ namespace Fizzler
                 
                 switch (op.Value.Kind)
                 {
-                    case TokenKind.Equals: _generator.AttributeExact(name, value); break;
-                    case TokenKind.Includes: _generator.AttributeIncludes(name, value); break;
-                    case TokenKind.DashMatch: _generator.AttributeDashMatch(name, value); break;
-                    case TokenKind.PrefixMatch: _generator.AttributePrefixMatch(name, value); break;
-                    case TokenKind.SuffixMatch: _generator.AttributeSuffixMatch(name, value); break;
-                    case TokenKind.SubstringMatch: _generator.AttributeSubstring(name, value); break;
+                    case TokenKind.Equals: _generator.AttributeExact(QName.Namespaceless(name), value); break;
+                    case TokenKind.Includes: _generator.AttributeIncludes(QName.Namespaceless(name), value); break;
+                    case TokenKind.DashMatch: _generator.AttributeDashMatch(QName.Namespaceless(name), value); break;
+                    case TokenKind.PrefixMatch: _generator.AttributePrefixMatch(QName.Namespaceless(name), value); break;
+                    case TokenKind.SuffixMatch: _generator.AttributeSuffixMatch(QName.Namespaceless(name), value); break;
+                    case TokenKind.SubstringMatch: _generator.AttributeSubstring(QName.Namespaceless(name), value); break;
                 }
             }
             
             if (!hasValue)
-                _generator.AttributeExists(name);
+                _generator.AttributeExists(QName.Namespaceless(name));
             
             Read(TokenKind.RightBracket);
         }
@@ -298,7 +298,7 @@ namespace Fizzler
 
             var token = Read(TokenKind.Ident, TokenKind.Star);
             if (token.Kind == TokenKind.Ident)
-                _generator.Type(token.Text);
+                _generator.Type(QName.Namespaceless(token.Text));
             else
                 _generator.Universal();
         }

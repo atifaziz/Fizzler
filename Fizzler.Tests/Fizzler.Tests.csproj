@@ -60,6 +60,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ElementSelector.cs" />
     <Compile Include="PsuedoSelectors.cs" />
+    <Compile Include="QNameTests.cs" />
     <Compile Include="ReaderTests.cs" />
     <Compile Include="SelectorBaseTest.cs" />
     <Compile Include="SelectorGeneratorTeeTests.cs" />

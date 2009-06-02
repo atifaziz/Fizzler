@@ -13,7 +13,7 @@ namespace Fizzler
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#type-selectors">type selector</a>,
         /// which represents an instance of the element type in the document tree. 
         /// </summary>
-        Selector<TElement> Type(string type);
+        Selector<TElement> Type(QName type);
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#universal-selector">universal selector</a>,
@@ -46,14 +46,14 @@ namespace Fizzler
         /// that represents an element with the given attribute <paramref name="name"/>
         /// whatever the values of the attribute.
         /// </summary>
-        Selector<TElement> AttributeExists(string name);
+        Selector<TElement> AttributeExists(QName name);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
         /// that represents an element with the given attribute <paramref name="name"/>
         /// and whose value is exactly <paramref name="value"/>.
         /// </summary>
-        Selector<TElement> AttributeExact(string name, string value);
+        Selector<TElement> AttributeExact(QName name, string value);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
@@ -61,7 +61,7 @@ namespace Fizzler
         /// and whose value is a whitespace-separated list of words, one of 
         /// which is exactly <paramref name="value"/>.
         /// </summary>
-        Selector<TElement> AttributeIncludes(string name, string value);
+        Selector<TElement> AttributeIncludes(QName name, string value);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
@@ -69,28 +69,28 @@ namespace Fizzler
         /// its value either being exactly <paramref name="value"/> or beginning 
         /// with <paramref name="value"/> immediately followed by "-" (U+002D).
         /// </summary>
-        Selector<TElement> AttributeDashMatch(string name, string value);
+        Selector<TElement> AttributeDashMatch(QName name, string value);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
         /// that represents an element with the attribute <paramref name="name"/> 
         /// whose value begins with the prefix <paramref name="value"/>.
         /// </summary>
-        Selector<TElement> AttributePrefixMatch(string name, string value);
+        Selector<TElement> AttributePrefixMatch(QName name, string value);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
         /// that represents an element with the attribute <paramref name="name"/> 
         /// whose value ends with the suffix <paramref name="value"/>.
         /// </summary>
-        Selector<TElement> AttributeSuffixMatch(string name, string value);
+        Selector<TElement> AttributeSuffixMatch(QName name, string value);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
         /// that represents an element with the attribute <paramref name="name"/> 
         /// whose value contains at least one instance of the substring <paramref name="value"/>.
         /// </summary>
-        Selector<TElement> AttributeSubstring(string name, string value);
+        Selector<TElement> AttributeSubstring(QName name, string value);
 
         //
         // Pseudo-class selectors

@@ -6,11 +6,6 @@ using NUnit.Framework;
 
 namespace Fizzler.Tests
 {
-	public delegate void FzAction();
-	public delegate void FzActionS2(string s, string s2);
-	public delegate void FzActionS1(string s);
-	public delegate void FzActionI2(int i, int i2);
-
 	/// <summary>
 	/// Ensure that all actions on SelectorGeneratorTee are passed
 	/// to the internal Primary and Secondary SelectorGenerators.
@@ -67,7 +62,7 @@ namespace Fizzler.Tests
 		[Test]
 		public void TypeTest()
 		{
-			Run(tee.Type, "go");
+            Run(tee.Type, QName.Namespaceless("go"));
 		}
 
 		[Test]
@@ -91,43 +86,43 @@ namespace Fizzler.Tests
 		[Test]
 		public void AttrExistsTest()
 		{
-			Run(tee.AttributeExists, "hello");
+			Run(tee.AttributeExists, QName.Namespaceless("hello"));
 		}
 
 		[Test]
 		public void AttExactTest()
 		{
-			Run(tee.AttributeExact, "hello", "there");
+			Run(tee.AttributeExact, QName.Namespaceless("hello"), "there");
 		}
 
 		[Test]
 		public void AttrIncludesTest()
 		{
-			Run(tee.AttributeIncludes, "hello", "there");
+			Run(tee.AttributeIncludes, QName.Namespaceless("hello"), "there");
 		}
 
 		[Test]
 		public void AttrDashMatchTest()
 		{
-			Run(tee.AttributeDashMatch, "hello", "there");
+			Run(tee.AttributeDashMatch, QName.Namespaceless("hello"), "there");
 		}
 
 		[Test]
 		public void AttrPrefixMatchTest()
 		{
-			Run(tee.AttributePrefixMatch,"hello", "there");
+			Run(tee.AttributePrefixMatch,QName.Namespaceless("hello"), "there");
 		}
 
 		[Test]
 		public void AttrSuffixMatchTest()
 		{
-			Run(tee.AttributeSuffixMatch, "hello", "there");
+			Run(tee.AttributeSuffixMatch, QName.Namespaceless("hello"), "there");
 		}
 
 		[Test]
 		public void AttrSubstringTest()
 		{
-			Run(tee.AttributeSubstring, "hello", "there");
+			Run(tee.AttributeSubstring, QName.Namespaceless("hello"), "there");
 		}
 
 		[Test]
@@ -184,25 +179,30 @@ namespace Fizzler.Tests
 			Run(tee.GeneralSibling);
 		}
 
-		private static void Run(FzAction action, params object[] args)
+		private static void Run(Action action, params object[] args)
 		{
 			Run(action.Method, args);
 		}
 
-		private static void Run(FzActionS1 action, params object[] args)
+        private static void Run(Action<QName> action, params object[] args)
 		{
 			Run(action.Method, args);
 		}
 
-		private static void Run(FzActionS2 action, params object[] args)
+		private static void Run(Action<QName, string> action, params object[] args)
 		{
 			Run(action.Method, args);
 		}
 
-		/// <summary>
+        private static void Run(Action<string> action, params object[] args)
+        {
+            Run(action.Method, args);
+        }
+        
+        /// <summary>
 		/// This is named differently as Mono cannot work out the difference between this and Run(FzActionS2 action, params object[] args)
 		/// </summary>
-		private static void RunI(FzActionI2 action, params object[] args)
+		private static void RunI(Action<int, int> action, params object[] args)
 		{
 			Run(action.Method, args);
 		}
@@ -274,7 +274,7 @@ namespace Fizzler.Tests
 	            OnInvoked(MethodBase.GetCurrentMethod());
 	        }
 
-	        public void Type(string type)
+	        public void Type(QName type)
 	        {
 	            OnInvoked(MethodBase.GetCurrentMethod(), type);
 	        }
@@ -294,37 +294,37 @@ namespace Fizzler.Tests
 	            OnInvoked(MethodBase.GetCurrentMethod(), clazz);
 	        }
 
-	        public void AttributeExists(string name)
+	        public void AttributeExists(QName name)
 	        {
 	            OnInvoked(MethodBase.GetCurrentMethod(), name);
 	        }
 
-	        public void AttributeExact(string name, string value)
+	        public void AttributeExact(QName name, string value)
 	        {
 	            OnInvoked(MethodBase.GetCurrentMethod(), name, value);
 	        }
 
-	        public void AttributeIncludes(string name, string value)
+	        public void AttributeIncludes(QName name, string value)
 	        {
 	            OnInvoked(MethodBase.GetCurrentMethod(), name, value);
 	        }
 
-	        public void AttributeDashMatch(string name, string value)
+	        public void AttributeDashMatch(QName name, string value)
 	        {
 	            OnInvoked(MethodBase.GetCurrentMethod(), name, value);
 	        }
 
-	        public void AttributePrefixMatch(string name, string value)
+	        public void AttributePrefixMatch(QName name, string value)
 	        {
 	            OnInvoked(MethodBase.GetCurrentMethod(), name, value);
 	        }
 
-	        public void AttributeSuffixMatch(string name, string value)
+	        public void AttributeSuffixMatch(QName name, string value)
 	        {
 	            OnInvoked(MethodBase.GetCurrentMethod(), name, value);
 	        }
 
-	        public void AttributeSubstring(string name, string value)
+	        public void AttributeSubstring(QName name, string value)
 	        {
 	            OnInvoked(MethodBase.GetCurrentMethod(), name, value);
 	        }

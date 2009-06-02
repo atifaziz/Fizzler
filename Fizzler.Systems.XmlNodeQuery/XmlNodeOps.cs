@@ -6,9 +6,10 @@ namespace Fizzler.Systems.XmlNodeQuery
 {
 	public class XmlNodeOps : IElementOps<XmlNode>
 	{
-		public virtual Selector<XmlNode> Type(string type)
+		public virtual Selector<XmlNode> Type(QName type)
 		{
-			return nodes => nodes.Where(n => n.Name == type);
+            if (type.IsEmpty) throw new ArgumentException(null, "type");
+            return nodes => nodes.Where(n => n.Name == type.Name);
 		}
 
 		public virtual Selector<XmlNode> Universal()
@@ -18,71 +19,85 @@ namespace Fizzler.Systems.XmlNodeQuery
 
 		public virtual Selector<XmlNode> Id(string id)
 		{
-			return AttributeExact("id", id);
+			return AttributeExact(QName.Namespaceless("id"), id);
 		}
 
 		public virtual Selector<XmlNode> Class(string clazz)
 		{
-			return AttributeIncludes("class", clazz);
+			return AttributeIncludes(QName.Namespaceless("class"), clazz);
 		}
 
-		public virtual Selector<XmlNode> AttributeExists(string name)
+		public virtual Selector<XmlNode> AttributeExists(QName name)
 		{
-			return nodes => nodes.Elements().Where(n => n.Attributes[name] != null);
+            if (name.IsEmpty) throw new ArgumentException(null, "name");
+            // TODO Proper namespace support
+			return nodes => nodes.Elements().Where(n => n.Attributes[name.Name] != null);
 		}
 
-		public virtual Selector<XmlNode> AttributeExact(string name, string value)
+		public virtual Selector<XmlNode> AttributeExact(QName name, string value)
 		{
-			return nodes => from n in nodes.Elements()
-			                let a = n.Attributes[name]
+            if (name.IsEmpty) throw new ArgumentException(null, "name");
+            // TODO Proper namespace support
+            return nodes => from n in nodes.Elements()
+			                let a = n.Attributes[name.Name]
 			                where a != null && a.Value == value
 			                select n;
 		}
 
-		public virtual Selector<XmlNode> AttributeIncludes(string name, string value)
+		public virtual Selector<XmlNode> AttributeIncludes(QName name, string value)
 		{
-			return nodes => from n in nodes.Elements()
-			                let a = n.Attributes[name]
+            if (name.IsEmpty) throw new ArgumentException(null, "name");
+            // TODO Proper namespace support
+            return nodes => from n in nodes.Elements()
+			                let a = n.Attributes[name.Name]
 			                where a != null && a.Value.Split(' ').Contains(value)
 			                select n;
 		}
 
-		public virtual Selector<XmlNode> AttributeDashMatch(string name, string value)
+		public virtual Selector<XmlNode> AttributeDashMatch(QName name, string value)
 		{
-			return string.IsNullOrEmpty(value)
+            if (name.IsEmpty) throw new ArgumentException(null, "name");
+            // TODO Proper namespace support
+            return string.IsNullOrEmpty(value)
 			     ? (Selector<XmlNode>)(nodes => Enumerable.Empty<XmlNode>())
 			     : (nodes => from n in nodes.Elements()
-			                 let a = n.Attributes[name]
+			                 let a = n.Attributes[name.Name]
 			                 where a != null && a.Value.Split('-').Contains(value)
 			       		            select n);
 		}
 
-		public virtual Selector<XmlNode> AttributePrefixMatch(string name, string value)
+		public virtual Selector<XmlNode> AttributePrefixMatch(QName name, string value)
 		{
-			return string.IsNullOrEmpty(value)
+            if (name.IsEmpty) throw new ArgumentException(null, "name");
+            // TODO Proper namespace support
+            return string.IsNullOrEmpty(value)
 			     ? (Selector<XmlNode>)(nodes => Enumerable.Empty<XmlNode>())
 			     : (nodes => from n in nodes.Elements()
-			                 let a = n.Attributes[name]
+			                 let a = n.Attributes[name.Name]
 			                 where a != null && a.Value.StartsWith(value)
 			                 select n);
 		}
 
-		public virtual Selector<XmlNode> AttributeSuffixMatch(string name, string value)
+		public virtual Selector<XmlNode> AttributeSuffixMatch(QName name, string value)
 		{
-			return string.IsNullOrEmpty(value)
+            if (name.IsEmpty) throw new ArgumentException(null, "name");
+            // TODO Proper namespace support
+            return string.IsNullOrEmpty(value)
 			     ? (Selector<XmlNode>)(nodes => Enumerable.Empty<XmlNode>())
 			     : (nodes => from n in nodes.Elements()
-			                 let a = n.Attributes[name]
+			                 let a = n.Attributes[name.Name]
 			                 where a != null && a.Value.EndsWith(value)
 			                 select n);
 		}
 
-		public virtual Selector<XmlNode> AttributeSubstring(string name, string value)
+		public virtual Selector<XmlNode> AttributeSubstring(QName name, string value)
 		{
-			return string.IsNullOrEmpty(value)
+            if (name.IsEmpty) throw new ArgumentException(null, "name");
+            // TODO Proper namespace support
+            return string.IsNullOrEmpty(value)
 			     ? (Selector<XmlNode>)(nodes => Enumerable.Empty<XmlNode>())
 			     : (nodes => from n in nodes.Elements()
-			                 let a = n.Attributes[name]
+			                 let a = n.Attributes[name.Name]
 			                 where a != null && a.Value.Contains(value)
 			                 select n);
 		}
