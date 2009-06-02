@@ -234,6 +234,12 @@ namespace Fizzler.Tests
 		}
 
         [Test]
+        public void Pipe()
+        {
+            AssertToken(TokenKind.Pipe, Token.Pipe());
+        }
+
+        [Test]
         public void StringRepresentations()
         {
             Assert.AreEqual("Eoi", Token.Eoi().ToString());
@@ -258,7 +264,8 @@ namespace Fizzler.Tests
             Assert.AreEqual("Function: foo", Token.Function("foo").ToString());
             Assert.AreEqual("RightParenthesis", Token.RightParenthesis().ToString());
             Assert.AreEqual("Integer: 42", Token.Integer("42").ToString());
-		    Assert.AreEqual("Tilde", Token.Tilde().ToString());
+            Assert.AreEqual("Tilde", Token.Tilde().ToString());
+            Assert.AreEqual("Pipe", Token.Pipe().ToString());
         }
     }
 }

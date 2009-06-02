@@ -158,10 +158,10 @@ namespace Fizzler.Tests
             Assert.AreEqual(TokenKind.DashMatch, Tokener.Tokenize("|=").First().Kind);
         }
 
-        [Test, ExpectedException(typeof(FormatException))]
-        public void BadDashMatch()
+        [Test]
+        public void Pipe()
         {
-            Tokener.Tokenize("||").ToArray();
+            Assert.AreEqual(new[] { Token.Pipe(), Token.Pipe() }, Tokener.Tokenize("||").Take(2).ToArray());
         }
 
         [Test]

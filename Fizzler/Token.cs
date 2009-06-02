@@ -98,6 +98,14 @@ namespace Fizzler
         }
 
         /// <summary>
+        /// Creates a pipe (vertical line) token.
+        /// </summary>
+        public static Token Pipe()
+        {
+            return new Token(TokenKind.Pipe);
+        }
+
+        /// <summary>
         /// Creates an left plus token.
         /// </summary>
         public static Token Plus()

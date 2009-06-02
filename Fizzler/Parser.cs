@@ -70,12 +70,12 @@ namespace Fizzler
             _generator.OnSelector();
 
             //selector
-            //  : simple_selector [ combinator simple_selector ]*
+            //  : simple_selector_sequence [ combinator simple_selector_sequence ]*
             //  ;
 
-            SimpleSelector();
+            SimpleSelectorSequence();
             while (TryCombinator())
-                SimpleSelector();
+                SimpleSelectorSequence();
         }
 
         private bool TryCombinator()
@@ -109,11 +109,12 @@ namespace Fizzler
             return true;
         }
 
-        private void SimpleSelector()
+        private void SimpleSelectorSequence()
         {
-            //simple_selector
-            //  : element_name [ HASH | class | attrib | pseudo ]*
-            //  | [ HASH | class | attrib | pseudo ]+
+            //simple_selector_sequence
+            //  : [ type_selector | universal ]
+            //    [ HASH | class | attrib | pseudo | negation ]*
+            //  | [ HASH | class | attrib | pseudo | negation ]+
             //  ;
 
             var named = false;
@@ -125,7 +126,7 @@ namespace Fizzler
                 {
                     if (named || modifiers > 0)
                         break;
-                    ElementName();
+                    TypeSelector();
                     named = true;
                 }
                 else
@@ -290,7 +291,42 @@ namespace Fizzler
             _generator.Class(Read(TokenKind.Ident).Text);
         }
 
-        private void ElementName()
+        private NamespacePrefix? TryNamespacePrefix()
+        {
+            //namespace_prefix
+            //  : [ IDENT | '*' ]? '|'
+            //  ;
+
+            var token = TryRead(TokenKind.Ident, TokenKind.Star, TokenKind.Pipe);
+            
+            if (token == null)
+                return null;
+            
+            if (token.Value.Kind == TokenKind.Pipe)
+                return NamespacePrefix.Empty;
+            
+            var prefix = token.Value;
+            if (TryRead(TokenKind.Pipe) == null)
+            {
+                Unread(prefix);
+                return null;
+            }
+            
+            return prefix.Kind == TokenKind.Ident
+                 ? new NamespacePrefix(prefix.Text)
+                 : NamespacePrefix.Any;
+        }
+
+        private void TypeSelector()
+        {
+            //type_selector
+            //  : [ namespace_prefix ]? element_name
+            //  ;
+
+            ElementName(TryNamespacePrefix() ?? NamespacePrefix.None);
+        }
+
+        private void ElementName(NamespacePrefix prefix)
         {
             //element_name
             //  : IDENT | '*'
@@ -298,9 +334,9 @@ namespace Fizzler
 
             var token = Read(TokenKind.Ident, TokenKind.Star);
             if (token.Kind == TokenKind.Ident)
-                _generator.Type(NamespacePrefix.None, token.Text);
+                _generator.Type(prefix, token.Text);
             else
-                _generator.Universal(NamespacePrefix.None);
+                _generator.Universal(prefix);
         }
 
         private Token Peek()

@@ -81,19 +81,25 @@ namespace Fizzler
                 {
                     case '*': // * or *=
                     case '~': // ~ or ~=
+                    case '|': // | or |=
                     {
                         if (reader.Read() == '=')
                         {
-                            yield return ch == '*' ? Token.SubstringMatch() : Token.Includes();
+                            yield return ch == '*' 
+                                       ? Token.SubstringMatch() 
+                                       : ch == '|' ? Token.DashMatch() 
+                                       : Token.Includes();
                         }
                         else
                         {
                             reader.Unread();
-                            yield return ch == '*' ? Token.Star() : Token.Tilde();
+                            yield return ch == '*' 
+                                ? Token.Star() 
+                                : ch == '|' ? Token.Pipe()
+                                : Token.Tilde();
                         }
                         break;
                     }
-                    case '|': // |=
                     case '^': // ^=
                     case '$': // $=
                     {
@@ -102,7 +108,6 @@ namespace Fizzler
                         
                         switch (ch)
                         {
-                            case '|': yield return Token.DashMatch(); break;
                             case '^': yield return Token.PrefixMatch(); break;
                             case '$': yield return Token.SuffixMatch(); break;
                         }

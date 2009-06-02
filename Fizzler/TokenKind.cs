@@ -86,6 +86,11 @@ namespace Fizzler
         RightBracket,
 
         /// <summary>
+        /// Represents "|"
+        /// </summary>
+        Pipe,
+
+        /// <summary>
         /// Represents S* "+"
         /// </summary>
         Plus,
