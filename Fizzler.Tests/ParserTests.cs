@@ -68,7 +68,7 @@ namespace Fizzler.Tests
         }
 
         [Test]
-        public void NamespacedUnivarsal()
+        public void NamespacedUniversal()
         {
             var generator = new TestSelectorGenerator();
             Parser.Parse(Tokener.Tokenize("foo|*"), generator);

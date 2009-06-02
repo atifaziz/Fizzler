@@ -34,7 +34,7 @@ namespace Fizzler
         }
 
         /// <summary>
-        /// Creates an star token.
+        /// Creates a star token.
         /// </summary>
         public static Token Star()
         {
@@ -42,7 +42,7 @@ namespace Fizzler
         }
 
         /// <summary>
-        /// Creates an dot token.
+        /// Creates a dot token.
         /// </summary>
         public static Token Dot()
         {
@@ -50,7 +50,7 @@ namespace Fizzler
         }
 
         /// <summary>
-        /// Creates an colon token.
+        /// Creates a colon token.
         /// </summary>
         public static Token Colon()
         {
@@ -58,7 +58,7 @@ namespace Fizzler
         }
 
         /// <summary>
-        /// Creates an comma token.
+        /// Creates a comma token.
         /// </summary>
         public static Token Comma()
         {
@@ -66,7 +66,7 @@ namespace Fizzler
         }
 
         /// <summary>
-        /// Creates an right parenthesis token.
+        /// Creates a right parenthesis token.
         /// </summary>
         public static Token RightParenthesis()
         {
@@ -82,7 +82,7 @@ namespace Fizzler
         }
 
         /// <summary>
-        /// Creates an left bracket token.
+        /// Creates a left bracket token.
         /// </summary>
         public static Token LeftBracket()
         {
@@ -90,7 +90,7 @@ namespace Fizzler
         }
 
         /// <summary>
-        /// Creates an right bracket token.
+        /// Creates a right bracket token.
         /// </summary>
         public static Token RightBracket()
         {
@@ -106,7 +106,7 @@ namespace Fizzler
         }
 
         /// <summary>
-        /// Creates an left plus token.
+        /// Creates a plus token.
         /// </summary>
         public static Token Plus()
         {
@@ -114,7 +114,7 @@ namespace Fizzler
         }
 
         /// <summary>
-        /// Creates an right greater token.
+        /// Creates a greater token.
         /// </summary>
         public static Token Greater()
         {
