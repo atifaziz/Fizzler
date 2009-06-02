@@ -245,6 +245,7 @@ namespace Fizzler
             //  ;
 
             Read(TokenKind.LeftBracket);
+            var prefix = TryNamespacePrefix() ?? NamespacePrefix.None;
             var name = Read(TokenKind.Ident).Text;
             
             var hasValue = false;
@@ -266,17 +267,17 @@ namespace Fizzler
                 
                 switch (op.Value.Kind)
                 {
-                    case TokenKind.Equals: _generator.AttributeExact(NamespacePrefix.None, name, value); break;
-                    case TokenKind.Includes: _generator.AttributeIncludes(NamespacePrefix.None, name, value); break;
-                    case TokenKind.DashMatch: _generator.AttributeDashMatch(NamespacePrefix.None, name, value); break;
-                    case TokenKind.PrefixMatch: _generator.AttributePrefixMatch(NamespacePrefix.None, name, value); break;
-                    case TokenKind.SuffixMatch: _generator.AttributeSuffixMatch(NamespacePrefix.None, name, value); break;
-                    case TokenKind.SubstringMatch: _generator.AttributeSubstring(NamespacePrefix.None, name, value); break;
+                    case TokenKind.Equals: _generator.AttributeExact(prefix, name, value); break;
+                    case TokenKind.Includes: _generator.AttributeIncludes(prefix, name, value); break;
+                    case TokenKind.DashMatch: _generator.AttributeDashMatch(prefix, name, value); break;
+                    case TokenKind.PrefixMatch: _generator.AttributePrefixMatch(prefix, name, value); break;
+                    case TokenKind.SuffixMatch: _generator.AttributeSuffixMatch(prefix, name, value); break;
+                    case TokenKind.SubstringMatch: _generator.AttributeSubstring(prefix, name, value); break;
                 }
             }
             
             if (!hasValue)
-                _generator.AttributeExists(NamespacePrefix.None, name);
+                _generator.AttributeExists(prefix, name);
             
             Read(TokenKind.RightBracket);
         }
