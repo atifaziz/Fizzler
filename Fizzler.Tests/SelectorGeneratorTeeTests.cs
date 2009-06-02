@@ -273,7 +273,7 @@ namespace Fizzler.Tests
 
 	        public void Universal(NamespacePrefix prefix)
 	        {
-	            OnInvoked(MethodBase.GetCurrentMethod());
+	            OnInvoked(MethodBase.GetCurrentMethod(), prefix);
 	        }
 
 	        public void Id(string id)
