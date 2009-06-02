@@ -126,7 +126,7 @@ namespace Fizzler
                 {
                     if (named || modifiers > 0)
                         break;
-                    TypeSelector();
+                    TypeSelectorOrUniversal();
                     named = true;
                 }
                 else
@@ -317,21 +317,19 @@ namespace Fizzler
                  : NamespacePrefix.Any;
         }
 
-        private void TypeSelector()
+        private void TypeSelectorOrUniversal()
         {
             //type_selector
             //  : [ namespace_prefix ]? element_name
             //  ;
-
-            ElementName(TryNamespacePrefix() ?? NamespacePrefix.None);
-        }
-
-        private void ElementName(NamespacePrefix prefix)
-        {
             //element_name
-            //  : IDENT | '*'
+            //  : IDENT
+            //  ;
+            //universal
+            //  : [ namespace_prefix ]? '*'
             //  ;
 
+            var prefix = TryNamespacePrefix() ?? NamespacePrefix.None;
             var token = Read(TokenKind.Ident, TokenKind.Star);
             if (token.Kind == TokenKind.Ident)
                 _generator.Type(prefix, token.Text);
