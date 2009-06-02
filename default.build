@@ -130,6 +130,7 @@
 			<sources>
 				<include name="VisualFizzler/**/*.cs" />
 				<include name="NET-2.0/ExtensionAttribute.cs" unless="${bool::parse(net-35)}" />
+				<include name="NET-2.0/Actions.cs" unless="${bool::parse(net-35)}" />
 			</sources>
 			<resources dynamicprefix="true">
 				<include name="VisualFizzler/**/*.resx" />
@@ -153,6 +154,7 @@
 		<csc target="library" noconfig="${not bool::parse(mono)}" output="bin//${output.dir}${configuration}//Fizzler.Tests.dll" debug="${debug}">
 			<sources>
 				<include name="Fizzler.Tests/**/*.cs" />
+				<include name="NET-2.0/Actions.cs" unless="${bool::parse(net-35)}" />
 			</sources>
 			<resources dynamicprefix="true">
 				<include name="Fizzler.Tests/*.html" />
