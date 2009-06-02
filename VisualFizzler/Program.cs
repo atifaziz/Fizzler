@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using HtmlAgilityPack;
 
 namespace VisualFizzler
 {
@@ -13,6 +14,8 @@ namespace VisualFizzler
         [STAThread]
         private static void Main()
         {
+            //HtmlNode.ElementsFlags["form"] = (HtmlElementFlag) ((int)((HtmlElementFlag)HtmlNode.ElementsFlags["form"]) & ~((int)HtmlElementFlag.CanOverlap));
+            HtmlNode.ElementsFlags["form"] = (HtmlElementFlag) HtmlNode.ElementsFlags["form"] | HtmlElementFlag.Closed;
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

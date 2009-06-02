@@ -56,11 +56,11 @@
     <Compile Include="HumanReadableSelectorGeneratorTests.cs" />
     <Compile Include="IDSelector.cs" />
     <Compile Include="MultipleSelectors.cs" />
+    <Compile Include="NamespacePrefixTests.cs" />
     <Compile Include="NthChild.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ElementSelector.cs" />
     <Compile Include="PsuedoSelectors.cs" />
-    <Compile Include="QNameTests.cs" />
     <Compile Include="ReaderTests.cs" />
     <Compile Include="SelectorBaseTest.cs" />
     <Compile Include="SelectorGeneratorTeeTests.cs" />

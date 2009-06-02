@@ -265,17 +265,17 @@ namespace Fizzler
                 
                 switch (op.Value.Kind)
                 {
-                    case TokenKind.Equals: _generator.AttributeExact(QName.Namespaceless(name), value); break;
-                    case TokenKind.Includes: _generator.AttributeIncludes(QName.Namespaceless(name), value); break;
-                    case TokenKind.DashMatch: _generator.AttributeDashMatch(QName.Namespaceless(name), value); break;
-                    case TokenKind.PrefixMatch: _generator.AttributePrefixMatch(QName.Namespaceless(name), value); break;
-                    case TokenKind.SuffixMatch: _generator.AttributeSuffixMatch(QName.Namespaceless(name), value); break;
-                    case TokenKind.SubstringMatch: _generator.AttributeSubstring(QName.Namespaceless(name), value); break;
+                    case TokenKind.Equals: _generator.AttributeExact(NamespacePrefix.None, name, value); break;
+                    case TokenKind.Includes: _generator.AttributeIncludes(NamespacePrefix.None, name, value); break;
+                    case TokenKind.DashMatch: _generator.AttributeDashMatch(NamespacePrefix.None, name, value); break;
+                    case TokenKind.PrefixMatch: _generator.AttributePrefixMatch(NamespacePrefix.None, name, value); break;
+                    case TokenKind.SuffixMatch: _generator.AttributeSuffixMatch(NamespacePrefix.None, name, value); break;
+                    case TokenKind.SubstringMatch: _generator.AttributeSubstring(NamespacePrefix.None, name, value); break;
                 }
             }
             
             if (!hasValue)
-                _generator.AttributeExists(QName.Namespaceless(name));
+                _generator.AttributeExists(NamespacePrefix.None, name);
             
             Read(TokenKind.RightBracket);
         }
@@ -298,7 +298,7 @@ namespace Fizzler
 
             var token = Read(TokenKind.Ident, TokenKind.Star);
             if (token.Kind == TokenKind.Ident)
-                _generator.Type(QName.Namespaceless(token.Text));
+                _generator.Type(NamespacePrefix.None, token.Text);
             else
                 _generator.Universal();
         }

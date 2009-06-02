@@ -63,10 +63,10 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void Type(QName type)
+        public void Type(NamespacePrefix prefix, string type)
         {
-            Primary.Type(type);
-            Secondary.Type(type);
+            Primary.Type(prefix, type);
+            Secondary.Type(prefix, type);
         }
 
         /// <summary>
@@ -99,64 +99,64 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void AttributeExists(QName name)
+        public void AttributeExists(NamespacePrefix prefix, string name)
         {
-            Primary.AttributeExists(name);
-            Secondary.AttributeExists(name);
+            Primary.AttributeExists(prefix, name);
+            Secondary.AttributeExists(prefix, name);
         }
 
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void AttributeExact(QName name, string value)
+        public void AttributeExact(NamespacePrefix prefix, string name, string value)
         {
-            Primary.AttributeExact(name, value);
-            Secondary.AttributeExact(name, value);
+            Primary.AttributeExact(prefix, name, value);
+            Secondary.AttributeExact(prefix, name, value);
         }
 
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void AttributeIncludes(QName name, string value)
+        public void AttributeIncludes(NamespacePrefix prefix, string name, string value)
         {
-            Primary.AttributeIncludes(name, value);
-            Secondary.AttributeIncludes(name, value);
+            Primary.AttributeIncludes(prefix, name, value);
+            Secondary.AttributeIncludes(prefix, name, value);
         }
 
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void AttributeDashMatch(QName name, string value)
+        public void AttributeDashMatch(NamespacePrefix prefix, string name, string value)
         {
-            Primary.AttributeDashMatch(name, value);
-            Secondary.AttributeDashMatch(name, value);
+            Primary.AttributeDashMatch(prefix, name, value);
+            Secondary.AttributeDashMatch(prefix, name, value);
         }
 
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void AttributePrefixMatch(QName name, string value)
+        public void AttributePrefixMatch(NamespacePrefix prefix, string name, string value)
         {
-            Primary.AttributePrefixMatch(name, value);
-            Secondary.AttributePrefixMatch(name, value);
+            Primary.AttributePrefixMatch(prefix, name, value);
+            Secondary.AttributePrefixMatch(prefix, name, value);
         }
 
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void AttributeSuffixMatch(QName name, string value)
+        public void AttributeSuffixMatch(NamespacePrefix prefix, string name, string value)
         {
-            Primary.AttributeSuffixMatch(name, value);
-            Secondary.AttributeSuffixMatch(name, value);
+            Primary.AttributeSuffixMatch(prefix, name, value);
+            Secondary.AttributeSuffixMatch(prefix, name, value);
         }
 
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void AttributeSubstring(QName name, string value)
+        public void AttributeSubstring(NamespacePrefix prefix, string name, string value)
         {
-            Primary.AttributeSubstring(name, value);
-            Secondary.AttributeSubstring(name, value);
+            Primary.AttributeSubstring(prefix, name, value);
+            Secondary.AttributeSubstring(prefix, name, value);
         }
 
         /// <summary>

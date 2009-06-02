@@ -62,7 +62,7 @@ namespace Fizzler.Tests
 		[Test]
 		public void TypeTest()
 		{
-            Run(tee.Type, QName.Namespaceless("go"));
+            Run(tee.Type, NamespacePrefix.None, "go");
 		}
 
 		[Test]
@@ -86,43 +86,43 @@ namespace Fizzler.Tests
 		[Test]
 		public void AttrExistsTest()
 		{
-			Run(tee.AttributeExists, QName.Namespaceless("hello"));
+			Run(tee.AttributeExists, NamespacePrefix.None, "hello");
 		}
 
 		[Test]
 		public void AttExactTest()
 		{
-			Run(tee.AttributeExact, QName.Namespaceless("hello"), "there");
+			Run(tee.AttributeExact, NamespacePrefix.None, "hello", "there");
 		}
 
 		[Test]
 		public void AttrIncludesTest()
 		{
-			Run(tee.AttributeIncludes, QName.Namespaceless("hello"), "there");
+			Run(tee.AttributeIncludes, NamespacePrefix.None, "hello", "there");
 		}
 
 		[Test]
 		public void AttrDashMatchTest()
 		{
-			Run(tee.AttributeDashMatch, QName.Namespaceless("hello"), "there");
+			Run(tee.AttributeDashMatch, NamespacePrefix.None, "hello", "there");
 		}
 
 		[Test]
 		public void AttrPrefixMatchTest()
 		{
-			Run(tee.AttributePrefixMatch,QName.Namespaceless("hello"), "there");
+			Run(tee.AttributePrefixMatch,NamespacePrefix.None, "hello", "there");
 		}
 
 		[Test]
 		public void AttrSuffixMatchTest()
 		{
-			Run(tee.AttributeSuffixMatch, QName.Namespaceless("hello"), "there");
+			Run(tee.AttributeSuffixMatch, NamespacePrefix.None, "hello", "there");
 		}
 
 		[Test]
 		public void AttrSubstringTest()
 		{
-			Run(tee.AttributeSubstring, QName.Namespaceless("hello"), "there");
+			Run(tee.AttributeSubstring, NamespacePrefix.None, "hello", "there");
 		}
 
 		[Test]
@@ -140,7 +140,7 @@ namespace Fizzler.Tests
 		[Test]
 		public void NthChildTest()
 		{
-			RunI(tee.NthChild, 1, 2);
+			Run(tee.NthChild, 1, 2);
 		}
 
 		[Test]
@@ -179,39 +179,31 @@ namespace Fizzler.Tests
 			Run(tee.GeneralSibling);
 		}
 
-		private static void Run(Action action, params object[] args)
+		private static void Run(Action action)
 		{
-			Run(action.Method, args);
+			RunImpl(action.Method);
 		}
 
-        private static void Run(Action<QName> action, params object[] args)
+        private static void Run<T>(Action<T> action, T arg)
 		{
-			Run(action.Method, args);
+			RunImpl(action.Method, arg);
 		}
 
-		private static void Run(Action<QName, string> action, params object[] args)
+		private static void Run<T1, T2>(Action<T1, T2> action, T1 arg1, T2 arg2)
 		{
-			Run(action.Method, args);
+			RunImpl(action.Method, arg1, arg2);
 		}
 
-        private static void Run(Action<string> action, params object[] args)
+        private static void Run<T1, T2, T3>(Action<T1, T2, T3> action, T1 arg1, T2 arg2, T3 arg3)
         {
-            Run(action.Method, args);
+            RunImpl(action.Method, arg1, arg2, arg3);
         }
-        
-        /// <summary>
-		/// This is named differently as Mono cannot work out the difference between this and Run(FzActionS2 action, params object[] args)
-		/// </summary>
-		private static void RunI(Action<int, int> action, params object[] args)
-		{
-			Run(action.Method, args);
-		}
 
 		/// <summary>
 	    /// Take the passed action, run it, and then check that the last method
 	    /// and last args are the same for pri and sec.
 	    /// </summary>
-	    private static void Run(MethodBase action, params object[] args)
+	    private static void RunImpl(MethodBase action, params object[] args)
 	    {
             var recordings = new Queue<CallRecording<ISelectorGenerator>>(2);
 	        primary.Recorder = recordings.Enqueue;
@@ -274,9 +266,9 @@ namespace Fizzler.Tests
 	            OnInvoked(MethodBase.GetCurrentMethod());
 	        }
 
-	        public void Type(QName type)
+	        public void Type(NamespacePrefix prefix, string type)
 	        {
-	            OnInvoked(MethodBase.GetCurrentMethod(), type);
+	            OnInvoked(MethodBase.GetCurrentMethod(), prefix, type);
 	        }
 
 	        public void Universal()
@@ -294,39 +286,39 @@ namespace Fizzler.Tests
 	            OnInvoked(MethodBase.GetCurrentMethod(), clazz);
 	        }
 
-	        public void AttributeExists(QName name)
+	        public void AttributeExists(NamespacePrefix prefix, string name)
 	        {
-	            OnInvoked(MethodBase.GetCurrentMethod(), name);
+	            OnInvoked(MethodBase.GetCurrentMethod(), prefix, name);
 	        }
 
-	        public void AttributeExact(QName name, string value)
+	        public void AttributeExact(NamespacePrefix prefix, string name, string value)
 	        {
-	            OnInvoked(MethodBase.GetCurrentMethod(), name, value);
+	            OnInvoked(MethodBase.GetCurrentMethod(), prefix, name, value);
 	        }
 
-	        public void AttributeIncludes(QName name, string value)
+	        public void AttributeIncludes(NamespacePrefix prefix, string name, string value)
 	        {
-	            OnInvoked(MethodBase.GetCurrentMethod(), name, value);
+	            OnInvoked(MethodBase.GetCurrentMethod(), prefix, name, value);
 	        }
 
-	        public void AttributeDashMatch(QName name, string value)
+	        public void AttributeDashMatch(NamespacePrefix prefix, string name, string value)
 	        {
-	            OnInvoked(MethodBase.GetCurrentMethod(), name, value);
+	            OnInvoked(MethodBase.GetCurrentMethod(), prefix, name, value);
 	        }
 
-	        public void AttributePrefixMatch(QName name, string value)
+	        public void AttributePrefixMatch(NamespacePrefix prefix, string name, string value)
 	        {
-	            OnInvoked(MethodBase.GetCurrentMethod(), name, value);
+	            OnInvoked(MethodBase.GetCurrentMethod(), prefix, name, value);
 	        }
 
-	        public void AttributeSuffixMatch(QName name, string value)
+	        public void AttributeSuffixMatch(NamespacePrefix prefix, string name, string value)
 	        {
-	            OnInvoked(MethodBase.GetCurrentMethod(), name, value);
+	            OnInvoked(MethodBase.GetCurrentMethod(), prefix, name, value);
 	        }
 
-	        public void AttributeSubstring(QName name, string value)
+	        public void AttributeSubstring(NamespacePrefix prefix, string name, string value)
 	        {
-	            OnInvoked(MethodBase.GetCurrentMethod(), name, value);
+	            OnInvoked(MethodBase.GetCurrentMethod(), prefix, name, value);
 	        }
 
 	        public void FirstChild()

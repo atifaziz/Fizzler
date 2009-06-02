@@ -29,7 +29,7 @@ namespace Fizzler
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#type-selectors">type selector</a>,
         /// which represents an instance of the element type in the document tree. 
         /// </summary>
-        void Type(QName type);
+        void Type(NamespacePrefix prefix, string name);
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#universal-selector">universal selector</a>,
@@ -62,14 +62,14 @@ namespace Fizzler
         /// that represents an element with the given attribute <paramref name="name"/>
         /// whatever the values of the attribute.
         /// </summary>
-        void AttributeExists(QName name);
+        void AttributeExists(NamespacePrefix prefix, string name);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
         /// that represents an element with the given attribute <paramref name="name"/>
         /// and whose value is exactly <paramref name="value"/>.
         /// </summary>
-        void AttributeExact(QName name, string value);
+        void AttributeExact(NamespacePrefix prefix, string name, string value);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
@@ -77,7 +77,7 @@ namespace Fizzler
         /// and whose value is a whitespace-separated list of words, one of 
         /// which is exactly <paramref name="value"/>.
         /// </summary>
-        void AttributeIncludes(QName name, string value);
+        void AttributeIncludes(NamespacePrefix prefix, string name, string value);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
@@ -85,28 +85,28 @@ namespace Fizzler
         /// its value either being exactly <paramref name="value"/> or beginning 
         /// with <paramref name="value"/> immediately followed by "-" (U+002D).
         /// </summary>
-        void AttributeDashMatch(QName name, string value);
+        void AttributeDashMatch(NamespacePrefix prefix, string name, string value);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
         /// that represents an element with the attribute <paramref name="name"/> 
         /// whose value begins with the prefix <paramref name="value"/>.
         /// </summary>
-        void AttributePrefixMatch(QName name, string value);
+        void AttributePrefixMatch(NamespacePrefix prefix, string name, string value);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
         /// that represents an element with the attribute <paramref name="name"/> 
         /// whose value ends with the suffix <paramref name="value"/>.
         /// </summary>
-        void AttributeSuffixMatch(QName name, string value);
+        void AttributeSuffixMatch(NamespacePrefix prefix, string name, string value);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
         /// that represents an element with the attribute <paramref name="name"/> 
         /// whose value contains at least one instance of the substring <paramref name="value"/>.
         /// </summary>
-        void AttributeSubstring(QName name, string value);
+        void AttributeSubstring(NamespacePrefix prefix, string name, string value);
 
         //
         // Pseudo-class selectors

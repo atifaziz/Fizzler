@@ -62,13 +62,13 @@
     <Compile Include="..\Fizzler.Tests\Properties\AssemblyInfo.cs" />
     <Compile Include="..\Fizzler.Tests\ElementSelector.cs" />
     <Compile Include="..\Fizzler.Tests\PsuedoSelectors.cs" />
-    <Compile Include="..\Fizzler.Tests\QNameTests.cs">
-      <Link>QNameTests.cs</Link>
-    </Compile>
     <Compile Include="..\Fizzler.Tests\SelectorBaseTest.cs" />
     <Compile Include="..\Fizzler.Tests\SelectorGeneratorTeeTests.cs" />
     <Compile Include="..\Fizzler.Tests\TokenerTests.cs" />
     <Compile Include="..\Fizzler.Tests\TokenTests.cs" />
+    <Compile Include="..\Fizzler\NamespacePrefix.cs">
+      <Link>NamespacePrefix.cs</Link>
+    </Compile>
     <Compile Include="Actions.cs" />
   </ItemGroup>
   <ItemGroup>

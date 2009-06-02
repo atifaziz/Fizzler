@@ -49,7 +49,7 @@
     <Compile Include="IElementOps.cs" />
     <Compile Include="ISelectorGenerator.cs" />
     <Compile Include="Parser.cs" />
-    <Compile Include="QName.cs" />
+    <Compile Include="NamespacePrefix.cs" />
     <Compile Include="Reader.cs" />
     <Compile Include="Selector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

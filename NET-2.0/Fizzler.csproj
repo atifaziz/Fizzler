@@ -51,10 +51,10 @@
       <Link>IElementOps.cs</Link>
     </Compile>
     <Compile Include="..\Fizzler\ISelectorGenerator.cs" />
-    <Compile Include="..\Fizzler\Parser.cs" />
-    <Compile Include="..\Fizzler\QName.cs">
-      <Link>QName.cs</Link>
+    <Compile Include="..\Fizzler\NamespacePrefix.cs">
+      <Link>NamespacePrefix.cs</Link>
     </Compile>
+    <Compile Include="..\Fizzler\Parser.cs" />
     <Compile Include="..\Fizzler\Reader.cs" />
     <Compile Include="..\Fizzler\Selector.cs" />
     <Compile Include="..\Fizzler\Properties\AssemblyInfo.cs" />

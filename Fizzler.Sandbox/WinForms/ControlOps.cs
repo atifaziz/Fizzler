@@ -28,11 +28,10 @@ namespace Fizzler.Systems.WinForms
         /// on the other hand will yield instance of <c>Foo.Bar.Button</c>.
         /// In essence, <paramref name="type"/> represent the <em>tail</em>.
         /// </remarks>
-        public virtual Selector<Control> Type(QName type)
+        public virtual Selector<Control> Type(NamespacePrefix prefix, string type)
         {
-            if (type.IsEmpty) throw new ArgumentException(null, "type");
             // TODO Proper namespace support
-            return TypeEndsWith(type.Name.Split('-').Reverse().ToArray());
+            return TypeEndsWith(type.Split('-').Reverse().ToArray());
         }
 
         private static Selector<Control> TypeEndsWith(string[] names)
@@ -70,7 +69,7 @@ namespace Fizzler.Systems.WinForms
         /// </summary>
         public virtual Selector<Control> Class(string clazz)
         {
-            return AttributeIncludes(QName.Namespaceless("class"), clazz);
+            return AttributeIncludes(NamespacePrefix.None, "class", clazz);
         }
 
         /// <summary>
@@ -78,11 +77,10 @@ namespace Fizzler.Systems.WinForms
         /// that represents a control with the given property <paramref name="name"/>
         /// whatever the values of the property.
         /// </summary>
-        public virtual Selector<Control> AttributeExists(QName name)
+        public virtual Selector<Control> AttributeExists(NamespacePrefix prefix, string name)
         {
-            if (name.IsEmpty) throw new ArgumentException(null, "name");
             // TODO Proper namespace support
-            return controls => controls.Where(c => c.Properties().Find(name.Name, true) != null);
+            return controls => controls.Where(c => c.Properties().Find(name, true) != null);
         }
 
         /// <summary>
@@ -90,11 +88,10 @@ namespace Fizzler.Systems.WinForms
         /// that represents a control with the given property <paramref name="name"/>
         /// and whose value is exactly <paramref name="value"/>.
         /// </summary>
-        public virtual Selector<Control> AttributeExact(QName name, string value)
+        public virtual Selector<Control> AttributeExact(NamespacePrefix prefix, string name, string value)
         {
-            if (name.IsEmpty) throw new ArgumentException(null, "name");
             // TODO Proper namespace support
-            return controls => controls.Where(c => c.FindPropertyValueString(name.Name) == value);
+            return controls => controls.Where(c => c.FindPropertyValueString(name) == value);
         }
 
         /// <summary>
@@ -103,11 +100,10 @@ namespace Fizzler.Systems.WinForms
         /// and whose value is a whitespace-separated list of words, one of 
         /// which is exactly <paramref name="value"/>.
         /// </summary>
-        public virtual Selector<Control> AttributeIncludes(QName name, string value)
+        public virtual Selector<Control> AttributeIncludes(NamespacePrefix prefix, string name, string value)
         {
-            if (name.IsEmpty) throw new ArgumentException(null, "name");
             // TODO Proper namespace support
-            return controls => controls.Where(c => c.FindPropertyValueString(name.Name).Split().Contains(value));
+            return controls => controls.Where(c => c.FindPropertyValueString(name).Split().Contains(value));
         }
 
         /// <summary>
@@ -116,11 +112,10 @@ namespace Fizzler.Systems.WinForms
         /// its value either being exactly <paramref name="value"/> or beginning 
         /// with <paramref name="value"/> immediately followed by "-" (U+002D).
         /// </summary>
-        public virtual Selector<Control> AttributeDashMatch(QName name, string value)
+        public virtual Selector<Control> AttributeDashMatch(NamespacePrefix prefix, string name, string value)
         {
-            if (name.IsEmpty) throw new ArgumentException(null, "name");
             // TODO Proper namespace support
-            return controls => controls.Where(c => c.FindPropertyValueString(name.Name).Split('-').Contains(value));
+            return controls => controls.Where(c => c.FindPropertyValueString(name).Split('-').Contains(value));
         }
 
         /// <summary>
@@ -128,11 +123,10 @@ namespace Fizzler.Systems.WinForms
         /// that represents an control with the attribute <paramref name="name"/> 
         /// whose value begins with the prefix <paramref name="value"/>.
         /// </summary>
-        public virtual Selector<Control> AttributePrefixMatch(QName name, string value)
+        public virtual Selector<Control> AttributePrefixMatch(NamespacePrefix prefix, string name, string value)
         {
-            if (name.IsEmpty) throw new ArgumentException(null, "name");
             // TODO Proper namespace support
-            return controls => controls.Where(c => c.FindPropertyValueString(name.Name).StartsWith(value));
+            return controls => controls.Where(c => c.FindPropertyValueString(name).StartsWith(value));
         }
 
         /// <summary>
@@ -140,11 +134,10 @@ namespace Fizzler.Systems.WinForms
         /// that represents an control with the attribute <paramref name="name"/> 
         /// whose value ends with the suffix <paramref name="value"/>.
         /// </summary>
-        public virtual Selector<Control> AttributeSuffixMatch(QName name, string value)
+        public virtual Selector<Control> AttributeSuffixMatch(NamespacePrefix prefix, string name, string value)
         {
-            if (name.IsEmpty) throw new ArgumentException(null, "name");
             // TODO Proper namespace support
-            return controls => controls.Where(c => c.FindPropertyValueString(name.Name).EndsWith(value));
+            return controls => controls.Where(c => c.FindPropertyValueString(name).EndsWith(value));
         }
 
         /// <summary>
@@ -152,11 +145,10 @@ namespace Fizzler.Systems.WinForms
         /// that represents an element with the attribute <paramref name="name"/> 
         /// whose value contains at least one instance of the substring <paramref name="value"/>.
         /// </summary>
-        public virtual Selector<Control> AttributeSubstring(QName name, string value)
+        public virtual Selector<Control> AttributeSubstring(NamespacePrefix prefix, string name, string value)
         {
-            if (name.IsEmpty) throw new ArgumentException(null, "name");
             // TODO Proper namespace support
-            return controls => controls.Where(c => c.FindPropertyValueString(name.Name).Contains(value));
+            return controls => controls.Where(c => c.FindPropertyValueString(name).Contains(value));
         }
 
         /// <summary>
