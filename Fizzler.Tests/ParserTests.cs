@@ -43,17 +43,56 @@ namespace Fizzler.Tests
             Assert.That(generator.TypeName, Is.EqualTo("bar"));
         }
 
+        [Test]
+        public void UniversalNoNamespace()
+        {
+            var generator = new TestSelectorGenerator();
+            Parser.Parse(Tokener.Tokenize("*"), generator);
+            Assert.That(generator.UniversalPrefix, Is.EqualTo(NamespacePrefix.None));
+        }
+
+        [Test]
+        public void UniversalEmptyNamespace()
+        {
+            var generator = new TestSelectorGenerator();
+            Parser.Parse(Tokener.Tokenize("|*"), generator);
+            Assert.That(generator.UniversalPrefix, Is.EqualTo(NamespacePrefix.Empty));
+        }
+
+        [Test]
+        public void UniversalAnyNamespace()
+        {
+            var generator = new TestSelectorGenerator();
+            Parser.Parse(Tokener.Tokenize("*|*"), generator);
+            Assert.That(generator.UniversalPrefix, Is.EqualTo(NamespacePrefix.Any));
+        }
+
+        [Test]
+        public void NamespacedUnivarsal()
+        {
+            var generator = new TestSelectorGenerator();
+            Parser.Parse(Tokener.Tokenize("foo|*"), generator);
+            Assert.That(generator.UniversalPrefix, Is.EqualTo(new NamespacePrefix("foo")));
+        }
+
         public class TestSelectorGenerator : ISelectorGenerator
         {
             public NamespacePrefix TypePrefix;
             public string TypeName;
+
+            public NamespacePrefix UniversalPrefix;
 
             public void Type(NamespacePrefix prefix, string name)
             {
                 TypePrefix = prefix;
                 TypeName = name;
             }
-            
+
+            public void Universal(NamespacePrefix prefix)
+            {
+                UniversalPrefix = prefix;
+            }
+
             #region Unimplemented memebers
 
             public void OnInit()
@@ -66,11 +105,6 @@ namespace Fizzler.Tests
 
             public void OnSelector()
             {
-            }
-
-            public void Universal(NamespacePrefix prefix)
-            {
-                throw new NotImplementedException();
             }
 
             public void Id(string id)
