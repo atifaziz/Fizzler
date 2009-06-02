@@ -56,6 +56,9 @@
     <Compile Include="..\Fizzler.Tests\AttributeSelectors.cs" />
     <Compile Include="..\Fizzler.Tests\ChildAndAdjacentSelectors.cs" />
     <Compile Include="..\Fizzler.Tests\ClassSelector.cs" />
+    <Compile Include="..\Fizzler.Tests\HumanReadableSelectorGeneratorTests.cs">
+      <Link>HumanReadableSelectorGeneratorTests.cs</Link>
+    </Compile>
     <Compile Include="..\Fizzler.Tests\IDSelector.cs" />
     <Compile Include="..\Fizzler.Tests\MultipleSelectors.cs" />
     <Compile Include="..\Fizzler.Tests\NamespacePrefixTests.cs">
@@ -68,10 +71,16 @@
     <Compile Include="..\Fizzler.Tests\Properties\AssemblyInfo.cs" />
     <Compile Include="..\Fizzler.Tests\ElementSelector.cs" />
     <Compile Include="..\Fizzler.Tests\PsuedoSelectors.cs" />
+    <Compile Include="..\Fizzler.Tests\ReaderTests.cs">
+      <Link>ReaderTests.cs</Link>
+    </Compile>
     <Compile Include="..\Fizzler.Tests\SelectorBaseTest.cs" />
     <Compile Include="..\Fizzler.Tests\SelectorGeneratorTeeTests.cs" />
     <Compile Include="..\Fizzler.Tests\TokenerTests.cs" />
     <Compile Include="..\Fizzler.Tests\TokenTests.cs" />
+    <Compile Include="..\Fizzler.Tests\XmlNodeQueryTests.cs">
+      <Link>XmlNodeQueryTests.cs</Link>
+    </Compile>
     <Compile Include="Actions.cs" />
   </ItemGroup>
   <ItemGroup>
