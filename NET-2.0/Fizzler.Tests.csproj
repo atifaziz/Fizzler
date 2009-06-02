@@ -58,6 +58,9 @@
     <Compile Include="..\Fizzler.Tests\ClassSelector.cs" />
     <Compile Include="..\Fizzler.Tests\IDSelector.cs" />
     <Compile Include="..\Fizzler.Tests\MultipleSelectors.cs" />
+    <Compile Include="..\Fizzler.Tests\NamespacePrefixTests.cs">
+      <Link>NamespacePrefixTests.cs</Link>
+    </Compile>
     <Compile Include="..\Fizzler.Tests\NthChild.cs" />
     <Compile Include="..\Fizzler.Tests\Properties\AssemblyInfo.cs" />
     <Compile Include="..\Fizzler.Tests\ElementSelector.cs" />
@@ -66,9 +69,6 @@
     <Compile Include="..\Fizzler.Tests\SelectorGeneratorTeeTests.cs" />
     <Compile Include="..\Fizzler.Tests\TokenerTests.cs" />
     <Compile Include="..\Fizzler.Tests\TokenTests.cs" />
-    <Compile Include="..\Fizzler\NamespacePrefix.cs">
-      <Link>NamespacePrefix.cs</Link>
-    </Compile>
     <Compile Include="Actions.cs" />
   </ItemGroup>
   <ItemGroup>
