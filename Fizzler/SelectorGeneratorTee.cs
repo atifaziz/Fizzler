@@ -72,10 +72,10 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void Universal()
+        public void Universal(NamespacePrefix prefix)
         {
-            Primary.Universal();
-            Secondary.Universal();
+            Primary.Universal(prefix);
+            Secondary.Universal(prefix);
         }
 
         /// <summary>

@@ -21,7 +21,7 @@ namespace Fizzler
         /// (including those without a namespace) if no default namespace 
         /// has been specified for selectors. 
         /// </summary>
-        Selector<TElement> Universal();
+        Selector<TElement> Universal(NamespacePrefix prefix);
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#Id-selectors">ID selector</a>,

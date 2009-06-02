@@ -131,7 +131,7 @@ namespace Fizzler
                 else
                 {
                     if (modifiers == 0 && !named) 
-                        _generator.Universal(); // implied
+                        _generator.Universal(NamespacePrefix.None); // implied
                     
                     if (token.Value.Kind == TokenKind.Hash)
                     {
@@ -300,7 +300,7 @@ namespace Fizzler
             if (token.Kind == TokenKind.Ident)
                 _generator.Type(NamespacePrefix.None, token.Text);
             else
-                _generator.Universal();
+                _generator.Universal(NamespacePrefix.None);
         }
 
         private Token Peek()

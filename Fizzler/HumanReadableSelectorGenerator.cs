@@ -68,7 +68,7 @@ namespace Fizzler
         /// <summary>
         /// Generates human-readable text of this universal selector.
         /// </summary>
-        public void Universal()
+        public void Universal(NamespacePrefix prefix)
 		{
 			Add(" elements");
 		}

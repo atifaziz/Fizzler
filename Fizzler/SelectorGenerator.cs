@@ -140,9 +140,9 @@ namespace Fizzler
         /// (including those without a namespace) if no default namespace 
         /// has been specified for selectors. 
         /// </summary>
-        public virtual void Universal()
+        public virtual void Universal(NamespacePrefix prefix)
         {
-            Add(Ops.Universal());
+            Add(Ops.Universal(prefix));
         }
 
         /// <summary>

@@ -27,9 +27,11 @@ namespace Fizzler.Systems.HtmlAgilityPack
         /// (including those without a namespace) if no default namespace 
         /// has been specified for selectors. 
         /// </summary>
-        public virtual Selector<HtmlNode> Universal()
+        public virtual Selector<HtmlNode> Universal(NamespacePrefix prefix)
         {
-            return nodes => nodes.Elements();
+            return prefix.IsSpecific
+                 ? (Selector<HtmlNode>) (nodes => Enumerable.Empty<HtmlNode>()) 
+                 : (nodes => nodes.Elements());
         }
 
         /// <summary>

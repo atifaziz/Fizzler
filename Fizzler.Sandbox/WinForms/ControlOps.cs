@@ -47,8 +47,9 @@ namespace Fizzler.Systems.WinForms
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#universal-selector">universal selector</a>,
         /// any single control in the control tree. 
         /// </summary>
-        public virtual Selector<Control> Universal()
+        public virtual Selector<Control> Universal(NamespacePrefix prefix)
         {
+            // TODO Proper namespace support
             return controls => controls;
         }
 

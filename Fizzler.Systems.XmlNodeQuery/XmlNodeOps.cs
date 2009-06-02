@@ -12,9 +12,10 @@ namespace Fizzler.Systems.XmlNodeQuery
             return nodes => nodes.Where(n => n.Name == type);
 		}
 
-		public virtual Selector<XmlNode> Universal()
+		public virtual Selector<XmlNode> Universal(NamespacePrefix prefix)
 		{
-			return nodes => nodes.Elements();
+            // TODO Proper namespace support
+            return nodes => nodes.Elements();
 		}
 
 		public virtual Selector<XmlNode> Id(string id)

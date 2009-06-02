@@ -68,7 +68,7 @@ namespace Fizzler.Tests
 		[Test]
 		public void UniversalTest()
 		{
-			Run(tee.Universal);
+			Run(tee.Universal, NamespacePrefix.None);
 		}
 
 		[Test]
@@ -271,7 +271,7 @@ namespace Fizzler.Tests
 	            OnInvoked(MethodBase.GetCurrentMethod(), prefix, type);
 	        }
 
-	        public void Universal()
+	        public void Universal(NamespacePrefix prefix)
 	        {
 	            OnInvoked(MethodBase.GetCurrentMethod());
 	        }
