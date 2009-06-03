@@ -47,6 +47,9 @@
     <Compile Include="..\Common\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Fizzler\Either.cs">
+      <Link>Either.cs</Link>
+    </Compile>
     <Compile Include="..\Fizzler\HumanReadableSelectorGenerator.cs">
       <Link>HumanReadableSelectorGenerator.cs</Link>
     </Compile>

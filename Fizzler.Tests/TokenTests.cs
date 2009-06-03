@@ -1,5 +1,6 @@
 ﻿using System;
 using NUnit.Framework;
+using NUnit.Framework.SyntaxHelpers;
 
 namespace Fizzler.Tests
 {
@@ -15,43 +16,46 @@ namespace Fizzler.Tests
         [Test]
         public void Star()
         {
-            AssertToken(TokenKind.Star, Token.Star());
+            AssertToken(TokenKind.Char, "*", Token.Star());
         }
 
         [Test]
         public void Dot()
         {
-            AssertToken(TokenKind.Dot, Token.Dot());
+            AssertToken(TokenKind.Char, ".", Token.Dot());
         }
 
         [Test]
         public void Colon()
         {
-            AssertToken(TokenKind.Colon, Token.Colon());
+            AssertToken(TokenKind.Char, ":", Token.Colon());
         }
 
         [Test]
         public void Comma()
         {
-            AssertToken(TokenKind.Comma, Token.Comma());
+            AssertToken(TokenKind.Char, ",", Token.Comma());
+
         }
 
         [Test]
         public void Equals()
         {
-            AssertToken(TokenKind.Equals, Token.Equals());
+            AssertToken(TokenKind.Char, "=", Token.Equals());
+
         }
 
         [Test]
         public void LeftBracket()
         {
-            AssertToken(TokenKind.LeftBracket, Token.LeftBracket());
+            AssertToken(TokenKind.Char, "[", Token.LeftBracket());
+
         }
 
         [Test]
         public void RightBracket()
         {
-            AssertToken(TokenKind.RightBracket, Token.RightBracket());
+            AssertToken(TokenKind.Char, "]", Token.RightBracket());
         }
 
         [Test]
@@ -69,7 +73,7 @@ namespace Fizzler.Tests
         [Test]
         public void RightParenthesis()
         {
-            AssertToken(TokenKind.RightParenthesis, Token.RightParenthesis());
+            AssertToken(TokenKind.Char, ")", Token.RightParenthesis());
         }
 
         [Test]
@@ -236,7 +240,9 @@ namespace Fizzler.Tests
         [Test]
         public void Pipe()
         {
-            AssertToken(TokenKind.Pipe, Token.Pipe());
+            var pipe = Token.Pipe();
+            Assert.That(pipe.Kind, Is.EqualTo(TokenKind.Char));
+            Assert.That(pipe.Text, Is.EqualTo("|"));
         }
 
         [Test]
@@ -251,21 +257,21 @@ namespace Fizzler.Tests
             Assert.AreEqual("SuffixMatch", Token.SuffixMatch().ToString());
             Assert.AreEqual("SubstringMatch", Token.SubstringMatch().ToString());
             Assert.AreEqual("String: foo", Token.String("foo").ToString());
-            Assert.AreEqual("Star", Token.Star().ToString());
-            Assert.AreEqual("Dot", Token.Dot().ToString());
-            Assert.AreEqual("Colon", Token.Colon().ToString());
-            Assert.AreEqual("Comma", Token.Comma().ToString());
-            Assert.AreEqual("Equals", Token.Equals().ToString());
-            Assert.AreEqual("LeftBracket", Token.LeftBracket().ToString());
-            Assert.AreEqual("RightBracket", Token.RightBracket().ToString());
             Assert.AreEqual("Plus", Token.Plus().ToString());
             Assert.AreEqual("Greater", Token.Greater().ToString());
             Assert.AreEqual("WhiteSpace:  ", Token.WhiteSpace(" ").ToString());
             Assert.AreEqual("Function: foo", Token.Function("foo").ToString());
-            Assert.AreEqual("RightParenthesis", Token.RightParenthesis().ToString());
             Assert.AreEqual("Integer: 42", Token.Integer("42").ToString());
             Assert.AreEqual("Tilde", Token.Tilde().ToString());
-            Assert.AreEqual("Pipe", Token.Pipe().ToString());
+            Assert.AreEqual("Char: *", Token.Star().ToString());
+            Assert.AreEqual("Char: .", Token.Dot().ToString());
+            Assert.AreEqual("Char: :", Token.Colon().ToString());
+            Assert.AreEqual("Char: ,", Token.Comma().ToString());
+            Assert.AreEqual("Char: =", Token.Equals().ToString());
+            Assert.AreEqual("Char: [", Token.LeftBracket().ToString());
+            Assert.AreEqual("Char: ]", Token.RightBracket().ToString());
+            Assert.AreEqual("Char: )", Token.RightParenthesis().ToString());
+            Assert.AreEqual("Char: |", Token.Pipe().ToString());
         }
     }
 }

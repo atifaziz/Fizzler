@@ -161,7 +161,7 @@ namespace Fizzler.Tests
         [Test]
         public void Pipe()
         {
-            Assert.AreEqual(new[] { Token.Pipe(), Token.Pipe() }, Tokener.Tokenize("||").Take(2).ToArray());
+            Assert.AreEqual(new[] { Token.Char('|'), Token.Char('|') }, Tokener.Tokenize("||").Take(2).ToArray());
         }
 
         [Test]
@@ -270,13 +270,13 @@ namespace Fizzler.Tests
         [Test]
         public void Star()
         {
-            Assert.AreEqual(TokenKind.Star, Tokener.Tokenize("*").First().Kind);
+            Assert.AreEqual(Token.Char('*'), Tokener.Tokenize("*").First());
         }
 
         [Test]
         public void StarStar()
         {
-            Assert.AreEqual(new[] { TokenKind.Star, TokenKind.Star }, Tokener.Tokenize("**").Take(2).Select(t => t.Kind).ToArray());
+            Assert.AreEqual(new[] { Token.Char('*'), Token.Char('*') }, Tokener.Tokenize("**").Take(2).ToArray());
         }
 
 		[Test]
@@ -318,7 +318,7 @@ namespace Fizzler.Tests
         [Test]
         public void StringReader()
         {
-            Assert.AreEqual(new[] { Token.Integer("123"), Token.Comma(), Token.Star(), Token.Eoi() }, 
+            Assert.AreEqual(new[] { Token.Integer("123"), Token.Comma(), Token.Char('*'), Token.Eoi() }, 
                 Tokener.Tokenize(new StringReader("123,*")).ToArray());
         }
 

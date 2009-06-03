@@ -5,7 +5,7 @@ namespace Fizzler
     /// <summary>
     /// Represent a token and optionally any text associated with it.
     /// </summary>
-    public struct Token
+    public struct Token : IEquatable<Token>
     {
         /// <summary>
         /// Gets the kind/type/class of the token.
@@ -33,12 +33,22 @@ namespace Fizzler
             return new Token(TokenKind.Eoi);
         }
 
+        private static readonly Token _star = Char('*');
+        private static readonly Token _dot = Char('.');
+        private static readonly Token _colon = Char(':');
+        private static readonly Token _comma = Char(',');
+        private static readonly Token _rightParenthesis = Char(')');
+        private static readonly Token _equals = Char('=');
+        private static readonly Token _pipe = Char('|');
+        private static readonly Token _leftBracket = Char('[');
+        private static readonly Token _rightBracket = Char(']');
+
         /// <summary>
         /// Creates a star token.
         /// </summary>
         public static Token Star()
         {
-            return new Token(TokenKind.Star);
+            return _star;
         }
 
         /// <summary>
@@ -46,7 +56,7 @@ namespace Fizzler
         /// </summary>
         public static Token Dot()
         {
-            return new Token(TokenKind.Dot);
+            return _dot;
         }
 
         /// <summary>
@@ -54,7 +64,7 @@ namespace Fizzler
         /// </summary>
         public static Token Colon()
         {
-            return new Token(TokenKind.Colon);
+            return _colon;
         }
 
         /// <summary>
@@ -62,7 +72,7 @@ namespace Fizzler
         /// </summary>
         public static Token Comma()
         {
-            return new Token(TokenKind.Comma);
+            return _comma;
         }
 
         /// <summary>
@@ -70,7 +80,7 @@ namespace Fizzler
         /// </summary>
         public static Token RightParenthesis()
         {
-            return new Token(TokenKind.RightParenthesis);
+            return _rightParenthesis;
         }
 
         /// <summary>
@@ -78,7 +88,7 @@ namespace Fizzler
         /// </summary>
         public static Token Equals()
         {
-            return new Token(TokenKind.Equals);
+            return _equals;
         }
 
         /// <summary>
@@ -86,7 +96,7 @@ namespace Fizzler
         /// </summary>
         public static Token LeftBracket()
         {
-            return new Token(TokenKind.LeftBracket);
+            return _leftBracket;
         }
 
         /// <summary>
@@ -94,7 +104,7 @@ namespace Fizzler
         /// </summary>
         public static Token RightBracket()
         {
-            return new Token(TokenKind.RightBracket);
+            return _rightBracket;
         }
 
         /// <summary>
@@ -102,7 +112,7 @@ namespace Fizzler
         /// </summary>
         public static Token Pipe()
         {
-            return new Token(TokenKind.Pipe);
+            return _pipe;
         }
 
         /// <summary>
@@ -222,10 +232,36 @@ namespace Fizzler
             return new Token(TokenKind.Function, text);
         }
 
-        private static void ValidateTextArgument(string text)
+        /// <summary>
+        /// Creates an arbitrary character token.
+        /// </summary>
+        public static Token Char(char ch)
         {
-            if (text == null) throw new ArgumentNullException("text");
-            if (text.Length == 0) throw new ArgumentException(null, "text");
+            return new Token(TokenKind.Char, ch.ToString());
+        }
+
+        /// <summary>
+        /// Indicates whether this instance and a specified object are equal.
+        /// </summary>
+        public override bool Equals(object obj)
+        {
+            return obj != null && obj is Token && Equals((Token) obj);
+        }
+
+        /// <summary>
+        /// Returns the hash code for this instance.
+        /// </summary>
+        public override int GetHashCode()
+        {
+            return Text == null ? Kind.GetHashCode() : Kind.GetHashCode() ^ Text.GetHashCode();
+        }
+
+        /// <summary>
+        /// Indicates whether the current object is equal to another object of the same type.
+        /// </summary>
+        public bool Equals(Token other)
+        {
+            return Kind == other.Kind && Text == other.Text;
         }
 
         /// <summary>
@@ -234,6 +270,29 @@ namespace Fizzler
         public override string ToString()
         {
             return Text == null ? Kind.ToString() : Kind + ": " + Text;
+        }
+        /// <summary>
+        /// Performs a logical comparison of the two tokens to determine 
+        /// whether they are equal. 
+        /// </summary>
+        public static bool operator==(Token a, Token b)
+        {
+            return a.Equals(b);
+        }
+
+        /// <summary>
+        /// Performs a logical comparison of the two tokens to determine 
+        /// whether they are inequal. 
+        /// </summary>
+        public static bool operator !=(Token a, Token b)
+        {
+            return !a.Equals(b);
+        }
+
+        private static void ValidateTextArgument(string text)
+        {
+            if (text == null) throw new ArgumentNullException("text");
+            if (text.Length == 0) throw new ArgumentException(null, "text");
         }
     }
 }

@@ -93,9 +93,8 @@ namespace Fizzler
                         else
                         {
                             reader.Unread();
-                            yield return ch == '*' 
-                                ? Token.Star() 
-                                : ch == '|' ? Token.Pipe()
+                            yield return ch == '*' || ch == '|'
+                                ? Token.Char(ch.Value) 
                                 : Token.Tilde();
                         }
                         break;

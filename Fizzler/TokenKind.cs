@@ -51,46 +51,6 @@ namespace Fizzler
         String,
 
         /// <summary>
-        /// Represents "*"
-        /// </summary>
-        Star,
-
-        /// <summary>
-        /// Represents "."
-        /// </summary>
-        Dot,
-
-        /// <summary>
-        /// Represents ":"
-        /// </summary>
-        Colon,
-
-        /// <summary>
-        /// Represents ","
-        /// </summary>
-        Comma,
-
-        /// <summary>
-        /// Represents "="
-        /// </summary>
-        Equals,
-
-        /// <summary>
-        /// Represents "["
-        /// </summary>
-        LeftBracket,
-
-        /// <summary>
-        /// Represents "]"
-        /// </summary>
-        RightBracket,
-
-        /// <summary>
-        /// Represents "|"
-        /// </summary>
-        Pipe,
-
-        /// <summary>
         /// Represents S* "+"
         /// </summary>
         Plus,
@@ -111,11 +71,6 @@ namespace Fizzler
         Function,
 
         /// <summary>
-        /// Represents )
-        /// </summary>
-        RightParenthesis,
-
-        /// <summary>
         /// Represents [0-9]+
         /// </summary>
         Integer,
@@ -124,5 +79,10 @@ namespace Fizzler
 		/// Represents S* "~"
 		/// </summary>
 		Tilde,
+
+        /// <summary>
+        /// Represents an arbitrary character
+        /// </summary>
+        Char,
     }
 }

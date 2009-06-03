@@ -6,6 +6,8 @@ using System.Linq;
 
 namespace Fizzler
 {
+    using TokenSpec = Either<TokenKind, Token>;
+
     /// <summary>
     /// Semantic parser for CSS selector grammar.
     /// </summary>
@@ -56,13 +58,13 @@ namespace Fizzler
             //  ;
 
             Selector();
-            while (TryRead(TokenKind.Comma) != null)
+            while (TryRead(ToTokenSpec(Token.Comma())) != null)
             {
-                TryRead(TokenKind.WhiteSpace);
+                TryRead(ToTokenSpec(TokenKind.WhiteSpace));
                 Selector();
             }
 
-            Read(TokenKind.Eoi);
+            Read(ToTokenSpec(TokenKind.Eoi));
         }
 
         private void Selector()
@@ -85,7 +87,7 @@ namespace Fizzler
             //  : PLUS S* | GREATER S* | TILDE S* | S+
             //  ;
 
-            var token = TryRead(TokenKind.Plus, TokenKind.Greater, TokenKind.Tilde, TokenKind.WhiteSpace);
+            var token = TryRead(ToTokenSpec(TokenKind.Plus), ToTokenSpec(TokenKind.Greater), ToTokenSpec(TokenKind.Tilde), ToTokenSpec(TokenKind.WhiteSpace));
             
             if (token == null)
                 return false;
@@ -103,7 +105,7 @@ namespace Fizzler
                     case TokenKind.Plus: _generator.Adjacent(); break;
                 }
 
-                TryRead(TokenKind.WhiteSpace);
+                TryRead(ToTokenSpec(TokenKind.WhiteSpace));
             }
             
             return true;
@@ -120,7 +122,7 @@ namespace Fizzler
             var named = false;
             for (var modifiers = 0; ; modifiers++)
             {
-                var token = TryRead(TokenKind.Hash, TokenKind.Dot, TokenKind.LeftBracket, TokenKind.Colon);
+                var token = TryRead(ToTokenSpec(TokenKind.Hash), ToTokenSpec(Token.Dot()), ToTokenSpec(Token.LeftBracket()), ToTokenSpec(Token.Colon()));
 
                 if (token == null)
                 {
@@ -141,11 +143,12 @@ namespace Fizzler
                     else
                     {
                         Unread(token.Value);
-                        switch (token.Value.Kind)
+                        switch (token.Value.Text[0])
                         {
-                            case TokenKind.Dot: Class(); break;
-                            case TokenKind.LeftBracket: Attrib(); break;
-                            case TokenKind.Colon: Pseudo(); break;
+                            case '.': Class(); break;
+                            case '[': Attrib(); break;
+                            case ':': Pseudo(); break;
+                            default: throw new Exception("Internal error.");
                         }
                     }
                 }
@@ -171,10 +174,10 @@ namespace Fizzler
             //  : ':' [ IDENT | functional_pseudo ]
             //  ;
 
-            Read(TokenKind.Colon);
+            Read(ToTokenSpec(Token.Colon()));
             if (!TryFunctionalPseudo())
             {
-                var clazz = Read(TokenKind.Ident).Text;
+                var clazz = Read(ToTokenSpec(TokenKind.Ident)).Text;
                 switch (clazz)
                 {
                     case "first-child": _generator.FirstChild(); break;
@@ -196,11 +199,11 @@ namespace Fizzler
             //  : FUNCTION S* expression ')'
             //  ;
 
-            var token = TryRead(TokenKind.Function);
+            var token = TryRead(ToTokenSpec(TokenKind.Function));
             if (token == null)
                 return false;
 
-            TryRead(TokenKind.WhiteSpace);
+            TryRead(ToTokenSpec(TokenKind.WhiteSpace));
 
             var func = token.Value.Text;
             switch (func)
@@ -213,7 +216,7 @@ namespace Fizzler
                 }
             }
 
-            Read(TokenKind.RightParenthesis);
+            Read(ToTokenSpec(Token.RightParenthesis()));
             return true;
         }
 
@@ -227,7 +230,7 @@ namespace Fizzler
             // TODO Add support for the full syntax
             // At present, only INTEGER is allowed
 
-            var b = int.Parse(Read(TokenKind.Integer).Text, CultureInfo.InvariantCulture);
+            var b = int.Parse(Read(ToTokenSpec(TokenKind.Integer)).Text, CultureInfo.InvariantCulture);
             _generator.NthChild(1, b);
         }
 
@@ -244,42 +247,48 @@ namespace Fizzler
             //        ]? ']'
             //  ;
 
-            Read(TokenKind.LeftBracket);
+            Read(ToTokenSpec(Token.LeftBracket()));
             var prefix = TryNamespacePrefix() ?? NamespacePrefix.None;
-            var name = Read(TokenKind.Ident).Text;
+            var name = Read(ToTokenSpec(TokenKind.Ident)).Text;
             
             var hasValue = false;
             while (true)
             {
                 var op = TryRead(
-                    TokenKind.Equals, 
-                    TokenKind.Includes, 
-                    TokenKind.DashMatch, 
-                    TokenKind.PrefixMatch, 
-                    TokenKind.SuffixMatch,
-                    TokenKind.SubstringMatch);
+                    ToTokenSpec(Token.Equals()), 
+                    ToTokenSpec(TokenKind.Includes), 
+                    ToTokenSpec(TokenKind.DashMatch), 
+                    ToTokenSpec(TokenKind.PrefixMatch), 
+                    ToTokenSpec(TokenKind.SuffixMatch),
+                    ToTokenSpec(TokenKind.SubstringMatch));
                 
                 if(op == null) 
                     break;
                 
                 hasValue = true;
-                var value = Read(TokenKind.String, TokenKind.Ident).Text;
-                
-                switch (op.Value.Kind)
+                var value = Read(ToTokenSpec(TokenKind.String), ToTokenSpec(TokenKind.Ident)).Text;
+
+                if (op.Value == Token.Equals())
                 {
-                    case TokenKind.Equals: _generator.AttributeExact(prefix, name, value); break;
-                    case TokenKind.Includes: _generator.AttributeIncludes(prefix, name, value); break;
-                    case TokenKind.DashMatch: _generator.AttributeDashMatch(prefix, name, value); break;
-                    case TokenKind.PrefixMatch: _generator.AttributePrefixMatch(prefix, name, value); break;
-                    case TokenKind.SuffixMatch: _generator.AttributeSuffixMatch(prefix, name, value); break;
-                    case TokenKind.SubstringMatch: _generator.AttributeSubstring(prefix, name, value); break;
+                    _generator.AttributeExact(prefix, name, value);
+                }
+                else
+                {
+                    switch (op.Value.Kind)
+                    {
+                        case TokenKind.Includes: _generator.AttributeIncludes(prefix, name, value); break;
+                        case TokenKind.DashMatch: _generator.AttributeDashMatch(prefix, name, value); break;
+                        case TokenKind.PrefixMatch: _generator.AttributePrefixMatch(prefix, name, value); break;
+                        case TokenKind.SuffixMatch: _generator.AttributeSuffixMatch(prefix, name, value); break;
+                        case TokenKind.SubstringMatch: _generator.AttributeSubstring(prefix, name, value); break;
+                    }
                 }
             }
             
             if (!hasValue)
                 _generator.AttributeExists(prefix, name);
             
-            Read(TokenKind.RightBracket);
+            Read(ToTokenSpec(Token.RightBracket()));
         }
 
         private void Class()
@@ -288,8 +297,8 @@ namespace Fizzler
             //  : '.' IDENT
             //  ;
             
-            Read(TokenKind.Dot);
-            _generator.Class(Read(TokenKind.Ident).Text);
+            Read(ToTokenSpec(Token.Dot()));
+            _generator.Class(Read(ToTokenSpec(TokenKind.Ident)).Text);
         }
 
         private NamespacePrefix? TryNamespacePrefix()
@@ -298,16 +307,17 @@ namespace Fizzler
             //  : [ IDENT | '*' ]? '|'
             //  ;
 
-            var token = TryRead(TokenKind.Ident, TokenKind.Star, TokenKind.Pipe);
+            var pipe = Token.Pipe();
+            var token = TryRead(ToTokenSpec(TokenKind.Ident), ToTokenSpec(Token.Star()), ToTokenSpec(pipe));
             
             if (token == null)
                 return null;
             
-            if (token.Value.Kind == TokenKind.Pipe)
+            if (token.Value == pipe)
                 return NamespacePrefix.Empty;
             
             var prefix = token.Value;
-            if (TryRead(TokenKind.Pipe) == null)
+            if (TryRead(ToTokenSpec(pipe)) == null)
             {
                 Unread(prefix);
                 return null;
@@ -331,7 +341,7 @@ namespace Fizzler
             //  ;
 
             var prefix = TryNamespacePrefix() ?? NamespacePrefix.None;
-            var token = Read(TokenKind.Ident, TokenKind.Star);
+            var token = Read(ToTokenSpec(TokenKind.Ident), ToTokenSpec(Token.Star()));
             if (token.Kind == TokenKind.Ident)
                 _generator.Type(prefix, token.Text);
             else
@@ -343,33 +353,33 @@ namespace Fizzler
             return _reader.Peek();
         }
 
-        private Token Read(TokenKind kind)
+        private Token Read(TokenSpec spec)
         {
-            var token = TryRead(kind);
+            var token = TryRead(spec);
             if (token == null)
             {
                 throw new FormatException(
                     string.Format(@"Unexpected token {{{0}}} where {{{1}}} was expected.",
-                    Peek().Kind, kind));
+                    Peek().Kind, spec));
             }
             return token.Value;
         }
 
-        private Token Read(params TokenKind[] kinds)
+        private Token Read(params TokenSpec[] specs)
         {
-            var token = TryRead(kinds);
+            var token = TryRead(specs);
             if (token == null)
             {
                 throw new FormatException(string.Format(
                     @"Unexpected token {{{0}}} where one of [{1}] was expected.", 
-                    Peek().Kind, string.Join(", ", kinds.Select(k => k.ToString()).ToArray())));
+                    Peek().Kind, string.Join(", ", specs.Select(k => k.ToString()).ToArray())));
             }
             return token.Value;
         }
 
-        private Token? TryRead(params TokenKind[] kinds)
+        private Token? TryRead(params TokenSpec[] specs)
         {
-            foreach (var kind in kinds)
+            foreach (var kind in specs)
             {
                 var token = TryRead(kind);
                 if (token != null)
@@ -378,10 +388,10 @@ namespace Fizzler
             return null;
         }
 
-        private Token? TryRead(TokenKind kind)
+        private Token? TryRead(TokenSpec spec)
         {
             var token = Peek();
-            if (token.Kind != kind)
+            if (!spec.Fold(a => a == token.Kind, b => b == token))
                 return null;
             _reader.Read();
             return token;
@@ -390,6 +400,16 @@ namespace Fizzler
         private void Unread(Token token)
         {
             _reader.Unread(token);
+        }
+
+        private static TokenSpec ToTokenSpec(TokenKind kind)
+        {
+            return TokenSpec.A(kind);
+        }
+
+        private static TokenSpec ToTokenSpec(Token token)
+        {
+            return TokenSpec.B(token);
         }
     }
 }
