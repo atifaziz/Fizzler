@@ -2,7 +2,7 @@ using NUnit.Framework;
 
 namespace Fizzler.Tests
 {
-	[TestFixture]
+    [TestFixture, Ignore("http://code.google.com/p/fizzler/issues/detail?id=24")]
 	public class PsuedoSelectors : SelectorBaseTest
 	{
 		[Test]
