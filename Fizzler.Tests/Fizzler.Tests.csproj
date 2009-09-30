@@ -38,10 +38,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\nunit.framework.dll</HintPath>
     </Reference>
-    <Reference Include="SgmlReaderDll, Version=1.8.3.13761, Culture=neutral, PublicKeyToken=46b2db9ca481831b, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\SgmlReaderDll.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -67,16 +63,15 @@
     <Compile Include="SelectorGeneratorTeeTests.cs" />
     <Compile Include="TokenerTests.cs" />
     <Compile Include="TokenTests.cs" />
-    <Compile Include="XmlNodeQueryTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fizzler.Sandbox\Fizzler.Sandbox.csproj">
+      <Project>{80456F6D-6853-4244-8E3D-F22ECA0980EC}</Project>
+      <Name>Fizzler.Sandbox</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fizzler.Systems.HtmlAgilityPack\Fizzler.Systems.HtmlAgilityPack.csproj">
       <Project>{DBEAD205-BD5C-461F-873D-DE643016F14C}</Project>
       <Name>Fizzler.Systems.HtmlAgilityPack %28Systems\Fizzler.Systems.HtmlAgilityPack%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Fizzler.Systems.XmlNodeQuery\Fizzler.Systems.XmlNodeQuery.csproj">
-      <Project>{CFAC3EC4-8F3C-405D-9440-ED63CAB524C8}</Project>
-      <Name>Fizzler.Systems.XmlNodeQuery %28Systems\Fizzler.Systems.XmlNodeQuery%29</Name>
     </ProjectReference>
     <ProjectReference Include="..\Fizzler\Fizzler.csproj">
       <Project>{939036D6-29FD-46E4-B6CD-52618F51081B}</Project>

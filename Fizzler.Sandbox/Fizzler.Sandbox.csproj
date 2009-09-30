@@ -47,6 +47,9 @@
     <Compile Include="WinForms\ControlExtensions.cs" />
     <Compile Include="WinForms\ControlOps.cs" />
     <Compile Include="WinForms\ControlSelection.cs" />
+    <Compile Include="Xml\XmlNodeExtensions.cs" />
+    <Compile Include="Xml\XmlNodeOps.cs" />
+    <Compile Include="Xml\XmlNodeSelection.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Fizzler\Fizzler.csproj">

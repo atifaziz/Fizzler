@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
-using Fizzler.Systems.XmlNodeQuery;
+using Fizzler.Systems.HtmlAgilityPack;
 using NUnit.Framework;
 
 namespace Fizzler.Tests

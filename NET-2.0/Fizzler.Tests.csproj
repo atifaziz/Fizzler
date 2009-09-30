@@ -78,9 +78,6 @@
     <Compile Include="..\Fizzler.Tests\SelectorGeneratorTeeTests.cs" />
     <Compile Include="..\Fizzler.Tests\TokenerTests.cs" />
     <Compile Include="..\Fizzler.Tests\TokenTests.cs" />
-    <Compile Include="..\Fizzler.Tests\XmlNodeQueryTests.cs">
-      <Link>XmlNodeQueryTests.cs</Link>
-    </Compile>
     <Compile Include="Actions.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -94,10 +91,6 @@
     <ProjectReference Include="Fizzler.Systems.HtmlAgilityPack.csproj">
       <Project>{48822D9C-C17E-412B-96AE-F740EEF87990}</Project>
       <Name>Fizzler.Systems.HtmlAgilityPack %28NET-2.0\Fizzler.Systems.HtmlAgilityPack%29</Name>
-    </ProjectReference>
-    <ProjectReference Include="Fizzler.Systems.XmlNodeQuery.csproj">
-      <Project>{1D34B151-2657-4A2B-AB2A-C7FBBB3935E8}</Project>
-      <Name>Fizzler.Systems.XmlNodeQuery %28NET-2.0\Fizzler.Systems.XmlNodeQuery%29</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
