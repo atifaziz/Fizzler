@@ -73,7 +73,7 @@
 		</csc>
 	</target>
 
-	<target name="build-htmlagilitypack" depends="build-xmlnodequery">
+	<target name="build-htmlagilitypack" depends="build-fizzler">
 		<csc target="library" noconfig="true" output="bin//${output.dir}${configuration}//Fizzler.Systems.HtmlAgilityPack.dll" debug="${debug}">
 			<sources>
 				<include name="NET-2.0/ExtensionAttribute.cs" unless="${bool::parse(net-35)}" />
@@ -82,23 +82,6 @@
 			<references>
 				<include name="bin/${output.dir}${configuration}/Fizzler.dll" />
 				<include name="libs/HtmlAgilityPack.dll" />
-				<include name="System.dll" />
-				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
-				<include name="libs/BackLINQ.dll" unless="${bool::parse(net-35)}" />
-				<include name="System.XML.dll" />
-			</references>
-		</csc>
-	</target>
-
-	<target name="build-xmlnodequery" depends="build-fizzler">
-		<csc target="library" noconfig="${not bool::parse(mono)}" output="bin//${output.dir}${configuration}//Fizzler.Systems.XmlNodeQuery.dll" debug="${debug}">
-			<sources>
-				<include name="Fizzler.Systems.XmlNodeQuery/**/*.cs" />
-				<include name="NET-2.0/ExtensionAttribute.cs" unless="${bool::parse(net-35)}" />
-			</sources>
-			<references>
-				<include name="bin/${output.dir}${configuration}/Fizzler.dll" />
-				<include name="libs/SgmlReaderDll.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
 				<include name="libs/BackLINQ.dll" unless="${bool::parse(net-35)}" />
@@ -162,9 +145,7 @@
 			<references>
 				<include name="bin/${output.dir}${configuration}/Fizzler.dll" />
 				<include name="bin/${output.dir}${configuration}/Fizzler.Systems.HtmlAgilityPack.dll" />
-				<include name="bin/${output.dir}${configuration}/Fizzler.Systems.XmlNodeQuery.dll" />
 				<include name="libs\HtmlAgilityPack.dll" />
-				<include name="libs\SgmlReaderDll.dll" />
 				<include name="libs\nunit.framework.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
@@ -175,7 +156,6 @@
 	</target>
 	<target name="test" depends="build-tests">
 		<copy file="libs/HtmlAgilityPack.dll" todir="bin//${output.dir}${configuration}" />
-		<copy file="libs/SgmlReaderDll.dll" todir="bin//${output.dir}${configuration}" />
 		<copy file="libs/BackLINQ.dll" todir="bin//${output.dir}${configuration}" unless="${bool::parse(net-35)}" />
 		<copy file="libs/nunit.framework.dll" todir="bin//${output.dir}${configuration}" />
 		<nunit2>
