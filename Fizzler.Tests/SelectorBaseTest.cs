@@ -24,7 +24,7 @@ namespace Fizzler.Tests
                     html = reader.ReadToEnd();
             }
 	        var document = new HtmlDocument();
-            document.LoadHtml(html);
+            document.LoadHtml2(html);
             Document = document;
         }
 
@@ -39,5 +39,5 @@ namespace Fizzler.Tests
         {
             return new ReadOnlyCollection<HtmlNode>(Select(selectorChain).ToArray());
         }
-	}
+    }
 }

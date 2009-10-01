@@ -44,7 +44,7 @@ namespace VisualFizzler
                 return;
 
             var document = new HtmlDocument();
-            document.Load(_openFileDialog.FileName);
+            document.Load2(_openFileDialog.FileName);
             Open(document);
         }
 
@@ -168,7 +168,7 @@ namespace VisualFizzler
             using (CurrentCursorScope.EnterWait())
             {
                 var document = new HtmlDocument();
-                document.LoadHtml(content);
+                document.LoadHtml2(content);
                 Open(document);
             }
 

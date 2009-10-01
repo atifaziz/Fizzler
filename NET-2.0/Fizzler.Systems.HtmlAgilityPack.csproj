@@ -53,6 +53,9 @@
     <Compile Include="..\Common\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="..\Fizzler.Systems.HtmlAgilityPack\HtmlDocumentExtensions.cs">
+      <Link>HtmlDocumentExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\Fizzler.Systems.HtmlAgilityPack\HtmlNodeExtensions.cs" />
     <Compile Include="..\Fizzler.Systems.HtmlAgilityPack\HtmlNodeOps.cs" />
     <Compile Include="..\Fizzler.Systems.HtmlAgilityPack\HtmlNodeSelection.cs" />

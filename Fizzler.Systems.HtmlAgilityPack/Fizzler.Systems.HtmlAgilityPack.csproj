@@ -48,6 +48,7 @@
     <Compile Include="..\Common\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="HtmlDocumentExtensions.cs" />
     <Compile Include="HtmlNodeExtensions.cs" />
     <Compile Include="HtmlNodeOps.cs" />
     <Compile Include="HtmlNodeSelection.cs" />

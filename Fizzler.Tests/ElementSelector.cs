@@ -62,7 +62,7 @@ namespace Fizzler.Tests
 		/// <summary>
 		/// This test covers an issue with HtmlAgilityPack where form childnodes().length == 0.
 		/// </summary>
-        [Test, Ignore("http://code.google.com/p/fizzler/issues/detail?id=24")]
+        [Test]
 		public void Basic_Positive_Precedence_Within_Form()
 		{
 			Assert.AreEqual(1, SelectList("form input").Count);

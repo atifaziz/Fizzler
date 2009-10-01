@@ -44,9 +44,9 @@ namespace ConsoleFizzler
 
             var document = new HtmlDocument();
             if(!arg.MoveNext() || arg.Current == "-")
-                document.LoadHtml(Console.In.ReadToEnd());
+                document.LoadHtml2(Console.In.ReadToEnd());
             else
-                document.Load(arg.Current);
+                document.Load2(arg.Current);
 
             var i = 0;
             foreach (var node in document.DocumentNode.QuerySelectorAll(selector))
