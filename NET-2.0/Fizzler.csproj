@@ -37,9 +37,9 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="BackLinq, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="LinqBridge, Version=1.1.0.0, Culture=neutral, PublicKeyToken=c2b14eb747628076, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\Libs\BackLinq.dll</HintPath>
+      <HintPath>..\Libs\LinqBridge.dll</HintPath>
     </Reference>
     <Reference Include="System" />
   </ItemGroup>

@@ -68,7 +68,7 @@
 			<references>
 				<include name="System.dll" />
 				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
-				<include name="libs/BackLINQ.dll" unless="${bool::parse(net-35)}" />
+				<include name="libs/LinqBridge.dll" unless="${bool::parse(net-35)}" />
 			</references>
 		</csc>
 	</target>
@@ -84,7 +84,7 @@
 				<include name="libs/HtmlAgilityPack.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
-				<include name="libs/BackLINQ.dll" unless="${bool::parse(net-35)}" />
+				<include name="libs/LinqBridge.dll" unless="${bool::parse(net-35)}" />
 				<include name="System.XML.dll" />
 			</references>
 		</csc>
@@ -102,7 +102,7 @@
 				<include name="libs/HtmlAgilityPack.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
-				<include name="libs/BackLINQ.dll" unless="${bool::parse(net-35)}" />
+				<include name="libs/LinqBridge.dll" unless="${bool::parse(net-35)}" />
 				<include name="System.XML.dll" />
 				<include name="System.Configuration.dll" />
 			</references>
@@ -125,7 +125,7 @@
 				<include name="Microsoft.VisualBasic.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
-				<include name="libs/BackLINQ.dll" unless="${bool::parse(net-35)}" />
+				<include name="libs/LinqBridge.dll" unless="${bool::parse(net-35)}" />
 				<include name="System.Deployment.dll" />
 				<include name="System.Drawing.dll" />
 				<include name="System.Windows.Forms.dll" />
@@ -149,14 +149,14 @@
 				<include name="libs\nunit.framework.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
-				<include name="libs/BackLINQ.dll" unless="${bool::parse(net-35)}" />
+				<include name="libs/LinqBridge.dll" unless="${bool::parse(net-35)}" />
 				<include name="System.XML.dll" />
 			</references>
 		</csc>
 	</target>
 	<target name="test" depends="build-tests">
 		<copy file="libs/HtmlAgilityPack.dll" todir="bin//${output.dir}${configuration}" />
-		<copy file="libs/BackLINQ.dll" todir="bin//${output.dir}${configuration}" unless="${bool::parse(net-35)}" />
+		<copy file="libs/LinqBridge.dll" todir="bin//${output.dir}${configuration}" unless="${bool::parse(net-35)}" />
 		<copy file="libs/nunit.framework.dll" todir="bin//${output.dir}${configuration}" />
 		<nunit2>
 			<formatter type="Plain" />
