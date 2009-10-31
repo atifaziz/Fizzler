@@ -28,9 +28,8 @@ namespace Fizzler.Systems.HtmlAgilityPack
         /// </summary>
         public static IEnumerable<HtmlNode> QuerySelectorAll(this HtmlNode node, string selector)
         {
-            var generator = new SelectorGenerator<HtmlNode>(new HtmlNodeOps());
-            Parser.Parse(selector, generator);
-            return generator.Selector(Enumerable.Repeat(node, 1));
+            return Parser.Parse(selector, new SelectorGenerator<HtmlNode>(new HtmlNodeOps()))
+                         .Selector(Enumerable.Repeat(node, 1));
         }
     }
 }

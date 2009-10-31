@@ -27,21 +27,46 @@ namespace Fizzler
         /// <summary>
         /// Parses a CSS selector group and generates its implementation.
         /// </summary>
-        public static void Parse(string selectors, ISelectorGenerator generator)
+        public static TGenerator Parse<TGenerator>(string selectors, TGenerator generator)
+                where TGenerator : ISelectorGenerator
+        {
+            return Parse(selectors, generator, g => g);
+        }
+
+        /// <summary>
+        /// Parses a CSS selector group and generates its implementation.
+        /// </summary>
+        public static T Parse<TGenerator, T>(string selectors, TGenerator generator, Func<TGenerator, T> resultor)
+            where TGenerator : ISelectorGenerator
         {
             if (selectors == null) throw new ArgumentNullException("selectors");
             if (selectors.Length == 0) throw new ArgumentException(null, "selectors");
-            Parse(Tokener.Tokenize(selectors), generator);
+            
+            return Parse(Tokener.Tokenize(selectors), generator, resultor);
         }
 
         /// <summary>
         /// Parses a tokenized stream representing a CSS selector group and 
         /// generates its implementation.
         /// </summary>
-        public static void Parse(IEnumerable<Token> tokens, ISelectorGenerator generator)
+        public static TGenerator Parse<TGenerator>(IEnumerable<Token> tokens, TGenerator generator) 
+                where TGenerator : ISelectorGenerator
+        {
+            return Parse(tokens, generator, g => g);
+        }
+
+        /// <summary>
+        /// Parses a tokenized stream representing a CSS selector group and 
+        /// generates its implementation.
+        /// </summary>
+        public static T Parse<TGenerator, T>(IEnumerable<Token> tokens, TGenerator generator, Func<TGenerator, T> resultor) 
+            where TGenerator : ISelectorGenerator
         {
             if (tokens == null) throw new ArgumentNullException("tokens");
+            if(resultor == null) throw new ArgumentNullException("resultor");
+            
             new Parser(new Reader<Token>(tokens.GetEnumerator()), generator).Parse();
+            return resultor(generator);
         }
 
         private void Parse()
