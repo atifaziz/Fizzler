@@ -46,6 +46,7 @@
     <Compile Include="..\Common\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="SelectorsCachingCompiler.cs" />
     <Compile Include="Either.cs" />
     <Compile Include="IElementOps.cs" />
     <Compile Include="ISelectorGenerator.cs" />

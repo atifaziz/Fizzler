@@ -68,6 +68,9 @@
     <Compile Include="..\Fizzler\SelectorGeneratorTee.cs">
       <Link>SelectorGeneratorTee.cs</Link>
     </Compile>
+    <Compile Include="..\Fizzler\SelectorsCachingCompiler.cs">
+      <Link>SelectorsCachingCompiler.cs</Link>
+    </Compile>
     <Compile Include="..\Fizzler\Token.cs" />
     <Compile Include="..\Fizzler\Tokener.cs" />
     <Compile Include="..\Fizzler\TokenKind.cs" />
