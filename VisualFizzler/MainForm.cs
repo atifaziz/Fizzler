@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Fizzler;
 using Fizzler.Systems.HtmlAgilityPack;
 using HtmlAgilityPack;
+using Mannex.Net;
 using Microsoft.VisualBasic;
 using HtmlDocument=HtmlAgilityPack.HtmlDocument;
 
@@ -119,7 +120,7 @@ namespace VisualFizzler
             try
             {
                 using (CurrentCursorScope.EnterWait())
-                    content = wc.DownloadString(url);
+                    content = wc.DownloadStringUsingResponseEncoding(url);
             }
             catch (WebException e)
             {
