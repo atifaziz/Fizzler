@@ -1,4 +1,6 @@
-﻿namespace ConsoleFizzler
+﻿using Mannex;
+
+namespace ConsoleFizzler
 {
     #region Imports
 
@@ -106,10 +108,10 @@
                 // Allows `arg=value` or `arg:value` style.
 
                 var paired = name.IndexOfAny(_argSeparators) > 0;
-                var pair = name.SplitPair(_argSeparators);
+                var pair = name.Split(_argSeparators, (n, v) => new { Name = n, Value = v });
 
                 if (paired)
-                    name = pair.Key; // Break the name out of the pair
+                    name = pair.Name; // Break the name out of the pair
 
                 // Get setting property from name.
 
