@@ -1,9 +1,13 @@
-using System;
-using System.Linq;
-using HtmlAgilityPack;
-
 namespace Fizzler.Systems.HtmlAgilityPack
 {
+    #region Imports
+
+    using System;
+    using System.Linq;
+    using global::HtmlAgilityPack;
+
+    #endregion
+
     /// <summary>
     /// An <see cref="IElementOps{TElement}"/> implementation for <see cref="HtmlNode"/>
     /// from <a href="http://www.codeplex.com/htmlagilitypack">HtmlAgilityPack</a>.

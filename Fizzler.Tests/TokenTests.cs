@@ -1,9 +1,13 @@
-﻿using System;
-using NUnit.Framework;
-using NUnit.Framework.SyntaxHelpers;
-
-namespace Fizzler.Tests
+﻿namespace Fizzler.Tests
 {
+    #region Imports
+
+    using System;
+    using NUnit.Framework;
+    using NUnit.Framework.SyntaxHelpers;
+
+    #endregion
+
     [TestFixture]
     public class TokenTests
     {

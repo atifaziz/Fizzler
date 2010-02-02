@@ -1,7 +1,7 @@
-using System;
-
 namespace Fizzler
 {
+    using System;
+
 	/// <summary>
     /// An <see cref="ISelectorGenerator"/> implementation that generates
     /// human-readable description of the selector.

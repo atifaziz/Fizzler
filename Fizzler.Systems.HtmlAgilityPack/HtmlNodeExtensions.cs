@@ -1,12 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using HtmlAgilityPack;
-
 namespace Fizzler.Systems.HtmlAgilityPack
 {
+    #region Imports
+
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Text;
+    using global::HtmlAgilityPack;
+
+    #endregion
+
     /// <summary>
     /// HtmlNode extension methods.
     /// </summary>

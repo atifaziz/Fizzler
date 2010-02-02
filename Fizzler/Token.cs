@@ -1,7 +1,7 @@
-using System;
-
 namespace Fizzler
 {
+    using System;
+
     /// <summary>
     /// Represent a token and optionally any text associated with it.
     /// </summary>

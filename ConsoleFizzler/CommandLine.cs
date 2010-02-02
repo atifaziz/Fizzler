@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices;
-
-namespace ConsoleFizzler
+﻿namespace ConsoleFizzler
 {
+    #region Imports
+
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.IO;
+    using System.Linq;
+    using System.Runtime.InteropServices;
+
+    #endregion
+
     static class CommandLine
     {
         private static readonly char[] _argSeparators = new[] { ':', '=' };

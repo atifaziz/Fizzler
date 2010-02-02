@@ -1,10 +1,14 @@
-using System;
-using System.Linq;
-using System.Xml;
-
 namespace Fizzler.Systems.XmlNodeQuery
 {
-	public class XmlNodeOps : IElementOps<XmlNode>
+    #region Imports
+
+    using System;
+    using System.Linq;
+    using System.Xml;
+
+    #endregion
+
+    public class XmlNodeOps : IElementOps<XmlNode>
 	{
 		public virtual Selector<XmlNode> Type(NamespacePrefix prefix, string type)
 		{

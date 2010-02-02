@@ -1,12 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using Fizzler.Systems.HtmlAgilityPack;
-using HtmlAgilityPack;
-
 namespace ConsoleFizzler
 {
+    #region Imports
+
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using Fizzler.Systems.HtmlAgilityPack;
+    using HtmlAgilityPack;
+
+    #endregion
+
     internal sealed class SelectCommand : Command
     {
         private string _separator;

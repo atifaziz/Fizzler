@@ -1,7 +1,7 @@
-using NUnit.Framework;
-
 namespace Fizzler.Tests
 {
+    using NUnit.Framework;
+
     [TestFixture]
 	public class PsuedoSelectors : SelectorBaseTest
 	{

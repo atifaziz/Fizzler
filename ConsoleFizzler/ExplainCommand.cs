@@ -1,9 +1,13 @@
-using System;
-using System.Linq;
-using Fizzler;
-
 namespace ConsoleFizzler
 {
+    #region Imports
+
+    using System;
+    using System.Linq;
+    using Fizzler;
+
+    #endregion
+
     internal sealed class ExplainCommand : Command
     {
         protected override int OnRun(string[] args)

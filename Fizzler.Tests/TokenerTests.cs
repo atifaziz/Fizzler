@@ -1,10 +1,14 @@
-using System;
-using System.IO;
-using System.Linq;
-using NUnit.Framework;
-
 namespace Fizzler.Tests
 {
+    #region Imports
+
+    using System;
+    using System.IO;
+    using System.Linq;
+    using NUnit.Framework;
+
+    #endregion
+
     [TestFixture]
     public class TokenerTests
     {

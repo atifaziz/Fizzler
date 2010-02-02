@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Fizzler
+﻿namespace Fizzler
 {
+    using System;
+
     /// <summary>
     /// Represent a type or attribute name.
     /// </summary>

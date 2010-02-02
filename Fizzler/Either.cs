@@ -21,11 +21,15 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using System;
-using System.Collections.Generic;
-
 namespace Fizzler
 {
+    #region Imports
+
+    using System;
+    using System.Collections.Generic;
+
+    #endregion
+
     // Adapted from Mono Rocks
 
     internal abstract class Either<TA, TB> 

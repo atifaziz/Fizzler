@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections;
-using System.Runtime.CompilerServices;
-using HtmlAgilityPack;
-
-namespace Fizzler.Systems.HtmlAgilityPack
+﻿namespace Fizzler.Systems.HtmlAgilityPack
 {
+    #region Imports
+
+    using System;
+    using System.Collections;
+    using System.Runtime.CompilerServices;
+    using global::HtmlAgilityPack;
+
+    #endregion
+
     public static class HtmlDocumentExtensions
     {
         private static Hashtable _defaultElementFlags;

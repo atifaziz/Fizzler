@@ -1,12 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Xml;
-
 namespace Fizzler.Systems.XmlNodeQuery
 {
-	public static class XmlNodeExtensions
+    #region Imports
+
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+    using System.Xml;
+
+    #endregion
+    
+    public static class XmlNodeExtensions
 	{
 		/// <summary>
 		/// Determines whether this node is an element or not.

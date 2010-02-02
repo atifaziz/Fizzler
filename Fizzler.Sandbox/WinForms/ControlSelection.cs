@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Windows.Forms;
-
-namespace Fizzler.Systems.WinForms
+﻿namespace Fizzler.Systems.WinForms
 {
+    #region Imports
+
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Windows.Forms;
+
+    #endregion
+
     /// <summary>
     /// Selectors API for <see cref="Control"/>.
     /// </summary>

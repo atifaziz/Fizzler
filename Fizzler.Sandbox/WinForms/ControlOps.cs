@@ -1,9 +1,13 @@
-using System;
-using System.Linq;
-using System.Windows.Forms;
-
 namespace Fizzler.Systems.WinForms
 {
+    #region Imports
+
+    using System;
+    using System.Linq;
+    using System.Windows.Forms;
+
+    #endregion
+
     /// <summary>
     /// An <see cref="IElementOps{TElement}"/> implementation for <see cref="Control"/>
     /// from Windows Forms.

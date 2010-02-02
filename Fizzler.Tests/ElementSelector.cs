@@ -1,9 +1,9 @@
-﻿using System;
-using NUnit.Framework;
-
-namespace Fizzler.Tests
+﻿namespace Fizzler.Tests
 {
-	[TestFixture]
+    using System;
+    using NUnit.Framework;
+
+    [TestFixture]
 	public class ElementSelector : SelectorBaseTest
 	{
 		[Test]

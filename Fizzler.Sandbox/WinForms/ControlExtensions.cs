@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.Windows.Forms;
-
-namespace Fizzler.Systems.WinForms
+﻿namespace Fizzler.Systems.WinForms
 {
+    #region Imports
+
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Windows.Forms;
+
+    #endregion
+
     /// <summary>
     /// Extension methods for <see cref="Control"/>.
     /// </summary>

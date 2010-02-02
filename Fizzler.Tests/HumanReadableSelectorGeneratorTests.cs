@@ -1,9 +1,9 @@
-using System;
-using NUnit.Framework;
-
 namespace Fizzler.Tests
 {
-	[TestFixture]
+    using System;
+    using NUnit.Framework;
+
+    [TestFixture]
 	public class HumanReadableSelectorGeneratorTests
 	{
 		public class TestHumanReadableSelectorGenerator : HumanReadableSelectorGenerator

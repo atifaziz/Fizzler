@@ -1,12 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Globalization;
-using System.Linq;
-
 namespace Fizzler
 {
+    #region Imports
+
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Globalization;
+    using System.Linq;
+
     using TokenSpec = Either<TokenKind, Token>;
+
+    #endregion
 
     /// <summary>
     /// Semantic parser for CSS selector grammar.

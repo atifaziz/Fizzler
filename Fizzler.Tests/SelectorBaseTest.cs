@@ -1,15 +1,19 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using Fizzler.Systems.HtmlAgilityPack;
-using HtmlAgilityPack;
-
 namespace Fizzler.Tests
 {
-	public abstract class SelectorBaseTest
+    #region Imports
+
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.IO;
+    using System.Linq;
+    using System.Reflection;
+    using Fizzler.Systems.HtmlAgilityPack;
+    using HtmlAgilityPack;
+
+    #endregion
+    
+    public abstract class SelectorBaseTest
 	{
 	    protected SelectorBaseTest()
 		{

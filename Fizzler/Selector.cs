@@ -1,7 +1,7 @@
-using System.Collections.Generic;
-
 namespace Fizzler
 {
+    using System.Collections.Generic;
+
     /// <summary>
     /// Represents a selector implementation over an arbitrary type of elements.
     /// </summary>

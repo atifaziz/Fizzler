@@ -1,10 +1,14 @@
-using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
-
 namespace Fizzler.Systems.XmlNodeQuery
 {
-	public static class XmlNodeSelection
+    #region Imports
+
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Xml;
+
+    #endregion
+
+    public static class XmlNodeSelection
 	{
 		/// <summary>
 		/// Similar to <see cref="QuerySelectorAll" /> except it returns 

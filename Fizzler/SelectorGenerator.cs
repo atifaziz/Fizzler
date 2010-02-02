@@ -1,9 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Fizzler
 {
+    #region Imports
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+
+    #endregion
+
     /// <summary>
     /// A selector generator implementation for an arbitrary document/element system.
     /// </summary>

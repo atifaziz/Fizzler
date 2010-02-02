@@ -1,14 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-
-using CommandNames = System.Collections.Generic.KeyValuePair<
-          /* key   */ System.Func<ConsoleFizzler.ICommand>,
-          /* value */ System.Collections.Generic.IEnumerable<string>>;
-
-namespace ConsoleFizzler
+﻿namespace ConsoleFizzler
 {
+    #region Imports
+
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Linq;
+
+    using CommandNames = System.Collections.Generic.KeyValuePair<
+            /* key   */ System.Func<ICommand>,
+            /* value */ System.Collections.Generic.IEnumerable<string>>;
+
+    #endregion
+
     internal static class Program
 	{
         internal static int Main(string[] args)

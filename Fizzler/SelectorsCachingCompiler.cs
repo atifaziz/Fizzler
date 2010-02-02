@@ -1,12 +1,10 @@
-using System.Diagnostics;
-
 namespace Fizzler
 {
     #region Imports
 
     using System;
     using System.Collections.Generic;
-    using System.Linq;
+    using System.Diagnostics;
 
     #endregion
 

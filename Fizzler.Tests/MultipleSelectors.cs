@@ -1,8 +1,8 @@
-using NUnit.Framework;
-
 namespace Fizzler.Tests
 {
-	[TestFixture]
+    using NUnit.Framework;
+
+    [TestFixture]
 	public class MultipleSelectors : SelectorBaseTest
 	{
 		[Test]

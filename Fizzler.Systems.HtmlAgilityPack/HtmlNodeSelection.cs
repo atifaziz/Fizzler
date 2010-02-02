@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using HtmlAgilityPack;
-
-namespace Fizzler.Systems.HtmlAgilityPack
+﻿namespace Fizzler.Systems.HtmlAgilityPack
 {
+    #region Imports
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using global::HtmlAgilityPack;
+
+    #endregion
+
     /// <summary>
     /// Selector API for <see cref="HtmlNode"/>.
     /// </summary>

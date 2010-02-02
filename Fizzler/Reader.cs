@@ -1,9 +1,13 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-
-namespace Fizzler
+﻿namespace Fizzler
 {
+    #region Imports
+
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+
+    #endregion
+
     /// <summary>
     /// Adds reading semantics to a base <see cref="IEnumerator{T}"/> with the 
     /// option to un-read and insert new elements while consuming the source.

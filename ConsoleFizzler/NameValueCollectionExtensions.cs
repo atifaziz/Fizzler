@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Specialized;
-using System.Linq;
-
-namespace ConsoleFizzler
+﻿namespace ConsoleFizzler
 {
+    #region Imports
+
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.Linq;
+
+    #endregion
+
     static class NameValueCollectionExtensions
     {
         public static IEnumerable<string> KeysByPrefix(this NameValueCollection collection, string prefix)

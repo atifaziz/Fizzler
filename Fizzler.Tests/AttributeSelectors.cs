@@ -1,10 +1,8 @@
-using System.Collections.Generic;
-using HtmlAgilityPack;
-using NUnit.Framework;
-
 namespace Fizzler.Tests
 {
-	[TestFixture]
+    using NUnit.Framework;
+
+    [TestFixture]
 	public class AttributeSelectors : SelectorBaseTest
 	{
 		[Test]

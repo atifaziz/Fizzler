@@ -1,12 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using NUnit.Framework;
-
 namespace Fizzler.Tests
 {
-	/// <summary>
+    #region Imports
+
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
+    using NUnit.Framework;
+
+    #endregion
+
+    /// <summary>
 	/// Ensure that all actions on SelectorGeneratorTee are passed
 	/// to the internal Primary and Secondary SelectorGenerators.
 	/// </summary>

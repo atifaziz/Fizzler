@@ -1,8 +1,8 @@
-using System;
-using System.Configuration;
-
 namespace ConsoleFizzler
 {
+    using System;
+    using System.Configuration;
+
     internal abstract class Command : ICommand
     {
         public int Run(string[] args)

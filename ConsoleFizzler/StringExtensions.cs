@@ -1,9 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-
-namespace ConsoleFizzler
+﻿namespace ConsoleFizzler
 {
+    #region Imports
+
+    using System;
+    using System.Collections.Generic;
+    using System.Globalization;
+
+    #endregion
+
     static class StringExtensions
     {
         /// <summary>
