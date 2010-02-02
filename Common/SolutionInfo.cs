@@ -1,12 +1,11 @@
 #region License, Terms and Conditions
 //
-// Jayrock - JSON and JSON-RPC for Microsoft .NET Framework and Mono
-// Written by Atif Aziz (www.raboof.com)
-// Copyright (c) 2005 Atif Aziz. All rights reserved.
+// Fizzler - CSS Selector Engine for Microsoft .NET Framework and Mono
+// Copyright (c) 2009, 2010 Atif Aziz, Colin Ramsay. All rights reserved.
 //
 // This library is free software; you can redistribute it and/or modify it under
 // the terms of the GNU Lesser General Public License as published by the Free
-// Software Foundation; either version 2.1 of the License, or (at your option)
+// Software Foundation; either version 3 of the License, or (at your option)
 // any later version.
 //
 // This library is distributed in the hope that it will be useful, but WITHOUT
@@ -34,7 +33,7 @@ using ComVisible = System.Runtime.InteropServices.ComVisibleAttribute;
 
 [assembly: AssemblyProduct("Fizzler")]
 [assembly: AssemblyCompany("http://fizzler.googlecode.com")]
-[assembly: AssemblyCopyright("Copyright (c) 2009, Atif Aziz, Colin Ramsay. All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright (c) 2009, 2010 Atif Aziz, Colin Ramsay. All rights reserved.")]
 [assembly: AssemblyCulture("")]
 
 //
