@@ -122,7 +122,7 @@ namespace Fizzler.Systems.XmlNodeQuery
         public virtual Selector<XmlNode> NthChild(int a, int b)
         {
             if (a != 1)
-                throw new NotSupportedException("The nth-child(an+b) selector where a in is not 1 are not supported.");
+                throw new NotSupportedException("The nth-child(an+b) selector where a is not 1 is not supported.");
 
             return nodes => from n in nodes
                             let elements = n.ParentNode.Elements().Take(b).ToArray()
@@ -198,7 +198,7 @@ namespace Fizzler.Systems.XmlNodeQuery
         public Selector<XmlNode> NthLastChild(int a, int b)
         {
             if (a != 1)
-                throw new NotSupportedException("The nth-last-child(an+b) selector where a in is not 1 are not supported.");
+                throw new NotSupportedException("The nth-last-child(an+b) selector where a is not 1 is not supported.");
 
             return nodes => from n in nodes
                             let elements = n.ParentNode.Elements().Skip(Math.Max(0, n.ParentNode.Elements().Count() - b)).Take(b).ToArray()
