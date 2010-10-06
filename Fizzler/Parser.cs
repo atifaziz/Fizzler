@@ -242,7 +242,7 @@ namespace Fizzler
                 default:
                 {
                     throw new FormatException(string.Format(
-                        "Unknown functional pseudo '{0}'. Only nth-child and nth-last-child is supported.", func));
+                        "Unknown functional pseudo '{0}'. Only nth-child and nth-last-child are supported.", func));
                 }
             }
 
