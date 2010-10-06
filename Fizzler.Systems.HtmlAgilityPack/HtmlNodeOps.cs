@@ -258,5 +258,20 @@ namespace Fizzler.Systems.HtmlAgilityPack
     	{
 			return nodes => nodes.SelectMany(n => n.ElementsAfterSelf());
     	}
+
+		/// <summary>
+		/// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
+		/// which represents an element that is the N-th child from bottom up of some other element.
+		/// </summary>
+    	public Selector<HtmlNode> NthLastChild(int a, int b)
+    	{
+			if (a != 1)
+				throw new NotSupportedException("The nth-last-child(an+b) selector where a in is not 1 are not supported.");
+
+			return nodes => from n in nodes
+							let elements = n.ParentNode.Elements().Skip(Math.Max(0, n.ParentNode.Elements().Count() - b)).Take(b).ToArray()
+							where elements.Length == b && elements.First().Equals(n)
+							select n;
+    	}
     }
 }

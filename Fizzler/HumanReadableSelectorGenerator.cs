@@ -228,5 +228,13 @@ namespace Fizzler
 		{
 			Add(", then take their siblings which are");
 		}
+
+		/// <summary>
+		/// Generates human-readable text of this combinator.
+		/// </summary>
+		public void NthLastChild(int a, int b)
+		{
+			Add(string.Format(" where the element has {0}n+{1}-1 sibling after it", a, b));
+		}
 	}
 }

@@ -238,10 +238,11 @@ namespace Fizzler
             switch (func)
             {
                 case "nth-child": Nth(); break;
+				 case "nth-last-child": NthLast(); break;
                 default:
                 {
                     throw new FormatException(string.Format(
-                        "Unknown functional pseudo '{0}'. Only nth-child is supported.", func));
+                        "Unknown functional pseudo '{0}'. Only nth-child and nth-last-child is supported.", func));
                 }
             }
 
@@ -262,6 +263,20 @@ namespace Fizzler
             var b = int.Parse(Read(ToTokenSpec(TokenKind.Integer)).Text, CultureInfo.InvariantCulture);
             _generator.NthChild(1, b);
         }
+
+		 private void NthLast()
+		 {
+			 //nth
+			 //  : S* [ ['-'|'+']? INTEGER? {N} [ S* ['-'|'+'] S* INTEGER ]? |
+			 //         ['-'|'+']? INTEGER | {O}{D}{D} | {E}{V}{E}{N} ] S*
+			 //  ;
+
+			 // TODO Add support for the full syntax
+			 // At present, only INTEGER is allowed
+
+			 var b = int.Parse(Read(ToTokenSpec(TokenKind.Integer)).Text, CultureInfo.InvariantCulture);
+			 _generator.NthLastChild(1, b);		 	
+		 }
 
         private void Attrib()
         {

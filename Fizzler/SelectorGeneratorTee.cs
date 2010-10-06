@@ -239,5 +239,14 @@ namespace Fizzler
 			Primary.GeneralSibling();
 			Secondary.GeneralSibling();
 		}
+
+		/// <summary>
+		/// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
+		/// </summary>
+    	public void NthLastChild(int a, int b)
+    	{
+    		Primary.NthLastChild(a, b);
+			Secondary.NthLastChild(a, b);
+    	}
     }
 }

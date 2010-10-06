@@ -484,7 +484,12 @@ namespace Fizzler.Tests
                 throw new NotImplementedException();
             }
 
-            #endregion
+        	 public void NthLastChild(int a, int b)
+        	 {
+        		 throw new NotImplementedException();
+        	 }
+
+        	#endregion
         }
     }
 }

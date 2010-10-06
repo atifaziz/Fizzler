@@ -369,8 +369,13 @@ namespace Fizzler.Tests
 	        {
 	            OnInvoked(MethodBase.GetCurrentMethod());
 	        }
-			
-	        private void OnInvoked(MethodBase method, params object[] args)
+
+	    	public void NthLastChild(int a, int b)
+	    	{
+	    		OnInvoked(MethodBase.GetCurrentMethod(), a, b);
+	    	}
+
+	    	private void OnInvoked(MethodBase method, params object[] args)
 	        {
 	            Recorder(new CallRecording<ISelectorGenerator>(this, (MethodInfo) method, args));
 	        }

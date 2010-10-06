@@ -247,5 +247,10 @@ namespace Fizzler.Systems.WinForms
     	{
 			return nodes => nodes.SelectMany(n => n.ControlsAfterSelf());
     	}
+
+    	public Selector<Control> NthLastChild(int a, int b)
+    	{
+    		throw new NotImplementedException();
+    	}
     }
 }

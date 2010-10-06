@@ -159,5 +159,11 @@ namespace Fizzler
 		/// immediately) the element represented by the second one.
 		/// </summary>
 		Selector<TElement> GeneralSibling();
+
+		/// <summary>
+		/// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
+		/// which represents an element that is the N-th child from bottom up of some other element.
+		/// </summary>
+    	Selector<TElement> NthLastChild(int a, int b);
     }
 }
