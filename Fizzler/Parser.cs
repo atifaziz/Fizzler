@@ -19,7 +19,7 @@ namespace Fizzler
     {
         private readonly Reader<Token> _reader;
         private readonly ISelectorGenerator _generator;
-        
+
         private Parser(Reader<Token> reader, ISelectorGenerator generator)
         {
             Debug.Assert(reader != null);
@@ -45,7 +45,7 @@ namespace Fizzler
         {
             if (selectors == null) throw new ArgumentNullException("selectors");
             if (selectors.Length == 0) throw new ArgumentException(null, "selectors");
-            
+
             return Parse(Tokener.Tokenize(selectors), generator, resultor);
         }
 
@@ -53,7 +53,7 @@ namespace Fizzler
         /// Parses a tokenized stream representing a CSS selector group and 
         /// generates its implementation.
         /// </summary>
-        public static TGenerator Parse<TGenerator>(IEnumerable<Token> tokens, TGenerator generator) 
+        public static TGenerator Parse<TGenerator>(IEnumerable<Token> tokens, TGenerator generator)
                 where TGenerator : ISelectorGenerator
         {
             return Parse(tokens, generator, g => g);
@@ -63,12 +63,12 @@ namespace Fizzler
         /// Parses a tokenized stream representing a CSS selector group and 
         /// generates its implementation.
         /// </summary>
-        public static T Parse<TGenerator, T>(IEnumerable<Token> tokens, TGenerator generator, Func<TGenerator, T> resultor) 
+        public static T Parse<TGenerator, T>(IEnumerable<Token> tokens, TGenerator generator, Func<TGenerator, T> resultor)
             where TGenerator : ISelectorGenerator
         {
             if (tokens == null) throw new ArgumentNullException("tokens");
-            if(resultor == null) throw new ArgumentNullException("resultor");
-            
+            if (resultor == null) throw new ArgumentNullException("resultor");
+
             new Parser(new Reader<Token>(tokens.GetEnumerator()), generator).Parse();
             return resultor(generator);
         }
@@ -117,7 +117,7 @@ namespace Fizzler
             //  ;
 
             var token = TryRead(ToTokenSpec(TokenKind.Plus), ToTokenSpec(TokenKind.Greater), ToTokenSpec(TokenKind.Tilde), ToTokenSpec(TokenKind.WhiteSpace));
-            
+
             if (token == null)
                 return false;
 
@@ -136,7 +136,7 @@ namespace Fizzler
 
                 TryRead(ToTokenSpec(TokenKind.WhiteSpace));
             }
-            
+
             return true;
         }
 
@@ -162,9 +162,9 @@ namespace Fizzler
                 }
                 else
                 {
-                    if (modifiers == 0 && !named) 
+                    if (modifiers == 0 && !named)
                         _generator.Universal(NamespacePrefix.None); // implied
-                    
+
                     if (token.Value.Kind == TokenKind.Hash)
                     {
                         _generator.Id(token.Value.Text);
@@ -214,10 +214,10 @@ namespace Fizzler
                     case "only-child": _generator.OnlyChild(); break;
                     case "empty": _generator.Empty(); break;
                     default:
-                    {
-                        throw new FormatException(string.Format(
-                            "Unknown pseudo-class '{0}'. Use either first-child, last-child, only-child or empty.", clazz));
-                    }
+                        {
+                            throw new FormatException(string.Format(
+                                "Unknown pseudo-class '{0}'. Use either first-child, last-child, only-child or empty.", clazz));
+                        }
                 }
             }
         }
@@ -238,12 +238,12 @@ namespace Fizzler
             switch (func)
             {
                 case "nth-child": Nth(); break;
-				case "nth-last-child": NthLast(); break;
+                case "nth-last-child": NthLast(); break;
                 default:
-                {
-                    throw new FormatException(string.Format(
-                        "Unknown functional pseudo '{0}'. Only nth-child and nth-last-child are supported.", func));
-                }
+                    {
+                        throw new FormatException(string.Format(
+                            "Unknown functional pseudo '{0}'. Only nth-child and nth-last-child are supported.", func));
+                    }
             }
 
             Read(ToTokenSpec(Token.RightParenthesis()));
@@ -264,17 +264,17 @@ namespace Fizzler
         }
 
         private void NthLast()
-		 {
-			 //nth
-			 //  : S* [ ['-'|'+']? INTEGER? {N} [ S* ['-'|'+'] S* INTEGER ]? |
-			 //         ['-'|'+']? INTEGER | {O}{D}{D} | {E}{V}{E}{N} ] S*
-			 //  ;
+        {
+            //nth
+            //  : S* [ ['-'|'+']? INTEGER? {N} [ S* ['-'|'+'] S* INTEGER ]? |
+            //         ['-'|'+']? INTEGER | {O}{D}{D} | {E}{V}{E}{N} ] S*
+            //  ;
 
-			 // TODO Add support for the full syntax
-			 // At present, only INTEGER is allowed
+            // TODO Add support for the full syntax
+            // At present, only INTEGER is allowed
 
-            _generator.NthLastChild(1, NthB());		 	
-		 }
+            _generator.NthLastChild(1, NthB());
+        }
 
         private int NthB()
         {
@@ -297,21 +297,21 @@ namespace Fizzler
             Read(ToTokenSpec(Token.LeftBracket()));
             var prefix = TryNamespacePrefix() ?? NamespacePrefix.None;
             var name = Read(ToTokenSpec(TokenKind.Ident)).Text;
-            
+
             var hasValue = false;
             while (true)
             {
                 var op = TryRead(
-                    ToTokenSpec(Token.Equals()), 
-                    ToTokenSpec(TokenKind.Includes), 
-                    ToTokenSpec(TokenKind.DashMatch), 
-                    ToTokenSpec(TokenKind.PrefixMatch), 
+                    ToTokenSpec(Token.Equals()),
+                    ToTokenSpec(TokenKind.Includes),
+                    ToTokenSpec(TokenKind.DashMatch),
+                    ToTokenSpec(TokenKind.PrefixMatch),
                     ToTokenSpec(TokenKind.SuffixMatch),
                     ToTokenSpec(TokenKind.SubstringMatch));
-                
-                if(op == null) 
+
+                if (op == null)
                     break;
-                
+
                 hasValue = true;
                 var value = Read(ToTokenSpec(TokenKind.String), ToTokenSpec(TokenKind.Ident)).Text;
 
@@ -331,10 +331,10 @@ namespace Fizzler
                     }
                 }
             }
-            
+
             if (!hasValue)
                 _generator.AttributeExists(prefix, name);
-            
+
             Read(ToTokenSpec(Token.RightBracket()));
         }
 
@@ -343,7 +343,7 @@ namespace Fizzler
             //class
             //  : '.' IDENT
             //  ;
-            
+
             Read(ToTokenSpec(Token.Dot()));
             _generator.Class(Read(ToTokenSpec(TokenKind.Ident)).Text);
         }
@@ -356,20 +356,20 @@ namespace Fizzler
 
             var pipe = Token.Pipe();
             var token = TryRead(ToTokenSpec(TokenKind.Ident), ToTokenSpec(Token.Star()), ToTokenSpec(pipe));
-            
+
             if (token == null)
                 return null;
-            
+
             if (token.Value == pipe)
                 return NamespacePrefix.Empty;
-            
+
             var prefix = token.Value;
             if (TryRead(ToTokenSpec(pipe)) == null)
             {
                 Unread(prefix);
                 return null;
             }
-            
+
             return prefix.Kind == TokenKind.Ident
                  ? new NamespacePrefix(prefix.Text)
                  : NamespacePrefix.Any;
@@ -418,7 +418,7 @@ namespace Fizzler
             if (token == null)
             {
                 throw new FormatException(string.Format(
-                    @"Unexpected token {{{0}}} where one of [{1}] was expected.", 
+                    @"Unexpected token {{{0}}} where one of [{1}] was expected.",
                     Peek().Kind, string.Join(", ", specs.Select(k => k.ToString()).ToArray())));
             }
             return token.Value;

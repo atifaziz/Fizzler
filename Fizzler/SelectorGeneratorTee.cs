@@ -231,22 +231,22 @@ namespace Fizzler
             Secondary.Adjacent();
         }
 
-		/// <summary>
-		/// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
-		/// </summary>
-		public void GeneralSibling()
-		{
-			Primary.GeneralSibling();
-			Secondary.GeneralSibling();
-		}
+        /// <summary>
+        /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
+        /// </summary>
+        public void GeneralSibling()
+        {
+            Primary.GeneralSibling();
+            Secondary.GeneralSibling();
+        }
 
-		/// <summary>
-		/// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
-		/// </summary>
-    	public void NthLastChild(int a, int b)
-    	{
-    		Primary.NthLastChild(a, b);
-			Secondary.NthLastChild(a, b);
-    	}
+        /// <summary>
+        /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
+        /// </summary>
+        public void NthLastChild(int a, int b)
+        {
+            Primary.NthLastChild(a, b);
+            Secondary.NthLastChild(a, b);
+        }
     }
 }

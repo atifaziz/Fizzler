@@ -296,25 +296,25 @@ namespace Fizzler
             Add(Ops.Adjacent());
         }
 
-		/// <summary>
-		/// Generates a <a href="http://www.w3.org/TR/css3-selectors/#combinators">combinator</a>,
-		/// which separates two sequences of simple selectors. The elements represented
-		/// by the two sequences share the same parent in the document tree and the
-		/// element represented by the first sequence precedes (not necessarily
-		/// immediately) the element represented by the second one.
-		/// </summary>
-		public virtual void GeneralSibling()
-		{
-			Add(Ops.GeneralSibling());
-		}
+        /// <summary>
+        /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#combinators">combinator</a>,
+        /// which separates two sequences of simple selectors. The elements represented
+        /// by the two sequences share the same parent in the document tree and the
+        /// element represented by the first sequence precedes (not necessarily
+        /// immediately) the element represented by the second one.
+        /// </summary>
+        public virtual void GeneralSibling()
+        {
+            Add(Ops.GeneralSibling());
+        }
 
-		/// <summary>
-		/// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
-		/// which represents an element that is the N-th child from bottom up of some other element.
-		/// </summary>
-    	public void NthLastChild(int a, int b)
-    	{
-    		Add(Ops.NthLastChild(a, b));
-    	}
+        /// <summary>
+        /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
+        /// which represents an element that is the N-th child from bottom up of some other element.
+        /// </summary>
+        public void NthLastChild(int a, int b)
+        {
+            Add(Ops.NthLastChild(a, b));
+        }
     }
 }
