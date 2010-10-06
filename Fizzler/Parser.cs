@@ -238,7 +238,7 @@ namespace Fizzler
             switch (func)
             {
                 case "nth-child": Nth(); break;
-				 case "nth-last-child": NthLast(); break;
+				case "nth-last-child": NthLast(); break;
                 default:
                 {
                     throw new FormatException(string.Format(
@@ -260,11 +260,10 @@ namespace Fizzler
             // TODO Add support for the full syntax
             // At present, only INTEGER is allowed
 
-            var b = int.Parse(Read(ToTokenSpec(TokenKind.Integer)).Text, CultureInfo.InvariantCulture);
-            _generator.NthChild(1, b);
+            _generator.NthChild(1, NthB());
         }
 
-		 private void NthLast()
+        private void NthLast()
 		 {
 			 //nth
 			 //  : S* [ ['-'|'+']? INTEGER? {N} [ S* ['-'|'+'] S* INTEGER ]? |
@@ -274,9 +273,13 @@ namespace Fizzler
 			 // TODO Add support for the full syntax
 			 // At present, only INTEGER is allowed
 
-			 var b = int.Parse(Read(ToTokenSpec(TokenKind.Integer)).Text, CultureInfo.InvariantCulture);
-			 _generator.NthLastChild(1, b);		 	
+            _generator.NthLastChild(1, NthB());		 	
 		 }
+
+        private int NthB()
+        {
+            return int.Parse(Read(ToTokenSpec(TokenKind.Integer)).Text, CultureInfo.InvariantCulture);
+        }
 
         private void Attrib()
         {
