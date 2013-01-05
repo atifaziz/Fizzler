@@ -1,24 +1,24 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler", "Fizzler\Fizzler.csproj", "{939036D6-29FD-46E4-B6CD-52618F51081B}"
-EndProject
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8FC1F69B-FAFC-484C-984B-78FA7E224BCB}"
 	ProjectSection(SolutionItems) = preProject
 		default.build = default.build
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Tests", "Fizzler.Tests\Fizzler.Tests.csproj", "{61EDF5C0-1854-4867-AE8A-7A1216E116C9}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Systems", "Systems", "{7AA23AC0-0852-45AC-8661-6FFBD3BD265D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NET-2.0", "NET-2.0", "{1A630545-B74B-4EEE-B0B6-DD8E2A6CAB02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler", "Fizzler\Fizzler.csproj", "{939036D6-29FD-46E4-B6CD-52618F51081B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Tests", "Fizzler.Tests\Fizzler.Tests.csproj", "{61EDF5C0-1854-4867-AE8A-7A1216E116C9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Systems.HtmlAgilityPack", "Fizzler.Systems.HtmlAgilityPack\Fizzler.Systems.HtmlAgilityPack.csproj", "{DBEAD205-BD5C-461F-873D-DE643016F14C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualFizzler", "VisualFizzler\VisualFizzler.csproj", "{46AA901E-21D1-4720-B173-532B91105CE7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Sandbox", "Fizzler.Sandbox\Fizzler.Sandbox.csproj", "{80456F6D-6853-4244-8E3D-F22ECA0980EC}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NET-2.0", "NET-2.0", "{1A630545-B74B-4EEE-B0B6-DD8E2A6CAB02}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler", "NET-2.0\Fizzler.csproj", "{278E9225-9FE5-4D63-9C9B-206FC68BAA37}"
 EndProject
