@@ -13,6 +13,8 @@ using Fizzler.Systems.HtmlAgilityPack;
 using HtmlAgilityPack;
 using Mannex.Net;
 using Microsoft.VisualBasic;
+using OpenWebClient;
+using WebClient=OpenWebClient.WebClient;
 using HtmlDocument=HtmlAgilityPack.HtmlDocument;
 
 namespace VisualFizzler
@@ -116,16 +118,34 @@ namespace VisualFizzler
 
             string content;
             var wc = new WebClient();
+            bool proxyAuthAttempted = false;
 
-            try
+            while (true)
             {
-                using (CurrentCursorScope.EnterWait())
-                    content = wc.DownloadStringUsingResponseEncoding(url);
-            }
-            catch (WebException e)
-            {
-                Program.ShowExceptionDialog(e, "Import Error", this);
-                return;
+                try
+                {
+                    using (CurrentCursorScope.EnterWait())
+                        content = wc.DownloadStringUsingResponseEncoding(url);
+                    break;
+                }
+                catch (WebException e)
+                {
+                    if (e.Status == WebExceptionStatus.ProtocolError 
+                        && !proxyAuthAttempted)
+                    {
+                        var httpResponse = e.Response as HttpWebResponse;
+                        if (httpResponse != null
+                            && HttpStatusCode.ProxyAuthenticationRequired == httpResponse.StatusCode)
+                        {
+                            proxyAuthAttempted = true;
+                            wc.AddHttpWebRequestModifier(hwr => hwr.Proxy.Credentials = CredentialCache.DefaultCredentials);
+                            continue;
+                        }
+                    }
+
+                    Program.ShowExceptionDialog(e, "Import Error", this);
+                    return;
+                }
             }
 
             //
