@@ -1,7 +1,6 @@
 namespace Fizzler.Tests
 {
     using NUnit.Framework;
-    using NUnit.Framework.SyntaxHelpers;
 
     [TestFixture]
     public class NamespacePrefixTests

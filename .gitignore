@@ -12,3 +12,4 @@ _ReSharper.*
 dist/
 pkg/*/
 *.nupkg
+packages/

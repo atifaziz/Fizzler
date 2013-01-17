@@ -1,4 +1,7 @@
-﻿namespace Fizzler.Systems.HtmlAgilityPack
+﻿using System.Collections.Generic;
+using System.Diagnostics;
+
+namespace Fizzler.Systems.HtmlAgilityPack
 {
     #region Imports
 
@@ -11,7 +14,7 @@
 
     public static class HtmlDocumentExtensions
     {
-        private static Hashtable _defaultElementFlags;
+        private static Dictionary<string, HtmlElementFlag> _defaultElementFlags;
 
         // TODO Think of a better name than LoadHtml2
         /// <summary>
@@ -48,7 +51,7 @@
         /// </remarks>
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void LoadHtmlWithElementFlags(this HtmlDocument document, string html, Hashtable flags)
+        public static void LoadHtmlWithElementFlags(this HtmlDocument document, string html, IEnumerable<KeyValuePair<string, HtmlElementFlag>> flags)
         {
             if (document == null) throw new ArgumentNullException("document");
             LoadWithElementFlags(flags, () => document.LoadHtml(html));
@@ -65,7 +68,7 @@
         /// </remarks>
 
         [MethodImpl(MethodImplOptions.Synchronized)]
-        public static void LoadWithElementFlags(this HtmlDocument document, string path, Hashtable flags)
+        public static void LoadWithElementFlags(this HtmlDocument document, string path, IEnumerable<KeyValuePair<string, HtmlElementFlag>> flags)
         {
             if (document == null) throw new ArgumentNullException("document");
             LoadWithElementFlags(flags, () => document.Load(path));
@@ -73,30 +76,50 @@
 
         private delegate void LoadHandler();
 
-        private static void LoadWithElementFlags(Hashtable flags, LoadHandler loader)
+        private static void LoadWithElementFlags(IEnumerable<KeyValuePair<string, HtmlElementFlag>> flags, LoadHandler loader)
         {
-            var oldFlags = HtmlNode.ElementsFlags;
+            Dictionary<string, HtmlElementFlag> oldFlags = null;
             try
             {
                 if (flags != null)
-                    HtmlNode.ElementsFlags = flags;
+                {
+                    oldFlags = HtmlNode.ElementsFlags.Clone();
+                    HtmlNode.ElementsFlags.Reload(flags);                    
+                }
                 loader();
             }
             finally
             {
-                HtmlNode.ElementsFlags = oldFlags;
+                if (oldFlags != null) 
+                    HtmlNode.ElementsFlags.Reload(oldFlags);
             }
         }
 
-        private static Hashtable DefaultElementFlags
+        private static Dictionary<TKey, TValue> Clone<TKey, TValue>(this Dictionary<TKey, TValue> source)
+        {
+            Debug.Assert(source != null);
+            return new Dictionary<TKey, TValue>(source, source.Comparer);
+        }
+
+        private static void Reload<TKey, TValue>(this IDictionary<TKey, TValue> target, IEnumerable<KeyValuePair<TKey, TValue>> source)
+        {
+            Debug.Assert(source != null);
+            Debug.Assert(target != null);
+
+            target.Clear();
+            foreach (var entry in source)
+                target[entry.Key] = entry.Value;
+        }
+
+        private static Dictionary<string, HtmlElementFlag> DefaultElementFlags
         {
             get
             {
                 if (_defaultElementFlags == null)
                 {
-                    var flags = (Hashtable)HtmlNode.ElementsFlags.Clone();
+                    var flags = HtmlNode.ElementsFlags.Clone();
                     // ReSharper disable BitwiseOperatorOnEnumWihtoutFlags
-                    flags["form"] = ((HtmlElementFlag)flags["form"]) | HtmlElementFlag.Closed;
+                    flags["form"] = flags["form"] | HtmlElementFlag.Closed;
                     // ReSharper restore BitwiseOperatorOnEnumWihtoutFlags
                     _defaultElementFlags = flags;
                 }

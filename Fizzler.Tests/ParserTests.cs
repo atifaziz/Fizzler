@@ -5,7 +5,6 @@ namespace Fizzler.Tests
     using System;
     using System.Collections.Generic;
     using NUnit.Framework;
-    using NUnit.Framework.SyntaxHelpers;
 
     #endregion
 

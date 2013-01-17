@@ -4,7 +4,6 @@
 
     using System;
     using NUnit.Framework;
-    using NUnit.Framework.SyntaxHelpers;
 
     #endregion
 
