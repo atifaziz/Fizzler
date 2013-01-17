@@ -9,7 +9,6 @@ namespace Fizzler
     public class HumanReadableSelectorGenerator : ISelectorGenerator
     {
         private int _chainCount;
-        private string _text;
 
         /// <summary>
         /// Initializes the text.
@@ -22,11 +21,7 @@ namespace Fizzler
         /// <summary>
         /// Gets the generated human-readable description text.
         /// </summary>
-        public string Text
-        {
-            get { return _text; }
-            private set { _text = value; }
-        }
+        public string Text { get; private set; }
 
         /// <summary>
         /// Generates human-readable for a selector in a group.
