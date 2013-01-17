@@ -1,4 +1,4 @@
-﻿namespace Fizzler.Systems.WinForms
+namespace Fizzler.Systems.WinForms
 {
     #region Imports
 

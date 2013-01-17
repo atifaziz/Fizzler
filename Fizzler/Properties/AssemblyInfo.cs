@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 
 [assembly: AssemblyTitle("Fizzler")]
 [assembly: AssemblyDescription("CSS Selector Engine for .NET")]

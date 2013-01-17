@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 
 [assembly: AssemblyTitle("ConsoleFizzler")]
 [assembly: AssemblyDescription("Fizzler Console Application")]

@@ -1,4 +1,4 @@
-﻿namespace Fizzler.Systems.HtmlAgilityPack
+namespace Fizzler.Systems.HtmlAgilityPack
 {
     #region Imports
 

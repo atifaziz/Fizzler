@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 
 [assembly: AssemblyTitle("Fizzler.Sandbox")]
 [assembly: AssemblyDescription("Fizzler sandbox for experiments and futures")]

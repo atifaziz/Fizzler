@@ -1,4 +1,4 @@
-﻿namespace VisualFizzler
+namespace VisualFizzler
 {
     partial class MainForm
     {

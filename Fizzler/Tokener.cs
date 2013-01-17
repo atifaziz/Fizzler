@@ -1,4 +1,4 @@
-﻿namespace Fizzler
+namespace Fizzler
 {
     #region Imports
 

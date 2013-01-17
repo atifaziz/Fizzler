@@ -1,4 +1,4 @@
-﻿namespace Fizzler.Tests
+namespace Fizzler.Tests
 {
     #region Imports
 

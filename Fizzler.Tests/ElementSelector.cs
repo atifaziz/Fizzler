@@ -1,4 +1,4 @@
-﻿namespace Fizzler.Tests
+namespace Fizzler.Tests
 {
     using System;
     using NUnit.Framework;

@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 
 [assembly: AssemblyTitle("Fizzler.System.HtmlAgilityPack")]
 [assembly: AssemblyDescription("Fizzler for HtmlAgilityPack")]
