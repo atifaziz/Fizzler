@@ -234,11 +234,11 @@
             AssertToken(TokenKind.SubstringMatch, Token.SubstringMatch());
         }
 
-		[Test]
-		public void GeneralSibling()
-		{
-			AssertToken(TokenKind.Tilde, Token.Tilde());
-		}
+        [Test]
+        public void GeneralSibling()
+        {
+            AssertToken(TokenKind.Tilde, Token.Tilde());
+        }
 
         [Test]
         public void Pipe()

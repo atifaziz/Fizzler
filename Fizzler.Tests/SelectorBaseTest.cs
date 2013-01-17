@@ -14,12 +14,12 @@ namespace Fizzler.Tests
     #endregion
     
     public abstract class SelectorBaseTest
-	{
-	    protected SelectorBaseTest()
-		{
+    {
+        protected SelectorBaseTest()
+        {
             string html;
-			var assembly = Assembly.GetExecutingAssembly();
-	        const string resourceName = "Fizzler.Tests.SelectorTest.html";
+            var assembly = Assembly.GetExecutingAssembly();
+            const string resourceName = "Fizzler.Tests.SelectorTest.html";
             using (var stream = assembly.GetManifestResourceStream(resourceName))
             {
                 if (stream == null)
@@ -27,14 +27,14 @@ namespace Fizzler.Tests
                 using(var reader = new StreamReader(stream))
                     html = reader.ReadToEnd();
             }
-	        var document = new HtmlDocument();
+            var document = new HtmlDocument();
             document.LoadHtml2(html);
             Document = document;
         }
 
-	    protected HtmlDocument Document { get; private set; }
+        protected HtmlDocument Document { get; private set; }
 
-	    protected IEnumerable<HtmlNode> Select(string selectorChain)
+        protected IEnumerable<HtmlNode> Select(string selectorChain)
         {
             return Document.DocumentNode.QuerySelectorAll(selectorChain);
         }

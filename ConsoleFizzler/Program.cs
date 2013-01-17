@@ -14,7 +14,7 @@
     #endregion
 
     internal static class Program
-	{
+    {
         internal static int Main(string[] args)
         {
             try
@@ -29,32 +29,32 @@
             }
         }
 
-		static int Run(string[] args)
-		{
-			if (args.Length == 0)
+        static int Run(string[] args)
+        {
+            if (args.Length == 0)
                 throw new ApplicationException("Missing command.");
 
-		    var commands = new[] 
+            var commands = new[] 
             {
-	            new CommandNames(() => new SelectCommand(), Aliases("select", "sel")),
-	            new CommandNames(() => new ExplainCommand(), Aliases("explain", "describe", "desc")),
-	        }
-		    .SelectMany(e => e.Value.Select(v => new KeyValuePair<string, Func<ICommand>>(v, e.Key)))
-		    .ToDictionary(e => e.Key, e => e.Value);
+                new CommandNames(() => new SelectCommand(), Aliases("select", "sel")),
+                new CommandNames(() => new ExplainCommand(), Aliases("explain", "describe", "desc")),
+            }
+            .SelectMany(e => e.Value.Select(v => new KeyValuePair<string, Func<ICommand>>(v, e.Key)))
+            .ToDictionary(e => e.Key, e => e.Value);
 
-		    var name = args[0];
-		    
+            var name = args[0];
+            
             Func<ICommand> command;
             if (!commands.TryGetValue(name, out command))
                 throw new ApplicationException("Invalid command.");
 
-		    return command().Run(args.Skip(1).ToArray());
+            return command().Run(args.Skip(1).ToArray());
            
-		}
+        }
 
         static IEnumerable<string> Aliases(params string[] values)
         {
             return values;
         }
-	}
+    }
 }

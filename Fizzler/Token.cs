@@ -171,13 +171,13 @@ namespace Fizzler
             return new Token(TokenKind.SubstringMatch);
         }
 
-		/// <summary>
-		/// Creates a general sibling token.
-		/// </summary>
-		public static Token Tilde()
-		{
-			return new Token(TokenKind.Tilde);
-		}
+        /// <summary>
+        /// Creates a general sibling token.
+        /// </summary>
+        public static Token Tilde()
+        {
+            return new Token(TokenKind.Tilde);
+        }
 
         /// <summary>
         /// Creates an identifier token.

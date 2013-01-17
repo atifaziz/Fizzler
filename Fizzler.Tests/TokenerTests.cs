@@ -283,17 +283,17 @@ namespace Fizzler.Tests
             Assert.AreEqual(new[] { Token.Char('*'), Token.Char('*') }, Tokener.Tokenize("**").Take(2).ToArray());
         }
 
-		[Test]
-		public void Tilde()
-		{
-			Assert.AreEqual(TokenKind.Tilde, Tokener.Tokenize("~").First().Kind);
-		}
+        [Test]
+        public void Tilde()
+        {
+            Assert.AreEqual(TokenKind.Tilde, Tokener.Tokenize("~").First().Kind);
+        }
 
-		[Test]
+        [Test]
         public void TildeWhitespacePrepended()
-		{
-			Assert.AreEqual(TokenKind.Tilde, Tokener.Tokenize("  ~").First().Kind);
-		}
+        {
+            Assert.AreEqual(TokenKind.Tilde, Tokener.Tokenize("  ~").First().Kind);
+        }
 
         [Test,ExpectedException(typeof(FormatException))]
         public void StringSingleQuoteUnterminated()

@@ -75,10 +75,10 @@ namespace Fizzler
         /// </summary>
         Integer,
 
-		/// <summary>
-		/// Represents S* "~"
-		/// </summary>
-		Tilde,
+        /// <summary>
+        /// Represents S* "~"
+        /// </summary>
+        Tilde,
 
         /// <summary>
         /// Represents an arbitrary character
