@@ -19,27 +19,31 @@
 // 
 #endregion
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Drawing;
-using System.Globalization;
-using System.Linq;
-using System.Net;
-using System.Net.Mime;
-using System.Text.RegularExpressions;
-using System.Windows.Forms;
-using Fizzler;
-using Fizzler.Systems.HtmlAgilityPack;
-using HtmlAgilityPack;
-using Mannex.Net;
-using Microsoft.VisualBasic;
-using OpenWebClient;
-using WebClient=OpenWebClient.WebClient;
-using HtmlDocument=HtmlAgilityPack.HtmlDocument;
-
 namespace VisualFizzler
 {
+    #region Imports
+
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics;
+    using System.Drawing;
+    using System.Globalization;
+    using System.Linq;
+    using System.Net;
+    using System.Net.Mime;
+    using System.Text.RegularExpressions;
+    using System.Windows.Forms;
+    using Fizzler;
+    using Fizzler.Systems.HtmlAgilityPack;
+    using HtmlAgilityPack;
+    using Mannex.Net;
+    using Microsoft.VisualBasic;
+    using OpenWebClient;
+    using HtmlDocument = HtmlAgilityPack.HtmlDocument;
+    using WebClient = OpenWebClient.WebClient;
+
+    #endregion
+
     public partial class MainForm : Form
     {
         private static readonly Regex _tagExpression = new Regex(@"\<(?:(?<t>[a-z]+)(?:""[^""]*""|'[^']*'|[^""'>])*|/(?<t>[a-z]+))\>",

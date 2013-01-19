@@ -19,13 +19,17 @@
 // 
 #endregion
 
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Windows.Forms;
-
 namespace VisualFizzler
 {
+    #region Imports
+
+    using System;
+    using System.Diagnostics;
+    using System.IO;
+    using System.Windows.Forms;
+
+    #endregion
+
     internal static class Program
     {
         /// <summary>

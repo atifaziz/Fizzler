@@ -19,15 +19,13 @@
 // 
 #endregion
 
-using System.Collections.Generic;
-using System.Diagnostics;
-
 namespace Fizzler.Systems.HtmlAgilityPack
 {
     #region Imports
 
     using System;
-    using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Runtime.CompilerServices;
     using global::HtmlAgilityPack;
 

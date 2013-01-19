@@ -18,7 +18,6 @@
 // 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA 
 // 
 #endregion
-using Mannex;
 
 namespace ConsoleFizzler
 {
@@ -30,6 +29,8 @@ namespace ConsoleFizzler
     using System.IO;
     using System.Linq;
     using System.Runtime.InteropServices;
+    using Mannex;
+
 
     #endregion
 

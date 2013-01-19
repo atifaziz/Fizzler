@@ -19,11 +19,11 @@
 // 
 #endregion
 
-using System;
-using System.Net.Mime;
-
 namespace VisualFizzler
 {
+    using System;
+    using System.Net.Mime;
+
     internal static class ContentTypeExtensions
     {
         public static bool IsPlainText(this ContentType contentType)

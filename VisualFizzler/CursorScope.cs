@@ -22,10 +22,10 @@
 //
 #endregion
 
-using System.Windows.Forms;
-
 namespace VisualFizzler
 {
+    using System.Windows.Forms;
+
     internal static class CurrentCursorScope
     {
         public static SingletonScope<Cursor, Helper> EnterWait()
