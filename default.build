@@ -81,7 +81,7 @@
 			</sources>
 			<references>
 				<include name="bin/${output.dir}${configuration}/Fizzler.dll" />
-				<include name="libs/HtmlAgilityPack.dll" />
+				<include name="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
 				<include name="libs/LinqBridge.dll" unless="${bool::parse(net-35)}" />
@@ -99,7 +99,8 @@
 			<references>
 				<include name="bin/${output.dir}${configuration}/Fizzler.dll" />
 				<include name="bin/${output.dir}${configuration}/Fizzler.Systems.HtmlAgilityPack.dll" />
-				<include name="libs/HtmlAgilityPack.dll" />
+				<include name="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" />
+				<include name="packages/Mannex.1.7.0/lib/net35/Mannex.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
 				<include name="libs/LinqBridge.dll" unless="${bool::parse(net-35)}" />
@@ -121,7 +122,8 @@
 			<references>
 				<include name="bin/${output.dir}${configuration}/Fizzler.dll" />
 				<include name="bin/${output.dir}${configuration}/Fizzler.Systems.HtmlAgilityPack.dll" />
-				<include name="libs/HtmlAgilityPack.dll" />
+				<include name="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" />
+				<include name="packages/Mannex.1.7.0/lib/net35/Mannex.dll" />
 				<include name="Microsoft.VisualBasic.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
@@ -145,8 +147,8 @@
 			<references>
 				<include name="bin/${output.dir}${configuration}/Fizzler.dll" />
 				<include name="bin/${output.dir}${configuration}/Fizzler.Systems.HtmlAgilityPack.dll" />
-				<include name="libs\HtmlAgilityPack.dll" />
-				<include name="libs\nunit.framework.dll" />
+				<include name="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" />
+				<include name="packages/NUnit.2.6.2/lib/nunit.framework.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
 				<include name="libs/LinqBridge.dll" unless="${bool::parse(net-35)}" />
@@ -155,9 +157,9 @@
 		</csc>
 	</target>
 	<target name="test" depends="build-tests">
-		<copy file="libs/HtmlAgilityPack.dll" todir="bin//${output.dir}${configuration}" />
+		<copy file="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" todir="bin//${output.dir}${configuration}" />
 		<copy file="libs/LinqBridge.dll" todir="bin//${output.dir}${configuration}" unless="${bool::parse(net-35)}" />
-		<copy file="libs/nunit.framework.dll" todir="bin//${output.dir}${configuration}" />
+		<copy file="packages/NUnit.2.6.2/lib/nunit.framework.dll" todir="bin//${output.dir}${configuration}" />
 		<nunit2>
 			<formatter type="Plain" />
 			<test assemblyname="bin//${output.dir}${configuration}//Fizzler.Tests.dll" appconfig="Fizzler.Tests/App.config" />
