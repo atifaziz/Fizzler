@@ -31,6 +31,7 @@
     <WarningsAsErrors>
     </WarningsAsErrors>
     <NoWarn>3001,3002,1685</NoWarn>
+    <DocumentationFile>..\..\bin\NET-2.0\Debug\Fizzler.Systems.HtmlAgilityPack.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,6 +43,7 @@
     <WarningsAsErrors>
     </WarningsAsErrors>
     <NoWarn>3001,3002,1685</NoWarn>
+    <DocumentationFile>..\..\bin\NET-2.0\Release\Fizzler.Systems.HtmlAgilityPack.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
