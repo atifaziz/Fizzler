@@ -31,6 +31,10 @@ namespace Fizzler.Systems.HtmlAgilityPack
 
     #endregion
 
+    /// <summary>
+    /// Extensions methods for <see cref="HtmlDocument"/>.
+    /// </summary>
+    
     public static class HtmlDocumentExtensions
     {
         private static Dictionary<string, HtmlElementFlag> _defaultElementFlags;
