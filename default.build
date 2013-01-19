@@ -68,7 +68,7 @@
 			<references>
 				<include name="System.dll" />
 				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
-				<include name="libs/LinqBridge.dll" unless="${bool::parse(net-35)}" />
+				<include name="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" unless="${bool::parse(net-35)}" />
 			</references>
 		</csc>
 	</target>
@@ -84,7 +84,7 @@
 				<include name="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
-				<include name="libs/LinqBridge.dll" unless="${bool::parse(net-35)}" />
+				<include name="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" unless="${bool::parse(net-35)}" />
 				<include name="System.XML.dll" />
 			</references>
 		</csc>
@@ -103,7 +103,7 @@
 				<include name="packages/Mannex.1.7.0/lib/net35/Mannex.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
-				<include name="libs/LinqBridge.dll" unless="${bool::parse(net-35)}" />
+				<include name="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" unless="${bool::parse(net-35)}" />
 				<include name="System.XML.dll" />
 				<include name="System.Configuration.dll" />
 			</references>
@@ -127,7 +127,7 @@
 				<include name="Microsoft.VisualBasic.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
-				<include name="libs/LinqBridge.dll" unless="${bool::parse(net-35)}" />
+				<include name="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" unless="${bool::parse(net-35)}" />
 				<include name="System.Deployment.dll" />
 				<include name="System.Drawing.dll" />
 				<include name="System.Windows.Forms.dll" />
@@ -151,14 +151,14 @@
 				<include name="packages/NUnit.2.6.2/lib/nunit.framework.dll" />
 				<include name="System.dll" />
 				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
-				<include name="libs/LinqBridge.dll" unless="${bool::parse(net-35)}" />
+				<include name="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" unless="${bool::parse(net-35)}" />
 				<include name="System.XML.dll" />
 			</references>
 		</csc>
 	</target>
 	<target name="test" depends="build-tests">
 		<copy file="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" todir="bin//${output.dir}${configuration}" />
-		<copy file="libs/LinqBridge.dll" todir="bin//${output.dir}${configuration}" unless="${bool::parse(net-35)}" />
+		<copy file="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" todir="bin//${output.dir}${configuration}" unless="${bool::parse(net-35)}" />
 		<copy file="packages/NUnit.2.6.2/lib/nunit.framework.dll" todir="bin//${output.dir}${configuration}" />
 		<nunit2>
 			<formatter type="Plain" />
