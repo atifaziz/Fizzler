@@ -5,7 +5,7 @@
 		<property name="debug" value="true" />
 		<property name="configuration" value="Debug" />
 		<if test="${framework::get-family(framework::get-runtime-framework()) != 'mono'}">
-			<call target="build" />
+			<echo message="This build script is designed to be used for targeting Mono." level="warning" />
 		</if>
 
 		<if test="${framework::get-family(framework::get-runtime-framework()) == 'mono'}">
@@ -22,7 +22,7 @@
 		<property name="configuration" value="Release" />
 
 		<if test="${framework::get-family(framework::get-runtime-framework()) != 'mono'}">
-			<call target="build" />
+			<echo message="This build script is designed to be used for targeting Mono." level="warning" />
 		</if>
 
 		<if test="${framework::get-family(framework::get-runtime-framework()) == 'mono'}">
