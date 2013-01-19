@@ -49,7 +49,7 @@ namespace Fizzler.Systems.HtmlAgilityPack
 
         // TODO Think of a better name than LoadHtml2
         /// <summary>
-        /// Same as <see cref="HtmlDocument.Load" /> but without the FORM nesting
+        /// Same as <see cref="HtmlDocument.Load(string)" /> but without the FORM nesting
         /// problem outlined in <a href="http://code.google.com/p/fizzler/issues/detail?id=24">issue #24</a>.
         /// </summary>
 
