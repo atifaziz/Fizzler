@@ -1,168 +1,168 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <project name="Fizzler" basedir="." default="debug">
 
-	<target name="debug">
-		<property name="debug" value="true" />
-		<property name="configuration" value="Debug" />
-		<if test="${framework::get-family(framework::get-runtime-framework()) != 'mono'}">
-			<echo message="This build script is designed to be used for targeting Mono." level="warning" />
-		</if>
+    <target name="debug">
+        <property name="debug" value="true" />
+        <property name="configuration" value="Debug" />
+        <if test="${framework::get-family(framework::get-runtime-framework()) != 'mono'}">
+            <echo message="This build script is designed to be used for targeting Mono." level="warning" />
+        </if>
 
-		<if test="${framework::get-family(framework::get-runtime-framework()) == 'mono'}">
-			<echo message="Running MONO build." />
-			<property name="output.dir" value="" />
-			<property name="net-35" value="true" />
-			<property name="mono" value="true" />
-			<call target="test" />
-		</if>
-	</target>
+        <if test="${framework::get-family(framework::get-runtime-framework()) == 'mono'}">
+            <echo message="Running MONO build." />
+            <property name="output.dir" value="" />
+            <property name="net-35" value="true" />
+            <property name="mono" value="true" />
+            <call target="test" />
+        </if>
+    </target>
 
-	<target name="release">
-		<property name="debug" value="false" />
-		<property name="configuration" value="Release" />
+    <target name="release">
+        <property name="debug" value="false" />
+        <property name="configuration" value="Release" />
 
-		<if test="${framework::get-family(framework::get-runtime-framework()) != 'mono'}">
-			<echo message="This build script is designed to be used for targeting Mono." level="warning" />
-		</if>
+        <if test="${framework::get-family(framework::get-runtime-framework()) != 'mono'}">
+            <echo message="This build script is designed to be used for targeting Mono." level="warning" />
+        </if>
 
-		<if test="${framework::get-family(framework::get-runtime-framework()) == 'mono'}">
-			<echo message="Running MONO build." />
-			<property name="output.dir" value="" />
-			<property name="net-35" value="true" />
-			<property name="mono" value="true" />
-			<call target="test" />
-		</if>
-	</target>
+        <if test="${framework::get-family(framework::get-runtime-framework()) == 'mono'}">
+            <echo message="Running MONO build." />
+            <property name="output.dir" value="" />
+            <property name="net-35" value="true" />
+            <property name="mono" value="true" />
+            <call target="test" />
+        </if>
+    </target>
 
-	<target name="clean">
-		<delete dir="bin" />
-		<delete dir="Fizzler.Systems.HtmlAgilityPack\bin" />
-		<delete dir="Fizzler.Systems.HtmlAgilityPack\obj" />
-		<delete dir="Fizzler\bin" />
-		<delete dir="Fizzler\obj" />
-		<delete dir="Fizzler.Tests\bin" />
-		<delete dir="Fizzler.Tests\obj" />
-	</target>
+    <target name="clean">
+        <delete dir="bin" />
+        <delete dir="Fizzler.Systems.HtmlAgilityPack\bin" />
+        <delete dir="Fizzler.Systems.HtmlAgilityPack\obj" />
+        <delete dir="Fizzler\bin" />
+        <delete dir="Fizzler\obj" />
+        <delete dir="Fizzler.Tests\bin" />
+        <delete dir="Fizzler.Tests\obj" />
+    </target>
 
-	<target name="prep" depends="clean">
-		<mkdir dir="bin//${output.dir}${configuration}" />
-		<mkdir dir="bin//${output.dir}${configuration}" />
-	</target>
+    <target name="prep" depends="clean">
+        <mkdir dir="bin//${output.dir}${configuration}" />
+        <mkdir dir="bin//${output.dir}${configuration}" />
+    </target>
 
-	<target name="build">
-		<property name="mono" value="false" />
-		<property name="output.dir" value="NET-2.0//" />
-		<property name="net-35" value="false" />
-		<call target="test" />
-		<property name="output.dir" value="" />
-		<property name="net-35" value="true" />
-		<call target="test" />
-	</target>
+    <target name="build">
+        <property name="mono" value="false" />
+        <property name="output.dir" value="NET-2.0//" />
+        <property name="net-35" value="false" />
+        <call target="test" />
+        <property name="output.dir" value="" />
+        <property name="net-35" value="true" />
+        <call target="test" />
+    </target>
 
-	<target name="build-fizzler" depends="prep">
-		<echo message="net-35 is: ${bool::parse(net-35)}" />
-		<csc target="library" noconfig="true" output="bin//${output.dir}${configuration}//Fizzler.dll" debug="${debug}">
-			<sources>
-				<include name="Fizzler/**/*.cs" />
-			</sources>
-			<references>
-				<include name="System.dll" />
-				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
-				<include name="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" unless="${bool::parse(net-35)}" />
-			</references>
-		</csc>
-	</target>
+    <target name="build-fizzler" depends="prep">
+        <echo message="net-35 is: ${bool::parse(net-35)}" />
+        <csc target="library" noconfig="true" output="bin//${output.dir}${configuration}//Fizzler.dll" debug="${debug}">
+            <sources>
+                <include name="Fizzler/**/*.cs" />
+            </sources>
+            <references>
+                <include name="System.dll" />
+                <include name="System.Core.dll" if="${bool::parse(net-35)}" />
+                <include name="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" unless="${bool::parse(net-35)}" />
+            </references>
+        </csc>
+    </target>
 
-	<target name="build-htmlagilitypack" depends="build-fizzler">
-		<csc target="library" noconfig="true" output="bin//${output.dir}${configuration}//Fizzler.Systems.HtmlAgilityPack.dll" debug="${debug}">
-			<sources>
-				<include name="NET-2.0/ExtensionAttribute.cs" unless="${bool::parse(net-35)}" />
-				<include name="Fizzler.Systems.HtmlAgilityPack/**/*.cs" />
-			</sources>
-			<references>
-				<include name="bin/${output.dir}${configuration}/Fizzler.dll" />
-				<include name="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" />
-				<include name="System.dll" />
-				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
-				<include name="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" unless="${bool::parse(net-35)}" />
-				<include name="System.XML.dll" />
-			</references>
-		</csc>
-	</target>
+    <target name="build-htmlagilitypack" depends="build-fizzler">
+        <csc target="library" noconfig="true" output="bin//${output.dir}${configuration}//Fizzler.Systems.HtmlAgilityPack.dll" debug="${debug}">
+            <sources>
+                <include name="NET-2.0/ExtensionAttribute.cs" unless="${bool::parse(net-35)}" />
+                <include name="Fizzler.Systems.HtmlAgilityPack/**/*.cs" />
+            </sources>
+            <references>
+                <include name="bin/${output.dir}${configuration}/Fizzler.dll" />
+                <include name="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" />
+                <include name="System.dll" />
+                <include name="System.Core.dll" if="${bool::parse(net-35)}" />
+                <include name="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" unless="${bool::parse(net-35)}" />
+                <include name="System.XML.dll" />
+            </references>
+        </csc>
+    </target>
 
-	<target name="build-consolefizzler" depends="build-htmlagilitypack">
-		<csc target="exe" noconfig="true" output="bin//${output.dir}${configuration}//fizz.exe" debug="${debug}">
-			<sources>
-				<include name="NET-2.0/ExtensionAttribute.cs" unless="${bool::parse(net-35)}" />
-				<include name="ConsoleFizzler/**/*.cs" />
-			</sources>
-			<references>
-				<include name="bin/${output.dir}${configuration}/Fizzler.dll" />
-				<include name="bin/${output.dir}${configuration}/Fizzler.Systems.HtmlAgilityPack.dll" />
-				<include name="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" />
-				<include name="packages/Mannex.1.7.0/lib/net35/Mannex.dll" />
-				<include name="System.dll" />
-				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
-				<include name="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" unless="${bool::parse(net-35)}" />
-				<include name="System.XML.dll" />
-				<include name="System.Configuration.dll" />
-			</references>
-		</csc>
-	</target>
-	<target name="build-visualfizzler" depends="build-consolefizzler">
-		<csc target="exe" noconfig="true" output="bin//${output.dir}${configuration}//VisualFizzler.exe" debug="${debug}">
-			<sources>
-				<include name="VisualFizzler/**/*.cs" />
-				<include name="NET-2.0/ExtensionAttribute.cs" unless="${bool::parse(net-35)}" />
-				<include name="NET-2.0/Actions.cs" unless="${bool::parse(net-35)}" />
-			</sources>
-			<resources dynamicprefix="true">
-				<include name="VisualFizzler/**/*.resx" />
-			</resources>
-			<references>
-				<include name="bin/${output.dir}${configuration}/Fizzler.dll" />
-				<include name="bin/${output.dir}${configuration}/Fizzler.Systems.HtmlAgilityPack.dll" />
-				<include name="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" />
-				<include name="packages/Mannex.1.7.0/lib/net35/Mannex.dll" />
-				<include name="Microsoft.VisualBasic.dll" />
-				<include name="System.dll" />
-				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
-				<include name="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" unless="${bool::parse(net-35)}" />
-				<include name="System.Deployment.dll" />
-				<include name="System.Drawing.dll" />
-				<include name="System.Windows.Forms.dll" />
-				<include name="System.XML.dll" />
-			</references>
-		</csc>
-	</target>
-	<target name="build-tests" depends="build-visualfizzler">
-		<csc target="library" noconfig="${not bool::parse(mono)}" output="bin//${output.dir}${configuration}//Fizzler.Tests.dll" debug="${debug}">
-			<sources>
-				<include name="Fizzler.Tests/**/*.cs" />
-				<include name="NET-2.0/Actions.cs" unless="${bool::parse(net-35)}" />
-			</sources>
-			<resources dynamicprefix="true">
-				<include name="Fizzler.Tests/*.html" />
-			</resources>
-			<references>
-				<include name="bin/${output.dir}${configuration}/Fizzler.dll" />
-				<include name="bin/${output.dir}${configuration}/Fizzler.Systems.HtmlAgilityPack.dll" />
-				<include name="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" />
-				<include name="packages/NUnit.2.6.2/lib/nunit.framework.dll" />
-				<include name="System.dll" />
-				<include name="System.Core.dll" if="${bool::parse(net-35)}" />
-				<include name="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" unless="${bool::parse(net-35)}" />
-				<include name="System.XML.dll" />
-			</references>
-		</csc>
-	</target>
-	<target name="test" depends="build-tests">
-		<copy file="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" todir="bin//${output.dir}${configuration}" />
-		<copy file="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" todir="bin//${output.dir}${configuration}" unless="${bool::parse(net-35)}" />
-		<copy file="packages/NUnit.2.6.2/lib/nunit.framework.dll" todir="bin//${output.dir}${configuration}" />
-		<nunit2>
-			<formatter type="Plain" />
-			<test assemblyname="bin//${output.dir}${configuration}//Fizzler.Tests.dll" appconfig="Fizzler.Tests/App.config" />
-		</nunit2>
-	</target>
+    <target name="build-consolefizzler" depends="build-htmlagilitypack">
+        <csc target="exe" noconfig="true" output="bin//${output.dir}${configuration}//fizz.exe" debug="${debug}">
+            <sources>
+                <include name="NET-2.0/ExtensionAttribute.cs" unless="${bool::parse(net-35)}" />
+                <include name="ConsoleFizzler/**/*.cs" />
+            </sources>
+            <references>
+                <include name="bin/${output.dir}${configuration}/Fizzler.dll" />
+                <include name="bin/${output.dir}${configuration}/Fizzler.Systems.HtmlAgilityPack.dll" />
+                <include name="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" />
+                <include name="packages/Mannex.1.7.0/lib/net35/Mannex.dll" />
+                <include name="System.dll" />
+                <include name="System.Core.dll" if="${bool::parse(net-35)}" />
+                <include name="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" unless="${bool::parse(net-35)}" />
+                <include name="System.XML.dll" />
+                <include name="System.Configuration.dll" />
+            </references>
+        </csc>
+    </target>
+    <target name="build-visualfizzler" depends="build-consolefizzler">
+        <csc target="exe" noconfig="true" output="bin//${output.dir}${configuration}//VisualFizzler.exe" debug="${debug}">
+            <sources>
+                <include name="VisualFizzler/**/*.cs" />
+                <include name="NET-2.0/ExtensionAttribute.cs" unless="${bool::parse(net-35)}" />
+                <include name="NET-2.0/Actions.cs" unless="${bool::parse(net-35)}" />
+            </sources>
+            <resources dynamicprefix="true">
+                <include name="VisualFizzler/**/*.resx" />
+            </resources>
+            <references>
+                <include name="bin/${output.dir}${configuration}/Fizzler.dll" />
+                <include name="bin/${output.dir}${configuration}/Fizzler.Systems.HtmlAgilityPack.dll" />
+                <include name="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" />
+                <include name="packages/Mannex.1.7.0/lib/net35/Mannex.dll" />
+                <include name="Microsoft.VisualBasic.dll" />
+                <include name="System.dll" />
+                <include name="System.Core.dll" if="${bool::parse(net-35)}" />
+                <include name="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" unless="${bool::parse(net-35)}" />
+                <include name="System.Deployment.dll" />
+                <include name="System.Drawing.dll" />
+                <include name="System.Windows.Forms.dll" />
+                <include name="System.XML.dll" />
+            </references>
+        </csc>
+    </target>
+    <target name="build-tests" depends="build-visualfizzler">
+        <csc target="library" noconfig="${not bool::parse(mono)}" output="bin//${output.dir}${configuration}//Fizzler.Tests.dll" debug="${debug}">
+            <sources>
+                <include name="Fizzler.Tests/**/*.cs" />
+                <include name="NET-2.0/Actions.cs" unless="${bool::parse(net-35)}" />
+            </sources>
+            <resources dynamicprefix="true">
+                <include name="Fizzler.Tests/*.html" />
+            </resources>
+            <references>
+                <include name="bin/${output.dir}${configuration}/Fizzler.dll" />
+                <include name="bin/${output.dir}${configuration}/Fizzler.Systems.HtmlAgilityPack.dll" />
+                <include name="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" />
+                <include name="packages/NUnit.2.6.2/lib/nunit.framework.dll" />
+                <include name="System.dll" />
+                <include name="System.Core.dll" if="${bool::parse(net-35)}" />
+                <include name="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" unless="${bool::parse(net-35)}" />
+                <include name="System.XML.dll" />
+            </references>
+        </csc>
+    </target>
+    <target name="test" depends="build-tests">
+        <copy file="packages/HtmlAgilityPack.1.4.6/lib/Net20/HtmlAgilityPack.dll" todir="bin//${output.dir}${configuration}" />
+        <copy file="packages/LinqBridge.1.3.0/lib/net20/LinqBridge.dll" todir="bin//${output.dir}${configuration}" unless="${bool::parse(net-35)}" />
+        <copy file="packages/NUnit.2.6.2/lib/nunit.framework.dll" todir="bin//${output.dir}${configuration}" />
+        <nunit2>
+            <formatter type="Plain" />
+            <test assemblyname="bin//${output.dir}${configuration}//Fizzler.Tests.dll" appconfig="Fizzler.Tests/App.config" />
+        </nunit2>
+    </target>
 </project>
