@@ -2,17 +2,16 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Fizzler</id>
-        <version>0.9.3</version>
+        <version>1.0.0-beta1</version>
         <title>Fizzler</title>
-        <authors>colinramsay1980,azizatif</authors>
-        <owners>C.Small</owners>
+        <authors>Atif Aziz, Colin Ramsay</authors>
+        <owners>Atif Aziz</owners>
         <licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
-        <projectUrl>https://github.com/yetanotherchris/fizzler/</projectUrl>
+        <projectUrl>https://fizzler.googlecode.com/</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>A .NET library to select items from a node tree based on a CSS selector. The default implementation is based on HTMLAgilityPack and selects from HTML documents. There over 140 unit tests - see below for more information. The tests are based on the jQuery selector engine tests. At this time, the library is BETA quality.</description>
-        <summary>A .NET library to select items from a node tree based on a CSS selector.</summary>
-        <releaseNotes>Removed manex dependency, added linqbridge.</releaseNotes>
-        <tags>htmlagility fizzler</tags>
+        <description>Fizzler is a CSS Selector parser and generic selector framework for document hierarchies. Fizzler also comes with a default implementation over HTMLAgilityPack that enables QuerySelector and QuerySelectorAll (from Selectors API Level 1) for HtmlNode objects.</description>
+        <summary>CSS Selector Engine for Microsoft .NET Framework</summary>
+        <tags>htmlagility fizzler css html</tags>
         <dependencies>
             <group targetFramework=".NETFramework2.0">
                 <dependency id="HtmlAgilityPack" version="1.4.6" />
@@ -24,35 +23,13 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="lib\net20\Fizzler.dll" target="lib\net20\Fizzler.dll" />
-        <file src="lib\net20\Fizzler.pdb" target="lib\net20\Fizzler.pdb" />
-        <file src="lib\net20\Fizzler.Systems.HtmlAgilityPack.dll" target="lib\net20\Fizzler.Systems.HtmlAgilityPack.dll" />
-        <file src="lib\net20\Fizzler.Systems.HtmlAgilityPack.pdb" target="lib\net20\Fizzler.Systems.HtmlAgilityPack.pdb" />
-        <file src="lib\net20\Fizzler.xml" target="lib\net20\Fizzler.xml" />
-        <file src="lib\net35\Fizzler.dll" target="lib\net35\Fizzler.dll" />
-        <file src="lib\net35\Fizzler.pdb" target="lib\net35\Fizzler.pdb" />
-        <file src="lib\net35\Fizzler.Sandbox.dll" target="lib\net35\Fizzler.Sandbox.dll" />
-        <file src="lib\net35\Fizzler.Sandbox.pdb" target="lib\net35\Fizzler.Sandbox.pdb" />
-        <file src="lib\net35\Fizzler.Systems.HtmlAgilityPack.dll" target="lib\net35\Fizzler.Systems.HtmlAgilityPack.dll" />
-        <file src="lib\net35\Fizzler.Systems.HtmlAgilityPack.pdb" target="lib\net35\Fizzler.Systems.HtmlAgilityPack.pdb" />
-        <file src="lib\net35\Fizzler.xml" target="lib\net35\Fizzler.xml" />
-        <file src="tools\fizz.exe" target="tools\fizz.exe" />
-        <file src="tools\fizz.exe.config" target="tools\fizz.exe.config" />
-        <file src="tools\fizz.pdb" target="tools\fizz.pdb" />
-        <file src="tools\Fizzler.dll" target="tools\Fizzler.dll" />
-        <file src="tools\Fizzler.pdb" target="tools\Fizzler.pdb" />
-        <file src="tools\Fizzler.Sandbox.dll" target="tools\Fizzler.Sandbox.dll" />
-        <file src="tools\Fizzler.Sandbox.pdb" target="tools\Fizzler.Sandbox.pdb" />
-        <file src="tools\Fizzler.Systems.HtmlAgilityPack.dll" target="tools\Fizzler.Systems.HtmlAgilityPack.dll" />
-        <file src="tools\Fizzler.Systems.HtmlAgilityPack.pdb" target="tools\Fizzler.Systems.HtmlAgilityPack.pdb" />
-        <file src="tools\Fizzler.xml" target="tools\Fizzler.xml" />
-        <file src="tools\HtmlAgilityPack.dll" target="tools\HtmlAgilityPack.dll" />
-        <file src="tools\HtmlAgilityPack.pdb" target="tools\HtmlAgilityPack.pdb" />
-        <file src="tools\HtmlAgilityPack.xml" target="tools\HtmlAgilityPack.xml" />
-        <file src="tools\Mannex.dll" target="tools\Mannex.dll" />
-        <file src="tools\Mannex.pdb" target="tools\Mannex.pdb" />
-        <file src="tools\Mannex.xml" target="tools\Mannex.xml" />
-        <file src="tools\VisualFizzler.exe" target="tools\VisualFizzler.exe" />
-        <file src="tools\VisualFizzler.pdb" target="tools\VisualFizzler.pdb" />
+        <file src="bin\NET-2.0\Release\Fizzler.dll" target="lib\net20\Fizzler.dll" />
+        <file src="bin\NET-2.0\Release\Fizzler.xml" target="lib\net20\Fizzler.xml" />
+        <file src="bin\NET-2.0\Release\Fizzler.Systems.HtmlAgilityPack.dll" target="lib\net20\Fizzler.Systems.HtmlAgilityPack.dll" />
+        <file src="bin\NET-2.0\Release\Fizzler.Systems.HtmlAgilityPack.xml" target="lib\net20\Fizzler.Systems.HtmlAgilityPack.xml" />
+        <file src="bin\Release\Fizzler.dll" target="lib\net35\Fizzler.dll" />
+        <file src="bin\Release\Fizzler.xml" target="lib\net35\Fizzler.xml" />
+        <file src="bin\Release\Fizzler.Systems.HtmlAgilityPack.dll" target="lib\net35\Fizzler.Systems.HtmlAgilityPack.dll" />
+        <file src="bin\Release\Fizzler.Systems.HtmlAgilityPack.xml" target="lib\net35\Fizzler.Systems.HtmlAgilityPack.xml" />
     </files>
 </package>
