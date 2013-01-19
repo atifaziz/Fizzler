@@ -3,8 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8FC1F69B-FAFC-484C-984B-78FA7E224BCB}"
 	ProjectSection(SolutionItems) = preProject
+		build.cmd = build.cmd
+		buildw.cmd = buildw.cmd
+		COPYING.LESSER.txt = COPYING.LESSER.txt
+		COPYING.txt = COPYING.txt
 		default.build = default.build
 		Fizzler.nuspec = Fizzler.nuspec
+		pack.cmd = pack.cmd
+		packw.cmd = packw.cmd
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Systems", "Systems", "{7AA23AC0-0852-45AC-8661-6FFBD3BD265D}"
