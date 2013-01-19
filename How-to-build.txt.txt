@@ -1,9 +1,0 @@
-WINDOWS
--------
-
-Run build-all.bat
-
-OSX
----
-
-Install latest Mono, Nant and Nunit. cd to the fizzler project root (where this file is) and simply run "nant".
