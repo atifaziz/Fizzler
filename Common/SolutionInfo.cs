@@ -29,7 +29,7 @@ using ComVisible = System.Runtime.InteropServices.ComVisibleAttribute;
 
 [assembly: AssemblyProduct("Fizzler")]
 [assembly: AssemblyCompany("http://fizzler.googlecode.com")]
-[assembly: AssemblyCopyright("Copyright (c) 2009, 2010 Atif Aziz, Colin Ramsay. All rights reserved.")]
+[assembly: AssemblyCopyright("Copyright (c) 2009 Atif Aziz, Colin Ramsay. All rights reserved.")]
 [assembly: AssemblyCulture("")]
 
 //
