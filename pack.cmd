@@ -8,5 +8,6 @@ goto :EOF
 :main
 if not exist dist md dist
 if not %errorlevel%==0 exit /b %errorlevel%
-call build /v:m && for %%i in (*.nuspec) do .nuget\NuGet pack %%i -OutputDirectory dist
+set nupack=.nuget\NuGet pack -OutputDirectory dist
+call build /v:m && %nupack% Fizzler.nuspec && %nupack% -NoPackageAnalysis Fizzler.Tools.nuspec
 goto :EOF
