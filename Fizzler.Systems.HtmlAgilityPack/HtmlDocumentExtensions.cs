@@ -39,11 +39,14 @@ namespace Fizzler.Systems.HtmlAgilityPack
     {
         private static Dictionary<string, HtmlElementFlag> _defaultElementFlags;
 
-        // TODO Think of a better name than LoadHtml2
         /// <summary>
         /// Same as <see cref="HtmlDocument.LoadHtml" /> but without the FORM nesting
         /// problem outlined in <a href="http://code.google.com/p/fizzler/issues/detail?id=24">issue #24</a>.
         /// </summary>
+        /// <remarks>
+        /// This method is designed to be used by the Fizzler project tools 
+        /// exclusively and may be removed from a future version.
+        /// </remarks>
 
         public static void LoadHtml2(this HtmlDocument document, string html)
         {
@@ -51,11 +54,14 @@ namespace Fizzler.Systems.HtmlAgilityPack
             document.LoadHtmlWithElementFlags(html, DefaultElementFlags);
         }
 
-        // TODO Think of a better name than LoadHtml2
         /// <summary>
         /// Same as <see cref="HtmlDocument.Load(string)" /> but without the FORM nesting
         /// problem outlined in <a href="http://code.google.com/p/fizzler/issues/detail?id=24">issue #24</a>.
         /// </summary>
+        /// <remarks>
+        /// This method is designed to be used by the Fizzler project tools 
+        /// exclusively and may be removed from a future version.
+        /// </remarks>
 
         public static void Load2(this HtmlDocument document, string path)
         {
@@ -71,6 +77,10 @@ namespace Fizzler.Systems.HtmlAgilityPack
         /// The behavior of this method is not guaranteed to be thread-safe 
         /// and is primarily a hack around <see cref="HtmlNode.ElementsFlags"/> 
         /// being static.
+        /// </remarks>
+        /// <remarks>
+        /// This method is designed to be used by the Fizzler project tools 
+        /// exclusively and may be removed from a future version.
         /// </remarks>
 
         [MethodImpl(MethodImplOptions.Synchronized)]
@@ -88,6 +98,10 @@ namespace Fizzler.Systems.HtmlAgilityPack
         /// The behavior of this method is not guaranteed to be thread-safe 
         /// and is primarily a hack around <see cref="HtmlNode.ElementsFlags"/> 
         /// being static.
+        /// </remarks>
+        /// <remarks>
+        /// This method is designed to be used by the Fizzler project tools 
+        /// exclusively and may be removed from a future version.
         /// </remarks>
 
         [MethodImpl(MethodImplOptions.Synchronized)]
