@@ -8,6 +8,7 @@
         <owners>Atif Aziz</owners>
         <licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
         <projectUrl>https://fizzler.googlecode.com/</projectUrl>
+        <copyright>Copyright (c) 2009 Atif Aziz, Colin Ramsay. All rights reserved.</copyright>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Fizzler is a CSS Selector parser and generic selector framework for document hierarchies. Fizzler also comes with a default implementation over HTMLAgilityPack that enables QuerySelector and QuerySelectorAll (from Selectors API Level 1) for HtmlNode objects.</description>
         <summary>CSS Selector Engine for Microsoft .NET Framework</summary>
@@ -23,6 +24,8 @@
         </dependencies>
     </metadata>
     <files>
+        <file src="COPYING.txt" target="COPYING.txt" />
+        <file src="COPYING.LESSER.txt" target="COPYING.LESSER.txt" />
         <file src="bin\NET-2.0\Release\Fizzler.dll" target="lib\net20\Fizzler.dll" />
         <file src="bin\NET-2.0\Release\Fizzler.xml" target="lib\net20\Fizzler.xml" />
         <file src="bin\NET-2.0\Release\Fizzler.Systems.HtmlAgilityPack.dll" target="lib\net20\Fizzler.Systems.HtmlAgilityPack.dll" />
