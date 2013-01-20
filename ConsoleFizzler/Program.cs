@@ -27,7 +27,7 @@ namespace ConsoleFizzler
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
-
+    using Mannex.Collections.Generic;
     using CommandNames = System.Collections.Generic.KeyValuePair<
             /* key   */ System.Func<ICommand>,
             /* value */ System.Collections.Generic.IEnumerable<string>>;
@@ -65,8 +65,8 @@ namespace ConsoleFizzler
 
             var name = args[0];
             
-            Func<ICommand> command;
-            if (!commands.TryGetValue(name, out command))
+            var command = commands.Find(name);
+            if (command == null)
                 throw new ApplicationException("Invalid command.");
 
             return command().Run(args.Skip(1).ToArray());
