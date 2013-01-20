@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>Fizzler.Tools</id>
+        <version>1.0.0-beta1</version>
+        <title>Fizzler Tools</title>
+        <authors>Atif Aziz, Colin Ramsay</authors>
+        <owners>Atif Aziz</owners>
+        <licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
+        <projectUrl>https://fizzler.googlecode.com/</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Fizzler is a CSS Selector parser and generic selector framework for document hierarchies. Fizzler also comes with a default implementation over HTMLAgilityPack that enables QuerySelector and QuerySelectorAll (from Selectors API Level 1) for HtmlNode objects.</description>
+        <summary>CSS Selector Engine for Microsoft .NET Framework</summary>
+        <tags>htmlagility fizzler css html</tags>
+        <dependencies>
+            <dependency id="HtmlAgilityPack" version="1.4.6" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Release\fizz.exe" target="tools\fizz.exe" />
+        <file src="bin\Release\fizz.exe.config" target="tools\fizz.exe.config" />
+        <file src="bin\Release\fizz.pdb" target="tools\fizz.pdb" />
+        <file src="bin\Release\Fizzler.dll" target="tools\Fizzler.dll" />
+        <file src="bin\Release\Fizzler.pdb" target="tools\Fizzler.pdb" />
+        <file src="bin\Release\Fizzler.Systems.HtmlAgilityPack.dll" target="tools\Fizzler.Systems.HtmlAgilityPack.dll" />
+        <file src="bin\Release\Fizzler.Systems.HtmlAgilityPack.pdb" target="tools\Fizzler.Systems.HtmlAgilityPack.pdb" />
+        <file src="bin\Release\HtmlAgilityPack.dll" target="tools\HtmlAgilityPack.dll" />
+        <file src="bin\Release\HtmlAgilityPack.pdb" target="tools\HtmlAgilityPack.pdb" />
+        <file src="bin\Release\Mannex.dll" target="tools\Mannex.dll" />
+        <file src="bin\Release\VisualFizzler.exe" target="tools\VisualFizzler.exe" />
+        <file src="bin\Release\VisualFizzler.pdb" target="tools\VisualFizzler.pdb" />    </files>
+</package>
