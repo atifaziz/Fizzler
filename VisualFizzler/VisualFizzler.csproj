@@ -60,7 +60,6 @@
     <Compile Include="..\Common\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="ContentTypeExtensions.cs" />
     <Compile Include="CursorScope.cs" />
     <Compile Include="ISingletonScopeHelper.cs" />
     <Compile Include="MainForm.cs">

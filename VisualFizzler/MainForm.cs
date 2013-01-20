@@ -37,6 +37,7 @@ namespace VisualFizzler
     using Fizzler.Systems.HtmlAgilityPack;
     using HtmlAgilityPack;
     using Mannex.Net;
+    using Mannex.Net.Mime;
     using Microsoft.VisualBasic;
     using OpenWebClient;
     using HtmlDocument = HtmlAgilityPack.HtmlDocument;
