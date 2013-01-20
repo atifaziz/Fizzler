@@ -10,8 +10,7 @@
         <projectUrl>https://fizzler.googlecode.com/</projectUrl>
         <copyright>Copyright (c) 2009 Atif Aziz, Colin Ramsay. All rights reserved.</copyright>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Fizzler is a CSS Selector parser and generic selector framework for document hierarchies. Fizzler also comes with a default implementation over HTMLAgilityPack that enables QuerySelector and QuerySelectorAll (from Selectors API Level 1) for HtmlNode objects.</description>
-        <summary>CSS Selector Engine for Microsoft .NET Framework</summary>
+        <summary>HTML querying tools based on open source libraries Fizzler and HTML Agility Pack</summary>
         <tags>htmlagility fizzler css html</tags>
     </metadata>
     <files>
