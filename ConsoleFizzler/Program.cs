@@ -28,9 +28,6 @@ namespace ConsoleFizzler
     using System.Diagnostics;
     using System.Linq;
     using Mannex.Collections.Generic;
-    using CommandNames = System.Collections.Generic.KeyValuePair<
-            /* key   */ System.Func<ICommand>,
-            /* value */ System.Collections.Generic.IEnumerable<string>>;
 
     #endregion
 
@@ -57,10 +54,10 @@ namespace ConsoleFizzler
 
             var commands = new[] 
             {
-                new CommandNames(() => new SelectCommand(), Aliases("select", "sel")),
-                new CommandNames(() => new ExplainCommand(), Aliases("explain", "describe", "desc")),
+                new Func<ICommand>(() => new SelectCommand()).AsKeyTo(Aliases("select", "sel")),
+                new Func<ICommand>(() => new ExplainCommand()).AsKeyTo(Aliases("explain", "describe", "desc")),
             }
-            .SelectMany(e => e.Value.Select(v => new KeyValuePair<string, Func<ICommand>>(v, e.Key)))
+            .SelectMany(e => e.Value.Select(v => v.AsKeyTo(e.Key)))
             .ToDictionary(e => e.Key, e => e.Value);
 
             var name = args[0];
@@ -69,8 +66,7 @@ namespace ConsoleFizzler
             if (command == null)
                 throw new ApplicationException("Invalid command.");
 
-            return command().Run(args.Skip(1).ToArray());
-           
+            return command().Run(args.Skip(1).ToArray());           
         }
 
         static IEnumerable<string> Aliases(params string[] values)
