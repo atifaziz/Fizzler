@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Fizzler</id>
-        <version>1.0.0-beta1</version>
+        <version>1.0.0-beta2</version>
         <title>Fizzler</title>
         <authors>Atif Aziz, Colin Ramsay</authors>
         <owners>Atif Aziz</owners>
@@ -10,16 +10,12 @@
         <projectUrl>https://fizzler.googlecode.com/</projectUrl>
         <copyright>Copyright (c) 2009 Atif Aziz, Colin Ramsay. All rights reserved.</copyright>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>Fizzler is a CSS Selector parser and generic selector framework for document hierarchies. Fizzler also comes with a default implementation over HTMLAgilityPack that enables QuerySelector and QuerySelectorAll (from Selectors API Level 1) for HtmlNode objects.</description>
-        <summary>CSS Selector Engine for Microsoft .NET Framework</summary>
-        <tags>htmlagility fizzler css html</tags>
+        <description>Fizzler is a W3C Selectors parser and generic selector framework for document hierarchies.</description>
+        <summary>W3C Selectors Engine for Microsoft .NET Framework</summary>
+        <tags>selectors w3c</tags>
         <dependencies>
             <group targetFramework=".NETFramework2.0">
-                <dependency id="HtmlAgilityPack" version="1.4.6" />
                 <dependency id="LinqBridge" version="1.3.0" />
-            </group>
-            <group targetFramework=".NETFramework3.5">
-                <dependency id="HtmlAgilityPack" version="1.4.6" />
             </group>
         </dependencies>
     </metadata>
@@ -28,11 +24,7 @@
         <file src="COPYING.LESSER.txt" target="COPYING.LESSER.txt" />
         <file src="bin\NET-2.0\Release\Fizzler.dll" target="lib\net20\Fizzler.dll" />
         <file src="bin\NET-2.0\Release\Fizzler.xml" target="lib\net20\Fizzler.xml" />
-        <file src="bin\NET-2.0\Release\Fizzler.Systems.HtmlAgilityPack.dll" target="lib\net20\Fizzler.Systems.HtmlAgilityPack.dll" />
-        <file src="bin\NET-2.0\Release\Fizzler.Systems.HtmlAgilityPack.xml" target="lib\net20\Fizzler.Systems.HtmlAgilityPack.xml" />
         <file src="bin\Release\Fizzler.dll" target="lib\net35\Fizzler.dll" />
         <file src="bin\Release\Fizzler.xml" target="lib\net35\Fizzler.xml" />
-        <file src="bin\Release\Fizzler.Systems.HtmlAgilityPack.dll" target="lib\net35\Fizzler.Systems.HtmlAgilityPack.dll" />
-        <file src="bin\Release\Fizzler.Systems.HtmlAgilityPack.xml" target="lib\net35\Fizzler.Systems.HtmlAgilityPack.xml" />
     </files>
 </package>

@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>Fizzler.Systems.HtmlAgilityPack</id>
+        <version>1.0.0-beta2</version>
+        <title>Fizzler</title>
+        <authors>Atif Aziz, Colin Ramsay</authors>
+        <owners>Atif Aziz</owners>
+        <licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
+        <projectUrl>https://fizzler.googlecode.com/</projectUrl>
+        <copyright>Copyright (c) 2009 Atif Aziz, Colin Ramsay. All rights reserved.</copyright>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <summary>W3C Selectors API for HTML Agility Pack</summary>
+        <description>Fizzler is a W3C Selectors parser and generic selector framework for document hierarchies. This package enables Fizzler over HTMLAgilityPack, adding QuerySelector and QuerySelectorAll (from Selectors API Level 1) for HtmlNode objects.</description>
+        <tags>selectors w3c htmlagility css html</tags>
+        <dependencies>
+            <group targetFramework=".NETFramework2.0">
+                <dependency id="HtmlAgilityPack" version="1.4.6" />
+                <dependency id="Fizzler" version="1.0.0" />
+            </group>
+            <group targetFramework=".NETFramework3.5">
+                <dependency id="HtmlAgilityPack" version="1.4.6" />
+                <dependency id="Fizzler" version="1.0.0" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="COPYING.txt" target="COPYING.txt" />
+        <file src="COPYING.LESSER.txt" target="COPYING.LESSER.txt" />
+        <file src="bin\NET-2.0\Release\Fizzler.Systems.HtmlAgilityPack.dll" target="lib\net20\Fizzler.Systems.HtmlAgilityPack.dll" />
+        <file src="bin\NET-2.0\Release\Fizzler.Systems.HtmlAgilityPack.xml" target="lib\net20\Fizzler.Systems.HtmlAgilityPack.xml" />
+        <file src="bin\Release\Fizzler.Systems.HtmlAgilityPack.dll" target="lib\net35\Fizzler.Systems.HtmlAgilityPack.dll" />
+        <file src="bin\Release\Fizzler.Systems.HtmlAgilityPack.xml" target="lib\net35\Fizzler.Systems.HtmlAgilityPack.xml" />
+    </files>
+</package>

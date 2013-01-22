@@ -4,7 +4,7 @@
         <id>Fizzler.Tools</id>
         <version>1.0.0-beta1</version>
         <title>Fizzler Tools</title>
-        <authors>Atif Aziz, Colin Ramsay</authors>
+        <authors>Atif Aziz</authors>
         <owners>Atif Aziz</owners>
         <licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
         <projectUrl>https://fizzler.googlecode.com/</projectUrl>
