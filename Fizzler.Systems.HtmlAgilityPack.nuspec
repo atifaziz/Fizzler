@@ -17,6 +17,7 @@
             <group targetFramework=".NETFramework2.0">
                 <dependency id="HtmlAgilityPack" version="1.4.6" />
                 <dependency id="Fizzler" version="1.0.0" />
+                <dependency id="LinqBridge" version="1.3.0" />
             </group>
             <group targetFramework=".NETFramework3.5">
                 <dependency id="HtmlAgilityPack" version="1.4.6" />
