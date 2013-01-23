@@ -28,5 +28,6 @@
         <file src="bin\Release\HtmlAgilityPack.pdb" target="tools\HtmlAgilityPack.pdb" />
         <file src="bin\Release\Mannex.dll" target="tools\Mannex.dll" />
         <file src="bin\Release\VisualFizzler.exe" target="tools\VisualFizzler.exe" />
-        <file src="bin\Release\VisualFizzler.pdb" target="tools\VisualFizzler.pdb" />    </files>
+        <file src="bin\Release\VisualFizzler.pdb" target="tools\VisualFizzler.pdb" />
+    </files>
 </package>
