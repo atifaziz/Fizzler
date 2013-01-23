@@ -17,6 +17,7 @@
             <group targetFramework=".NETFramework2.0">
                 <dependency id="LinqBridge" version="1.3.0" />
             </group>
+            <group targetFramework=".NETFramework3.5" />
         </dependencies>
     </metadata>
     <files>
