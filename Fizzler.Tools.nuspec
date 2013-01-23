@@ -11,6 +11,7 @@
         <copyright>Copyright (c) 2009 Atif Aziz, Colin Ramsay. All rights reserved.</copyright>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <summary>HTML querying tools based on open source libraries Fizzler and HTML Agility Pack</summary>
+        <description>WinForms and console tools for querying HTML documents based on open source libraries Fizzler and HTML Agility Pack</description>
         <tags>htmlagility fizzler css html</tags>
     </metadata>
     <files>
