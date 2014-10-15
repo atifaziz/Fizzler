@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Fizzler.Systems.HtmlAgilityPack</id>
-        <version>1.0.0-beta2</version>
+        <version>1.0.0</version>
         <title>Fizzler for HTML Agility Pack</title>
         <authors>Atif Aziz, Colin Ramsay</authors>
         <owners>Atif Aziz</owners>
@@ -16,21 +16,20 @@
         <dependencies>
             <group targetFramework=".NETFramework2.0">
                 <dependency id="HtmlAgilityPack" version="1.4.6" />
-                <dependency id="Fizzler" version="1.0.0-beta2" />
+                <dependency id="Fizzler" version="1.0.0" />
                 <dependency id="LinqBridge" version="1.3.0" />
             </group>
             <group targetFramework=".NETFramework3.5">
                 <dependency id="HtmlAgilityPack" version="1.4.6" />
-                <dependency id="Fizzler" version="1.0.0-beta2" />
+                <dependency id="Fizzler" version="1.0.0" />
             </group>
         </dependencies>
     </metadata>
     <files>
         <file src="COPYING.txt" target="COPYING.txt" />
         <file src="COPYING.LESSER.txt" target="COPYING.LESSER.txt" />
-        <file src="bin\NET-2.0\Release\Fizzler.Systems.HtmlAgilityPack.dll" target="lib\net20\Fizzler.Systems.HtmlAgilityPack.dll" />
-        <file src="bin\NET-2.0\Release\Fizzler.Systems.HtmlAgilityPack.xml" target="lib\net20\Fizzler.Systems.HtmlAgilityPack.xml" />
-        <file src="bin\Release\Fizzler.Systems.HtmlAgilityPack.dll" target="lib\net35\Fizzler.Systems.HtmlAgilityPack.dll" />
-        <file src="bin\Release\Fizzler.Systems.HtmlAgilityPack.xml" target="lib\net35\Fizzler.Systems.HtmlAgilityPack.xml" />
+        <file src="bin\NET-2.0\Release\Fizzler.Systems.HtmlAgilityPack.*" target="lib\net20" />
+        <file src="bin\Release\Fizzler.Systems.HtmlAgilityPack.*" target="lib\net35" />
+        <file src="src\**\*.cs" target="src" exclude="src\Fizzler.Tests\**;src\Fizzler.Sandbox\**"/>
     </files>
 </package>

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Fizzler</id>
-        <version>1.0.0-beta2</version>
+        <version>1.0.0</version>
         <title>Fizzler</title>
         <authors>Atif Aziz, Colin Ramsay</authors>
         <owners>Atif Aziz</owners>
@@ -23,9 +23,12 @@
     <files>
         <file src="COPYING.txt" target="COPYING.txt" />
         <file src="COPYING.LESSER.txt" target="COPYING.LESSER.txt" />
-        <file src="bin\NET-2.0\Release\Fizzler.dll" target="lib\net20\Fizzler.dll" />
-        <file src="bin\NET-2.0\Release\Fizzler.xml" target="lib\net20\Fizzler.xml" />
-        <file src="bin\Release\Fizzler.dll" target="lib\net35\Fizzler.dll" />
-        <file src="bin\Release\Fizzler.xml" target="lib\net35\Fizzler.xml" />
+        <file src="bin\NET-2.0\Release\Fizzler.dll" target="lib\net20" />
+        <file src="bin\NET-2.0\Release\Fizzler.xml" target="lib\net20" />
+        <file src="bin\NET-2.0\Release\Fizzler.pdb" target="lib\net20" />
+        <file src="bin\Release\Fizzler.dll" target="lib\net35" />
+        <file src="bin\Release\Fizzler.xml" target="lib\net35" />
+        <file src="bin\Release\Fizzler.pdb" target="lib\net35" />
+        <file src="src\**\*.cs" target="src" exclude="src\Fizzler.Tests\**;src\Fizzler.Sandbox\**"/>
     </files>
 </package>

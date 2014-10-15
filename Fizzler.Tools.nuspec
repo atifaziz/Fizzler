@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Fizzler.Tools</id>
-        <version>1.0.0-beta2</version>
+        <version>1.0.0</version>
         <title>Fizzler Tools</title>
         <authors>Atif Aziz</authors>
         <owners>Atif Aziz</owners>
@@ -17,17 +17,11 @@
     <files>
         <file src="COPYING.txt" target="COPYING.txt" />
         <file src="COPYING.LESSER.txt" target="COPYING.LESSER.txt" />
-        <file src="bin\Release\fizz.exe" target="tools\fizz.exe" />
-        <file src="bin\Release\fizz.exe.config" target="tools\fizz.exe.config" />
-        <file src="bin\Release\fizz.pdb" target="tools\fizz.pdb" />
-        <file src="bin\Release\Fizzler.dll" target="tools\Fizzler.dll" />
-        <file src="bin\Release\Fizzler.pdb" target="tools\Fizzler.pdb" />
-        <file src="bin\Release\Fizzler.Systems.HtmlAgilityPack.dll" target="tools\Fizzler.Systems.HtmlAgilityPack.dll" />
-        <file src="bin\Release\Fizzler.Systems.HtmlAgilityPack.pdb" target="tools\Fizzler.Systems.HtmlAgilityPack.pdb" />
-        <file src="bin\Release\HtmlAgilityPack.dll" target="tools\HtmlAgilityPack.dll" />
-        <file src="bin\Release\HtmlAgilityPack.pdb" target="tools\HtmlAgilityPack.pdb" />
-        <file src="bin\Release\Mannex.dll" target="tools\Mannex.dll" />
-        <file src="bin\Release\VisualFizzler.exe" target="tools\VisualFizzler.exe" />
-        <file src="bin\Release\VisualFizzler.pdb" target="tools\VisualFizzler.pdb" />
+        <file target="tools"  src="bin\Release\fizz.*"                            exclude="bin\Release\*.xml" />
+        <file target="tools"  src="bin\Release\Fizzler.*"                         exclude="bin\Release\*.xml;bin\Release\Fizzler.Sandbox.*" />
+        <file target="tools"  src="bin\Release\Fizzler.Systems.HtmlAgilityPack.*" exclude="bin\Release\*.xml" />
+        <file target="tools"  src="bin\Release\HtmlAgilityPack.*"                 exclude="bin\Release\*.xml" />
+        <file target="tools"  src="bin\Release\VisualFizzler.*"                   exclude="bin\Release\*.xml" />
+        <file target="tools"  src="bin\Release\Mannex.dll" />
     </files>
 </package>
