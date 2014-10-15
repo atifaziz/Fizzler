@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DBEAD205-BD5C-461F-873D-DE643016F14C}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{296C2824-A7D7-42A0-9B4C-1BC8FA0A1859}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fizzler.Systems.HtmlAgilityPack</RootNamespace>
-    <AssemblyName>Fizzler.Systems.HtmlAgilityPack</AssemblyName>
+    <RootNamespace>ConsoleFizzler</RootNamespace>
+    <AssemblyName>fizz</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -24,29 +24,31 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <NoWarn>3001,3002</NoWarn>
-    <DocumentationFile>bin\Debug\Fizzler.Systems.HtmlAgilityPack.xml</DocumentationFile>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <NoWarn>3001,3002</NoWarn>
-    <DocumentationFile>bin\Release\Fizzler.Systems.HtmlAgilityPack.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net20\HtmlAgilityPack.dll</HintPath>
+      <HintPath>..\..\packages\HtmlAgilityPack.1.4.6\lib\Net20\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Mannex, Version=1.7.15616.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\Mannex.1.7.0\lib\net35\Mannex.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
@@ -57,19 +59,29 @@
     <Compile Include="..\Common\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="HtmlDocumentExtensions.cs" />
-    <Compile Include="HtmlNodeExtensions.cs" />
-    <Compile Include="HtmlNodeOps.cs" />
-    <Compile Include="HtmlNodeSelection.cs" />
+    <Compile Include="CommandLine.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="ExplainCommand.cs" />
+    <Compile Include="ICommand.cs" />
+    <Compile Include="NameValueCollectionExtensions.cs" />
+    <Compile Include="NodeOutputFormat.cs" />
+    <Compile Include="SelectCommand.cs" />
+    <Compile Include="StringExtensions.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Fizzler.Systems.HtmlAgilityPack\Fizzler.Systems.HtmlAgilityPack.csproj">
+      <Project>{DBEAD205-BD5C-461F-873D-DE643016F14C}</Project>
+      <Name>Fizzler.Systems.HtmlAgilityPack %28Systems\Fizzler.Systems.HtmlAgilityPack%29</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Fizzler\Fizzler.csproj">
       <Project>{939036D6-29FD-46E4-B6CD-52618F51081B}</Project>
       <Name>Fizzler</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

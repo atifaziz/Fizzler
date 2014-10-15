@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{296C2824-A7D7-42A0-9B4C-1BC8FA0A1859}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{80456F6D-6853-4244-8E3D-F22ECA0980EC}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ConsoleFizzler</RootNamespace>
-    <AssemblyName>fizz</AssemblyName>
+    <RootNamespace>Fizzler</RootNamespace>
+    <AssemblyName>Fizzler.Sandbox</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <FileUpgradeFlags>
@@ -17,75 +17,52 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <OldToolsVersion>3.5</OldToolsVersion>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\</OutputPath>
+    <OutputPath>..\..\bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\</OutputPath>
+    <OutputPath>..\..\bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net20\HtmlAgilityPack.dll</HintPath>
-    </Reference>
-    <Reference Include="Mannex, Version=1.7.15616.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Mannex.1.7.0\lib\net35\Mannex.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
-    <Reference Include="System.configuration" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
     </Reference>
     <Reference Include="System.Data" />
-    <Reference Include="System.XML" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Common\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="CommandLine.cs" />
-    <Compile Include="Command.cs" />
-    <Compile Include="ExplainCommand.cs" />
-    <Compile Include="ICommand.cs" />
-    <Compile Include="NameValueCollectionExtensions.cs" />
-    <Compile Include="NodeOutputFormat.cs" />
-    <Compile Include="SelectCommand.cs" />
-    <Compile Include="StringExtensions.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WinForms\ControlExtensions.cs" />
+    <Compile Include="WinForms\ControlOps.cs" />
+    <Compile Include="WinForms\ControlSelection.cs" />
+    <Compile Include="Xml\XmlNodeExtensions.cs" />
+    <Compile Include="Xml\XmlNodeOps.cs" />
+    <Compile Include="Xml\XmlNodeSelection.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fizzler.Systems.HtmlAgilityPack\Fizzler.Systems.HtmlAgilityPack.csproj">
-      <Project>{DBEAD205-BD5C-461F-873D-DE643016F14C}</Project>
-      <Name>Fizzler.Systems.HtmlAgilityPack %28Systems\Fizzler.Systems.HtmlAgilityPack%29</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Fizzler\Fizzler.csproj">
       <Project>{939036D6-29FD-46E4-B6CD-52618F51081B}</Project>
       <Name>Fizzler</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

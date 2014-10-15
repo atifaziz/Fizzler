@@ -5,13 +5,15 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{48822D9C-C17E-412B-96AE-F740EEF87990}</ProjectGuid>
+    <ProjectGuid>{278E9225-9FE5-4D63-9C9B-206FC68BAA37}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fizzler.Systems.HtmlAgilityPack</RootNamespace>
-    <AssemblyName>Fizzler.Systems.HtmlAgilityPack</AssemblyName>
+    <RootNamespace>Fizzler</RootNamespace>
+    <AssemblyName>Fizzler</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SignAssembly>false</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Fizzler\Fizzler.snk</AssemblyOriginatorKeyFile>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <UpgradeBackupLocation>
@@ -24,59 +26,64 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\NET-2.0\Debug\</OutputPath>
+    <OutputPath>..\..\..\bin\NET-2.0\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <WarningsAsErrors>
-    </WarningsAsErrors>
-    <NoWarn>3001,3002,1685</NoWarn>
-    <DocumentationFile>..\..\bin\NET-2.0\Debug\Fizzler.Systems.HtmlAgilityPack.xml</DocumentationFile>
+    <DocumentationFile>..\..\..\bin\NET-2.0\Debug\Fizzler.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\NET-2.0\Release\</OutputPath>
+    <OutputPath>..\..\..\bin\NET-2.0\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <WarningsAsErrors>
-    </WarningsAsErrors>
-    <NoWarn>3001,3002,1685</NoWarn>
-    <DocumentationFile>..\..\bin\NET-2.0\Release\Fizzler.Systems.HtmlAgilityPack.xml</DocumentationFile>
+    <DocumentationFile>..\..\..\bin\NET-2.0\Release\Fizzler.xml</DocumentationFile>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HtmlAgilityPack, Version=1.4.6.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\HtmlAgilityPack.1.4.6\lib\Net20\HtmlAgilityPack.dll</HintPath>
-    </Reference>
     <Reference Include="LinqBridge, Version=1.3.0.0, Culture=neutral, PublicKeyToken=c2b14eb747628076, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\LinqBridge.1.3.0\lib\net20\LinqBridge.dll</HintPath>
+      <HintPath>..\..\..\packages\LinqBridge.1.3.0\lib\net20\LinqBridge.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\Common\SolutionInfo.cs">
       <Link>SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="..\..\Fizzler.Systems.HtmlAgilityPack\HtmlDocumentExtensions.cs">
-      <Link>HtmlDocumentExtensions.cs</Link>
+    <Compile Include="..\..\Fizzler\Either.cs">
+      <Link>Either.cs</Link>
     </Compile>
-    <Compile Include="..\..\Fizzler.Systems.HtmlAgilityPack\HtmlNodeExtensions.cs" />
-    <Compile Include="..\..\Fizzler.Systems.HtmlAgilityPack\HtmlNodeOps.cs" />
-    <Compile Include="..\..\Fizzler.Systems.HtmlAgilityPack\HtmlNodeSelection.cs" />
-    <Compile Include="..\..\Fizzler.Systems.HtmlAgilityPack\Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\Fizzler\HumanReadableSelectorGenerator.cs">
+      <Link>HumanReadableSelectorGenerator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Fizzler\IElementOps.cs">
+      <Link>IElementOps.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Fizzler\ISelectorGenerator.cs" />
+    <Compile Include="..\..\Fizzler\NamespacePrefix.cs">
+      <Link>NamespacePrefix.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Fizzler\Parser.cs" />
+    <Compile Include="..\..\Fizzler\Reader.cs" />
+    <Compile Include="..\..\Fizzler\Selector.cs" />
+    <Compile Include="..\..\Fizzler\Properties\AssemblyInfo.cs" />
+    <Compile Include="..\..\Fizzler\SelectorGenerator.cs" />
+    <Compile Include="..\..\Fizzler\SelectorGeneratorTee.cs">
+      <Link>SelectorGeneratorTee.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Fizzler\SelectorsCachingCompiler.cs">
+      <Link>SelectorsCachingCompiler.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Fizzler\Token.cs" />
+    <Compile Include="..\..\Fizzler\Tokener.cs" />
+    <Compile Include="..\..\Fizzler\TokenKind.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fizzler\Fizzler.csproj">
-      <Project>{278E9225-9FE5-4D63-9C9B-206FC68BAA37}</Project>
-      <Name>Fizzler %28NET-2.0\Fizzler%29</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
+    <None Include="..\..\Fizzler\Fizzler.snk" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
