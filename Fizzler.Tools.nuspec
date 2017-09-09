@@ -7,7 +7,7 @@
         <authors>Atif Aziz</authors>
         <owners>Atif Aziz</owners>
         <licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
-        <projectUrl>https://fizzler.googlecode.com/</projectUrl>
+        <projectUrl>https://github.com/atifaziz/Fizzler</projectUrl>
         <copyright>Copyright (c) 2009 Atif Aziz, Colin Ramsay. All rights reserved.</copyright>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <summary>HTML querying tools based on open source libraries Fizzler and HTML Agility Pack</summary>
