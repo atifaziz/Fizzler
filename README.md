@@ -5,7 +5,7 @@ The [default implementation][fizzhap] is based on [HTMLAgilityPack][hap] and
 selects from HTML documents. There over 140 unit tests - see below for more
 information. The tests are based on the jQuery selector engine tests.
 
-Fizzler supports .NET 2.0 and later versions.
+Fizzler supports .NET 3.5 and later versions.
 
 Contributions are welcome in forms of:
 

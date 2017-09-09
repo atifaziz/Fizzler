@@ -13,19 +13,10 @@
         <description>Fizzler is a W3C Selectors parser and generic selector framework for document hierarchies.</description>
         <summary>W3C Selectors Engine for Microsoft .NET Framework</summary>
         <tags>selectors w3c</tags>
-        <dependencies>
-            <group targetFramework=".NETFramework2.0">
-                <dependency id="LinqBridge" version="1.3.0" />
-            </group>
-            <group targetFramework=".NETFramework3.5" />
-        </dependencies>
     </metadata>
     <files>
         <file src="COPYING.txt" target="COPYING.txt" />
         <file src="COPYING.LESSER.txt" target="COPYING.LESSER.txt" />
-        <file src="bin\NET-2.0\Release\Fizzler.dll" target="lib\net20" />
-        <file src="bin\NET-2.0\Release\Fizzler.xml" target="lib\net20" />
-        <file src="bin\NET-2.0\Release\Fizzler.pdb" target="lib\net20" />
         <file src="bin\Release\Fizzler.dll" target="lib\net35" />
         <file src="bin\Release\Fizzler.xml" target="lib\net35" />
         <file src="bin\Release\Fizzler.pdb" target="lib\net35" />
