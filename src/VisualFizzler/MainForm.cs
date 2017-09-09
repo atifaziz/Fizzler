@@ -229,7 +229,7 @@ namespace VisualFizzler
 
         private void HelpContents_Click(object sender, EventArgs e)
         {
-            Process.Start("http://fizzler.googlecode.com/");
+            Process.Start("https://github.com/atifaziz/Fizzler");
         }
 
         private void Open(HtmlDocument document)
