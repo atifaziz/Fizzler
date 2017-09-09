@@ -14,7 +14,7 @@
         <description>Fizzler is a W3C Selectors parser and generic selector framework for document hierarchies. This package enables Fizzler over HTMLAgilityPack, adding QuerySelector and QuerySelectorAll (from Selectors API Level 1) for HtmlNode objects.</description>
         <tags>selectors w3c htmlagility css html</tags>
         <dependencies>
-            <dependency id="HtmlAgilityPack" version="1.4.6" />
+            <dependency id="HtmlAgilityPack" version="1.5.1" />
             <dependency id="Fizzler" version="1.0.0" />
         </dependencies>
     </metadata>
