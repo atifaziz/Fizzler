@@ -13,3 +13,4 @@ dist/
 pkg/*/
 *.nupkg
 packages/
+.vs/
