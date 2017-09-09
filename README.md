@@ -117,5 +117,5 @@ View them here ([Fizzler.Tests][tests]):
   * `Adj_No_Spaces`
 
   [fizzhap]: http://www.nuget.org/packages/Fizzler.Systems.HtmlAgilityPack/
-  [hap]: http://www.codeplex.com/htmlagilitypack
+  [hap]: http://html-agility-pack.net/
   [tests]: https://github.com/atifaziz/Fizzler/tree/master/src/Fizzler.Tests
