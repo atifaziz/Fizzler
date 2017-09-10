@@ -39,7 +39,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.5.1" />
-    <PackageReference Include="NUnit" Version="2.6.2" />
+    <PackageReference Include="NUnit" Version="3.8.1" />
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>

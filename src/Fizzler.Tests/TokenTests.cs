@@ -124,16 +124,18 @@ namespace Fizzler.Tests
             AssertToken(TokenKind.Ident, "foo", Token.Ident("foo"));
         }
 
-        [Test,ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void IdentNullText()
         {
-            Token.Ident(null);
+            var e = Assert.Throws<ArgumentNullException>(() => Token.Ident(null));
+            Assert.That(e.ParamName, Is.EqualTo("text"));
         }
 
-        [Test, ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void IdentEmptyText()
         {
-            Token.Ident(string.Empty);
+            var e = Assert.Throws<ArgumentException>(() => Token.Ident(string.Empty));
+            Assert.That(e.ParamName, Is.EqualTo("text"));
         }
 
         [Test]
@@ -142,16 +144,18 @@ namespace Fizzler.Tests
             AssertToken(TokenKind.Hash, "foo", Token.Hash("foo"));
         }
 
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void HashNullText()
         {
-            Token.Hash(null);
+            var e = Assert.Throws<ArgumentNullException>(() => Token.Hash(null));
+            Assert.That(e.ParamName, Is.EqualTo("text"));
         }
 
-        [Test, ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void HashEmptyText()
         {
-            Token.Hash(string.Empty);
+            var e = Assert.Throws<ArgumentException>(() => Token.Hash(string.Empty));
+            Assert.That(e.ParamName, Is.EqualTo("text"));
         }
 
         [Test]
@@ -177,16 +181,18 @@ namespace Fizzler.Tests
             AssertToken(TokenKind.Function, "foo", Token.Function("foo"));
         }
 
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void FunctionNullText()
         {
-            Token.Function(null);
+            var e = Assert.Throws<ArgumentNullException>(() => Token.Function(null));
+            Assert.That(e.ParamName, Is.EqualTo("text"));
         }
 
-        [Test, ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void FunctionEmptyText()
         {
-            Token.Function(string.Empty);
+            var e = Assert.Throws<ArgumentException>(() => Token.Function(string.Empty));
+            Assert.That(e.ParamName, Is.EqualTo("text"));
         }
 
         public void WhiteSpace()
@@ -194,16 +200,16 @@ namespace Fizzler.Tests
             AssertToken(TokenKind.WhiteSpace, " \n ", Token.WhiteSpace("foo"));
         }
 
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void WhiteSpaceNullText()
         {
-            Token.WhiteSpace(null);
+            Assert.Throws<ArgumentNullException>(() => Token.WhiteSpace(null));
         }
 
-        [Test, ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void WhiteSpaceEmptyText()
         {
-            Token.WhiteSpace(string.Empty);
+            Assert.Throws<ArgumentException>(() => Token.WhiteSpace(string.Empty));
         }
 
         public void Integer()
@@ -211,16 +217,18 @@ namespace Fizzler.Tests
             AssertToken(TokenKind.Integer, "123", Token.Integer("123"));
         }
 
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void IntegerNullText()
         {
-            Token.Integer(null);
+            var e = Assert.Throws<ArgumentNullException>(() => Token.Integer(null));
+            Assert.That(e.ParamName, Is.EqualTo("text"));
         }
 
-        [Test, ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void IntegerEmptyText()
         {
-            Token.Integer(string.Empty);
+            var e = Assert.Throws<ArgumentException>(() => Token.Integer(string.Empty));
+            Assert.That(e.ParamName, Is.EqualTo("text"));
         }
        
         private static void AssertToken(TokenKind kindExpected, Token token)

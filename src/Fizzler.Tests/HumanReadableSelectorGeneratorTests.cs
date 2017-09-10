@@ -35,11 +35,12 @@ namespace Fizzler.Tests
             }
         }
 
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void Null_Selector()
         {
             var generator = new TestHumanReadableSelectorGenerator();
-            generator.Add(null);
+            var e = Assert.Throws<ArgumentNullException>(() => generator.Add(null));
+            Assert.That(e.ParamName, Is.EqualTo("selector"));
         }
 
         [Test]

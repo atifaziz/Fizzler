@@ -33,16 +33,20 @@ namespace Fizzler.Tests
     [TestFixture]
     public class ReaderTests
     {
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void NullEnumeratorInitialization()
         {
-            new Reader<int>((IEnumerator<int>)null);
+            var e = Assert.Throws<ArgumentNullException>(() =>
+                new Reader<int>((IEnumerator<int>)null));
+            Assert.That(e.ParamName, Is.EqualTo("e"));
         }
 
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void NullEnumerableInitialization()
         {
-            new Reader<int>((IEnumerable<int>)null);
+            var e = Assert.Throws<ArgumentNullException>(() =>
+                new Reader<int>((IEnumerable<int>)null));
+            Assert.That(e.ParamName, Is.EqualTo("e"));
         }
 
         [Test]
@@ -57,10 +61,11 @@ namespace Fizzler.Tests
             Assert.IsTrue(new Reader<int>(new int[1]).HasMore);
         }
 
-        [Test, ExpectedException(typeof(InvalidOperationException))]
+        [Test]
         public void ReadEmpty()
         {
-            new Reader<int>(new int[0]).Read();
+            Assert.Throws<InvalidOperationException>(() =>
+                new Reader<int>(new int[0]).Read());
         }
 
         [Test]
@@ -77,10 +82,11 @@ namespace Fizzler.Tests
             Assert.AreEqual(910, reader.Read());
         }
 
-        [Test, ExpectedException(typeof(InvalidOperationException))]
+        [Test]
         public void PeekEmpty()
         {
-            new Reader<int>(new int[0]).Peek();
+            Assert.Throws<InvalidOperationException>(() =>
+                new Reader<int>(new int[0]).Peek());
         }
 
         [Test]
@@ -151,34 +157,46 @@ namespace Fizzler.Tests
             Assert.AreEqual(1, e.DisposeCallCount);
         }
 
-        [Test, ExpectedException(typeof(ObjectDisposedException))]
+        [Test]
         public void HasMoreDisposed()
         {
-            var unused = CreateDisposedReader<int>().HasMore;
+            var e = Assert.Throws<ObjectDisposedException>(() =>
+            {
+                var unused = CreateDisposedReader<int>().HasMore;
+            });
+            Assert.That(e.ObjectName, Is.EqualTo(typeof(Reader<>).Name));
         }
 
-        [Test, ExpectedException(typeof(ObjectDisposedException))]
+        [Test]
         public void ReadDisposed()
         {
-            CreateDisposedReader<int>().Read();
+            var e = Assert.Throws<ObjectDisposedException>(() =>
+                CreateDisposedReader<int>().Read());
+            Assert.That(e.ObjectName, Is.EqualTo(typeof(Reader<>).Name));
         }
 
-        [Test, ExpectedException(typeof(ObjectDisposedException))]
+        [Test]
         public void UnreadDisposed()
         {
-            CreateDisposedReader<int>().Unread(42);
+            var e = Assert.Throws<ObjectDisposedException>(() =>
+                CreateDisposedReader<int>().Unread(42));
+            Assert.That(e.ObjectName, Is.EqualTo(typeof(Reader<>).Name));
         }
 
-        [Test, ExpectedException(typeof(ObjectDisposedException))]
+        [Test]
         public void PeekDisposed()
         {
-            CreateDisposedReader<int>().Peek();
+            var e = Assert.Throws<ObjectDisposedException>(() =>
+                CreateDisposedReader<int>().Peek());
+            Assert.That(e.ObjectName, Is.EqualTo(typeof(Reader<>).Name));
         }
 
-        [Test, ExpectedException(typeof(ObjectDisposedException))]
+        [Test]
         public void EnumerateDisposed()
         {
-            CreateDisposedReader<int>().GetEnumerator();
+            var e = Assert.Throws<ObjectDisposedException>(() =>
+                CreateDisposedReader<int>().GetEnumerator());
+            Assert.That(e.ObjectName, Is.EqualTo(typeof(Reader<>).Name));
         }
 
         private static Reader<T> CreateDisposedReader<T>()

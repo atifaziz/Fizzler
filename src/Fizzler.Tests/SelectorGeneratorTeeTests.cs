@@ -50,20 +50,20 @@ namespace Fizzler.Tests
             tee = new SelectorGeneratorTee(primary, secondary);
         }
 
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void NullPrimary()
         {
-            new SelectorGeneratorTee(
-                null, new FakeSelectorGenerator()
-            );
+            var e = Assert.Throws<ArgumentNullException>(() =>
+                new SelectorGeneratorTee(null, new FakeSelectorGenerator()));
+            Assert.That(e.ParamName, Is.EqualTo("primary"));
         }
 
-        [Test, ExpectedException(typeof(ArgumentNullException))]
+        [Test]
         public void NullSecondary()
         {
-            new SelectorGeneratorTee(
-                new FakeSelectorGenerator(), null
-            );
+            var e = Assert.Throws<ArgumentNullException>(() =>
+                new SelectorGeneratorTee(new FakeSelectorGenerator(), null));
+            Assert.That(e.ParamName, Is.EqualTo("secondary"));
         }
 
         [Test]

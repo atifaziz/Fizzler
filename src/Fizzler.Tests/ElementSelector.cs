@@ -89,10 +89,10 @@ namespace Fizzler.Tests
             Assert.AreEqual(1, SelectList("form input").Count);
         }
 
-        [Test,ExpectedException(typeof(FormatException))]
+        [Test]
         public void Type_Star()
         {
-            SelectList("a*");
+            Assert.Throws<FormatException>(() => SelectList("a*"));
         }
     }
 }
