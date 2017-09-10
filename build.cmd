@@ -6,5 +6,6 @@ popd
 goto :EOF
 
 :main
-for %%s in (*.sln) do for %%c in (Debug Release) do if not errorlevel 1 call msbuild "%%s" /p:Configuration=%%c /v:m %*
+call msbuild /t:restore ^
+  && for %%s in (*.sln) do for %%c in (Debug Release) do if not errorlevel 1 call msbuild "%%s" /p:Configuration=%%c /v:m %*
 goto :EOF
