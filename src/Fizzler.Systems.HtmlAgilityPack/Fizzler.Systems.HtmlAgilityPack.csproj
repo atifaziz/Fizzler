@@ -1,77 +1,24 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{DBEAD205-BD5C-461F-873D-DE643016F14C}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fizzler.Systems.HtmlAgilityPack</RootNamespace>
-    <AssemblyName>Fizzler.Systems.HtmlAgilityPack</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>3.5</OldToolsVersion>
-    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <RestorePackages>true</RestorePackages>
+    <TargetFramework>netstandard1.3</TargetFramework>
+    <Version>1.1.0</Version>
+    <Authors>Atif Aziz, Colin Ramsay</Authors>
+    <Company />
+    <Product>Fizzler</Product>
+    <Description>Fizzler is a W3C Selectors parser and generic selector framework for document hierarchies. This package enables Fizzler over HTMLAgilityPack, adding QuerySelector and QuerySelectorAll (from Selectors API Level 1) for HtmlNode objects.</Description>
+    <Copyright>Copyright © 2009 Atif Aziz, Colin Ramsay. All rights reserved.</Copyright>
+    <PackageLicenseUrl>http://www.gnu.org/licenses/lgpl.html</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/atifaziz/Fizzler</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/atifaziz/Fizzler</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>selectors w3c html css</PackageTags>
+    <AssemblyVersion>1.1.21209.0</AssemblyVersion>
+    <FileVersion>1.1.21209.1357</FileVersion>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>3001,3002</NoWarn>
-    <DocumentationFile>..\bin\Debug\Fizzler.Systems.HtmlAgilityPack.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <NoWarn>3001,3002</NoWarn>
-    <DocumentationFile>..\bin\Release\Fizzler.Systems.HtmlAgilityPack.xml</DocumentationFile>
-  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Fizzler\Fizzler.csproj" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="HtmlAgilityPack" Version="1.5.1" />
-    <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-    <Reference Include="System.Data" />
-    <Reference Include="System.XML" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\Common\SolutionInfo.cs">
-      <Link>SolutionInfo.cs</Link>
-    </Compile>
-    <Compile Include="HtmlDocumentExtensions.cs" />
-    <Compile Include="HtmlNodeExtensions.cs" />
-    <Compile Include="HtmlNodeOps.cs" />
-    <Compile Include="HtmlNodeSelection.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Fizzler\Fizzler.csproj">
-      <Project>{939036D6-29FD-46E4-B6CD-52618F51081B}</Project>
-      <Name>Fizzler</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

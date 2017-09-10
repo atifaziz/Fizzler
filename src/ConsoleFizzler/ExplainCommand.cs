@@ -25,12 +25,16 @@ namespace ConsoleFizzler
 
     using System;
     using System.Linq;
+    using Microsoft.Extensions.Configuration;
     using Fizzler;
 
     #endregion
 
     internal sealed class ExplainCommand : Command
     {
+        public ExplainCommand(IConfigurationRoot configuration) :
+            base(configuration) {}
+
         protected override int OnRun(string[] args)
         {
             if (!args.Any())

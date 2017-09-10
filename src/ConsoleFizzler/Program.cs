@@ -19,6 +19,8 @@
 // 
 #endregion
 
+using Microsoft.Extensions.Configuration;
+
 namespace ConsoleFizzler
 {
     #region Imports
@@ -54,8 +56,8 @@ namespace ConsoleFizzler
 
             var commands = new[] 
             {
-                new Func<ICommand>(() => new SelectCommand()).AsKeyTo(Aliases("select", "sel")),
-                new Func<ICommand>(() => new ExplainCommand()).AsKeyTo(Aliases("explain", "describe", "desc")),
+                new Func<IConfigurationRoot, ICommand>(cfg => new SelectCommand(cfg)).AsKeyTo(Aliases("select", "sel")),
+                new Func<IConfigurationRoot, ICommand>(cfg => new ExplainCommand(cfg)).AsKeyTo(Aliases("explain", "describe", "desc")),
             }
             .SelectMany(e => e.Value.Select(v => v.AsKeyTo(e.Key)))
             .ToDictionary(e => e.Key, e => e.Value);
@@ -66,7 +68,13 @@ namespace ConsoleFizzler
             if (command == null)
                 throw new ApplicationException("Invalid command.");
 
-            return command().Run(args.Skip(1).ToArray());           
+            var config =
+                new ConfigurationBuilder()
+                    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                    .AddIniFile(AppDomain.CurrentDomain.FriendlyName + ".ini", optional: true)
+                    .Build();
+
+            return command(config).Run(args.Skip(1).ToArray());           
         }
 
         static IEnumerable<string> Aliases(params string[] values)

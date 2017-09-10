@@ -1,81 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.30729</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{939036D6-29FD-46E4-B6CD-52618F51081B}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Fizzler</RootNamespace>
-    <AssemblyName>Fizzler</AssemblyName>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
+    <TargetFramework>netstandard1.0</TargetFramework>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Fizzler.snk</AssemblyOriginatorKeyFile>
-    <FileUpgradeFlags>
-    </FileUpgradeFlags>
-    <UpgradeBackupLocation>
-    </UpgradeBackupLocation>
-    <OldToolsVersion>3.5</OldToolsVersion>
+    <Version>1.1.0</Version>
+    <Authors>Atif Aziz, Colin Ramsay</Authors>
+    <Description>Fizzler is a W3C Selectors parser and generic selector framework for document hierarchies.</Description>
+    <AssemblyVersion>1.1.21209.0</AssemblyVersion>
+    <FileVersion>1.1.21209.1357</FileVersion>
+    <PackageLicenseUrl>http://www.gnu.org/licenses/lgpl.html</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/atifaziz/Fizzler</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/atifaziz/Fizzler</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>selectors w3c</PackageTags>
+    <PackageIconUrl></PackageIconUrl>
+    <Copyright>Copyright © 2009 Atif Aziz, Colin Ramsay. All rights reserved.</Copyright>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>..\..\bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\bin\Debug\Fizzler.xml</DocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;NETSTANDARD1_0</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\..\bin\Release\Fizzler.xml</DocumentationFile>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
-  <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core">
-      <RequiredTargetFramework>3.5</RequiredTargetFramework>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="..\Common\SolutionInfo.cs">
-      <Link>SolutionInfo.cs</Link>
-    </Compile>
-    <Compile Include="SelectorsCachingCompiler.cs" />
-    <Compile Include="Either.cs" />
-    <Compile Include="IElementOps.cs" />
-    <Compile Include="ISelectorGenerator.cs" />
-    <Compile Include="Parser.cs" />
-    <Compile Include="NamespacePrefix.cs" />
-    <Compile Include="Reader.cs" />
-    <Compile Include="Selector.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SelectorGenerator.cs" />
-    <Compile Include="SelectorGeneratorTee.cs" />
-    <Compile Include="Token.cs" />
-    <Compile Include="Tokener.cs" />
-    <Compile Include="TokenKind.cs" />
-    <Compile Include="HumanReadableSelectorGenerator.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Fizzler.snk" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>

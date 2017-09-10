@@ -22,10 +22,19 @@
 namespace ConsoleFizzler
 {
     using System;
-    using System.Configuration;
+    using System.Linq;
+    using Microsoft.Extensions.Configuration;
+    using Mannex.Collections.Generic;
 
     internal abstract class Command : ICommand
     {
+        readonly IConfigurationRoot _configuration;
+
+        protected Command(IConfigurationRoot configuration)
+        {
+            _configuration = configuration;
+        }
+
         public int Run(string[] args)
         {
             LoadConfiguration();
@@ -46,11 +55,12 @@ namespace ConsoleFizzler
         {
             if (prefix == null) throw new ArgumentNullException("prefix");
 
-            if (prefix.Length > 0)
-                prefix = prefix + ".";
+            var config =
+                from e in _configuration.GetSection(prefix).AsEnumerable()
+                where e.Value != null
+                select e.Key.Substring(prefix.Length + 1).AsKeyTo(e.Value);
 
-            var settings = ConfigurationManager.AppSettings;
-            var args = CommandLine.ToArgs(settings.Narrow(prefix).Pairs());
+            var args = CommandLine.ToArgs(config);
             CommandLine.ParseTo(args, this);
         }
      
