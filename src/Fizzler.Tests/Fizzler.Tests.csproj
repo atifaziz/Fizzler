@@ -68,10 +68,6 @@
     <Compile Include="TokenTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fizzler.Sandbox\Fizzler.Sandbox.csproj">
-      <Project>{80456F6D-6853-4244-8E3D-F22ECA0980EC}</Project>
-      <Name>Fizzler.Sandbox</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Fizzler.Systems.HtmlAgilityPack\Fizzler.Systems.HtmlAgilityPack.csproj">
       <Project>{DBEAD205-BD5C-461F-873D-DE643016F14C}</Project>
       <Name>Fizzler.Systems.HtmlAgilityPack %28Systems\Fizzler.Systems.HtmlAgilityPack%29</Name>
