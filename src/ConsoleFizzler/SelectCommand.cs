@@ -36,7 +36,6 @@ namespace ConsoleFizzler
     internal sealed class SelectCommand : Command
     {
         private string _separator;
-        private IConfigurationRoot cfg;
 
         public SelectCommand(IConfigurationRoot configuration) :
             base(configuration) {}
