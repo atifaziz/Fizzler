@@ -22,4 +22,13 @@
     <DefineConstants>TRACE;DEBUG;NETSTANDARD1_0</DefineConstants>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Content Include="..\..\COPYING.LESSER.txt" Link="COPYING.LESSER.txt">
+      <PackagePath/>
+    </Content>
+    <Content Include="..\..\COPYING.txt" Link="COPYING.txt">
+      <PackagePath/>
+    </Content>
+  </ItemGroup>
+
 </Project>
