@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard1.3</TargetFramework>
+    <TargetFrameworks>netstandard1.3;net40</TargetFrameworks>
     <Version>1.1.0</Version>
     <Authors>Atif Aziz, Colin Ramsay</Authors>
     <Company />
