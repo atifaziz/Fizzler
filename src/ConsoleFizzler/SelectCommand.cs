@@ -29,12 +29,16 @@ namespace ConsoleFizzler
     using System.Linq;
     using Fizzler.Systems.HtmlAgilityPack;
     using HtmlAgilityPack;
+    using Microsoft.Extensions.Configuration;
 
     #endregion
 
     internal sealed class SelectCommand : Command
     {
         private string _separator;
+
+        public SelectCommand(IConfigurationRoot configuration) :
+            base(configuration) {}
 
         public bool Colorful { get; set; }
         public ConsoleColor? TagNameColor { get; set; }

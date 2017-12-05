@@ -8,9 +8,9 @@ goto :EOF
 :main
 if not exist dist md dist
 if not %errorlevel%==0 exit /b %errorlevel%
-set nupack=.nuget\NuGet pack -OutputDirectory dist
+set dotpack=dotnet pack -o ..\..\dist --include-source --include-symbols
 call build /v:m ^
-  && %nupack% -Symbols Fizzler.nuspec ^
-  && %nupack% -Symbols Fizzler.Systems.HtmlAgilityPack.nuspec ^
-  && %nupack% -NoPackageAnalysis Fizzler.Tools.nuspec
+  && %dotpack% src\Fizzler ^
+  && %dotpack% src\Fizzler.Systems.HtmlAgilityPack ^
+  && .nuget\NuGet pack -OutputDirectory dist -NoPackageAnalysis Fizzler.Tools.nuspec
 goto :EOF

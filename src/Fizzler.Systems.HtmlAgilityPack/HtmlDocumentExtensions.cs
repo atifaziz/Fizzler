@@ -37,6 +37,7 @@ namespace Fizzler.Systems.HtmlAgilityPack
     
     public static class HtmlDocumentExtensions
     {
+        private static object _lock = new object();
         private static Dictionary<string, HtmlElementFlag> _defaultElementFlags;
 
         /// <summary>
@@ -83,11 +84,11 @@ namespace Fizzler.Systems.HtmlAgilityPack
         /// exclusively and may be removed from a future version.
         /// </remarks>
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public static void LoadHtmlWithElementFlags(this HtmlDocument document, string html, IEnumerable<KeyValuePair<string, HtmlElementFlag>> flags)
         {
             if (document == null) throw new ArgumentNullException("document");
-            LoadWithElementFlags(flags, () => document.LoadHtml(html));
+            lock (_lock)
+                LoadWithElementFlags(flags, () => document.LoadHtml(html));
         }
 
         /// <summary>
@@ -104,11 +105,11 @@ namespace Fizzler.Systems.HtmlAgilityPack
         /// exclusively and may be removed from a future version.
         /// </remarks>
 
-        [MethodImpl(MethodImplOptions.Synchronized)]
         public static void LoadWithElementFlags(this HtmlDocument document, string path, IEnumerable<KeyValuePair<string, HtmlElementFlag>> flags)
         {
             if (document == null) throw new ArgumentNullException("document");
-            LoadWithElementFlags(flags, () => document.Load(path));
+            lock (_lock)
+                LoadWithElementFlags(flags, () => document.Load(path));
         }
 
         private delegate void LoadHandler();
