@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard1.3;net40</TargetFrameworks>
-    <Version>1.2.0</Version>
+    <VersionPrefix>1.2.0</VersionPrefix>
     <Authors>Atif Aziz, Colin Ramsay</Authors>
     <Company />
     <Product>Fizzler</Product>

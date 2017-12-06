@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard1.0;net40</TargetFrameworks>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Fizzler.snk</AssemblyOriginatorKeyFile>
-    <Version>1.2.0</Version>
+    <VersionPrefix>1.2.0</VersionPrefix>
     <Authors>Atif Aziz, Colin Ramsay</Authors>
     <Description>Fizzler is a W3C Selectors parser and generic selector framework for document hierarchies.</Description>
     <AssemblyVersion>1.1.21209.0</AssemblyVersion>
