@@ -24,8 +24,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fizzler.Systems.HtmlAgility
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisualFizzler", "src\VisualFizzler\VisualFizzler.csproj", "{46AA901E-21D1-4720-B173-532B91105CE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Fizzler.Sandbox", "src\Fizzler.Sandbox\Fizzler.Sandbox.csproj", "{80456F6D-6853-4244-8E3D-F22ECA0980EC}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleFizzler", "src\ConsoleFizzler\ConsoleFizzler.csproj", "{296C2824-A7D7-42A0-9B4C-1BC8FA0A1859}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fizzler.Tests", "src\Fizzler.Tests\Fizzler.Tests.csproj", "{3C0C905E-47D4-4616-8B09-C3CECB12598F}"
@@ -48,10 +46,6 @@ Global
 		{46AA901E-21D1-4720-B173-532B91105CE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46AA901E-21D1-4720-B173-532B91105CE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46AA901E-21D1-4720-B173-532B91105CE7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{80456F6D-6853-4244-8E3D-F22ECA0980EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{80456F6D-6853-4244-8E3D-F22ECA0980EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{80456F6D-6853-4244-8E3D-F22ECA0980EC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{80456F6D-6853-4244-8E3D-F22ECA0980EC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{296C2824-A7D7-42A0-9B4C-1BC8FA0A1859}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{296C2824-A7D7-42A0-9B4C-1BC8FA0A1859}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{296C2824-A7D7-42A0-9B4C-1BC8FA0A1859}.Release|Any CPU.ActiveCfg = Release|Any CPU
