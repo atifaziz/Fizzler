@@ -28,4 +28,4 @@ using System.Reflection;
 // Version information
 //
 
-[assembly: AssemblyFileVersion("1.1.21209.917")]
+[assembly: AssemblyFileVersion("1.2.21506.1459")]
