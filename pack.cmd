@@ -16,6 +16,5 @@ if not "%~1"=="" (
 )
 call build /v:m ^
   && %dotpack% src\Fizzler ^
-  && %dotpack% src\Fizzler.Systems.HtmlAgilityPack ^
-  && %nupack% Fizzler.Tools.nuspec
+  && %dotpack% src\Fizzler.Systems.HtmlAgilityPack
 goto :EOF
