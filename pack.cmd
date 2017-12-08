@@ -14,7 +14,5 @@ if not "%~1"=="" (
     set dotpack=%dotpack% --version-suffix %1
     set nupack=%nupack% -Properties VersionSuffix=-%1
 )
-call build /v:m ^
-  && %dotpack% src\Fizzler ^
-  && %dotpack% src\Fizzler.Systems.HtmlAgilityPack
+call build /v:m && %dotpack% src\Fizzler
 goto :EOF
