@@ -5,6 +5,7 @@
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Fizzler.snk</AssemblyOriginatorKeyFile>
     <VersionPrefix>1.2.0</VersionPrefix>
+    <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <Authors>Atif Aziz, Colin Ramsay</Authors>
     <Description>Fizzler is a W3C Selectors parser and generic selector framework for document hierarchies.</Description>
     <AssemblyVersion>1.1.21209.0</AssemblyVersion>
