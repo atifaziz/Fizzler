@@ -108,7 +108,7 @@ namespace Fizzler
         /// <summary>
         /// Formats this namespace together with a name.
         /// </summary>
-        public string Format(string name)
+        [Pure] public string Format(string name)
         {
             if (name == null) throw new ArgumentNullException(nameof(name));
             if (name.Length == 0) throw new ArgumentException(null, nameof(name));
