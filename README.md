@@ -5,7 +5,7 @@ The [default implementation][fizzhap] is based on [HTMLAgilityPack][hap] and
 selects from HTML documents. There over 140 unit tests - see below for more
 information. The tests are based on the jQuery selector engine tests.
 
-Fizzler supports .NET 3.5 and later versions.
+Fizzler supports .NET Standard 1.0 and later versions.
 
 Contributions are welcome in forms of:
 
@@ -29,13 +29,13 @@ html.LoadHtml(@"
       </body>
   </html>");
 
-// Fizzler for HtmlAgilityPack is implemented as the 
+// Fizzler for HtmlAgilityPack is implemented as the
 // QuerySelectorAll extension method on HtmlNode
 
 var document = html.DocumentNode;
 
 // yields: [<p class="content">Fizzler</p>]
-document.QuerySelectorAll(".content"); 
+document.QuerySelectorAll(".content");
 
 // yields: [<p class="content">Fizzler</p>,<p>CSS Selector Engine</p>]
 document.QuerySelectorAll("p");
