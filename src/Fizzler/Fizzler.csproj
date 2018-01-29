@@ -14,7 +14,7 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>selectors w3c</PackageTags>
     <PackageIconUrl></PackageIconUrl>
-    <Copyright>Copyright © 2009 Atif Aziz, Colin Ramsay. All rights reserved.</Copyright>
+    <Copyright>Copyright © 2009 Atif Aziz, Colin Ramsay. All rights reserved. Portions Copyright © 2008 Novell, Inc.</Copyright>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -23,10 +23,10 @@
 
   <ItemGroup>
     <Content Include="..\..\COPYING.LESSER.txt" Link="COPYING.LESSER.txt">
-      <PackagePath/>
+      <PackagePath />
     </Content>
     <Content Include="..\..\COPYING.txt" Link="COPYING.txt">
-      <PackagePath/>
+      <PackagePath />
     </Content>
   </ItemGroup>
 
