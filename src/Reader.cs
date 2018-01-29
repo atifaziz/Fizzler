@@ -47,7 +47,7 @@ namespace Fizzler
 
         private static IEnumerable<T> CheckNonNull(IEnumerable<T> e)
         {
-            if (e == null) throw new ArgumentNullException("e");
+            if (e == null) throw new ArgumentNullException(nameof(e));
             return e;
         }
 
@@ -57,7 +57,7 @@ namespace Fizzler
         /// </summary>
         public Reader(IEnumerator<T> e)
         {
-            _enumerator = e ?? throw new ArgumentNullException("e");
+            _enumerator = e ?? throw new ArgumentNullException(nameof(e));
             _buffer = new Stack<T>();
             RealRead();
         }

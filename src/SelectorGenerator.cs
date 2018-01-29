@@ -51,7 +51,7 @@ namespace Fizzler
         /// </summary>
         public SelectorGenerator(IElementOps<TElement> ops, IEqualityComparer<TElement> equalityComparer)
         {
-            Ops = ops ?? throw new ArgumentNullException("ops");
+            Ops = ops ?? throw new ArgumentNullException(nameof(ops));
             _equalityComparer = equalityComparer ?? EqualityComparer<TElement>.Default;
             _selectors = new Stack<Selector<TElement>>();
         }
@@ -93,7 +93,7 @@ namespace Fizzler
         /// </summary>
         protected void Add(Selector<TElement> selector)
         {
-            if(selector == null) throw new ArgumentNullException("selector");
+            if(selector == null) throw new ArgumentNullException(nameof(selector));
 
             var top = Selector;
             Selector = top == null ? selector : (elements => selector(top(elements)));

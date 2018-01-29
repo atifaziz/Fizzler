@@ -41,7 +41,7 @@ namespace Fizzler
         /// </summary>
         public static IEnumerable<Token> Tokenize(TextReader reader)
         {
-            if (reader == null) throw new ArgumentNullException("reader");
+            if (reader == null) throw new ArgumentNullException(nameof(reader));
             return Tokenize(reader.ReadToEnd());
         }
 

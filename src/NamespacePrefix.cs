@@ -126,8 +126,8 @@ namespace Fizzler
         /// </summary>
         public string Format(string name)
         {
-            if (name == null) throw new ArgumentNullException("name");
-            if (name.Length == 0) throw new ArgumentException(null, "name");
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (name.Length == 0) throw new ArgumentException(null, nameof(name));
 
             return Text + (IsNone ? null : "|") + name;
         }

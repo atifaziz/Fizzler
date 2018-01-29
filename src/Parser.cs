@@ -64,8 +64,8 @@ namespace Fizzler
         public static T Parse<TGenerator, T>(string selectors, TGenerator generator, Func<TGenerator, T> resultor)
             where TGenerator : ISelectorGenerator
         {
-            if (selectors == null) throw new ArgumentNullException("selectors");
-            if (selectors.Length == 0) throw new ArgumentException(null, "selectors");
+            if (selectors == null) throw new ArgumentNullException(nameof(selectors));
+            if (selectors.Length == 0) throw new ArgumentException(null, nameof(selectors));
 
             return Parse(Tokener.Tokenize(selectors), generator, resultor);
         }
@@ -87,8 +87,8 @@ namespace Fizzler
         public static T Parse<TGenerator, T>(IEnumerable<Token> tokens, TGenerator generator, Func<TGenerator, T> resultor)
             where TGenerator : ISelectorGenerator
         {
-            if (tokens == null) throw new ArgumentNullException("tokens");
-            if (resultor == null) throw new ArgumentNullException("resultor");
+            if (tokens == null) throw new ArgumentNullException(nameof(tokens));
+            if (resultor == null) throw new ArgumentNullException(nameof(resultor));
 
             new Parser(new Reader<Token>(tokens.GetEnumerator()), generator).Parse();
             return resultor(generator);

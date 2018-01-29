@@ -69,7 +69,7 @@ namespace Fizzler
         /// </summary>
         protected void Add(string selector)
         {
-            Text += selector ?? throw new ArgumentNullException("selector");
+            Text += selector ?? throw new ArgumentNullException(nameof(selector));
         }
 
         /// <summary>

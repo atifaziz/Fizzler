@@ -57,7 +57,7 @@ namespace Fizzler
         /// </remarks>
         public static Func<string, T> Create<T>(Func<string, T> compiler, IDictionary<string, T> cache)
         {
-            if(compiler == null) throw new ArgumentNullException("compiler");
+            if(compiler == null) throw new ArgumentNullException(nameof(compiler));
             return CreateImpl(compiler, cache ?? new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase));
         }
 

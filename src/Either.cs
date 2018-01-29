@@ -39,13 +39,13 @@ namespace Fizzler
 
         public static Either<TA, TB> A(TA value)
         {
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
             return new AImpl(value);
         }
 
         public static Either<TA, TB> B(TB value)
         {
-            if (value == null) throw new ArgumentNullException("value");
+            if (value == null) throw new ArgumentNullException(nameof(value));
             return new BImpl(value);
         }
 
@@ -82,8 +82,8 @@ namespace Fizzler
 
             public override TResult Fold<TResult>(Func<TA, TResult> a, Func<TB, TResult> b)
             {
-                if (a == null) throw new ArgumentNullException("a");
-                if (b == null) throw new ArgumentNullException("b");
+                if (a == null) throw new ArgumentNullException(nameof(a));
+                if (b == null) throw new ArgumentNullException(nameof(b));
                 return a(_value);
             }
 
@@ -120,8 +120,8 @@ namespace Fizzler
 
             public override TResult Fold<TResult>(Func<TA, TResult> a, Func<TB, TResult> b)
             {
-                if (a == null) throw new ArgumentNullException("a");
-                if (b == null) throw new ArgumentNullException("b");
+                if (a == null) throw new ArgumentNullException(nameof(a));
+                if (b == null) throw new ArgumentNullException(nameof(b));
                 return b(_value);
             }
 
