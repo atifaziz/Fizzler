@@ -1,0 +1,21 @@
+language: csharp
+os:
+  - linux
+dist: trusty
+sudo: required
+dotnet: 2.0.0
+env:
+  - CONFIGURATION=Debug
+  - CONFIGURATION=Release
+
+if: tag IS blank
+
+before_install:
+  - dotnet --info
+
+install:
+  - dotnet restore
+
+script:
+  - dotnet build --no-restore -c $CONFIGURATION
+  - dotnet test --no-restore --no-build -c $CONFIGURATION tests
