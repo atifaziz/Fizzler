@@ -1,22 +1,22 @@
 #region Copyright and License
-// 
+//
 // Fizzler - CSS Selector Engine for Microsoft .NET Framework
 // Copyright (c) 2009 Atif Aziz, Colin Ramsay. All rights reserved.
-// 
-// This library is free software; you can redistribute it and/or modify it under 
-// the terms of the GNU Lesser General Public License as published by the Free 
-// Software Foundation; either version 3 of the License, or (at your option) 
+//
+// This library is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Lesser General Public License as published by the Free
+// Software Foundation; either version 3 of the License, or (at your option)
 // any later version.
-// 
-// This library is distributed in the hope that it will be useful, but WITHOUT 
-// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
-// FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
+//
+// This library is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
 // details.
-// 
-// You should have received a copy of the GNU Lesser General Public License 
-// along with this library; if not, write to the Free Software Foundation, Inc., 
-// 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA 
-// 
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with this library; if not, write to the Free Software Foundation, Inc.,
+// 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+//
 #endregion
 
 namespace Fizzler
@@ -28,7 +28,7 @@ namespace Fizzler
     using System.Diagnostics;
     using System.IO;
     using System.Text;
-    
+
     #endregion
 
     /// <summary>
@@ -110,16 +110,16 @@ namespace Fizzler
                     {
                         if (reader.Read() == '=')
                         {
-                            yield return ch == '*' 
-                                       ? Token.SubstringMatch() 
-                                       : ch == '|' ? Token.DashMatch() 
+                            yield return ch == '*'
+                                       ? Token.SubstringMatch()
+                                       : ch == '|' ? Token.DashMatch()
                                        : Token.Includes();
                         }
                         else
                         {
                             reader.Unread();
                             yield return ch == '*' || ch == '|'
-                                ? Token.Char(ch.Value) 
+                                ? Token.Char(ch.Value)
                                 : Token.Tilde();
                         }
                         break;
@@ -129,7 +129,7 @@ namespace Fizzler
                     {
                         if (reader.Read() != '=')
                             throw new FormatException(string.Format("Invalid character at position {0}.", reader.Position));
-                        
+
                         switch (ch)
                         {
                             case '^': yield return Token.PrefixMatch(); break;
@@ -155,7 +155,7 @@ namespace Fizzler
                     //
                     case '\"':
                     case '\'': yield return ParseString(reader, /* quote */ ch.Value); break;
-                    
+
                     default:
                         throw new FormatException(string.Format("Invalid character at position {0}.", reader.Position));
                 }
@@ -204,12 +204,12 @@ namespace Fizzler
 
             char? ch;
             StringBuilder sb = null;
-            
+
             while ((ch = reader.Read()) != quote)
             {
                 if (ch == null)
                     throw new FormatException(string.Format("Unterminated string at position {0}.", strpos));
-                
+
                 if (ch == '\\')
                 {
                     ch = reader.Read();
@@ -217,18 +217,18 @@ namespace Fizzler
                     //
                     // NOTE: Only escaping of quote and backslash supported!
                     //
-                    
+
                     if (ch != quote && ch != '\\')
                         throw new FormatException(string.Format("Invalid escape sequence at position {0} in a string at position {1}.", reader.Position, strpos));
-                    
+
                     if (sb == null)
                         sb = new StringBuilder();
-                    
+
                     sb.Append(reader.MarkedExceptLast());
                     reader.Mark();
                 }
             }
-            
+
             var text = reader.Marked();
 
             if (sb != null)
@@ -251,7 +251,7 @@ namespace Fizzler
         {
             return ch == '_'
                 || (ch >= 'a' && ch <= 'z')
-                || (ch >= 'A' && ch <= 'Z');                
+                || (ch >= 'A' && ch <= 'Z');
         }
 
         private static bool IsNmChar(char? ch) // [_a-z0-9-]|{nonascii}|{escape}
@@ -273,7 +273,7 @@ namespace Fizzler
             private bool Ready { get { return _index >= 0 && _index < _input.Length; } }
             public char? Value { get { return Ready ? _input[_index] : (char?)null; } }
             public int Position { get { return _index + 1; } }
-          
+
             public void Mark()
             {
                 _start = _index;

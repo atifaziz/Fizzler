@@ -1,22 +1,22 @@
 #region Copyright and License
-// 
+//
 // Fizzler - CSS Selector Engine for Microsoft .NET Framework
 // Copyright (c) 2009 Atif Aziz, Colin Ramsay. All rights reserved.
-// 
-// This library is free software; you can redistribute it and/or modify it under 
-// the terms of the GNU Lesser General Public License as published by the Free 
-// Software Foundation; either version 3 of the License, or (at your option) 
+//
+// This library is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Lesser General Public License as published by the Free
+// Software Foundation; either version 3 of the License, or (at your option)
 // any later version.
-// 
-// This library is distributed in the hope that it will be useful, but WITHOUT 
-// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
-// FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
+//
+// This library is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
 // details.
-// 
-// You should have received a copy of the GNU Lesser General Public License 
-// along with this library; if not, write to the Free Software Foundation, Inc., 
-// 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA 
-// 
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with this library; if not, write to the Free Software Foundation, Inc.,
+// 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+//
 #endregion
 
 namespace Fizzler
@@ -30,7 +30,7 @@ namespace Fizzler
     public struct NamespacePrefix
     {
         /// <summary>
-        /// Represents a name from either the default or any namespace 
+        /// Represents a name from either the default or any namespace
         /// in a target document, depending on whether a default namespace is
         /// in effect or not.
         /// </summary>
@@ -84,7 +84,7 @@ namespace Fizzler
         public bool IsEmpty { get { return !IsNone && Text.Length == 0; } }
 
         /// <summary>
-        /// Indicates whether this instance represents a name from a 
+        /// Indicates whether this instance represents a name from a
         /// specific namespace or not.
         /// </summary>
         public bool IsSpecific { get {return !IsNone && !IsAny; } }

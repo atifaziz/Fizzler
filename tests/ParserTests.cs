@@ -1,22 +1,22 @@
 #region Copyright and License
-// 
+//
 // Fizzler - CSS Selector Engine for Microsoft .NET Framework
 // Copyright (c) 2009 Atif Aziz, Colin Ramsay. All rights reserved.
-// 
-// This library is free software; you can redistribute it and/or modify it under 
-// the terms of the GNU Lesser General Public License as published by the Free 
-// Software Foundation; either version 3 of the License, or (at your option) 
+//
+// This library is free software; you can redistribute it and/or modify it under
+// the terms of the GNU Lesser General Public License as published by the Free
+// Software Foundation; either version 3 of the License, or (at your option)
 // any later version.
-// 
-// This library is distributed in the hope that it will be useful, but WITHOUT 
-// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS 
-// FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more 
+//
+// This library is distributed in the hope that it will be useful, but WITHOUT
+// ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+// FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
 // details.
-// 
-// You should have received a copy of the GNU Lesser General Public License 
-// along with this library; if not, write to the Free Software Foundation, Inc., 
-// 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA 
-// 
+//
+// You should have received a copy of the GNU Lesser General Public License
+// along with this library; if not, write to the Free Software Foundation, Inc.,
+// 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+//
 #endregion
 
 namespace Fizzler.Tests
@@ -311,12 +311,12 @@ namespace Fizzler.Tests
                 new object[] { expected1 });
         }
 
-        private static void Test<T1, T2>(string input, 
-            Func<TestSelectorGenerator, T1> actual1, T1 expected1, 
+        private static void Test<T1, T2>(string input,
+            Func<TestSelectorGenerator, T1> actual1, T1 expected1,
             Func<TestSelectorGenerator, T2> actual2, T2 expected2)
         {
-            Test(input, 
-                new Func<TestSelectorGenerator, object>[] {g => actual1(g), g => actual2(g)}, 
+            Test(input,
+                new Func<TestSelectorGenerator, object>[] {g => actual1(g), g => actual2(g)},
                 new object[] {expected1, expected2});
         }
 
@@ -330,8 +330,8 @@ namespace Fizzler.Tests
                 new object[] { expected1, expected2, expected3 });
         }
 
-        private static void Test(string input, 
-            IEnumerable<Func<TestSelectorGenerator, object>> actuals, 
+        private static void Test(string input,
+            IEnumerable<Func<TestSelectorGenerator, object>> actuals,
             IEnumerable<object> expectations)
         {
             var generator = new TestSelectorGenerator();
