@@ -1,11 +1,12 @@
 @echo off
-setlocal
 pushd "%~dp0"
 call :main %*
 popd
 goto :EOF
 
 :main
-call msbuild /t:restore ^
-  && for %%s in (*.sln) do for %%c in (Debug Release) do if not errorlevel 1 call msbuild "%%s" /p:Configuration=%%c /v:m %*
+    dotnet restore ^
+ && dotnet --info ^
+ && dotnet build --no-restore -c Debug ^
+ && dotnet build --no-restore -c Release
 goto :EOF
