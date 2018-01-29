@@ -8,8 +8,6 @@
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <Authors>Atif Aziz, Colin Ramsay</Authors>
     <Description>Fizzler is a W3C Selectors parser and generic selector framework for document hierarchies.</Description>
-    <AssemblyVersion>1.1.21209.0</AssemblyVersion>
-    <FileVersion>1.1.21209.1357</FileVersion>
     <PackageLicenseUrl>http://www.gnu.org/licenses/lgpl.html</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/atifaziz/Fizzler</PackageProjectUrl>
     <RepositoryUrl>https://github.com/atifaziz/Fizzler</RepositoryUrl>
