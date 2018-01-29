@@ -49,10 +49,10 @@ namespace Fizzler
             return new BImpl(value);
         }
 
-        public override abstract bool Equals(object obj);
+        public abstract override bool Equals(object obj);
         public abstract bool Equals(Either<TA, TB> obj);
-        public override abstract int GetHashCode();
-        public override abstract string ToString();
+        public abstract override int GetHashCode();
+        public abstract override string ToString();
         public abstract TResult Fold<TResult>(Func<TA, TResult> a, Func<TB, TResult> b);
 
         sealed class AImpl : Either<TA, TB>
