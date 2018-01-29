@@ -14,3 +14,5 @@ pkg/*/
 *.nupkg
 packages/
 .vs/
+.idea/
+
