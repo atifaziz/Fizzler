@@ -22,6 +22,7 @@
 namespace Fizzler
 {
     using System;
+    using System.Diagnostics.Contracts;
 
     /// <summary>
     /// Represent a type or attribute name.
@@ -92,7 +93,7 @@ namespace Fizzler
         /// <summary>
         /// Indicates whether this instance and another are equal.
         /// </summary>
-        public bool Equals(NamespacePrefix other) => Text == other.Text;
+        [Pure] public bool Equals(NamespacePrefix other) => Text == other.Text;
 
         /// <summary>
         /// Returns the hash code for this instance.
