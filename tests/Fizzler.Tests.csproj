@@ -9,6 +9,6 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Fizzler\Fizzler.csproj" />
+    <ProjectReference Include="..\src\Fizzler.csproj" />
   </ItemGroup>
 </Project>

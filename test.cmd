@@ -11,5 +11,5 @@ goto :EOF
 goto :EOF
 
 :test
-dotnet test --no-build src\Fizzler.Tests -c %1
+dotnet test --no-build tests -c %1
 goto :EOF

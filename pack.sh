@@ -9,6 +9,6 @@ fi
 ./build.sh
 dotnet pack                                          \
        --no-build --include-symbols --include-source \
-       -c Release -o ../../dist                      \
+       -c Release -o ../dist                         \
        $VERSION_SUFFIX                               \
-       src/Fizzler
+       src

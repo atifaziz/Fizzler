@@ -118,4 +118,4 @@ View them here ([Fizzler.Tests][tests]):
 
   [fizzhap]: http://www.nuget.org/packages/Fizzler.Systems.HtmlAgilityPack/
   [hap]: http://html-agility-pack.net/
-  [tests]: https://github.com/atifaziz/Fizzler/tree/master/src/Fizzler.Tests
+  [tests]: https://github.com/atifaziz/Fizzler/tree/master/tests/Fizzler.Tests

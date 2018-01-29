@@ -18,10 +18,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="..\..\COPYING.LESSER.txt" Link="COPYING.LESSER.txt">
+    <Content Include="..\COPYING.LESSER.txt" Link="COPYING.LESSER.txt">
       <PackagePath />
     </Content>
-    <Content Include="..\..\COPYING.txt" Link="COPYING.txt">
+    <Content Include="..\COPYING.txt" Link="COPYING.txt">
       <PackagePath />
     </Content>
   </ItemGroup>

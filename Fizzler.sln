@@ -19,9 +19,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		test.sh = test.sh
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fizzler", "src\Fizzler\Fizzler.csproj", "{939036D6-29FD-46E4-B6CD-52618F51081B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fizzler", "src\Fizzler.csproj", "{939036D6-29FD-46E4-B6CD-52618F51081B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fizzler.Tests", "src\Fizzler.Tests\Fizzler.Tests.csproj", "{3C0C905E-47D4-4616-8B09-C3CECB12598F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Fizzler.Tests", "tests\Fizzler.Tests.csproj", "{3C0C905E-47D4-4616-8B09-C3CECB12598F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
