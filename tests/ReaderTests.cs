@@ -208,7 +208,7 @@ namespace Fizzler.Tests
 
         sealed class TestEnumerator<T> : IEnumerator<T>
         {
-            public int DisposeCallCount { get; set; }
+            public int DisposeCallCount { get; private set; }
             public bool Disposed => DisposeCallCount > 0;
 
             public void Dispose() => DisposeCallCount++;
