@@ -26,6 +26,10 @@
     <OutputPath>..\bin\Release\</OutputPath>
   </PropertyGroup>
 
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.0'">
+    <PackageReference Include="System.Diagnostics.Contracts" Version="4.3.0" />
+  </ItemGroup>
+
   <ItemGroup>
     <Content Include="..\COPYING.LESSER.txt" Link="COPYING.LESSER.txt">
       <PackagePath />
