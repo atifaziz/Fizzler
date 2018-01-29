@@ -17,10 +17,6 @@
     <Copyright>Copyright © 2009 Atif Aziz, Colin Ramsay. All rights reserved. Portions Copyright © 2008 Novell, Inc.</Copyright>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DefineConstants>TRACE;DEBUG;NETSTANDARD1_0</DefineConstants>
-  </PropertyGroup>
-
   <ItemGroup>
     <Content Include="..\..\COPYING.LESSER.txt" Link="COPYING.LESSER.txt">
       <PackagePath />
