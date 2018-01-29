@@ -33,12 +33,12 @@ namespace Fizzler
         /// <summary>
         /// Gets the first generator used to initialize this generator.
         /// </summary>
-        public ISelectorGenerator Primary { get; private set; }
+        public ISelectorGenerator Primary { get; }
 
         /// <summary>
         /// Gets the second generator used to initialize this generator.
         /// </summary>
-        public ISelectorGenerator Secondary { get; private set; }
+        public ISelectorGenerator Secondary { get; }
 
         /// <summary>
         /// Initializes a new instance of <see cref="SelectorGeneratorTee"/>

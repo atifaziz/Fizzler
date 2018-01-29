@@ -38,10 +38,10 @@ namespace Fizzler
     /// </summary>
     public sealed class Parser
     {
-        private readonly Reader<Token> _reader;
-        private readonly ISelectorGenerator _generator;
+        readonly Reader<Token> _reader;
+        readonly ISelectorGenerator _generator;
 
-        private Parser(Reader<Token> reader, ISelectorGenerator generator)
+        Parser(Reader<Token> reader, ISelectorGenerator generator)
         {
             Debug.Assert(reader != null);
             Debug.Assert(generator != null);
@@ -53,10 +53,8 @@ namespace Fizzler
         /// Parses a CSS selector group and generates its implementation.
         /// </summary>
         public static TGenerator Parse<TGenerator>(string selectors, TGenerator generator)
-                where TGenerator : ISelectorGenerator
-        {
-            return Parse(selectors, generator, g => g);
-        }
+            where TGenerator : ISelectorGenerator =>
+            Parse(selectors, generator, g => g);
 
         /// <summary>
         /// Parses a CSS selector group and generates its implementation.
@@ -75,10 +73,8 @@ namespace Fizzler
         /// generates its implementation.
         /// </summary>
         public static TGenerator Parse<TGenerator>(IEnumerable<Token> tokens, TGenerator generator)
-                where TGenerator : ISelectorGenerator
-        {
-            return Parse(tokens, generator, g => g);
-        }
+            where TGenerator : ISelectorGenerator =>
+            Parse(tokens, generator, g => g);
 
         /// <summary>
         /// Parses a tokenized stream representing a CSS selector group and
@@ -94,14 +90,14 @@ namespace Fizzler
             return resultor(generator);
         }
 
-        private void Parse()
+        void Parse()
         {
             _generator.OnInit();
             SelectorGroup();
             _generator.OnClose();
         }
 
-        private void SelectorGroup()
+        void SelectorGroup()
         {
             //selectors_group
             //  : selector [ COMMA S* selector ]*
@@ -117,7 +113,7 @@ namespace Fizzler
             Read(ToTokenSpec(TokenKind.Eoi));
         }
 
-        private void Selector()
+        void Selector()
         {
             _generator.OnSelector();
 
@@ -130,7 +126,7 @@ namespace Fizzler
                 SimpleSelectorSequence();
         }
 
-        private bool TryCombinator()
+        bool TryCombinator()
         {
             //combinator
             //  /* combinators can be surrounded by whitespace */
@@ -161,7 +157,7 @@ namespace Fizzler
             return true;
         }
 
-        private void SimpleSelectorSequence()
+        void SimpleSelectorSequence()
         {
             //simple_selector_sequence
             //  : [ type_selector | universal ]
@@ -205,7 +201,7 @@ namespace Fizzler
             }
         }
 
-        private void Pseudo()
+        void Pseudo()
         {
             //pseudo
             //  /* '::' starts a pseudo-element, ':' a pseudo-class */
@@ -218,7 +214,7 @@ namespace Fizzler
             PseudoClass(); // We do pseudo-class only for now
         }
 
-        private void PseudoClass()
+        void PseudoClass()
         {
             //pseudo
             //  : ':' [ IDENT | functional_pseudo ]
@@ -243,7 +239,7 @@ namespace Fizzler
             }
         }
 
-        private bool TryFunctionalPseudo()
+        bool TryFunctionalPseudo()
         {
             //functional_pseudo
             //  : FUNCTION S* expression ')'
@@ -271,7 +267,7 @@ namespace Fizzler
             return true;
         }
 
-        private void Nth()
+        void Nth()
         {
             //nth
             //  : S* [ ['-'|'+']? INTEGER? {N} [ S* ['-'|'+'] S* INTEGER ]? |
@@ -284,7 +280,7 @@ namespace Fizzler
             _generator.NthChild(1, NthB());
         }
 
-        private void NthLast()
+        void NthLast()
         {
             //nth
             //  : S* [ ['-'|'+']? INTEGER? {N} [ S* ['-'|'+'] S* INTEGER ]? |
@@ -297,12 +293,12 @@ namespace Fizzler
             _generator.NthLastChild(1, NthB());
         }
 
-        private int NthB()
+        int NthB()
         {
             return int.Parse(Read(ToTokenSpec(TokenKind.Integer)).Text, CultureInfo.InvariantCulture);
         }
 
-        private void Attrib()
+        void Attrib()
         {
             //attrib
             //  : '[' S* [ namespace_prefix ]? IDENT S*
@@ -359,7 +355,7 @@ namespace Fizzler
             Read(ToTokenSpec(Token.RightBracket()));
         }
 
-        private void Class()
+        void Class()
         {
             //class
             //  : '.' IDENT
@@ -369,7 +365,7 @@ namespace Fizzler
             _generator.Class(Read(ToTokenSpec(TokenKind.Ident)).Text);
         }
 
-        private NamespacePrefix? TryNamespacePrefix()
+        NamespacePrefix? TryNamespacePrefix()
         {
             //namespace_prefix
             //  : [ IDENT | '*' ]? '|'
@@ -396,7 +392,7 @@ namespace Fizzler
                  : NamespacePrefix.Any;
         }
 
-        private void TypeSelectorOrUniversal()
+        void TypeSelectorOrUniversal()
         {
             //type_selector
             //  : [ namespace_prefix ]? element_name
@@ -416,12 +412,9 @@ namespace Fizzler
                 _generator.Universal(prefix);
         }
 
-        private Token Peek()
-        {
-            return _reader.Peek();
-        }
+        Token Peek() => _reader.Peek();
 
-        private Token Read(TokenSpec spec)
+        Token Read(TokenSpec spec)
         {
             var token = TryRead(spec);
             if (token == null)
@@ -433,7 +426,7 @@ namespace Fizzler
             return token.Value;
         }
 
-        private Token Read(params TokenSpec[] specs)
+        Token Read(params TokenSpec[] specs)
         {
             var token = TryRead(specs);
             if (token == null)
@@ -445,7 +438,7 @@ namespace Fizzler
             return token.Value;
         }
 
-        private Token? TryRead(params TokenSpec[] specs)
+        Token? TryRead(params TokenSpec[] specs)
         {
             foreach (var kind in specs)
             {
@@ -456,7 +449,7 @@ namespace Fizzler
             return null;
         }
 
-        private Token? TryRead(TokenSpec spec)
+        Token? TryRead(TokenSpec spec)
         {
             var token = Peek();
             if (!spec.Fold(a => a == token.Kind, b => b == token))
@@ -465,19 +458,9 @@ namespace Fizzler
             return token;
         }
 
-        private void Unread(Token token)
-        {
-            _reader.Unread(token);
-        }
+        void Unread(Token token) => _reader.Unread(token);
 
-        private static TokenSpec ToTokenSpec(TokenKind kind)
-        {
-            return TokenSpec.A(kind);
-        }
-
-        private static TokenSpec ToTokenSpec(Token token)
-        {
-            return TokenSpec.B(token);
-        }
+        static TokenSpec ToTokenSpec(TokenKind kind) => TokenSpec.A(kind);
+        static TokenSpec ToTokenSpec(Token token) => TokenSpec.B(token);
     }
 }

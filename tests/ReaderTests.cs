@@ -199,42 +199,23 @@ namespace Fizzler.Tests
             Assert.That(e.ObjectName, Is.EqualTo(typeof(Reader<>).Name));
         }
 
-        private static Reader<T> CreateDisposedReader<T>()
+        static Reader<T> CreateDisposedReader<T>()
         {
             var reader = new Reader<T>(new T[0]);
             reader.Close();
             return reader;
         }
 
-        private sealed class TestEnumerator<T> : IEnumerator<T>
+        sealed class TestEnumerator<T> : IEnumerator<T>
         {
             public int DisposeCallCount { get; set; }
-            public bool Disposed { get { return DisposeCallCount > 0; } }
+            public bool Disposed => DisposeCallCount > 0;
 
-            public void Dispose()
-            {
-                DisposeCallCount++;
-            }
-
-            public bool MoveNext()
-            {
-                return false;
-            }
-
-            public void Reset()
-            {
-                throw new NotImplementedException();
-            }
-
-            public T Current
-            {
-                get { throw new NotImplementedException(); }
-            }
-
-            object IEnumerator.Current
-            {
-                get { return Current; }
-            }
+            public void Dispose() => DisposeCallCount++;
+            public bool MoveNext() => false;
+            public void Reset() => throw new NotImplementedException();
+            public T Current => throw new NotImplementedException();
+            object IEnumerator.Current => Current;
         }
     }
 }

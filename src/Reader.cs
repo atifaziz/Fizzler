@@ -35,21 +35,15 @@ namespace Fizzler
     /// </summary>
     public sealed class Reader<T> : IDisposable, IEnumerable<T>
     {
-        private IEnumerator<T> _enumerator;
-        private Stack<T> _buffer;
+        IEnumerator<T> _enumerator;
+        Stack<T> _buffer;
 
         /// <summary>
         /// Initialize a new <see cref="Reader{T}"/> with a base
         /// <see cref="IEnumerable{T}"/> object.
         /// </summary>
         public Reader(IEnumerable<T> e) :
-            this(CheckNonNull(e).GetEnumerator()) { }
-
-        private static IEnumerable<T> CheckNonNull(IEnumerable<T> e)
-        {
-            if (e == null) throw new ArgumentNullException(nameof(e));
-            return e;
-        }
+            this(e?.GetEnumerator()) { }
 
         /// <summary>
         /// Initialize a new <see cref="Reader{T}"/> with a base
@@ -113,10 +107,7 @@ namespace Fizzler
             return _buffer.Peek();
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <summary>
         /// Returns an enumerator that iterates through the remaining
@@ -128,13 +119,13 @@ namespace Fizzler
             return GetEnumeratorImpl();
         }
 
-        private IEnumerator<T> GetEnumeratorImpl()
+        IEnumerator<T> GetEnumeratorImpl()
         {
             while (HasMore)
                 yield return Read();
         }
 
-        private void RealRead()
+        void RealRead()
         {
             EnsureAlive();
 
@@ -146,15 +137,9 @@ namespace Fizzler
         /// Disposes the enumerator used to initialize this object
         /// if that enumerator supports <see cref="IDisposable"/>.
         /// </summary>
-        public void Close()
-        {
-            Dispose();
-        }
+        public void Close() => Dispose();
 
-        void IDisposable.Dispose()
-        {
-            Dispose();
-        }
+        void IDisposable.Dispose() => Dispose();
 
         void Dispose()
         {
@@ -165,7 +150,7 @@ namespace Fizzler
             _buffer = null;
         }
 
-        private void EnsureAlive()
+        void EnsureAlive()
         {
             if (_enumerator == null)
                 throw new ObjectDisposedException(GetType().Name);

@@ -32,10 +32,10 @@ namespace Fizzler
 
     // Adapted from Mono Rocks
 
-    internal abstract class Either<TA, TB>
+    abstract class Either<TA, TB>
             : IEquatable<Either<TA, TB>>
     {
-        private Either() {}
+        Either() {}
 
         public static Either<TA, TB> A(TA value)
         {
@@ -55,30 +55,19 @@ namespace Fizzler
         public override abstract string ToString();
         public abstract TResult Fold<TResult>(Func<TA, TResult> a, Func<TB, TResult> b);
 
-        private sealed class AImpl : Either<TA, TB>
+        sealed class AImpl : Either<TA, TB>
         {
-            private readonly TA _value;
+            readonly TA _value;
 
-            public AImpl(TA value)
-            {
-                _value = value;
-            }
+            public AImpl(TA value) => _value = value;
 
-            public override int GetHashCode()
-            {
-                return _value.GetHashCode();
-            }
+            public override int GetHashCode() => _value.GetHashCode();
 
-            public override bool Equals(object obj)
-            {
-                return Equals(obj as AImpl);
-            }
+            public override bool Equals(object obj) => Equals(obj as AImpl);
 
-            public override bool Equals(Either<TA, TB> obj)
-            {
-                return obj is AImpl a
-                    && EqualityComparer<TA>.Default.Equals(_value, a._value);
-            }
+            public override bool Equals(Either<TA, TB> obj) =>
+                obj is AImpl a
+                && EqualityComparer<TA>.Default.Equals(_value, a._value);
 
             public override TResult Fold<TResult>(Func<TA, TResult> a, Func<TB, TResult> b)
             {
@@ -87,36 +76,22 @@ namespace Fizzler
                 return a(_value);
             }
 
-            public override string ToString()
-            {
-                return _value.ToString();
-            }
+            public override string ToString() => _value.ToString();
         }
 
-        private sealed class BImpl : Either<TA, TB>
+        sealed class BImpl : Either<TA, TB>
         {
-            private readonly TB _value;
+            readonly TB _value;
 
-            public BImpl(TB value)
-            {
-                _value = value;
-            }
+            public BImpl(TB value) => _value = value;
 
-            public override int GetHashCode()
-            {
-                return _value.GetHashCode();
-            }
+            public override int GetHashCode() => _value.GetHashCode();
 
-            public override bool Equals(object obj)
-            {
-                return Equals(obj as BImpl);
-            }
+            public override bool Equals(object obj) => Equals(obj as BImpl);
 
-            public override bool Equals(Either<TA, TB> obj)
-            {
-                return obj is BImpl b
-                    && EqualityComparer<TB>.Default.Equals(_value, b._value);
-            }
+            public override bool Equals(Either<TA, TB> obj) =>
+                obj is BImpl b
+                && EqualityComparer<TB>.Default.Equals(_value, b._value);
 
             public override TResult Fold<TResult>(Func<TA, TResult> a, Func<TB, TResult> b)
             {
@@ -125,10 +100,7 @@ namespace Fizzler
                 return b(_value);
             }
 
-            public override string ToString()
-            {
-                return _value.ToString();
-            }
+            public override string ToString() => _value.ToString();
         }
     }
 }

@@ -41,10 +41,8 @@ namespace Fizzler
         /// <summary>
         /// Creates a caching selectors compiler on top on an existing compiler.
         /// </summary>
-        public static Func<string, T> Create<T>(Func<string, T> compiler)
-        {
-            return Create(compiler, null);
-        }
+        public static Func<string, T> Create<T>(Func<string, T> compiler) =>
+            Create(compiler, null);
 
         /// <summary>
         /// Creates a caching selectors compiler on top on an existing compiler.
@@ -61,17 +59,15 @@ namespace Fizzler
             return CreateImpl(compiler, cache ?? new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase));
         }
 
-        private static Func<string, T> CreateImpl<T>(Func<string, T> compiler, IDictionary<string, T> cache)
+        static Func<string, T> CreateImpl<T>(Func<string, T> compiler, IDictionary<string, T> cache)
         {
             Debug.Assert(compiler != null);
             Debug.Assert(cache != null);
 
             return selector =>
-            {
-                return cache.TryGetValue(selector, out var compiled)
-                     ? compiled
-                     : cache[selector] = compiler(selector);
-            };
+                cache.TryGetValue(selector, out var compiled)
+                ? compiled
+                : cache[selector] = compiler(selector);
         }
     }
 }

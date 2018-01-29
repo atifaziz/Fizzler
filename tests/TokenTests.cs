@@ -231,12 +231,12 @@ namespace Fizzler.Tests
             Assert.That(e.ParamName, Is.EqualTo("text"));
         }
 
-        private static void AssertToken(TokenKind kindExpected, Token token)
+        static void AssertToken(TokenKind kindExpected, Token token)
         {
             AssertToken(kindExpected, null, token);
         }
 
-        private static void AssertToken(TokenKind expectedKind, string expectedText, Token token)
+        static void AssertToken(TokenKind expectedKind, string expectedText, Token token)
         {
             Assert.AreEqual(expectedKind, token.Kind);
             if (expectedText == null)

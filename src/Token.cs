@@ -31,16 +31,14 @@ namespace Fizzler
         /// <summary>
         /// Gets the kind/type/class of the token.
         /// </summary>
-        public TokenKind Kind { get; private set; }
+        public TokenKind Kind { get; }
 
         /// <summary>
         /// Gets text, if any, associated with the token.
         /// </summary>
-        public string Text { get; private set; }
+        public string Text { get; }
 
-        private Token(TokenKind kind) : this(kind, null) {}
-
-        private Token(TokenKind kind, string text) : this()
+        Token(TokenKind kind, string text = null) : this()
         {
             Kind = kind;
             Text = text;
@@ -49,156 +47,103 @@ namespace Fizzler
         /// <summary>
         /// Creates an end-of-input token.
         /// </summary>
-        public static Token Eoi()
-        {
-            return new Token(TokenKind.Eoi);
-        }
+        public static Token Eoi() =>
+            new Token(TokenKind.Eoi);
 
-        private static readonly Token _star = Char('*');
-        private static readonly Token _dot = Char('.');
-        private static readonly Token _colon = Char(':');
-        private static readonly Token _comma = Char(',');
-        private static readonly Token _rightParenthesis = Char(')');
-        private static readonly Token _equals = Char('=');
-        private static readonly Token _pipe = Char('|');
-        private static readonly Token _leftBracket = Char('[');
-        private static readonly Token _rightBracket = Char(']');
+        static readonly Token _star = Char('*');
+        static readonly Token _dot = Char('.');
+        static readonly Token _colon = Char(':');
+        static readonly Token _comma = Char(',');
+        static readonly Token _rightParenthesis = Char(')');
+        static readonly Token _equals = Char('=');
+        static readonly Token _pipe = Char('|');
+        static readonly Token _leftBracket = Char('[');
+        static readonly Token _rightBracket = Char(']');
 
         /// <summary>
         /// Creates a star token.
         /// </summary>
-        public static Token Star()
-        {
-            return _star;
-        }
+        public static Token Star() => _star;
 
         /// <summary>
         /// Creates a dot token.
         /// </summary>
-        public static Token Dot()
-        {
-            return _dot;
-        }
+        public static Token Dot() => _dot;
 
         /// <summary>
         /// Creates a colon token.
         /// </summary>
-        public static Token Colon()
-        {
-            return _colon;
-        }
+        public static Token Colon() => _colon;
 
         /// <summary>
         /// Creates a comma token.
         /// </summary>
-        public static Token Comma()
-        {
-            return _comma;
-        }
+        public static Token Comma() => _comma;
 
         /// <summary>
         /// Creates a right parenthesis token.
         /// </summary>
-        public static Token RightParenthesis()
-        {
-            return _rightParenthesis;
-        }
+        public static Token RightParenthesis() => _rightParenthesis;
 
         /// <summary>
         /// Creates an equals token.
         /// </summary>
-        public static Token Equals()
-        {
-            return _equals;
-        }
+        public static Token Equals() => _equals;
 
         /// <summary>
         /// Creates a left bracket token.
         /// </summary>
-        public static Token LeftBracket()
-        {
-            return _leftBracket;
-        }
+        public static Token LeftBracket() => _leftBracket;
 
         /// <summary>
         /// Creates a right bracket token.
         /// </summary>
-        public static Token RightBracket()
-        {
-            return _rightBracket;
-        }
+        public static Token RightBracket() => _rightBracket;
 
         /// <summary>
         /// Creates a pipe (vertical line) token.
         /// </summary>
-        public static Token Pipe()
-        {
-            return _pipe;
-        }
+        public static Token Pipe() => _pipe;
 
         /// <summary>
         /// Creates a plus token.
         /// </summary>
-        public static Token Plus()
-        {
-            return new Token(TokenKind.Plus);
-        }
+        public static Token Plus() => new Token(TokenKind.Plus);
 
         /// <summary>
         /// Creates a greater token.
         /// </summary>
-        public static Token Greater()
-        {
-            return new Token(TokenKind.Greater);
-        }
+        public static Token Greater() => new Token(TokenKind.Greater);
 
         /// <summary>
         /// Creates an includes token.
         /// </summary>
-        public static Token Includes()
-        {
-            return new Token(TokenKind.Includes);
-        }
+        public static Token Includes() => new Token(TokenKind.Includes);
 
         /// <summary>
         /// Creates a dash-match token.
         /// </summary>
-        public static Token DashMatch()
-        {
-            return new Token(TokenKind.DashMatch);
-        }
+        public static Token DashMatch() => new Token(TokenKind.DashMatch);
 
         /// <summary>
         /// Creates a prefix-match token.
         /// </summary>
-        public static Token PrefixMatch()
-        {
-            return new Token(TokenKind.PrefixMatch);
-        }
+        public static Token PrefixMatch() => new Token(TokenKind.PrefixMatch);
 
         /// <summary>
         /// Creates a suffix-match token.
         /// </summary>
-        public static Token SuffixMatch()
-        {
-            return new Token(TokenKind.SuffixMatch);
-        }
+        public static Token SuffixMatch() => new Token(TokenKind.SuffixMatch);
 
         /// <summary>
         /// Creates a substring-match token.
         /// </summary>
-        public static Token SubstringMatch()
-        {
-            return new Token(TokenKind.SubstringMatch);
-        }
+        public static Token SubstringMatch() => new Token(TokenKind.SubstringMatch);
 
         /// <summary>
         /// Creates a general sibling token.
         /// </summary>
-        public static Token Tilde()
-        {
-            return new Token(TokenKind.Tilde);
-        }
+        public static Token Tilde() => new Token(TokenKind.Tilde);
 
         /// <summary>
         /// Creates an identifier token.
@@ -239,10 +184,8 @@ namespace Fizzler
         /// <summary>
         /// Creates a string token.
         /// </summary>
-        public static Token String(string text)
-        {
-            return new Token(TokenKind.String, text ?? string.Empty);
-        }
+        public static Token String(string text) =>
+            new Token(TokenKind.String, text ?? string.Empty);
 
         /// <summary>
         /// Creates a function token.
@@ -256,61 +199,46 @@ namespace Fizzler
         /// <summary>
         /// Creates an arbitrary character token.
         /// </summary>
-        public static Token Char(char ch)
-        {
-            return new Token(TokenKind.Char, ch.ToString());
-        }
+        public static Token Char(char ch) =>
+            new Token(TokenKind.Char, ch.ToString());
 
         /// <summary>
         /// Indicates whether this instance and a specified object are equal.
         /// </summary>
-        public override bool Equals(object obj)
-        {
-            return obj is Token token && Equals(token);
-        }
+        public override bool Equals(object obj) =>
+            obj is Token token && Equals(token);
 
         /// <summary>
         /// Returns the hash code for this instance.
         /// </summary>
-        public override int GetHashCode()
-        {
-            return Text == null ? Kind.GetHashCode() : Kind.GetHashCode() ^ Text.GetHashCode();
-        }
+        public override int GetHashCode() =>
+            Text == null ? Kind.GetHashCode() : Kind.GetHashCode() ^ Text.GetHashCode();
 
         /// <summary>
         /// Indicates whether the current object is equal to another object of the same type.
         /// </summary>
-        public bool Equals(Token other)
-        {
-            return Kind == other.Kind && Text == other.Text;
-        }
+        public bool Equals(Token other) =>
+            Kind == other.Kind && Text == other.Text;
 
         /// <summary>
         /// Gets a string representation of the token.
         /// </summary>
-        public override string ToString()
-        {
-            return Text == null ? Kind.ToString() : Kind + ": " + Text;
-        }
+        public override string ToString() =>
+            Text == null ? Kind.ToString() : Kind + ": " + Text;
+
         /// <summary>
         /// Performs a logical comparison of the two tokens to determine
         /// whether they are equal.
         /// </summary>
-        public static bool operator==(Token a, Token b)
-        {
-            return a.Equals(b);
-        }
+        public static bool operator==(Token a, Token b) => a.Equals(b);
 
         /// <summary>
         /// Performs a logical comparison of the two tokens to determine
         /// whether they are inequal.
         /// </summary>
-        public static bool operator !=(Token a, Token b)
-        {
-            return !a.Equals(b);
-        }
+        public static bool operator !=(Token a, Token b) => !a.Equals(b);
 
-        private static void ValidateTextArgument(string text)
+        static void ValidateTextArgument(string text)
         {
             if (text == null) throw new ArgumentNullException(nameof(text));
             if (text.Length == 0) throw new ArgumentException(null, nameof(text));

@@ -49,15 +49,12 @@ namespace Fizzler
         /// <summary>
         /// Initializes an instance with a namespace prefix specification.
         /// </summary>
-        public NamespacePrefix(string text) : this()
-        {
-            Text = text;
-        }
+        public NamespacePrefix(string text) : this() => Text = text;
 
         /// <summary>
         /// Gets the raw text value of this instance.
         /// </summary>
-        public string Text { get; private set; }
+        public string Text { get; }
 
         /// <summary>
         /// Indicates whether this instance represents a name
@@ -65,61 +62,47 @@ namespace Fizzler
         /// document, depending on whether a default namespace is
         /// in effect or not.
         /// </summary>
-        public bool IsNone { get { return Text == null; } }
+        public bool IsNone => Text == null;
 
         /// <summary>
         /// Indicates whether this instance represents a name
         /// from any namespace (including one without one)
         /// in a target document.
         /// </summary>
-        public bool IsAny
-        {
-            get { return !IsNone && Text.Length == 1 && Text[0] == '*'; }
-        }
+        public bool IsAny => !IsNone && Text.Length == 1 && Text[0] == '*';
 
         /// <summary>
         /// Indicates whether this instance represents a name
         /// without a namespace in a target document.
         /// </summary>
-        public bool IsEmpty { get { return !IsNone && Text.Length == 0; } }
+        public bool IsEmpty => !IsNone && Text.Length == 0;
 
         /// <summary>
         /// Indicates whether this instance represents a name from a
         /// specific namespace or not.
         /// </summary>
-        public bool IsSpecific { get {return !IsNone && !IsAny; } }
+        public bool IsSpecific => !IsNone && !IsAny;
 
         /// <summary>
         /// Indicates whether this instance and a specified object are equal.
         /// </summary>
-        public override bool Equals(object obj)
-        {
-            return obj is NamespacePrefix && Equals((NamespacePrefix) obj);
-        }
+        public override bool Equals(object obj) =>
+            obj is NamespacePrefix prefix && Equals(prefix);
 
         /// <summary>
         /// Indicates whether this instance and another are equal.
         /// </summary>
-        public bool Equals(NamespacePrefix other)
-        {
-            return Text == other.Text;
-        }
+        public bool Equals(NamespacePrefix other) => Text == other.Text;
 
         /// <summary>
         /// Returns the hash code for this instance.
         /// </summary>
-        public override int GetHashCode()
-        {
-            return IsNone ? 0 : Text.GetHashCode();
-        }
+        public override int GetHashCode() => IsNone ? 0 : Text.GetHashCode();
 
         /// <summary>
         /// Returns a string representation of this instance.
         /// </summary>
-        public override string ToString()
-        {
-            return IsNone ? "(none)" : Text;
-        }
+        public override string ToString() => IsNone ? "(none)" : Text;
 
         /// <summary>
         /// Formats this namespace together with a name.

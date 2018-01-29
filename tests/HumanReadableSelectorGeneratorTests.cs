@@ -164,7 +164,7 @@ namespace Fizzler.Tests
             Run("*[title^='hithere']", "Take all elements which have attribute title whose value begins with 'hithere' and select them.");
         }
 
-        private static void Run(string selector, string message)
+        static void Run(string selector, string message)
         {
             var generator = new HumanReadableSelectorGenerator();
             Parser.Parse(selector, generator);

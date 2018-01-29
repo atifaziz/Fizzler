@@ -304,14 +304,14 @@ namespace Fizzler.Tests
                               g => g.AttributeSubstringValue, "v");
         }
 
-        private static void Test<T1>(string input, Func<TestSelectorGenerator, T1> actual1, T1 expected1)
+        static void Test<T1>(string input, Func<TestSelectorGenerator, T1> actual1, T1 expected1)
         {
             Test(input,
                 new Func<TestSelectorGenerator, object>[] { g => actual1(g) },
                 new object[] { expected1 });
         }
 
-        private static void Test<T1, T2>(string input,
+        static void Test<T1, T2>(string input,
             Func<TestSelectorGenerator, T1> actual1, T1 expected1,
             Func<TestSelectorGenerator, T2> actual2, T2 expected2)
         {
@@ -320,7 +320,7 @@ namespace Fizzler.Tests
                 new object[] {expected1, expected2});
         }
 
-        private static void Test<T1, T2, T3>(string input,
+        static void Test<T1, T2, T3>(string input,
             Func<TestSelectorGenerator, T1> actual1, T1 expected1,
             Func<TestSelectorGenerator, T2> actual2, T2 expected2,
             Func<TestSelectorGenerator, T3> actual3, T2 expected3)
@@ -330,7 +330,7 @@ namespace Fizzler.Tests
                 new object[] { expected1, expected2, expected3 });
         }
 
-        private static void Test(string input,
+        static void Test(string input,
             IEnumerable<Func<TestSelectorGenerator, object>> actuals,
             IEnumerable<object> expectations)
         {
@@ -437,77 +437,21 @@ namespace Fizzler.Tests
 
             #region Unimplemented memebers
 
-            public void OnInit()
-            {
-            }
-
-            public void OnClose()
-            {
-            }
-
-            public void OnSelector()
-            {
-            }
-
-            public void Id(string id)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Class(string clazz)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void FirstChild()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void LastChild()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void NthChild(int a, int b)
-            {
-                throw new NotImplementedException();
-            }
-
-            public void OnlyChild()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Empty()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Child()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Descendant()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void Adjacent()
-            {
-                throw new NotImplementedException();
-            }
-
-            public void GeneralSibling()
-            {
-                throw new NotImplementedException();
-            }
-
-             public void NthLastChild(int a, int b)
-             {
-                 throw new NotImplementedException();
-             }
+            public void OnInit() {}
+            public void OnClose() {}
+            public void OnSelector() {}
+            public void Id(string id) => throw new NotImplementedException();
+            public void Class(string clazz) => throw new NotImplementedException();
+            public void FirstChild() => throw new NotImplementedException();
+            public void LastChild() => throw new NotImplementedException();
+            public void NthChild(int a, int b) => throw new NotImplementedException();
+            public void OnlyChild() => throw new NotImplementedException();
+            public void Empty() => throw new NotImplementedException();
+            public void Child() => throw new NotImplementedException();
+            public void Descendant() => throw new NotImplementedException();
+            public void Adjacent() => throw new NotImplementedException();
+            public void GeneralSibling() => throw new NotImplementedException();
+            public void NthLastChild(int a, int b) => throw new NotImplementedException();
 
             #endregion
         }

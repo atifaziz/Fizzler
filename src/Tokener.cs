@@ -163,7 +163,7 @@ namespace Fizzler
             yield return Token.Eoi();
         }
 
-        private static string ParseWhiteSpace(Reader reader)
+        static string ParseWhiteSpace(Reader reader)
         {
             Debug.Assert(reader != null);
 
@@ -172,7 +172,7 @@ namespace Fizzler
             return reader.MarkedWithUnread();
         }
 
-        private static string ParseHash(Reader reader)
+        static string ParseHash(Reader reader)
         {
             Debug.Assert(reader != null);
 
@@ -184,7 +184,7 @@ namespace Fizzler
             return text;
         }
 
-        private static Token ParseString(Reader reader, char quote)
+        static Token ParseString(Reader reader, char quote)
         {
             Debug.Assert(reader != null);
 
@@ -237,64 +237,38 @@ namespace Fizzler
             return Token.String(text);
         }
 
-        private static bool IsDigit(char? ch) // [0-9]
+        static bool IsDigit(char? ch) => // [0-9]
+            ch >= '0' && ch <= '9';
+
+        static bool IsS(char? ch) => // [ \t\r\n\f]
+            ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n' || ch == '\f';
+
+        static bool IsNmStart(char? ch) // [_a-z]|{nonascii}|{escape}
+            => ch == '_'
+            || (ch >= 'a' && ch <= 'z')
+            || (ch >= 'A' && ch <= 'Z');
+
+        static bool IsNmChar(char? ch) => // [_a-z0-9-]|{nonascii}|{escape}
+            IsNmStart(ch) || ch == '-' || (ch >= '0' && ch <= '9');
+
+        sealed class Reader
         {
-            return ch >= '0' && ch <= '9';
-        }
+            readonly string _input;
+            int _index = -1;
+            int _start = -1;
 
-        private static bool IsS(char? ch) // [ \t\r\n\f]
-        {
-            return ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n' || ch == '\f';
-        }
+            public Reader(string input) => _input = input;
 
-        private static bool IsNmStart(char? ch) // [_a-z]|{nonascii}|{escape}
-        {
-            return ch == '_'
-                || (ch >= 'a' && ch <= 'z')
-                || (ch >= 'A' && ch <= 'Z');
-        }
+            bool Ready => _index >= 0 && _index < _input.Length;
+            public char? Value => Ready ? _input[_index] : (char?)null;
+            public int Position => _index + 1;
 
-        private static bool IsNmChar(char? ch) // [_a-z0-9-]|{nonascii}|{escape}
-        {
-            return IsNmStart(ch) || ch == '-' || (ch >= '0' && ch <= '9');
-        }
+            public void Mark() => _start = _index;
+            public void MarkFromNext() => _start = _index + 1;
+            public string Marked() => Marked(0);
+            public string MarkedExceptLast() => Marked(-1);
 
-        private sealed class Reader
-        {
-            private readonly string _input;
-            private int _index = -1;
-            private int _start = -1;
-
-            public Reader(string input)
-            {
-                _input = input;
-            }
-
-            private bool Ready { get { return _index >= 0 && _index < _input.Length; } }
-            public char? Value { get { return Ready ? _input[_index] : (char?)null; } }
-            public int Position { get { return _index + 1; } }
-
-            public void Mark()
-            {
-                _start = _index;
-            }
-
-            public void MarkFromNext()
-            {
-                _start = _index + 1;
-            }
-
-            public string Marked()
-            {
-                return Marked(0);
-            }
-
-            public string MarkedExceptLast()
-            {
-                return Marked(-1);
-            }
-
-            private string Marked(int trim)
+            string Marked(int trim)
             {
                 var start = _start;
                 var count = Math.Min(_input.Length, _index + trim) - start;
@@ -309,10 +283,7 @@ namespace Fizzler
                 return Value;
             }
 
-            public void Unread()
-            {
-                _index = Math.Max(-1, _index - 1);
-            }
+            public void Unread() => _index = Math.Max(-1, _index - 1);
 
             public string MarkedWithUnread()
             {
