@@ -68,8 +68,7 @@ namespace Fizzler
 
             return selector =>
             {
-                T compiled;
-                return cache.TryGetValue(selector, out compiled)
+                return cache.TryGetValue(selector, out var compiled)
                      ? compiled
                      : cache[selector] = compiler(selector);
             };

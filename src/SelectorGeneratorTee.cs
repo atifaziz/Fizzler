@@ -47,11 +47,8 @@ namespace Fizzler
         /// </summary>
         public SelectorGeneratorTee(ISelectorGenerator primary, ISelectorGenerator secondary)
         {
-            if (primary == null) throw new ArgumentNullException("primary");
-            if (secondary == null) throw new ArgumentNullException("secondary");
-
-            Primary = primary;
-            Secondary = secondary;
+            Primary = primary ?? throw new ArgumentNullException("primary");
+            Secondary = secondary ?? throw new ArgumentNullException("secondary");
         }
 
         /// <summary>

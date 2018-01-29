@@ -69,8 +69,7 @@ namespace Fizzler
         /// </summary>
         protected void Add(string selector)
         {
-            if (selector == null) throw new ArgumentNullException("selector");
-            Text += selector;
+            Text += selector ?? throw new ArgumentNullException("selector");
         }
 
         /// <summary>
@@ -78,7 +77,7 @@ namespace Fizzler
         /// </summary>
         public void Type(NamespacePrefix prefix, string type)
         {
-            Add(string.Format(" <{0}> elements", type));
+            Add($" <{type}> elements");
         }
 
         /// <summary>
@@ -94,7 +93,7 @@ namespace Fizzler
         /// </summary>
         public void Id(string id)
         {
-            Add(string.Format(" with an ID of '{0}'", id));
+            Add($" with an ID of '{id}'");
         }
 
         /// <summary>
@@ -102,7 +101,7 @@ namespace Fizzler
         /// </summary>
         void ISelectorGenerator.Class(string clazz)
         {
-            Add(string.Format(" with a class of '{0}'", clazz));
+            Add($" with a class of '{clazz}'");
         }
 
         /// <summary>
@@ -110,7 +109,7 @@ namespace Fizzler
         /// </summary>
         public void AttributeExists(NamespacePrefix prefix, string name)
         {
-            Add(string.Format(" which have attribute {0} defined", name));
+            Add($" which have attribute {name} defined");
         }
 
         /// <summary>
@@ -118,7 +117,7 @@ namespace Fizzler
         /// </summary>
         public void AttributeExact(NamespacePrefix prefix, string name, string value)
         {
-            Add(string.Format(" which have attribute {0} with a value of '{1}'", name, value));
+            Add($" which have attribute {name} with a value of '{value}'");
         }
 
         /// <summary>
@@ -126,7 +125,7 @@ namespace Fizzler
         /// </summary>
         public void AttributeIncludes(NamespacePrefix prefix, string name, string value)
         {
-            Add(string.Format(" which have attribute {0} that includes the word '{1}'", name, value));
+            Add($" which have attribute {name} that includes the word '{value}'");
         }
 
         /// <summary>
@@ -134,7 +133,7 @@ namespace Fizzler
         /// </summary>
         public void AttributeDashMatch(NamespacePrefix prefix, string name, string value)
         {
-            Add(string.Format(" which have attribute {0} with a hyphen separated value matching '{1}'", name, value));
+            Add($" which have attribute {name} with a hyphen separated value matching '{value}'");
         }
 
         /// <summary>
@@ -142,7 +141,7 @@ namespace Fizzler
         /// </summary>
         public void AttributePrefixMatch(NamespacePrefix prefix, string name, string value)
         {
-            Add(string.Format(" which have attribute {0} whose value begins with '{1}'", name, value));
+            Add($" which have attribute {name} whose value begins with '{value}'");
         }
 
         /// <summary>
@@ -150,7 +149,7 @@ namespace Fizzler
         /// </summary>
         public void AttributeSuffixMatch(NamespacePrefix prefix, string name, string value)
         {
-            Add(string.Format(" which have attribute {0} whose value ends with '{1}'", name, value));
+            Add($" which have attribute {name} whose value ends with '{value}'");
         }
 
         /// <summary>
@@ -158,7 +157,7 @@ namespace Fizzler
         /// </summary>
         public void AttributeSubstring(NamespacePrefix prefix, string name, string value)
         {
-            Add(string.Format(" which have attribute {0} whose value contains '{1}'", name, value));
+            Add($" which have attribute {name} whose value contains '{value}'");
         }
 
         /// <summary>
@@ -182,7 +181,7 @@ namespace Fizzler
         /// </summary>
         public void NthChild(int a, int b)
         {
-            Add(string.Format(" where the element has {0}n+{1}-1 sibling before it", a, b));
+            Add($" where the element has {a}n+{b}-1 sibling before it");
         }
 
         /// <summary>
@@ -250,7 +249,7 @@ namespace Fizzler
         /// </summary>
         public void NthLastChild(int a, int b)
         {
-            Add(string.Format(" where the element has {0}n+{1}-1 sibling after it", a, b));
+            Add($" where the element has {a}n+{b}-1 sibling after it");
         }
     }
 }

@@ -76,8 +76,7 @@ namespace Fizzler
 
             public override bool Equals(Either<TA, TB> obj)
             {
-                var a = obj as AImpl;
-                return a != null
+                return obj is AImpl a
                     && EqualityComparer<TA>.Default.Equals(_value, a._value);
             }
 
@@ -115,8 +114,7 @@ namespace Fizzler
 
             public override bool Equals(Either<TA, TB> obj)
             {
-                var b = obj as BImpl;
-                return b != null
+                return obj is BImpl b
                     && EqualityComparer<TB>.Default.Equals(_value, b._value);
             }
 

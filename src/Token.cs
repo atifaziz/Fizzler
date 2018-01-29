@@ -266,7 +266,7 @@ namespace Fizzler
         /// </summary>
         public override bool Equals(object obj)
         {
-            return obj != null && obj is Token && Equals((Token) obj);
+            return obj is Token token && Equals(token);
         }
 
         /// <summary>

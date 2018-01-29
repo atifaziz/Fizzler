@@ -51,8 +51,7 @@ namespace Fizzler
         /// </summary>
         public SelectorGenerator(IElementOps<TElement> ops, IEqualityComparer<TElement> equalityComparer)
         {
-            if(ops == null) throw new ArgumentNullException("ops");
-            Ops = ops;
+            Ops = ops ?? throw new ArgumentNullException("ops");
             _equalityComparer = equalityComparer ?? EqualityComparer<TElement>.Default;
             _selectors = new Stack<Selector<TElement>>();
         }

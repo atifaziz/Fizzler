@@ -57,8 +57,7 @@ namespace Fizzler
         /// </summary>
         public Reader(IEnumerator<T> e)
         {
-            if(e == null) throw new ArgumentNullException("e");
-            _enumerator = e;
+            _enumerator = e ?? throw new ArgumentNullException("e");
             _buffer = new Stack<T>();
             RealRead();
         }
