@@ -38,16 +38,16 @@ namespace Fizzler.Tests
     [TestFixture]
     public class SelectorGeneratorTeeTests
     {
-        static SelectorGeneratorTee tee;
-        static FakeSelectorGenerator primary;
-        static FakeSelectorGenerator secondary;
+        static SelectorGeneratorTee _tee;
+        static FakeSelectorGenerator _primary;
+        static FakeSelectorGenerator _secondary;
 
         [SetUp]
         public void Setup()
         {
-            primary = new FakeSelectorGenerator();
-            secondary = new FakeSelectorGenerator();
-            tee = new SelectorGeneratorTee(primary, secondary);
+            _primary = new FakeSelectorGenerator();
+            _secondary = new FakeSelectorGenerator();
+            _tee = new SelectorGeneratorTee(_primary, _secondary);
         }
 
         [Test]
@@ -69,139 +69,139 @@ namespace Fizzler.Tests
         [Test]
         public void OnInitTest()
         {
-            Run(tee.OnInit);
+            Run(_tee.OnInit);
         }
 
         [Test]
         public void OnCloseTest()
         {
-            Run(tee.OnClose);
+            Run(_tee.OnClose);
         }
 
         [Test]
         public void OnSelectorTest()
         {
-            Run(tee.OnSelector);
+            Run(_tee.OnSelector);
         }
 
         [Test]
         public void TypeTest()
         {
-            Run(tee.Type, NamespacePrefix.None, "go");
+            Run(_tee.Type, NamespacePrefix.None, "go");
         }
 
         [Test]
         public void UniversalTest()
         {
-            Run(tee.Universal, NamespacePrefix.None);
+            Run(_tee.Universal, NamespacePrefix.None);
         }
 
         [Test]
         public void IdTest()
         {
-            Run(tee.Id, "hello");
+            Run(_tee.Id, "hello");
         }
 
         [Test]
         public void ClassTest()
         {
-            Run(tee.Class, "hello");
+            Run(_tee.Class, "hello");
         }
 
         [Test]
         public void AttrExistsTest()
         {
-            Run(tee.AttributeExists, NamespacePrefix.None, "hello");
+            Run(_tee.AttributeExists, NamespacePrefix.None, "hello");
         }
 
         [Test]
         public void AttExactTest()
         {
-            Run(tee.AttributeExact, NamespacePrefix.None, "hello", "there");
+            Run(_tee.AttributeExact, NamespacePrefix.None, "hello", "there");
         }
 
         [Test]
         public void AttrIncludesTest()
         {
-            Run(tee.AttributeIncludes, NamespacePrefix.None, "hello", "there");
+            Run(_tee.AttributeIncludes, NamespacePrefix.None, "hello", "there");
         }
 
         [Test]
         public void AttrDashMatchTest()
         {
-            Run(tee.AttributeDashMatch, NamespacePrefix.None, "hello", "there");
+            Run(_tee.AttributeDashMatch, NamespacePrefix.None, "hello", "there");
         }
 
         [Test]
         public void AttrPrefixMatchTest()
         {
-            Run(tee.AttributePrefixMatch,NamespacePrefix.None, "hello", "there");
+            Run(_tee.AttributePrefixMatch,NamespacePrefix.None, "hello", "there");
         }
 
         [Test]
         public void AttrSuffixMatchTest()
         {
-            Run(tee.AttributeSuffixMatch, NamespacePrefix.None, "hello", "there");
+            Run(_tee.AttributeSuffixMatch, NamespacePrefix.None, "hello", "there");
         }
 
         [Test]
         public void AttrSubstringTest()
         {
-            Run(tee.AttributeSubstring, NamespacePrefix.None, "hello", "there");
+            Run(_tee.AttributeSubstring, NamespacePrefix.None, "hello", "there");
         }
 
         [Test]
         public void FirstChildTest()
         {
-            Run(tee.FirstChild);
+            Run(_tee.FirstChild);
         }
 
         [Test]
         public void LastChildTest()
         {
-            Run(tee.LastChild);
+            Run(_tee.LastChild);
         }
 
         [Test]
         public void NthChildTest()
         {
-            Run(tee.NthChild, 1, 2);
+            Run(_tee.NthChild, 1, 2);
         }
 
         [Test]
         public void OnlyChildTest()
         {
-            Run(tee.OnlyChild);
+            Run(_tee.OnlyChild);
         }
 
         [Test]
         public void EmptyTest()
         {
-            Run(tee.Empty);
+            Run(_tee.Empty);
         }
 
         [Test]
         public void ChildTest()
         {
-            Run(tee.Child);
+            Run(_tee.Child);
         }
 
         [Test]
         public void DescendantTest()
         {
-            Run(tee.Descendant);
+            Run(_tee.Descendant);
         }
 
         [Test]
         public void AdjacentTest()
         {
-            Run(tee.Adjacent);
+            Run(_tee.Adjacent);
         }
 
         [Test]
         public void GeneralSiblingTest()
         {
-            Run(tee.GeneralSibling);
+            Run(_tee.GeneralSibling);
         }
 
         static void Run(Action action)
@@ -231,21 +231,21 @@ namespace Fizzler.Tests
         static void RunImpl(MethodBase action, params object[] args)
         {
             var recordings = new Queue<CallRecording<ISelectorGenerator>>(2);
-            primary.Recorder = recordings.Enqueue;
-            secondary.Recorder = recordings.Enqueue;
+            _primary.Recorder = recordings.Enqueue;
+            _secondary.Recorder = recordings.Enqueue;
 
-            action.Invoke(tee, args);
+            action.Invoke(_tee, args);
 
             // Assert the fact that the primary and secondary methods were
             // both called with the same arguments and in the right order!
 
             var recording = recordings.Dequeue();
-            Assert.AreSame(primary, recording.Target);
+            Assert.AreSame(_primary, recording.Target);
             Assert.AreEqual(action.Name, MapMethod<ISelectorGenerator>(recording.Method).Name);
             Assert.AreEqual(args, recording.Arguments);
 
             recording = recordings.Dequeue();
-            Assert.AreSame(secondary, recording.Target);
+            Assert.AreSame(_secondary, recording.Target);
             Assert.AreEqual(action.Name, MapMethod<ISelectorGenerator>(recording.Method).Name);
             Assert.AreEqual(args, recording.Arguments);
         }

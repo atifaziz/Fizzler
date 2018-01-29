@@ -50,60 +50,60 @@ namespace Fizzler
         public static Token Eoi() =>
             new Token(TokenKind.Eoi);
 
-        static readonly Token _star = Char('*');
-        static readonly Token _dot = Char('.');
-        static readonly Token _colon = Char(':');
-        static readonly Token _comma = Char(',');
-        static readonly Token _rightParenthesis = Char(')');
-        static readonly Token _equals = Char('=');
-        static readonly Token _pipe = Char('|');
-        static readonly Token _leftBracket = Char('[');
-        static readonly Token _rightBracket = Char(']');
+        static readonly Token StarToken = Char('*');
+        static readonly Token DotToken = Char('.');
+        static readonly Token ColonToken = Char(':');
+        static readonly Token CommaToken = Char(',');
+        static readonly Token RightParenthesisToken = Char(')');
+        static readonly Token EqualsToken = Char('=');
+        static readonly Token PipeToken = Char('|');
+        static readonly Token LeftBracketToken = Char('[');
+        static readonly Token RightBracketToken = Char(']');
 
         /// <summary>
         /// Creates a star token.
         /// </summary>
-        public static Token Star() => _star;
+        public static Token Star() => StarToken;
 
         /// <summary>
         /// Creates a dot token.
         /// </summary>
-        public static Token Dot() => _dot;
+        public static Token Dot() => DotToken;
 
         /// <summary>
         /// Creates a colon token.
         /// </summary>
-        public static Token Colon() => _colon;
+        public static Token Colon() => ColonToken;
 
         /// <summary>
         /// Creates a comma token.
         /// </summary>
-        public static Token Comma() => _comma;
+        public static Token Comma() => CommaToken;
 
         /// <summary>
         /// Creates a right parenthesis token.
         /// </summary>
-        public static Token RightParenthesis() => _rightParenthesis;
+        public static Token RightParenthesis() => RightParenthesisToken;
 
         /// <summary>
         /// Creates an equals token.
         /// </summary>
-        public static Token Equals() => _equals;
+        public static Token Equals() => EqualsToken;
 
         /// <summary>
         /// Creates a left bracket token.
         /// </summary>
-        public static Token LeftBracket() => _leftBracket;
+        public static Token LeftBracket() => LeftBracketToken;
 
         /// <summary>
         /// Creates a right bracket token.
         /// </summary>
-        public static Token RightBracket() => _rightBracket;
+        public static Token RightBracket() => RightBracketToken;
 
         /// <summary>
         /// Creates a pipe (vertical line) token.
         /// </summary>
-        public static Token Pipe() => _pipe;
+        public static Token Pipe() => PipeToken;
 
         /// <summary>
         /// Creates a plus token.
