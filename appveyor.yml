@@ -18,6 +18,8 @@ build_script:
     $id = $id.Substring(0, 13)
 
     .\pack.cmd ci-$id
+test_script:
+- cmd: test.cmd
 artifacts:
 - path: dist\*.nupkg
 deploy:
