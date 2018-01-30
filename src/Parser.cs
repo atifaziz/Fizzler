@@ -433,7 +433,7 @@ namespace Fizzler
             {
                 throw new FormatException(string.Format(
                     @"Unexpected token {{{0}}} where one of [{1}] was expected.",
-                    Peek().Kind, string.Join(", ", specs.Select(k => k.ToString()).ToArray())));
+                    Peek().Kind, string.Join(", ", from k in specs select k.ToString())));
             }
             return token.Value;
         }
