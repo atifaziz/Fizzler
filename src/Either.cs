@@ -45,6 +45,7 @@ namespace Fizzler
         public abstract override int GetHashCode();
         public abstract override string ToString();
         public abstract TResult Fold<TResult>(Func<TA, TResult> a, Func<TB, TResult> b);
+        public abstract TResult Fold<T, TResult>(T arg, Func<T, TA, TResult> a, Func<T, TB, TResult> b);
 
         sealed class AImpl : Either<TA, TB>
         {
@@ -66,6 +67,13 @@ namespace Fizzler
                 if (a == null) throw new ArgumentNullException(nameof(a));
                 if (b == null) throw new ArgumentNullException(nameof(b));
                 return a(_value);
+            }
+
+            public override TResult Fold<T, TResult>(T arg, Func<T, TA, TResult> a, Func<T, TB, TResult> b)
+            {
+                if (a == null) throw new ArgumentNullException(nameof(a));
+                if (b == null) throw new ArgumentNullException(nameof(b));
+                return a(arg, _value);
             }
 
             public override string ToString() =>
@@ -92,6 +100,13 @@ namespace Fizzler
                 if (a == null) throw new ArgumentNullException(nameof(a));
                 if (b == null) throw new ArgumentNullException(nameof(b));
                 return b(_value);
+            }
+
+            public override TResult Fold<T, TResult>(T arg, Func<T, TA, TResult> a, Func<T, TB, TResult> b)
+            {
+                if (a == null) throw new ArgumentNullException(nameof(a));
+                if (b == null) throw new ArgumentNullException(nameof(b));
+                return b(arg, _value);
             }
 
             public override string ToString() =>
