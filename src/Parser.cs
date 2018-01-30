@@ -90,6 +90,8 @@ namespace Fizzler
             return resultor(generator);
         }
 
+        static partial class TokenSpecs { }
+
         void Parse()
         {
             _generator.OnInit();
@@ -126,6 +128,17 @@ namespace Fizzler
                 SimpleSelectorSequence();
         }
 
+        partial class TokenSpecs // ReSharper disable once InconsistentNaming
+        {
+            public static readonly TokenSpec[] Plus_Greater_Tilde_WhiteSpace =
+            {
+                ToTokenSpec(TokenKind.Plus),
+                ToTokenSpec(TokenKind.Greater),
+                ToTokenSpec(TokenKind.Tilde),
+                ToTokenSpec(TokenKind.WhiteSpace)
+            };
+        }
+
         bool TryCombinator()
         {
             //combinator
@@ -133,7 +146,7 @@ namespace Fizzler
             //  : PLUS S* | GREATER S* | TILDE S* | S+
             //  ;
 
-            var token = TryRead(ToTokenSpec(TokenKind.Plus), ToTokenSpec(TokenKind.Greater), ToTokenSpec(TokenKind.Tilde), ToTokenSpec(TokenKind.WhiteSpace));
+            var token = TryRead(TokenSpecs.Plus_Greater_Tilde_WhiteSpace);
 
             if (token == null)
                 return false;
@@ -157,6 +170,17 @@ namespace Fizzler
             return true;
         }
 
+        partial class TokenSpecs // ReSharper disable once InconsistentNaming
+        {
+            public static readonly TokenSpec[] Hash_Dot_LeftBracket_Colon =
+            {
+                ToTokenSpec(TokenKind.Hash),
+                ToTokenSpec(Token.Dot()),
+                ToTokenSpec(Token.LeftBracket()),
+                ToTokenSpec(Token.Colon())
+            };
+        }
+
         void SimpleSelectorSequence()
         {
             //simple_selector_sequence
@@ -168,7 +192,7 @@ namespace Fizzler
             var named = false;
             for (var modifiers = 0; ; modifiers++)
             {
-                var token = TryRead(ToTokenSpec(TokenKind.Hash), ToTokenSpec(Token.Dot()), ToTokenSpec(Token.LeftBracket()), ToTokenSpec(Token.Colon()));
+                var token = TryRead(TokenSpecs.Hash_Dot_LeftBracket_Colon);
 
                 if (token == null)
                 {
@@ -298,6 +322,27 @@ namespace Fizzler
             return int.Parse(Read(ToTokenSpec(TokenKind.Integer)).Text, CultureInfo.InvariantCulture);
         }
 
+        partial class TokenSpecs
+        {
+            // ReSharper disable once InconsistentNaming
+            public static readonly TokenSpec[] Equals_Includes_DashMatch_PrefixMatch_SuffixMatch_SubstringMatch =
+            {
+                ToTokenSpec(Token.Equals()),
+                ToTokenSpec(TokenKind.Includes),
+                ToTokenSpec(TokenKind.DashMatch),
+                ToTokenSpec(TokenKind.PrefixMatch),
+                ToTokenSpec(TokenKind.SuffixMatch),
+                ToTokenSpec(TokenKind.SubstringMatch)
+            };
+
+            // ReSharper disable once InconsistentNaming
+            public static readonly TokenSpec[] String_Ident =
+            {
+                ToTokenSpec(TokenKind.String),
+                ToTokenSpec(TokenKind.Ident)
+            };
+        }
+
         void Attrib()
         {
             //attrib
@@ -318,19 +363,13 @@ namespace Fizzler
             var hasValue = false;
             while (true)
             {
-                var op = TryRead(
-                    ToTokenSpec(Token.Equals()),
-                    ToTokenSpec(TokenKind.Includes),
-                    ToTokenSpec(TokenKind.DashMatch),
-                    ToTokenSpec(TokenKind.PrefixMatch),
-                    ToTokenSpec(TokenKind.SuffixMatch),
-                    ToTokenSpec(TokenKind.SubstringMatch));
+                var op = TryRead(TokenSpecs.Equals_Includes_DashMatch_PrefixMatch_SuffixMatch_SubstringMatch);
 
                 if (op == null)
                     break;
 
                 hasValue = true;
-                var value = Read(ToTokenSpec(TokenKind.String), ToTokenSpec(TokenKind.Ident)).Text;
+                var value = Read(TokenSpecs.String_Ident).Text;
 
                 if (op.Value == Token.Equals())
                 {
@@ -365,6 +404,16 @@ namespace Fizzler
             _generator.Class(Read(ToTokenSpec(TokenKind.Ident)).Text);
         }
 
+        partial class TokenSpecs // ReSharper disable once InconsistentNaming
+        {
+            public static readonly TokenSpec[] Ident_Star_Pipe =
+            {
+                ToTokenSpec(TokenKind.Ident),
+                ToTokenSpec(Token.Star()),
+                ToTokenSpec(Token.Pipe())
+            };
+        }
+
         NamespacePrefix? TryNamespacePrefix()
         {
             //namespace_prefix
@@ -372,7 +421,7 @@ namespace Fizzler
             //  ;
 
             var pipe = Token.Pipe();
-            var token = TryRead(ToTokenSpec(TokenKind.Ident), ToTokenSpec(Token.Star()), ToTokenSpec(pipe));
+            var token = TryRead(TokenSpecs.Ident_Star_Pipe);
 
             if (token == null)
                 return null;
@@ -392,6 +441,15 @@ namespace Fizzler
                  : NamespacePrefix.Any;
         }
 
+        partial class TokenSpecs // ReSharper disable once InconsistentNaming
+        {
+            public static readonly TokenSpec[] Ident_Star =
+            {
+                ToTokenSpec(TokenKind.Ident),
+                ToTokenSpec(Token.Star())
+            };
+        }
+
         void TypeSelectorOrUniversal()
         {
             //type_selector
@@ -405,7 +463,7 @@ namespace Fizzler
             //  ;
 
             var prefix = TryNamespacePrefix() ?? NamespacePrefix.None;
-            var token = Read(ToTokenSpec(TokenKind.Ident), ToTokenSpec(Token.Star()));
+            var token = Read(TokenSpecs.Ident_Star);
             if (token.Kind == TokenKind.Ident)
                 _generator.Type(prefix, token.Text);
             else
