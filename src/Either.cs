@@ -37,17 +37,8 @@ namespace Fizzler
     {
         Either() {}
 
-        public static Either<TA, TB> A(TA value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            return new AImpl(value);
-        }
-
-        public static Either<TA, TB> B(TB value)
-        {
-            if (value == null) throw new ArgumentNullException(nameof(value));
-            return new BImpl(value);
-        }
+        public static Either<TA, TB> A(TA value) => new AImpl(value);
+        public static Either<TA, TB> B(TB value) => new BImpl(value);
 
         public abstract override bool Equals(object obj);
         public abstract bool Equals(Either<TA, TB> obj);
@@ -61,7 +52,8 @@ namespace Fizzler
 
             public AImpl(TA value) => _value = value;
 
-            public override int GetHashCode() => _value.GetHashCode();
+            public override int GetHashCode() =>
+                EqualityComparer<TA>.Default.GetHashCode(_value);
 
             public override bool Equals(object obj) => Equals(obj as AImpl);
 
@@ -76,7 +68,8 @@ namespace Fizzler
                 return a(_value);
             }
 
-            public override string ToString() => _value.ToString();
+            public override string ToString() =>
+                _value?.ToString() ?? string.Empty;
         }
 
         sealed class BImpl : Either<TA, TB>
@@ -85,7 +78,8 @@ namespace Fizzler
 
             public BImpl(TB value) => _value = value;
 
-            public override int GetHashCode() => _value.GetHashCode();
+            public override int GetHashCode() =>
+                EqualityComparer<TB>.Default.GetHashCode(_value);
 
             public override bool Equals(object obj) => Equals(obj as BImpl);
 
@@ -100,7 +94,8 @@ namespace Fizzler
                 return b(_value);
             }
 
-            public override string ToString() => _value.ToString();
+            public override string ToString() =>
+                _value?.ToString() ?? string.Empty;
         }
     }
 }
