@@ -414,29 +414,18 @@ namespace Fizzler
 
         Token Peek() => _reader.Peek();
 
-        Token Read(TokenSpec spec)
-        {
-            var token = TryRead(spec);
-            if (token == null)
-            {
-                throw new FormatException(
-                    string.Format(@"Unexpected token {{{0}}} where {{{1}}} was expected.",
+        Token Read(TokenSpec spec) =>
+            TryRead(spec)
+            ?? throw new FormatException(string.Format(
+                    @"Unexpected token {{{0}}} where {{{1}}} was expected.",
                     Peek().Kind, spec));
-            }
-            return token.Value;
-        }
 
-        Token Read(params TokenSpec[] specs)
-        {
-            var token = TryRead(specs);
-            if (token == null)
-            {
-                throw new FormatException(string.Format(
-                    @"Unexpected token {{{0}}} where one of [{1}] was expected.",
-                    Peek().Kind, string.Join(", ", from k in specs select k.ToString())));
-            }
-            return token.Value;
-        }
+        Token Read(params TokenSpec[] specs) =>
+            TryRead(specs)
+            ?? throw new FormatException(string.Format(
+                   @"Unexpected token {{{0}}} where one of [{1}] was expected.",
+                   Peek().Kind,
+                   string.Join(", ", from k in specs select k.ToString())));
 
         Token? TryRead(params TokenSpec[] specs)
         {
