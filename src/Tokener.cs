@@ -27,6 +27,7 @@ namespace Fizzler
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.IO;
+    using System.Runtime.CompilerServices;
     using System.Text;
 
     #endregion
@@ -237,17 +238,21 @@ namespace Fizzler
             return Token.String(text);
         }
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static bool IsDigit(char? ch) => // [0-9]
             ch >= '0' && ch <= '9';
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static bool IsS(char? ch) => // [ \t\r\n\f]
             ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n' || ch == '\f';
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static bool IsNmStart(char? ch) // [_a-z]|{nonascii}|{escape}
             => ch == '_'
             || (ch >= 'a' && ch <= 'z')
             || (ch >= 'A' && ch <= 'Z');
 
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static bool IsNmChar(char? ch) => // [_a-z0-9-]|{nonascii}|{escape}
             IsNmStart(ch) || ch == '-' || (ch >= '0' && ch <= '9');
 
