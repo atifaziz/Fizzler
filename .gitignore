@@ -16,4 +16,5 @@ packages/
 .vs/
 .idea/
 TestResults/
+.vscode/
 
