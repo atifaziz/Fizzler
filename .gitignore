@@ -15,4 +15,5 @@ pkg/*/
 packages/
 .vs/
 .idea/
+TestResults/
 
