@@ -21,6 +21,8 @@ Contributions are welcome in forms of:
 
 ## Examples
 
+The following example uses [Fizzler.Systems.HtmlAgilityPack][fizzhap]:
+
 ```c#
 // Load the document using HTMLAgilityPack as normal
 var html = new HtmlDocument();
