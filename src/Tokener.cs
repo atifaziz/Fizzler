@@ -53,23 +53,25 @@ namespace Fizzler
         {
             var reader = new Reader(input ?? string.Empty);
 
-            while (reader.Read() != null)
+            while (reader.Read() is char ch)
             {
-                var ch = reader.Value;
-
                 //
                 // Identifier or function
                 //
                 if (ch == '-' || IsNmStart(ch))
                 {
                     reader.Mark();
-                    if (reader.Value == '-')
+                    if (ch == '-')
                     {
-                        if (!IsNmStart(reader.Read()))
+                        if (!(reader.Read() is char n) || !IsNmStart(n))
                             throw new FormatException(string.Format("Invalid identifier at position {0}.", reader.Position));
                     }
-                    while (IsNmChar(reader.Read())) { /* NOP */ }
-                    if (reader.Value == '(')
+
+                    var r = reader.Read();
+                    while (r is char nm && IsNmChar(nm))
+                        r = reader.Read();
+
+                    if (r == '(')
                         yield return Token.Function(reader.Marked());
                     else
                         yield return Token.Ident(reader.MarkedWithUnread());
@@ -80,7 +82,7 @@ namespace Fizzler
                 else if (IsDigit(ch))
                 {
                     reader.Mark();
-                    do { /* NOP */ } while (IsDigit(reader.Read()));
+                    do { /* NOP */ } while (reader.Read() is char d && IsDigit(d));
                     yield return Token.Integer(reader.MarkedWithUnread());
                 }
                 //
@@ -89,8 +91,7 @@ namespace Fizzler
                 else if (IsS(ch))
                 {
                     var space = ParseWhiteSpace(reader);
-                    ch = reader.Read();
-                    switch (ch)
+                    switch (reader.Read())
                     {
                         case ',': yield return Token.Comma(); break;
                         case '+': yield return Token.Plus(); break;
@@ -120,7 +121,7 @@ namespace Fizzler
                         {
                             reader.Unread();
                             yield return ch == '*' || ch == '|'
-                                ? Token.Char(ch.Value)
+                                ? Token.Char(ch)
                                 : Token.Tilde();
                         }
                         break;
@@ -155,7 +156,7 @@ namespace Fizzler
                     // Single- or double-quoted strings
                     //
                     case '\"':
-                    case '\'': yield return ParseString(reader, /* quote */ ch.Value); break;
+                    case '\'': yield return ParseString(reader, /* quote */ ch); break;
 
                     default:
                         throw new FormatException(string.Format("Invalid character at position {0}.", reader.Position));
@@ -169,7 +170,7 @@ namespace Fizzler
             Debug.Assert(reader != null);
 
             reader.Mark();
-            while (IsS(reader.Read())) { /* NOP */ }
+            while (reader.Read() is char ch && IsS(ch)) { /* NOP */ }
             return reader.MarkedWithUnread();
         }
 
@@ -178,7 +179,7 @@ namespace Fizzler
             Debug.Assert(reader != null);
 
             reader.MarkFromNext(); // skipping #
-            while (IsNmChar(reader.Read())) { /* NOP */ }
+            while (reader.Read() is char ch && IsNmChar(ch)) { /* NOP */ }
             var text = reader.MarkedWithUnread();
             if (text.Length == 0)
                 throw new FormatException(string.Format("Invalid hash at position {0}.", reader.Position));
@@ -203,30 +204,36 @@ namespace Fizzler
             var strpos = reader.Position;
             reader.MarkFromNext(); // skipping quote
 
-            char? ch;
             StringBuilder sb = null;
 
-            while ((ch = reader.Read()) != quote)
+            for (var done = false; !done;)
             {
-                if (ch == null)
-                    throw new FormatException(string.Format("Unterminated string at position {0}.", strpos));
-
-                if (ch == '\\')
+                switch (reader.Read())
                 {
-                    ch = reader.Read();
+                    case null:
+                        throw new FormatException(string.Format("Unterminated string at position {0}.", strpos));
 
-                    //
-                    // NOTE: Only escaping of quote and backslash supported!
-                    //
+                    case char ch when ch == quote:
+                        done = true;
+                        break;
 
-                    if (ch != quote && ch != '\\')
-                        throw new FormatException(string.Format("Invalid escape sequence at position {0} in a string at position {1}.", reader.Position, strpos));
+                    case char ch when ch == '\\':
+                    {
+                        //
+                        // NOTE: Only escaping of quote and backslash supported!
+                        //
 
-                    if (sb == null)
-                        sb = new StringBuilder();
+                        var esc = reader.Read();
+                        if (esc != quote && esc != '\\')
+                            throw new FormatException(string.Format("Invalid escape sequence at position {0} in a string at position {1}.", reader.Position, strpos));
 
-                    sb.Append(reader.MarkedExceptLast());
-                    reader.Mark();
+                        if (sb == null)
+                            sb = new StringBuilder();
+
+                        sb.Append(reader.MarkedExceptLast());
+                        reader.Mark();
+                        break;
+                    }
                 }
             }
 
@@ -239,21 +246,21 @@ namespace Fizzler
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool IsDigit(char? ch) => // [0-9]
+        static bool IsDigit(char ch) => // [0-9]
             ch >= '0' && ch <= '9';
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool IsS(char? ch) => // [ \t\r\n\f]
+        static bool IsS(char ch) => // [ \t\r\n\f]
             ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n' || ch == '\f';
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool IsNmStart(char? ch) // [_a-z]|{nonascii}|{escape}
+        static bool IsNmStart(char ch) // [_a-z]|{nonascii}|{escape}
             => ch == '_'
             || (ch >= 'a' && ch <= 'z')
             || (ch >= 'A' && ch <= 'Z');
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool IsNmChar(char? ch) => // [_a-z0-9-]|{nonascii}|{escape}
+        static bool IsNmChar(char ch) => // [_a-z0-9-]|{nonascii}|{escape}
             IsNmStart(ch) || ch == '-' || (ch >= '0' && ch <= '9');
 
         sealed class Reader
@@ -264,8 +271,6 @@ namespace Fizzler
 
             public Reader(string input) => _input = input;
 
-            bool Ready => _index >= 0 && _index < _input.Length;
-            public char? Value => Ready ? _input[_index] : (char?)null;
             public int Position => _index + 1;
 
             public void Mark() => _start = _index;
@@ -284,8 +289,13 @@ namespace Fizzler
 
             public char? Read()
             {
-                _index = Position >= _input.Length ? _input.Length : _index + 1;
-                return Value;
+                var input = _input;
+
+                var i = _index = Position >= input.Length
+                               ? input.Length
+                               : _index + 1;
+
+                return i >= 0 && i < input.Length ? input[i] : (char?) null;
             }
 
             public void Unread() => _index = Math.Max(-1, _index - 1);
