@@ -5,12 +5,13 @@
 [![NuGet][nuget-badge]][nuget-pkg]
 [![MyGet][myget-badge]][edge-pkgs]
 
-A .NET library to select items from a node tree based on a CSS selector.
+Fizzler is a .NET Standard 1.0 library; it is a [W3C Selectors
+(Level 3)][w3cs3] parser and generic selector framework over document
+hierarchies.
+
 The [default implementation][fizzhap] is based on [HTMLAgilityPack][hap] and
 selects from HTML documents. The unit tests are based on the jQuery
 selector engine tests.
-
-Fizzler supports .NET Standard 1.0 and later versions.
 
 Contributions are welcome in forms of:
 
@@ -67,5 +68,6 @@ document.QuerySelectorAll("p:first-child");
 [nuget-badge]: https://img.shields.io/nuget/v/Fizzler.svg
 [nuget-pkg]: https://www.nuget.org/packages/Fizzler
 
+[w3cs3]: https://www.w3.org/TR/selectors-3/
 [fizzhap]: http://www.nuget.org/packages/Fizzler.Systems.HtmlAgilityPack/
 [hap]: http://html-agility-pack.net/
