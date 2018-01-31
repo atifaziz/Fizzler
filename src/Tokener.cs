@@ -52,6 +52,7 @@ namespace Fizzler
         public static IEnumerable<Token> Tokenize(string input)
         {
             var reader = new Reader(input ?? string.Empty);
+            StringBuilder sb = null;
 
             while (reader.Read() is char ch)
             {
@@ -156,7 +157,7 @@ namespace Fizzler
                     // Single- or double-quoted strings
                     //
                     case '\"':
-                    case '\'': yield return ParseString(reader, /* quote */ ch); break;
+                    case '\'': yield return ParseString(reader, /* quote */ ch, ref sb); break;
 
                     default:
                         throw new FormatException(string.Format("Invalid character at position {0}.", reader.Position));
@@ -186,7 +187,7 @@ namespace Fizzler
             return text;
         }
 
-        static Token ParseString(Reader reader, char quote)
+        static Token ParseString(Reader reader, char quote, ref StringBuilder sb)
         {
             Debug.Assert(reader != null);
 
@@ -204,7 +205,7 @@ namespace Fizzler
             var strpos = reader.Position;
             reader.MarkFromNext(); // skipping quote
 
-            StringBuilder sb = null;
+            sb?.Clear();
 
             for (var done = false; !done;)
             {
