@@ -1,5 +1,10 @@
 # Fizzler: .NET CSS Selector Engine
 
+[![Build Status][win-build-badge]][win-builds]
+[![Build Status][nix-build-badge]][nix-builds]
+[![NuGet][nuget-badge]][nuget-pkg]
+[![MyGet][myget-badge]][edge-pkgs]
+
 A .NET library to select items from a node tree based on a CSS selector.
 The [default implementation][fizzhap] is based on [HTMLAgilityPack][hap] and
 selects from HTML documents. The unit tests are based on the jQuery
@@ -51,5 +56,14 @@ document.QuerySelectorAll("p:first-child");
 ```
 
 
-  [fizzhap]: http://www.nuget.org/packages/Fizzler.Systems.HtmlAgilityPack/
-  [hap]: http://html-agility-pack.net/
+[win-build-badge]: https://img.shields.io/appveyor/ci/raboof/fizzler/master.svg?label=windows
+[win-builds]: https://ci.appveyor.com/project/raboof/fizzler
+[nix-build-badge]: https://img.shields.io/travis/atifaziz/Fizzler/master.svg?label=linux
+[nix-builds]: https://travis-ci.org/atifaziz/Fizzler
+[myget-badge]: https://img.shields.io/myget/raboof/vpre/Fizzler.svg?label=myget
+[edge-pkgs]: https://www.myget.org/feed/raboof/package/nuget/Fizzler
+[nuget-badge]: https://img.shields.io/nuget/v/Fizzler.svg
+[nuget-pkg]: https://www.nuget.org/packages/Fizzler
+
+[fizzhap]: http://www.nuget.org/packages/Fizzler.Systems.HtmlAgilityPack/
+[hap]: http://html-agility-pack.net/
