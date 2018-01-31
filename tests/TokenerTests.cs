@@ -191,6 +191,13 @@ namespace Fizzler.Tests
             Assert.AreEqual(new[] { Token.Char('|'), Token.Char('|') }, Tokener.Tokenize("||").Take(2).ToArray());
         }
 
+        [TestCase("\"\"")]
+        [TestCase("''")]
+        public void EmptyString(string input)
+        {
+            Assert.AreEqual(Token.String(string.Empty), Tokener.Tokenize(input).First());
+        }
+
         [Test]
         public void StringSingleQuoted()
         {
