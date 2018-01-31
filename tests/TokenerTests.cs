@@ -45,10 +45,11 @@ namespace Fizzler.Tests
             Assert.AreEqual(Token.Eoi(), Tokener.Tokenize(string.Empty).Single());
         }
 
-        [Test]
-        public void WhiteSpace()
+        [TestCase(" \r \n \f \t ", " \r \n \f \t ")]
+        [TestCase(" \r \n \f \t ", " \r \n \f \t etc")]
+        public void WhiteSpace(string ws, string input)
         {
-            Assert.AreEqual(Token.WhiteSpace(" \r \n \f \t "), Tokener.Tokenize(" \r \n \f \t etc").First());
+            Assert.AreEqual(Token.WhiteSpace(ws), Tokener.Tokenize(input).First());
         }
 
         [Test]
@@ -332,11 +333,12 @@ namespace Fizzler.Tests
                 Tokener.Tokenize("\"foo").ToArray());
         }
 
-        [Test]
-        public void StringInvalidEscaping()
+        [TestCase(@"'f\oo")]
+        [TestCase(@"'foo\")]
+        public void StringInvalidEscaping(string input)
         {
             Assert.Throws<FormatException>(() =>
-                Tokener.Tokenize(@"'f\oo").ToArray());
+                Tokener.Tokenize(input).ToArray());
         }
 
         [Test]
