@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Fizzler.Systems.HtmlAgilityPack</id>
-        <version>1.1.0$VersionSuffix$</version>
+        <version>1.1.1$VersionSuffix$</version>
         <title>Fizzler for HTML Agility Pack</title>
         <authors>Atif Aziz, Colin Ramsay</authors>
         <owners>Atif Aziz</owners>
@@ -15,7 +15,7 @@
         <tags>selectors w3c htmlagility css html</tags>
         <dependencies>
             <dependency id="HtmlAgilityPack" version="1.5.1" />
-            <dependency id="Fizzler" version="1.0.0" />
+            <dependency id="Fizzler" version="1.1.0" />
         </dependencies>
     </metadata>
     <files>
