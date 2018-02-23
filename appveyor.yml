@@ -1,0 +1,37 @@
+version: '{build}'
+image: Visual Studio 2017
+branches:
+  except:
+    - /.+[\-.]wip$/
+    - wip
+pull_requests:
+  do_not_increment_build_number: true
+skip_commits:
+  files:
+    - '*.md'
+    - '*.txt'
+    - '.editorconfig'
+build_script:
+- ps: >-
+    $id = $env:APPVEYOR_REPO_COMMIT_TIMESTAMP -replace '([-:]|\.0+Z)', ''
+
+    $id = $id.Substring(0, 13)
+
+    .\pack.cmd ci-$id
+artifacts:
+- path: dist\*.nupkg
+deploy:
+- provider: NuGet
+  server: https://www.myget.org/F/raboof/api/v2/package
+  api_key:
+    secure: fhGwXyO35FSshRzs5GWmF1LJTrd1sIqmS/jNCSfO2LfOciuYAKiXuFMYZFGiTAl+
+  symbol_server: https://www.myget.org/F/raboof/symbols/api/v2/package
+  on:
+    branch: master
+notifications:
+- provider: Email
+  to:
+  - raboof-ci@googlegroups.com
+  on_build_success: true
+  on_build_failure: true
+  on_build_status_changed: false

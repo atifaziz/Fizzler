@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Fizzler</id>
-        <version>1.1.0</version>
+        <version>1.1.0$VersionSuffix$</version>
         <title>Fizzler</title>
         <authors>Atif Aziz, Colin Ramsay</authors>
         <owners>Atif Aziz</owners>

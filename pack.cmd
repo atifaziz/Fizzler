@@ -9,6 +9,7 @@ goto :EOF
 if not exist dist md dist
 if not %errorlevel%==0 exit /b %errorlevel%
 set nupack=.nuget\NuGet pack -OutputDirectory dist
+if not "%1"=="" set nupack=%nupack% -Properties VersionSuffix=-%1
 call build /v:m ^
   && %nupack% -Symbols Fizzler.nuspec ^
   && %nupack% -Symbols Fizzler.Systems.HtmlAgilityPack.nuspec ^
