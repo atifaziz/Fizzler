@@ -254,10 +254,11 @@ namespace Fizzler
                     case "last-child": _generator.LastChild(); break;
                     case "only-child": _generator.OnlyChild(); break;
                     case "empty": _generator.Empty(); break;
+                    case "root": _generator.Root(); break;
                     default:
                         {
                             throw new FormatException(string.Format(
-                                "Unknown pseudo-class '{0}'. Use either first-child, last-child, only-child or empty.", clazz));
+                                "Unknown pseudo-class '{0}'. Use either first-child, last-child, only-child, empty or root.", clazz));
                         }
                 }
             }

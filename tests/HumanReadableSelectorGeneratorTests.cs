@@ -164,6 +164,12 @@ namespace Fizzler.Tests
             Run("*[title^='hithere']", "Take all elements which have attribute title whose value begins with 'hithere' and select them.");
         }
 
+        [Test]
+        public void Root()
+        {
+            Run("*:root", "Take all elements which are root and select them.");
+        }
+
         static void Run(string selector, string message)
         {
             var generator = new HumanReadableSelectorGenerator();

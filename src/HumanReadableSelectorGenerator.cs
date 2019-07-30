@@ -206,5 +206,11 @@ namespace Fizzler
         /// </summary>
         public void NthLastChild(int a, int b) =>
             Add($" where the element has {a}n+{b}-1 sibling after it");
+
+        /// <summary>
+        /// Generates human-readable text of this combinator.
+        /// </summary>
+        public void Root() =>
+            Add($" which are root");
     }
 }

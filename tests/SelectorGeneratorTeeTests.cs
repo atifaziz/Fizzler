@@ -181,6 +181,12 @@ namespace Fizzler.Tests
         }
 
         [Test]
+        public void RootTest()
+        {
+            Run(_tee.Root);
+        }
+
+        [Test]
         public void ChildTest()
         {
             Run(_tee.Child);
@@ -350,6 +356,9 @@ namespace Fizzler.Tests
 
             void OnInvoked(MethodBase method, params object[] args) =>
                 Recorder(new CallRecording<ISelectorGenerator>(this, (MethodInfo) method, args));
+
+            public void Root() =>
+                OnInvoked(MethodBase.GetCurrentMethod());
         }
     }
 }

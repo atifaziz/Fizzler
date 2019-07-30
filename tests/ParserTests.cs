@@ -452,6 +452,7 @@ namespace Fizzler.Tests
             public void Adjacent() => throw new NotImplementedException();
             public void GeneralSibling() => throw new NotImplementedException();
             public void NthLastChild(int a, int b) => throw new NotImplementedException();
+            public void Root() => throw new NotImplementedException();
 
             #endregion
         }
