@@ -9,7 +9,7 @@
     <PublicSign Condition=" '$(OS)' != 'Windows_NT' ">true</PublicSign>
     <Authors>Atif Aziz, Colin Ramsay</Authors>
     <Description>Fizzler is a W3C Selectors parser and generic selector framework for document hierarchies.</Description>
-    <PackageLicenseUrl>http://www.gnu.org/licenses/lgpl.html</PackageLicenseUrl>
+    <PackageLicenseFile>COPYING.txt</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/atifaziz/Fizzler</PackageProjectUrl>
     <RepositoryUrl>https://github.com/atifaziz/Fizzler</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
@@ -32,12 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="..\COPYING.LESSER.txt" Link="COPYING.LESSER.txt">
-      <PackagePath />
-    </Content>
-    <Content Include="..\COPYING.txt" Link="COPYING.txt">
-      <PackagePath />
-    </Content>
+    <None Include="..\COPYING.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
   </ItemGroup>
 
 </Project>
