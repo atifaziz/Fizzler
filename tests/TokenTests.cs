@@ -213,6 +213,7 @@ namespace Fizzler.Tests
             Assert.Throws<ArgumentException>(() => Token.WhiteSpace(string.Empty));
         }
 
+        [Test]
         public void Integer()
         {
             AssertToken(TokenKind.Integer, "123", Token.Integer("123"));
