@@ -73,9 +73,14 @@ namespace Fizzler
                         r = reader.Read();
 
                     if (r == '(')
-                        yield return Token.Function(reader.Marked());
+                    {
+                        var ident = reader.Marked();
+                        yield return ident == "not" ? Token.Not() : Token.Function(ident);
+                    }
                     else
+                    {
                         yield return Token.Ident(reader.MarkedWithUnread());
+                    }
                 }
                 //
                 // Integer

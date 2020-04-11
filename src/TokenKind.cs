@@ -92,6 +92,11 @@ namespace Fizzler
         Function,
 
         /// <summary>
+        /// Represents ":"{N}{O}{T}"("
+        /// </summary>
+        Not,
+
+        /// <summary>
         /// Represents [0-9]+
         /// </summary>
         Integer,

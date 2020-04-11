@@ -196,6 +196,12 @@ namespace Fizzler.Tests
         }
 
         [Test]
+        public void Not()
+        {
+            AssertToken(TokenKind.Not, Token.Not());
+        }
+
+        [Test]
         public void WhiteSpace()
         {
             AssertToken(TokenKind.WhiteSpace, " \n ", Token.WhiteSpace(" \n "));

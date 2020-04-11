@@ -188,6 +188,14 @@ namespace Fizzler
             //    [ HASH | class | attrib | pseudo | negation ]*
             //  | [ HASH | class | attrib | pseudo | negation ]+
             //  ;
+            //
+            //negation
+            //  : NOT S* negation_arg S* ')'
+            //  ;
+            //
+            //negation_arg
+            //  : type_selector | universal | HASH | class | attrib | pseudo
+            //  ;
 
             var named = false;
             for (var modifiers = 0; ; modifiers++)
@@ -207,6 +215,10 @@ namespace Fizzler
                         _generator.Universal(NamespacePrefix.None); // implied
 
                     if (token.Value.Kind == TokenKind.Hash)
+                    {
+                        _generator.Id(token.Value.Text);
+                    }
+                    else if (token.Value.Kind == TokenKind.Not)
                     {
                         _generator.Id(token.Value.Text);
                     }
