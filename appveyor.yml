@@ -27,6 +27,7 @@ install:
 - sh: export PATH="$HOME/.dotnet:$PATH"
 before_build:
 - dotnet --info
+- dotnet tool restore
 build_script:
 - ps: |-
     $id = ([datetimeoffset]$env:APPVEYOR_REPO_COMMIT_TIMESTAMP).ToUniversalTime().ToString('yyyyMMdd''t''HHmm')
