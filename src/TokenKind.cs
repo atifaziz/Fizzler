@@ -87,7 +87,7 @@ namespace Fizzler
         WhiteSpace,
 
         /// <summary>
-        /// Represents {ident} ")"
+        /// Represents {ident} "("
         /// </summary>
         Function,
 
