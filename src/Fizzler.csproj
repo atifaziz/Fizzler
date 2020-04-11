@@ -15,6 +15,9 @@
     <RepositoryType>Git</RepositoryType>
     <PackageTags>selectors w3c</PackageTags>
     <PackageIconUrl></PackageIconUrl>
+    <PackageOutputPath>..\dist</PackageOutputPath>
+    <IncludeSymbols>true</IncludeSymbols>
+    <IncludeSource>true</IncludeSource>
     <Copyright>Copyright © 2009 Atif Aziz, Colin Ramsay. All rights reserved. Portions Copyright © 2008 Novell, Inc.</Copyright>
   </PropertyGroup>
 

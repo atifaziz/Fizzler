@@ -7,8 +7,4 @@ else
     VERSION_SUFFIX=
 fi
 ./build.sh
-dotnet pack                                          \
-       --no-build --include-symbols --include-source \
-       -c Release -o ../dist                         \
-       $VERSION_SUFFIX                               \
-       src
+dotnet pack --no-build -c Release $VERSION_SUFFIX src
