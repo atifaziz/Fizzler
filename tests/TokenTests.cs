@@ -195,9 +195,10 @@ namespace Fizzler.Tests
             Assert.That(e.ParamName, Is.EqualTo("text"));
         }
 
+        [Test]
         public void WhiteSpace()
         {
-            AssertToken(TokenKind.WhiteSpace, " \n ", Token.WhiteSpace("foo"));
+            AssertToken(TokenKind.WhiteSpace, " \n ", Token.WhiteSpace(" \n "));
         }
 
         [Test]
