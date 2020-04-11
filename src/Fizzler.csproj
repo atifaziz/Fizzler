@@ -19,6 +19,9 @@
     <IncludeSymbols>true</IncludeSymbols>
     <IncludeSource>true</IncludeSource>
     <Copyright>Copyright © 2009 Atif Aziz, Colin Ramsay. All rights reserved. Portions Copyright © 2008 Novell, Inc.</Copyright>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <EmbedUntrackedSource>true</EmbedUntrackedSource>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -36,6 +39,10 @@
 
   <ItemGroup>
     <None Include="..\COPYING.txt" Pack="true" PackagePath="$(PackageLicenseFile)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
   </ItemGroup>
 
 </Project>

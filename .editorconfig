@@ -7,7 +7,7 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj}]
+[*.{csproj,vbproj,vcxproj,vcxproj.filters,proj,projitems,shproj,targets}]
 indent_size = 2
 
 [*.{sln}]
