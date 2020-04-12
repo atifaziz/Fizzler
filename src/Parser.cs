@@ -242,9 +242,12 @@ namespace Fizzler
                 return false;
 
             TryRead(ToTokenSpec(TokenKind.WhiteSpace));
-            _generator.Negation(true);
+            var generator = _generator as INegationSelectorGenerator;
+            if (generator == null)
+                throw new NotSupportedException("Negation pseudo-class is not supported.");
+            generator.Negation(true);
             SimpleSelectorSequence(forbidNegation: true);
-            _generator.Negation(false);
+            generator.Negation(false);
             TryRead(ToTokenSpec(TokenKind.WhiteSpace));
             Read(ToTokenSpec(Token.RightParenthesis()));
             return true;

@@ -164,12 +164,6 @@ namespace Fizzler
         /// </summary>
         void Empty();
 
-        /// <summary>
-        /// Generates a <a href="https://www.w3.org/TR/selectors-3/#negation">negation pseudo-class selector</a>,
-        /// which represents an element that is not represented by its argument.
-        /// </summary>
-        void Negation(bool value);
-
         //
         // Combinators
         //
@@ -208,5 +202,14 @@ namespace Fizzler
         /// which represents an element that is the N-th child from bottom up of some other element.
         /// </summary>
         void NthLastChild(int a, int b);
+    }
+
+    public interface INegationSelectorGenerator : ISelectorGenerator
+    {
+        /// <summary>
+        /// Generates a <a href="https://www.w3.org/TR/selectors-3/#negation">negation pseudo-class selector</a>,
+        /// which represents an element that is not represented by its argument.
+        /// </summary>
+        void Negation(bool value);
     }
 }

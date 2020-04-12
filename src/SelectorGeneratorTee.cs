@@ -28,7 +28,7 @@ namespace Fizzler
     /// to two other <see cref="ISelectorGenerator"/> objects, which
     /// can be useful for doing work in a single pass.
     /// </summary>
-    public sealed class SelectorGeneratorTee : ISelectorGenerator
+    public sealed class SelectorGeneratorTee : INegationSelectorGenerator
     {
         /// <summary>
         /// Gets the first generator used to initialize this generator.
@@ -227,8 +227,8 @@ namespace Fizzler
         /// </summary>
         public void Negation(bool value)
         {
-            Primary.Negation(value);
-            Secondary.Negation(value);
+            ((INegationSelectorGenerator) Primary).Negation(value);
+            ((INegationSelectorGenerator) Secondary).Negation(value);
         }
 
         /// <summary>
