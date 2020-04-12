@@ -34,7 +34,7 @@ namespace Fizzler
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#type-selectors">type selector</a>,
         /// which represents an instance of the element type in the document tree.
         /// </summary>
-        Selector<TElement> Type(NamespacePrefix prefix, string name);
+        Selector<TElement> Type(NamespacePrefix prefix, string name, bool negation = false);
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#universal-selector">universal selector</a>,
@@ -42,21 +42,21 @@ namespace Fizzler
         /// (including those without a namespace) if no default namespace
         /// has been specified for selectors.
         /// </summary>
-        Selector<TElement> Universal(NamespacePrefix prefix);
+        Selector<TElement> Universal(NamespacePrefix prefix, bool negation = false);
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#Id-selectors">ID selector</a>,
         /// which represents an element instance that has an identifier that
         /// matches the identifier in the ID selector.
         /// </summary>
-        Selector<TElement> Id(string id);
+        Selector<TElement> Id(string id, bool negation = false);
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#class-html">class selector</a>,
         /// which is an alternative <see cref="AttributeIncludes"/> when
         /// representing the <c>class</c> attribute.
         /// </summary>
-        Selector<TElement> Class(string clazz);
+        Selector<TElement> Class(string clazz, bool negation = false);
 
         //
         // Attribute selectors
@@ -67,14 +67,14 @@ namespace Fizzler
         /// that represents an element with the given attribute <paramref name="name"/>
         /// whatever the values of the attribute.
         /// </summary>
-        Selector<TElement> AttributeExists(NamespacePrefix prefix, string name);
+        Selector<TElement> AttributeExists(NamespacePrefix prefix, string name, bool negation = false);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
         /// that represents an element with the given attribute <paramref name="name"/>
         /// and whose value is exactly <paramref name="value"/>.
         /// </summary>
-        Selector<TElement> AttributeExact(NamespacePrefix prefix, string name, string value);
+        Selector<TElement> AttributeExact(NamespacePrefix prefix, string name, string value, bool negation = false);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
@@ -82,7 +82,7 @@ namespace Fizzler
         /// and whose value is a whitespace-separated list of words, one of
         /// which is exactly <paramref name="value"/>.
         /// </summary>
-        Selector<TElement> AttributeIncludes(NamespacePrefix prefix, string name, string value);
+        Selector<TElement> AttributeIncludes(NamespacePrefix prefix, string name, string value, bool negation = false);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
@@ -90,28 +90,28 @@ namespace Fizzler
         /// its value either being exactly <paramref name="value"/> or beginning
         /// with <paramref name="value"/> immediately followed by "-" (U+002D).
         /// </summary>
-        Selector<TElement> AttributeDashMatch(NamespacePrefix prefix, string name, string value);
+        Selector<TElement> AttributeDashMatch(NamespacePrefix prefix, string name, string value, bool negation = false);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
         /// that represents an element with the attribute <paramref name="name"/>
         /// whose value begins with the prefix <paramref name="value"/>.
         /// </summary>
-        Selector<TElement> AttributePrefixMatch(NamespacePrefix prefix, string name, string value);
+        Selector<TElement> AttributePrefixMatch(NamespacePrefix prefix, string name, string value, bool negation = false);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
         /// that represents an element with the attribute <paramref name="name"/>
         /// whose value ends with the suffix <paramref name="value"/>.
         /// </summary>
-        Selector<TElement> AttributeSuffixMatch(NamespacePrefix prefix, string name, string value);
+        Selector<TElement> AttributeSuffixMatch(NamespacePrefix prefix, string name, string value, bool negation = false);
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
         /// that represents an element with the attribute <paramref name="name"/>
         /// whose value contains at least one instance of the substring <paramref name="value"/>.
         /// </summary>
-        Selector<TElement> AttributeSubstring(NamespacePrefix prefix, string name, string value);
+        Selector<TElement> AttributeSubstring(NamespacePrefix prefix, string name, string value, bool negation = false);
 
         //
         // Pseudo-class selectors
@@ -121,32 +121,32 @@ namespace Fizzler
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that is the first child of some other element.
         /// </summary>
-        Selector<TElement> FirstChild();
+        Selector<TElement> FirstChild(bool negation = false);
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that is the last child of some other element.
         /// </summary>
-        Selector<TElement> LastChild();
+        Selector<TElement> LastChild(bool negation = false);
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that is the N-th child of some other element.
         /// </summary>
-        Selector<TElement> NthChild(int a, int b);
+        Selector<TElement> NthChild(int a, int b, bool negation = false);
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that has a parent element and whose parent
         /// element has no other element children.
         /// </summary>
-        Selector<TElement> OnlyChild();
+        Selector<TElement> OnlyChild(bool negation = false);
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that has no children at all.
         /// </summary>
-        Selector<TElement> Empty();
+        Selector<TElement> Empty(bool negation = false);
 
         //
         // Combinators
@@ -185,6 +185,6 @@ namespace Fizzler
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that is the N-th child from bottom up of some other element.
         /// </summary>
-        Selector<TElement> NthLastChild(int a, int b);
+        Selector<TElement> NthLastChild(int a, int b, bool negation = false);
     }
 }

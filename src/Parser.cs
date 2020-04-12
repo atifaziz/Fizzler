@@ -181,20 +181,12 @@ namespace Fizzler
             };
         }
 
-        void SimpleSelectorSequence()
+        void SimpleSelectorSequence(bool forbidNegation = false)
         {
             //simple_selector_sequence
             //  : [ type_selector | universal ]
             //    [ HASH | class | attrib | pseudo | negation ]*
             //  | [ HASH | class | attrib | pseudo | negation ]+
-            //  ;
-            //
-            //negation
-            //  : NOT S* negation_arg S* ')'
-            //  ;
-            //
-            //negation_arg
-            //  : type_selector | universal | HASH | class | attrib | pseudo
             //  ;
 
             var named = false;
@@ -218,23 +210,44 @@ namespace Fizzler
                     {
                         _generator.Id(token.Value.Text);
                     }
-                    else if (token.Value.Kind == TokenKind.Not)
-                    {
-                        _generator.Id(token.Value.Text);
-                    }
                     else
                     {
                         Unread(token.Value);
-                        switch (token.Value.Text[0])
+                        if (forbidNegation || !TryNegation())
                         {
-                            case '.': Class(); break;
-                            case '[': Attrib(); break;
-                            case ':': Pseudo(); break;
-                            default: throw new Exception("Internal error.");
+                            switch (token.Value.Text[0])
+                            {
+                                case '.': Class(); break;
+                                case '[': Attrib(); break;
+                                case ':': Pseudo(); break;
+                                default: throw new Exception("Internal error.");
+                            }
                         }
                     }
                 }
             }
+        }
+
+        bool TryNegation()
+        {
+            //negation
+            //  : NOT S* negation_arg S* ')'
+            //  ;
+            //
+            //negation_arg
+            //  : type_selector | universal | HASH | class | attrib | pseudo
+            //  ;
+
+            if (TryRead(ToTokenSpec(TokenKind.Not)) == null)
+                return false;
+
+            TryRead(ToTokenSpec(TokenKind.WhiteSpace));
+            _generator.Negation(true);
+            SimpleSelectorSequence(forbidNegation: true);
+            _generator.Negation(false);
+            TryRead(ToTokenSpec(TokenKind.WhiteSpace));
+            Read(ToTokenSpec(Token.RightParenthesis()));
+            return true;
         }
 
         void Pseudo()

@@ -36,6 +36,7 @@ namespace Fizzler
     {
         readonly IEqualityComparer<TElement> _equalityComparer;
         readonly Stack<Selector<TElement>> _selectors;
+        bool _negation;
 
         /// <summary>
         /// Initializes a new instance of this object with an instance
@@ -135,7 +136,7 @@ namespace Fizzler
         /// matches the identifier in the ID selector.
         /// </summary>
         public virtual void Id(string id) =>
-            Add(Ops.Id(id));
+            Add(Ops.Id(id, _negation));
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#class-html">class selector</a>,
@@ -143,14 +144,14 @@ namespace Fizzler
         /// representing the <c>class</c> attribute.
         /// </summary>
         public virtual void Class(string clazz) =>
-            Add(Ops.Class(clazz));
+            Add(Ops.Class(clazz, _negation));
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#type-selectors">type selector</a>,
         /// which represents an instance of the element type in the document tree.
         /// </summary>
         public virtual void Type(NamespacePrefix prefix, string type) =>
-            Add(Ops.Type(prefix, type));
+            Add(Ops.Type(prefix, type, _negation));
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#universal-selector">universal selector</a>,
@@ -159,7 +160,7 @@ namespace Fizzler
         /// has been specified for selectors.
         /// </summary>
         public virtual void Universal(NamespacePrefix prefix) =>
-            Add(Ops.Universal(prefix));
+            Add(Ops.Universal(prefix, _negation));
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
@@ -167,7 +168,7 @@ namespace Fizzler
         /// whatever the values of the attribute.
         /// </summary>
         public virtual void AttributeExists(NamespacePrefix prefix, string name) =>
-            Add(Ops.AttributeExists(prefix, name));
+            Add(Ops.AttributeExists(prefix, name, _negation));
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
@@ -175,7 +176,7 @@ namespace Fizzler
         /// and whose value is exactly <paramref name="value"/>.
         /// </summary>
         public virtual void AttributeExact(NamespacePrefix prefix, string name, string value) =>
-            Add(Ops.AttributeExact(prefix, name, value));
+            Add(Ops.AttributeExact(prefix, name, value, _negation));
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
@@ -184,7 +185,7 @@ namespace Fizzler
         /// which is exactly <paramref name="value"/>.
         /// </summary>
         public virtual void AttributeIncludes(NamespacePrefix prefix, string name, string value) =>
-            Add(Ops.AttributeIncludes(prefix, name, value));
+            Add(Ops.AttributeIncludes(prefix, name, value, _negation));
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
@@ -193,7 +194,7 @@ namespace Fizzler
         /// with <paramref name="value"/> immediately followed by "-" (U+002D).
         /// </summary>
         public virtual void AttributeDashMatch(NamespacePrefix prefix, string name, string value) =>
-            Add(Ops.AttributeDashMatch(prefix, name, value));
+            Add(Ops.AttributeDashMatch(prefix, name, value, _negation));
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
@@ -201,7 +202,7 @@ namespace Fizzler
         /// whose value begins with the prefix <paramref name="value"/>.
         /// </summary>
         public void AttributePrefixMatch(NamespacePrefix prefix, string name, string value) =>
-            Add(Ops.AttributePrefixMatch(prefix, name, value));
+            Add(Ops.AttributePrefixMatch(prefix, name, value, _negation));
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
@@ -209,7 +210,7 @@ namespace Fizzler
         /// whose value ends with the suffix <paramref name="value"/>.
         /// </summary>
         public void AttributeSuffixMatch(NamespacePrefix prefix, string name, string value) =>
-            Add(Ops.AttributeSuffixMatch(prefix, name, value));
+            Add(Ops.AttributeSuffixMatch(prefix, name, value, _negation));
 
         /// <summary>
         /// Generates an <a href="http://www.w3.org/TR/css3-selectors/#attribute-selectors">attribute selector</a>
@@ -217,28 +218,28 @@ namespace Fizzler
         /// whose value contains at least one instance of the substring <paramref name="value"/>.
         /// </summary>
         public void AttributeSubstring(NamespacePrefix prefix, string name, string value) =>
-            Add(Ops.AttributeSubstring(prefix, name, value));
+            Add(Ops.AttributeSubstring(prefix, name, value, _negation));
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that is the first child of some other element.
         /// </summary>
         public virtual void FirstChild() =>
-            Add(Ops.FirstChild());
+            Add(Ops.FirstChild(_negation));
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that is the last child of some other element.
         /// </summary>
         public virtual void LastChild() =>
-            Add(Ops.LastChild());
+            Add(Ops.LastChild(_negation));
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that is the N-th child of some other element.
         /// </summary>
         public virtual void NthChild(int a, int b) =>
-            Add(Ops.NthChild(a, b));
+            Add(Ops.NthChild(a, b, _negation));
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
@@ -246,14 +247,21 @@ namespace Fizzler
         /// element has no other element children.
         /// </summary>
         public virtual void OnlyChild() =>
-            Add(Ops.OnlyChild());
+            Add(Ops.OnlyChild(_negation));
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#pseudo-classes">pseudo-class selector</a>,
         /// which represents an element that has no children at all.
         /// </summary>
         public virtual void Empty() =>
-            Add(Ops.Empty());
+            Add(Ops.Empty(_negation));
+
+        /// <summary>
+        /// Generates a <a href="https://www.w3.org/TR/selectors-3/#negation">negation pseudo-class selector</a>,
+        /// which represents an element that is not represented by its argument.
+        /// </summary>
+        public void Negation(bool value) =>
+            _negation = value;
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#combinators">combinator</a>,
@@ -293,6 +301,6 @@ namespace Fizzler
         /// which represents an element that is the N-th child from bottom up of some other element.
         /// </summary>
         public void NthLastChild(int a, int b) =>
-            Add(Ops.NthLastChild(a, b));
+            Add(Ops.NthLastChild(a, b, _negation));
     }
 }

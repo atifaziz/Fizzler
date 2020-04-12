@@ -225,6 +225,15 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
+        public void Negation(bool value)
+        {
+            Primary.Negation(value);
+            Secondary.Negation(value);
+        }
+
+        /// <summary>
+        /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
+        /// </summary>
         public void Child()
         {
             Primary.Child();

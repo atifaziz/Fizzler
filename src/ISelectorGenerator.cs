@@ -164,6 +164,12 @@ namespace Fizzler
         /// </summary>
         void Empty();
 
+        /// <summary>
+        /// Generates a <a href="https://www.w3.org/TR/selectors-3/#negation">negation pseudo-class selector</a>,
+        /// which represents an element that is not represented by its argument.
+        /// </summary>
+        void Negation(bool value);
+
         //
         // Combinators
         //
