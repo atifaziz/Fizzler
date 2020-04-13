@@ -179,6 +179,15 @@ namespace Fizzler
                 ToTokenSpec(Token.LeftBracket()),
                 ToTokenSpec(Token.Colon())
             };
+
+            public static readonly TokenSpec[] Hash_Dot_LeftBracket_Colon_Not =
+            {
+                ToTokenSpec(TokenKind.Hash),
+                ToTokenSpec(Token.Dot()),
+                ToTokenSpec(Token.LeftBracket()),
+                ToTokenSpec(Token.Colon()),
+                ToTokenSpec(Token.Not())
+            };
         }
 
         void SimpleSelectorSequence(bool forbidNegation = false)
@@ -192,7 +201,8 @@ namespace Fizzler
             var named = false;
             for (var modifiers = 0; ; modifiers++)
             {
-                var token = TryRead(TokenSpecs.Hash_Dot_LeftBracket_Colon);
+                var token = TryRead(forbidNegation ? TokenSpecs.Hash_Dot_LeftBracket_Colon
+                                                   : TokenSpecs.Hash_Dot_LeftBracket_Colon_Not);
 
                 if (token == null)
                 {
@@ -203,18 +213,25 @@ namespace Fizzler
                 }
                 else
                 {
-                    if (modifiers == 0 && !named)
+                    if (!forbidNegation && modifiers == 0 && !named)
                         _generator.Universal(NamespacePrefix.None); // implied
 
-                    if (token.Value.Kind == TokenKind.Hash)
+                    switch (token.Value.Kind)
                     {
-                        _generator.Id(token.Value.Text);
-                    }
-                    else
-                    {
-                        Unread(token.Value);
-                        if (forbidNegation || !TryNegation())
+                        case TokenKind.Not:
                         {
+                            Unread(token.Value);
+                            Negation();
+                            break;
+                        }
+                        case TokenKind.Hash:
+                        {
+                            _generator.Id(token.Value.Text);
+                            break;
+                        }
+                        default:
+                        {
+                            Unread(token.Value);
                             switch (token.Value.Text[0])
                             {
                                 case '.': Class(); break;
@@ -222,13 +239,14 @@ namespace Fizzler
                                 case ':': Pseudo(); break;
                                 default: throw new Exception("Internal error.");
                             }
+                            break;
                         }
                     }
                 }
             }
         }
 
-        bool TryNegation()
+        void Negation()
         {
             //negation
             //  : NOT S* negation_arg S* ')'
@@ -238,9 +256,7 @@ namespace Fizzler
             //  : type_selector | universal | HASH | class | attrib | pseudo
             //  ;
 
-            if (TryRead(ToTokenSpec(TokenKind.Not)) == null)
-                return false;
-
+            Read(ToTokenSpec(TokenKind.Not));
             TryRead(ToTokenSpec(TokenKind.WhiteSpace));
             var generator = _generator as INegationSelectorGenerator;
             if (generator == null)
@@ -250,7 +266,6 @@ namespace Fizzler
             generator.Negation(false);
             TryRead(ToTokenSpec(TokenKind.WhiteSpace));
             Read(ToTokenSpec(Token.RightParenthesis()));
-            return true;
         }
 
         void Pseudo()

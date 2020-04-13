@@ -73,14 +73,9 @@ namespace Fizzler
                         r = reader.Read();
 
                     if (r == '(')
-                    {
-                        var ident = reader.Marked();
-                        yield return ident == "not" ? Token.Not() : Token.Function(ident);
-                    }
+                        yield return Token.Function(reader.Marked());
                     else
-                    {
                         yield return Token.Ident(reader.MarkedWithUnread());
-                    }
                 }
                 //
                 // Integer
@@ -149,7 +144,24 @@ namespace Fizzler
                     // Single-character punctuation
                     //
                     case '.': yield return Token.Dot(); break;
-                    case ':':  yield return Token.Colon(); break;
+                    case ':':
+                    {
+                        var pos = reader.Position;
+                        if (reader.Read() == 'n'
+                            && reader.Read() == 'o'
+                            && reader.Read() == 't'
+                            && reader.Read() == '(')
+                        {
+                            yield return Token.Not();
+                            break;
+                        }
+
+                        while (reader.Position > pos)
+                            reader.Unread();
+
+                        yield return Token.Colon();
+                        break;
+                    }
                     case ',':  yield return Token.Comma(); break;
                     case '=':  yield return Token.Equals(); break;
                     case '[':  yield return Token.LeftBracket(); break;
