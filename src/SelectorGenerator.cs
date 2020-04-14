@@ -313,9 +313,9 @@ namespace Fizzler
         public void EndNegation()
         {
             var negationSourceSelector = _negationSourceSelector ?? throw new InvalidOperationException();
-            _negationSourceSelector = null;
             var selector = Selector;
             Selector = nodes => negationSourceSelector(nodes).Except(selector(nodes), _equalityComparer);
+            _negationSourceSelector = null;
         }
     }
 }
