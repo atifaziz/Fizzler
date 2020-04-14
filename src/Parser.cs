@@ -190,7 +190,7 @@ namespace Fizzler
             };
         }
 
-        void SimpleSelectorSequence(bool forbidNegation = false)
+        void SimpleSelectorSequence()
         {
             //simple_selector_sequence
             //  : [ type_selector | universal ]
@@ -201,8 +201,7 @@ namespace Fizzler
             var named = false;
             for (var modifiers = 0; ; modifiers++)
             {
-                var token = TryRead(forbidNegation ? TokenSpecs.Hash_Dot_LeftBracket_Colon
-                                                   : TokenSpecs.Hash_Dot_LeftBracket_Colon_Not);
+                var token = TryRead(TokenSpecs.Hash_Dot_LeftBracket_Colon_Not);
 
                 if (token == null)
                 {
@@ -213,7 +212,7 @@ namespace Fizzler
                 }
                 else
                 {
-                    if (!forbidNegation && modifiers == 0 && !named)
+                    if (modifiers == 0 && !named)
                         _generator.Universal(NamespacePrefix.None); // implied
 
                     switch (token.Value.Kind)
@@ -251,21 +250,50 @@ namespace Fizzler
             //negation
             //  : NOT S* negation_arg S* ')'
             //  ;
-            //
-            //negation_arg
-            //  : type_selector | universal | HASH | class | attrib | pseudo
-            //  ;
 
             Read(ToTokenSpec(TokenKind.Not));
             TryRead(ToTokenSpec(TokenKind.WhiteSpace));
             var generator = _generator as INegationSelectorGenerator;
             if (generator == null)
                 throw new NotSupportedException("Negation pseudo-class is not supported.");
+
             generator.BeginNegation();
-            SimpleSelectorSequence(forbidNegation: true);
-            generator.EndNegation();
+
+            //negation_arg
+            //  : type_selector | universal | HASH | class | attrib | pseudo
+            //  ;
+
+            var token = TryRead(TokenSpecs.Hash_Dot_LeftBracket_Colon);
+
+            if (token == null)
+            {
+                TypeSelectorOrUniversal();
+            }
+            else
+            {
+                _generator.Universal(NamespacePrefix.None); // implied
+
+                if (token.Value.Kind == TokenKind.Hash)
+                {
+                    _generator.Id(token.Value.Text);
+                }
+                else
+                {
+                    Unread(token.Value);
+                    switch (token.Value.Text[0])
+                    {
+                        case '.': Class(); break;
+                        case '[': Attrib(); break;
+                        case ':': Pseudo(); break;
+                        default: throw new Exception("Internal error.");
+                    }
+                }
+            }
+
             TryRead(ToTokenSpec(TokenKind.WhiteSpace));
             Read(ToTokenSpec(Token.RightParenthesis()));
+
+            generator.EndNegation();
         }
 
         void Pseudo()

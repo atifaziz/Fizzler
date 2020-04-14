@@ -32,6 +32,18 @@ namespace Fizzler.Tests
     [TestFixture]
     public class ParserTests
     {
+        [TestCase(":not(.foo.bar)")]
+        [TestCase(":not(p.foo)")]
+        [TestCase(":not(p div)")]
+        [TestCase(":not(p, div)")]
+        [TestCase(":not(#foo.bar)")]
+        [TestCase(":not([foo][bar])")]
+        public void Invalid(string selector)
+        {
+            Assert.Throws<FormatException>(() =>
+                Parser.Parse(Tokener.Tokenize(selector), new NoSelectorGenerator()));
+        }
+
         [Test]
         public void TypeNoNamespace()
         {
@@ -454,6 +466,36 @@ namespace Fizzler.Tests
             public void NthLastChild(int a, int b) => throw new NotImplementedException();
 
             #endregion
+        }
+
+        sealed class NoSelectorGenerator : INegationSelectorGenerator
+        {
+            public void OnInit() {}
+            public void OnClose() {}
+            public void OnSelector() {}
+            public void Type(NamespacePrefix prefix, string name) {}
+            public void Universal(NamespacePrefix prefix) {}
+            public void Id(string id) {}
+            public void Class(string clazz) {}
+            public void AttributeExists(NamespacePrefix prefix, string name) {}
+            public void AttributeExact(NamespacePrefix prefix, string name, string value) {}
+            public void AttributeIncludes(NamespacePrefix prefix, string name, string value) {}
+            public void AttributeDashMatch(NamespacePrefix prefix, string name, string value) {}
+            public void AttributePrefixMatch(NamespacePrefix prefix, string name, string value) {}
+            public void AttributeSuffixMatch(NamespacePrefix prefix, string name, string value) {}
+            public void AttributeSubstring(NamespacePrefix prefix, string name, string value) {}
+            public void FirstChild() {}
+            public void LastChild() {}
+            public void NthChild(int a, int b) {}
+            public void OnlyChild() {}
+            public void Empty() {}
+            public void Child() {}
+            public void Descendant() {}
+            public void Adjacent() {}
+            public void GeneralSibling() {}
+            public void NthLastChild(int a, int b) {}
+            public void BeginNegation() {}
+            public void EndNegation() {}
         }
     }
 }
