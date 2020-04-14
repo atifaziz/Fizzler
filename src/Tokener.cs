@@ -141,18 +141,26 @@ namespace Fizzler
                         break;
                     }
                     //
-                    // Single-character punctuation
+                    // Single-character punctuation (mostly)
                     //
                     case '.': yield return Token.Dot(); break;
+                    case ',':  yield return Token.Comma(); break;
+                    case '=':  yield return Token.Equals(); break;
+                    case '[':  yield return Token.LeftBracket(); break;
+                    case ']':  yield return Token.RightBracket(); break;
+                    case ')':  yield return Token.RightParenthesis(); break;
+                    case '+': yield return Token.Plus(); break;
+                    case '>':  yield return Token.Greater(); break;
+                    case '#':  yield return Token.Hash(ParseHash(reader)); break;
                     case ':':
                     {
                         var pos = reader.Position;
-                        if (reader.Read() == 'n'
-                            && reader.Read() == 'o'
-                            && reader.Read() == 't'
-                            && reader.Read() == '(')
+                        if (reader.Read() == 'n' &&
+                            reader.Read() == 'o' &&
+                            reader.Read() == 't' &&
+                            reader.Read() == '(')
                         {
-                            yield return Token.Not();
+                            yield return Token.Not(); // ":"{N}{O}{T}"("  return NOT;
                             break;
                         }
 
@@ -162,14 +170,6 @@ namespace Fizzler
                         yield return Token.Colon();
                         break;
                     }
-                    case ',':  yield return Token.Comma(); break;
-                    case '=':  yield return Token.Equals(); break;
-                    case '[':  yield return Token.LeftBracket(); break;
-                    case ']':  yield return Token.RightBracket(); break;
-                    case ')':  yield return Token.RightParenthesis(); break;
-                    case '+': yield return Token.Plus(); break;
-                    case '>':  yield return Token.Greater(); break;
-                    case '#':  yield return Token.Hash(ParseHash(reader)); break;
                     //
                     // Single- or double-quoted strings
                     //
