@@ -369,5 +369,18 @@ namespace Fizzler.Tests
             Assert.Throws<FormatException>(() =>
                 Tokener.Tokenize("what?").ToArray());
         }
+
+        [Test]
+        public void Not()
+        {
+            Assert.AreEqual(Token.Not(), Tokener.Tokenize(":not(").First());
+        }
+
+        [Test]
+        public void NotNotFunction()
+        {
+            Assert.AreEqual(new[] { Token.Char(':'), Token.Function("notnot") },
+                            Tokener.Tokenize(":notnot(").Take(2));
+        }
     }
 }
