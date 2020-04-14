@@ -318,7 +318,7 @@ namespace Fizzler
             Selector = nodes =>
             {
                 var nodeList = nodes.ToList();
-                return negationSourceSelector(nodeList).Except(selector(nodeList));
+                return negationSourceSelector(nodeList).Except(selector(nodeList), _equalityComparer);
             };
         }
     }
