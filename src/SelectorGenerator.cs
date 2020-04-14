@@ -315,11 +315,7 @@ namespace Fizzler
             var negationSourceSelector = _negationSourceSelector ?? throw new InvalidOperationException();
             _negationSourceSelector = null;
             var selector = Selector;
-            Selector = nodes =>
-            {
-                var nodeList = nodes.ToList();
-                return negationSourceSelector(nodeList).Except(selector(nodeList), _equalityComparer);
-            };
+            Selector = nodes => negationSourceSelector(nodes).Except(selector(nodes), _equalityComparer);
         }
     }
 }
