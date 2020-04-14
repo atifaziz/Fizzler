@@ -261,9 +261,9 @@ namespace Fizzler
             var generator = _generator as INegationSelectorGenerator;
             if (generator == null)
                 throw new NotSupportedException("Negation pseudo-class is not supported.");
-            generator.Negation(true);
+            generator.BeginNegation();
             SimpleSelectorSequence(forbidNegation: true);
-            generator.Negation(false);
+            generator.EndNegation();
             TryRead(ToTokenSpec(TokenKind.WhiteSpace));
             Read(ToTokenSpec(Token.RightParenthesis()));
         }

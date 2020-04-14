@@ -225,10 +225,19 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
-        public void Negation(bool value)
+        public void BeginNegation()
         {
-            ((INegationSelectorGenerator) Primary).Negation(value);
-            ((INegationSelectorGenerator) Secondary).Negation(value);
+            ((INegationSelectorGenerator) Primary).BeginNegation();
+            ((INegationSelectorGenerator) Secondary).BeginNegation();
+        }
+
+        /// <summary>
+        /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
+        /// </summary>
+        public void EndNegation()
+        {
+            ((INegationSelectorGenerator) Primary).EndNegation();
+            ((INegationSelectorGenerator) Secondary).EndNegation();
         }
 
         /// <summary>
