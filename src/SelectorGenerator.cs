@@ -32,10 +32,11 @@ namespace Fizzler
     /// <summary>
     /// A selector generator implementation for an arbitrary document/element system.
     /// </summary>
-    public class SelectorGenerator<TElement> : ISelectorGenerator
+    public class SelectorGenerator<TElement> : INegationSelectorGenerator
     {
         readonly IEqualityComparer<TElement> _equalityComparer;
         readonly Stack<Selector<TElement>> _selectors;
+        Selector<TElement> _negationSourceSelector;
 
         /// <summary>
         /// Initializes a new instance of this object with an instance
@@ -294,5 +295,27 @@ namespace Fizzler
         /// </summary>
         public void NthLastChild(int a, int b) =>
             Add(Ops.NthLastChild(a, b));
+
+        /// <summary>
+        /// Starts a <a href="https://www.w3.org/TR/selectors-3/#negation">negation pseudo-class selector</a>,
+        /// which represents an element that is not represented by its argument.
+        /// </summary>
+        public void BeginNegation()
+        {
+            _negationSourceSelector = Selector ?? throw new InvalidOperationException();
+            Selector = null;
+        }
+
+        /// <summary>
+        /// Generates a <a href="https://www.w3.org/TR/selectors-3/#negation">negation pseudo-class selector</a>,
+        /// which represents an element that is not represented by its argument.
+        /// </summary>
+        public void EndNegation()
+        {
+            var negationSourceSelector = _negationSourceSelector ?? throw new InvalidOperationException();
+            var selector = Selector;
+            Selector = nodes => negationSourceSelector(nodes).Except(selector(nodes), _equalityComparer);
+            _negationSourceSelector = null;
+        }
     }
 }

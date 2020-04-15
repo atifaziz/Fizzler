@@ -203,4 +203,19 @@ namespace Fizzler
         /// </summary>
         void NthLastChild(int a, int b);
     }
+
+    public interface INegationSelectorGenerator : ISelectorGenerator
+    {
+        /// <summary>
+        /// Starts a <a href="https://www.w3.org/TR/selectors-3/#negation">negation pseudo-class selector</a>,
+        /// which represents an element that is not represented by its argument.
+        /// </summary>
+        void BeginNegation();
+
+        /// <summary>
+        /// Generates a <a href="https://www.w3.org/TR/selectors-3/#negation">negation pseudo-class selector</a>,
+        /// which represents an element that is not represented by its argument.
+        /// </summary>
+        void EndNegation();
+    }
 }

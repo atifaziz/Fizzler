@@ -141,10 +141,9 @@ namespace Fizzler
                         break;
                     }
                     //
-                    // Single-character punctuation
+                    // Single-character punctuation (mostly)
                     //
                     case '.': yield return Token.Dot(); break;
-                    case ':':  yield return Token.Colon(); break;
                     case ',':  yield return Token.Comma(); break;
                     case '=':  yield return Token.Equals(); break;
                     case '[':  yield return Token.LeftBracket(); break;
@@ -153,6 +152,24 @@ namespace Fizzler
                     case '+': yield return Token.Plus(); break;
                     case '>':  yield return Token.Greater(); break;
                     case '#':  yield return Token.Hash(ParseHash(reader)); break;
+                    case ':':
+                    {
+                        var pos = reader.Position;
+                        if (reader.Read() == 'n' &&
+                            reader.Read() == 'o' &&
+                            reader.Read() == 't' &&
+                            reader.Read() == '(')
+                        {
+                            yield return Token.Not(); // ":"{N}{O}{T}"("  return NOT;
+                            break;
+                        }
+
+                        while (reader.Position > pos)
+                            reader.Unread();
+
+                        yield return Token.Colon();
+                        break;
+                    }
                     //
                     // Single- or double-quoted strings
                     //

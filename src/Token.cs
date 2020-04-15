@@ -197,6 +197,11 @@ namespace Fizzler
         }
 
         /// <summary>
+        /// Creates a not token.
+        /// </summary>
+        public static Token Not() => new Token(TokenKind.Not);
+
+        /// <summary>
         /// Creates an arbitrary character token.
         /// </summary>
         public static Token Char(char ch) =>

@@ -179,6 +179,15 @@ namespace Fizzler
                 ToTokenSpec(Token.LeftBracket()),
                 ToTokenSpec(Token.Colon())
             };
+
+            public static readonly TokenSpec[] Hash_Dot_LeftBracket_Colon_Not =
+            {
+                ToTokenSpec(TokenKind.Hash),
+                ToTokenSpec(Token.Dot()),
+                ToTokenSpec(Token.LeftBracket()),
+                ToTokenSpec(Token.Colon()),
+                ToTokenSpec(Token.Not())
+            };
         }
 
         void SimpleSelectorSequence()
@@ -192,7 +201,7 @@ namespace Fizzler
             var named = false;
             for (var modifiers = 0; ; modifiers++)
             {
-                var token = TryRead(TokenSpecs.Hash_Dot_LeftBracket_Colon);
+                var token = TryRead(TokenSpecs.Hash_Dot_LeftBracket_Colon_Not);
 
                 if (token == null)
                 {
@@ -206,23 +215,85 @@ namespace Fizzler
                     if (modifiers == 0 && !named)
                         _generator.Universal(NamespacePrefix.None); // implied
 
-                    if (token.Value.Kind == TokenKind.Hash)
+                    switch (token.Value.Kind)
                     {
-                        _generator.Id(token.Value.Text);
-                    }
-                    else
-                    {
-                        Unread(token.Value);
-                        switch (token.Value.Text[0])
+                        case TokenKind.Not:
                         {
-                            case '.': Class(); break;
-                            case '[': Attrib(); break;
-                            case ':': Pseudo(); break;
-                            default: throw new Exception("Internal error.");
+                            Unread(token.Value);
+                            Negation();
+                            break;
+                        }
+                        case TokenKind.Hash:
+                        {
+                            _generator.Id(token.Value.Text);
+                            break;
+                        }
+                        default:
+                        {
+                            Unread(token.Value);
+                            switch (token.Value.Text[0])
+                            {
+                                case '.': Class(); break;
+                                case '[': Attrib(); break;
+                                case ':': Pseudo(); break;
+                                default: throw new Exception("Internal error.");
+                            }
+                            break;
                         }
                     }
                 }
             }
+        }
+
+        void Negation()
+        {
+            //negation
+            //  : NOT S* negation_arg S* ')'
+            //  ;
+
+            Read(ToTokenSpec(TokenKind.Not));
+            TryRead(ToTokenSpec(TokenKind.WhiteSpace));
+            var generator = _generator as INegationSelectorGenerator;
+            if (generator == null)
+                throw new NotSupportedException("Negation pseudo-class is not supported.");
+
+            generator.BeginNegation();
+
+            //negation_arg
+            //  : type_selector | universal | HASH | class | attrib | pseudo
+            //  ;
+
+            var token = TryRead(TokenSpecs.Hash_Dot_LeftBracket_Colon);
+
+            if (token == null)
+            {
+                TypeSelectorOrUniversal();
+            }
+            else
+            {
+                _generator.Universal(NamespacePrefix.None); // implied
+
+                if (token.Value.Kind == TokenKind.Hash)
+                {
+                    _generator.Id(token.Value.Text);
+                }
+                else
+                {
+                    Unread(token.Value);
+                    switch (token.Value.Text[0])
+                    {
+                        case '.': Class(); break;
+                        case '[': Attrib(); break;
+                        case ':': Pseudo(); break;
+                        default: throw new Exception("Internal error.");
+                    }
+                }
+            }
+
+            TryRead(ToTokenSpec(TokenKind.WhiteSpace));
+            Read(ToTokenSpec(Token.RightParenthesis()));
+
+            generator.EndNegation();
         }
 
         void Pseudo()
