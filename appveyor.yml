@@ -5,6 +5,7 @@ image:
 branches:
   only:
   - master
+  - /\d+\.\d+(\.\d+)?/
   except:
   - /.+[\-.]wip$/
   - wip
