@@ -2,7 +2,17 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard1.0;netstandard2.0</TargetFrameworks>
-    <LangVersion>7</LangVersion>
+    <!--
+      no harm in using latest language version the .NET SDK supports, in this case latest could be c# 9
+      and it also seems that things like switch expressions, or patterns, or even pattern matching does
+      not require anything extra not in the older TargetFrameworks so it should be fine as I use it to
+      unify the codebase to the newer syntax from the newer language versions, despite what the
+      TargetFramework(s) are set to which keeps if preprocessor blocks out of the code.
+      The only exception is when using the syntax for System.Index and System.Range where those
+      TargetFrameworks lack those classes for it (in which case the only way to use it would be to
+      provide your own copy of them based on the code in .NET 5/6).
+    -->
+    <LangVersion>latest</LangVersion>
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>Fizzler.snk</AssemblyOriginatorKeyFile>
     <VersionPrefix>1.3.0</VersionPrefix>
@@ -16,21 +26,23 @@
     <PackageTags>selectors w3c</PackageTags>
     <PackageIconUrl></PackageIconUrl>
     <PackageOutputPath>..\dist</PackageOutputPath>
-    <IncludeSymbols>true</IncludeSymbols>
-    <IncludeSource>true</IncludeSource>
     <Copyright>Copyright © 2009 Atif Aziz, Colin Ramsay. All rights reserved. Portions Copyright © 2008 Novell, Inc.</Copyright>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
     <EmbedUntrackedSource>true</EmbedUntrackedSource>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <OutputPath>..\bin\Debug\</OutputPath>
-    <DebugType>full</DebugType>
+    <!-- to embed complete (full) pdbs in Debug builds. -->
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <OutputPath>..\bin\Release\</OutputPath>
+    <!-- to embed complete pdbs in Release builds as well. -->
+    <DebugType>embedded</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.0'">
@@ -42,6 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <!-- There are prerelease versions of this as well in the .NET 5/6 azure feeds. -->
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all" />
   </ItemGroup>
 
