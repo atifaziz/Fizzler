@@ -27,6 +27,7 @@ namespace Fizzler.Tests
     using System.Collections;
     using System.Collections.Generic;
     using NUnit.Framework;
+    using Assert = NUnit.Framework.Legacy.ClassicAssert;
 
     #endregion
 
