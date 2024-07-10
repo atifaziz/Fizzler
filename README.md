@@ -1,7 +1,6 @@
 # Fizzler: .NET CSS Selector Engine
 
-[![Build Status][win-build-badge]][win-builds]
-[![Build Status][nix-build-badge]][nix-builds]
+[![Build Status][build-badge]][builds]
 [![NuGet][nuget-badge]][nuget-pkg]
 [![MyGet][myget-badge]][edge-pkgs]
 
@@ -59,10 +58,8 @@ document.QuerySelectorAll("p:first-child");
 ```
 
 
-[win-build-badge]: https://img.shields.io/appveyor/ci/raboof/fizzler/master.svg?label=windows
-[win-builds]: https://ci.appveyor.com/project/raboof/fizzler
-[nix-build-badge]: https://img.shields.io/travis/atifaziz/Fizzler/master.svg?label=linux
-[nix-builds]: https://travis-ci.org/atifaziz/Fizzler
+[build-badge]: https://img.shields.io/appveyor/ci/raboof/fizzler/master.svg?label=windows
+[builds]: https://ci.appveyor.com/project/raboof/fizzler
 [myget-badge]: https://img.shields.io/myget/raboof/vpre/Fizzler.svg?label=myget
 [edge-pkgs]: https://www.myget.org/feed/raboof/package/nuget/Fizzler
 [nuget-badge]: https://img.shields.io/nuget/v/Fizzler.svg
