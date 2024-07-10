@@ -23,7 +23,6 @@ namespace Fizzler.Tests
 {
     using System;
     using NUnit.Framework;
-    using Assert = NUnit.Framework.Legacy.ClassicAssert;
 
     [TestFixture]
     public class HumanReadableSelectorGeneratorTests
@@ -169,7 +168,7 @@ namespace Fizzler.Tests
         {
             var generator = new HumanReadableSelectorGenerator();
             Parser.Parse(selector, generator);
-            Assert.AreEqual(message, generator.Text);
+            Assert.That(generator.Text, Is.EqualTo(message));
         }
     }
 }

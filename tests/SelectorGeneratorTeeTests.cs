@@ -28,7 +28,6 @@ namespace Fizzler.Tests
     using System.Linq;
     using System.Reflection;
     using NUnit.Framework;
-    using Assert = NUnit.Framework.Legacy.ClassicAssert;
 
     #endregion
 
@@ -241,14 +240,14 @@ namespace Fizzler.Tests
             // both called with the same arguments and in the right order!
 
             var recording = recordings.Dequeue();
-            Assert.AreSame(_primary, recording.Target);
-            Assert.AreEqual(action.Name, MapMethod<ISelectorGenerator>(recording.Method).Name);
-            Assert.AreEqual(args, recording.Arguments);
+            Assert.That(recording.Target, Is.SameAs(_primary));
+            Assert.That(MapMethod<ISelectorGenerator>(recording.Method).Name, Is.EqualTo(action.Name));
+            Assert.That(recording.Arguments, Is.EqualTo(args));
 
             recording = recordings.Dequeue();
-            Assert.AreSame(_secondary, recording.Target);
-            Assert.AreEqual(action.Name, MapMethod<ISelectorGenerator>(recording.Method).Name);
-            Assert.AreEqual(args, recording.Arguments);
+            Assert.That(recording.Target, Is.SameAs(_secondary));
+            Assert.That(MapMethod<ISelectorGenerator>(recording.Method).Name, Is.EqualTo(action.Name));
+            Assert.That(recording.Arguments, Is.EqualTo(args));
         }
 
         static MethodInfo MapMethod<T>(MethodInfo method) where T : class

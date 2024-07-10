@@ -25,7 +25,6 @@ namespace Fizzler.Tests
 
     using System;
     using NUnit.Framework;
-    using Assert = NUnit.Framework.Legacy.ClassicAssert;
 
     #endregion
 
@@ -247,11 +246,11 @@ namespace Fizzler.Tests
 
         static void AssertToken(TokenKind expectedKind, string expectedText, Token token)
         {
-            Assert.AreEqual(expectedKind, token.Kind);
+            Assert.That(token.Kind, Is.EqualTo(expectedKind));
             if (expectedText == null)
-                Assert.IsNull(token.Text);
+                Assert.That(token.Text, Is.Null);
             else
-                Assert.AreEqual(expectedText, token.Text);
+                Assert.That(token.Text, Is.EqualTo(expectedText));
         }
 
         [Test]
@@ -289,30 +288,30 @@ namespace Fizzler.Tests
         [Test]
         public void StringRepresentations()
         {
-            Assert.AreEqual("Eoi", Token.Eoi().ToString());
-            Assert.AreEqual("Ident: foo", Token.Ident("foo").ToString());
-            Assert.AreEqual("Hash: foo", Token.Hash("foo").ToString());
-            Assert.AreEqual("Includes", Token.Includes().ToString());
-            Assert.AreEqual("DashMatch", Token.DashMatch().ToString());
-            Assert.AreEqual("PrefixMatch", Token.PrefixMatch().ToString());
-            Assert.AreEqual("SuffixMatch", Token.SuffixMatch().ToString());
-            Assert.AreEqual("SubstringMatch", Token.SubstringMatch().ToString());
-            Assert.AreEqual("String: foo", Token.String("foo").ToString());
-            Assert.AreEqual("Plus", Token.Plus().ToString());
-            Assert.AreEqual("Greater", Token.Greater().ToString());
-            Assert.AreEqual("WhiteSpace:  ", Token.WhiteSpace(" ").ToString());
-            Assert.AreEqual("Function: foo", Token.Function("foo").ToString());
-            Assert.AreEqual("Integer: 42", Token.Integer("42").ToString());
-            Assert.AreEqual("Tilde", Token.Tilde().ToString());
-            Assert.AreEqual("Char: *", Token.Star().ToString());
-            Assert.AreEqual("Char: .", Token.Dot().ToString());
-            Assert.AreEqual("Char: :", Token.Colon().ToString());
-            Assert.AreEqual("Char: ,", Token.Comma().ToString());
-            Assert.AreEqual("Char: =", Token.Equals().ToString());
-            Assert.AreEqual("Char: [", Token.LeftBracket().ToString());
-            Assert.AreEqual("Char: ]", Token.RightBracket().ToString());
-            Assert.AreEqual("Char: )", Token.RightParenthesis().ToString());
-            Assert.AreEqual("Char: |", Token.Pipe().ToString());
+            Assert.That(Token.Eoi().ToString(), Is.EqualTo("Eoi"));
+            Assert.That(Token.Ident("foo").ToString(), Is.EqualTo("Ident: foo"));
+            Assert.That(Token.Hash("foo").ToString(), Is.EqualTo("Hash: foo"));
+            Assert.That(Token.Includes().ToString(), Is.EqualTo("Includes"));
+            Assert.That(Token.DashMatch().ToString(), Is.EqualTo("DashMatch"));
+            Assert.That(Token.PrefixMatch().ToString(), Is.EqualTo("PrefixMatch"));
+            Assert.That(Token.SuffixMatch().ToString(), Is.EqualTo("SuffixMatch"));
+            Assert.That(Token.SubstringMatch().ToString(), Is.EqualTo("SubstringMatch"));
+            Assert.That(Token.String("foo").ToString(), Is.EqualTo("String: foo"));
+            Assert.That(Token.Plus().ToString(), Is.EqualTo("Plus"));
+            Assert.That(Token.Greater().ToString(), Is.EqualTo("Greater"));
+            Assert.That(Token.WhiteSpace(" ").ToString(), Is.EqualTo("WhiteSpace:  "));
+            Assert.That(Token.Function("foo").ToString(), Is.EqualTo("Function: foo"));
+            Assert.That(Token.Integer("42").ToString(), Is.EqualTo("Integer: 42"));
+            Assert.That(Token.Tilde().ToString(), Is.EqualTo("Tilde"));
+            Assert.That(Token.Star().ToString(), Is.EqualTo("Char: *"));
+            Assert.That(Token.Dot().ToString(), Is.EqualTo("Char: ."));
+            Assert.That(Token.Colon().ToString(), Is.EqualTo("Char: :"));
+            Assert.That(Token.Comma().ToString(), Is.EqualTo("Char: ,"));
+            Assert.That(Token.Equals().ToString(), Is.EqualTo("Char: ="));
+            Assert.That(Token.LeftBracket().ToString(), Is.EqualTo("Char: ["));
+            Assert.That(Token.RightBracket().ToString(), Is.EqualTo("Char: ]"));
+            Assert.That(Token.RightParenthesis().ToString(), Is.EqualTo("Char: )"));
+            Assert.That(Token.Pipe().ToString(), Is.EqualTo("Char: |"));
         }
     }
 }

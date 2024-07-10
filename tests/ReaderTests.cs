@@ -27,7 +27,6 @@ namespace Fizzler.Tests
     using System.Collections;
     using System.Collections.Generic;
     using NUnit.Framework;
-    using Assert = NUnit.Framework.Legacy.ClassicAssert;
 
     #endregion
 
@@ -53,13 +52,13 @@ namespace Fizzler.Tests
         [Test]
         public void HasMoreWhenEmpty()
         {
-            Assert.IsFalse(new Reader<int>(new int[0]).HasMore);
+            Assert.That(new Reader<int>(new int[0]).HasMore, Is.False);
         }
 
         [Test]
         public void HasMoreWhenNotEmpty()
         {
-            Assert.IsTrue(new Reader<int>(new int[1]).HasMore);
+            Assert.That(new Reader<int>(new int[1]).HasMore, Is.True);
         }
 
         [Test]
@@ -76,11 +75,11 @@ namespace Fizzler.Tests
             reader.Unread(56);
             reader.Unread(34);
             reader.Unread(12);
-            Assert.AreEqual(12, reader.Read());
-            Assert.AreEqual(34, reader.Read());
-            Assert.AreEqual(56, reader.Read());
-            Assert.AreEqual(78, reader.Read());
-            Assert.AreEqual(910, reader.Read());
+            Assert.That(reader.Read(), Is.EqualTo(12));
+            Assert.That(reader.Read(), Is.EqualTo(34));
+            Assert.That(reader.Read(), Is.EqualTo(56));
+            Assert.That(reader.Read(), Is.EqualTo(78));
+            Assert.That(reader.Read(), Is.EqualTo(910));
         }
 
         [Test]
@@ -94,68 +93,68 @@ namespace Fizzler.Tests
         public void PeekNonEmpty()
         {
             var reader = new Reader<int>(new[] { 12, 34, 56 });
-            Assert.AreEqual(12, reader.Peek());
-            Assert.AreEqual(12, reader.Read());
-            Assert.AreEqual(34, reader.Peek());
-            Assert.AreEqual(34, reader.Read());
-            Assert.AreEqual(56, reader.Peek());
-            Assert.AreEqual(56, reader.Read());
+            Assert.That(reader.Peek(), Is.EqualTo(12));
+            Assert.That(reader.Read(), Is.EqualTo(12));
+            Assert.That(reader.Peek(), Is.EqualTo(34));
+            Assert.That(reader.Read(), Is.EqualTo(34));
+            Assert.That(reader.Peek(), Is.EqualTo(56));
+            Assert.That(reader.Read(), Is.EqualTo(56));
         }
 
         [Test]
         public void Enumeration()
         {
             var e = new Reader<int>(new[] { 12, 34, 56 }).GetEnumerator();
-            Assert.IsTrue(e.MoveNext());
-            Assert.AreEqual(12, e.Current);
-            Assert.IsTrue(e.MoveNext());
-            Assert.AreEqual(34, e.Current);
-            Assert.IsTrue(e.MoveNext());
-            Assert.AreEqual(56, e.Current);
-            Assert.IsFalse(e.MoveNext());
+            Assert.That(e.MoveNext(), Is.True);
+            Assert.That(e.Current, Is.EqualTo(12));
+            Assert.That(e.MoveNext(), Is.True);
+            Assert.That(e.Current, Is.EqualTo(34));
+            Assert.That(e.MoveNext(), Is.True);
+            Assert.That(e.Current, Is.EqualTo(56));
+            Assert.That(e.MoveNext(), Is.False);
         }
 
         [Test]
         public void EnumerationNonGeneric()
         {
             var e = ((IEnumerable) new Reader<int>(new[] { 12, 34, 56 })).GetEnumerator();
-            Assert.IsTrue(e.MoveNext());
-            Assert.AreEqual(12, e.Current);
-            Assert.IsTrue(e.MoveNext());
-            Assert.AreEqual(34, e.Current);
-            Assert.IsTrue(e.MoveNext());
-            Assert.AreEqual(56, e.Current);
-            Assert.IsFalse(e.MoveNext());
+            Assert.That(e.MoveNext(), Is.True);
+            Assert.That(e.Current, Is.EqualTo(12));
+            Assert.That(e.MoveNext(), Is.True);
+            Assert.That(e.Current, Is.EqualTo(34));
+            Assert.That(e.MoveNext(), Is.True);
+            Assert.That(e.Current, Is.EqualTo(56));
+            Assert.That(e.MoveNext(), Is.False);
         }
 
         [Test]
         public void CloseDisposes()
         {
             var e = new TestEnumerator<object>();
-            Assert.IsFalse(e.Disposed);
+            Assert.That(e.Disposed, Is.False);
             new Reader<object>(e).Close();
-            Assert.IsTrue(e.Disposed);
+            Assert.That(e.Disposed, Is.True);
         }
 
         [Test]
         public void DisposeDisposes()
         {
             var e = new TestEnumerator<object>();
-            Assert.IsFalse(e.Disposed);
+            Assert.That(e.Disposed, Is.False);
             ((IDisposable) new Reader<object>(e)).Dispose();
-            Assert.IsTrue(e.Disposed);
+            Assert.That(e.Disposed, Is.True);
         }
 
         [Test]
         public void DisposeDisposesOnce()
         {
             var e = new TestEnumerator<object>();
-            Assert.IsFalse(e.Disposed);
+            Assert.That(e.Disposed, Is.False);
             var disposable = ((IDisposable)new Reader<object>(e));
             disposable.Dispose();
-            Assert.AreEqual(1, e.DisposeCallCount);
+            Assert.That(e.DisposeCallCount, Is.EqualTo(1));
             disposable.Dispose();
-            Assert.AreEqual(1, e.DisposeCallCount);
+            Assert.That(e.DisposeCallCount, Is.EqualTo(1));
         }
 
         [Test]
