@@ -27,6 +27,7 @@ namespace Fizzler.Tests
     using System.IO;
     using System.Linq;
     using NUnit.Framework;
+    using Assert = NUnit.Framework.Legacy.ClassicAssert;
 
     #endregion
 
