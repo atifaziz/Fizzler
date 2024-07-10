@@ -32,7 +32,7 @@ build_script:
 - ps: |-
     $id = ([datetimeoffset]$env:APPVEYOR_REPO_COMMIT_TIMESTAMP).ToUniversalTime().ToString('yyyyMMdd''t''HHmm')
     if ($isWindows) { .\pack.cmd ci-$id } else { ./pack.sh ci-$id }
-    dotnet sourcelink test "$(dir dist\*.nupkg)"
+    dotnet sourcelink test "$(dir dist\*.symbols.nupkg)"
 test_script:
 - cmd: test.cmd
 - sh: ./test.sh
