@@ -25,7 +25,6 @@ namespace Fizzler
 
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
 
     #endregion
 
@@ -53,21 +52,15 @@ namespace Fizzler
         /// the <see cref="Dictionary{TKey,TValue}"/> implementation with an
         /// ordinally case-insensitive selectors text comparer.
         /// </remarks>
-        public static Func<string, T> Create<T>(Func<string, T> compiler, IDictionary<string, T> cache)
+        public static Func<string, T> Create<T>(Func<string, T> compiler, IDictionary<string, T>? cache)
         {
             if(compiler == null) throw new ArgumentNullException(nameof(compiler));
             return CreateImpl(compiler, cache ?? new Dictionary<string, T>(StringComparer.OrdinalIgnoreCase));
         }
 
-        static Func<string, T> CreateImpl<T>(Func<string, T> compiler, IDictionary<string, T> cache)
-        {
-            Debug.Assert(compiler != null);
-            Debug.Assert(cache != null);
-
-            return selector =>
-                cache.TryGetValue(selector, out var compiled)
-                ? compiled
-                : cache[selector] = compiler(selector);
-        }
+        static Func<string, T> CreateImpl<T>(Func<string, T> compiler, IDictionary<string, T> cache) =>
+            selector => cache.TryGetValue(selector, out var compiled)
+                      ? compiled
+                      : cache[selector] = compiler(selector);
     }
 }

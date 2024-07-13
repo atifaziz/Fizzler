@@ -39,8 +39,7 @@ namespace Fizzler.Tests
         public void Null_Selector()
         {
             var generator = new TestHumanReadableSelectorGenerator();
-            var e = Assert.Throws<ArgumentNullException>(() => generator.Add(null));
-            Assert.That(e.ParamName, Is.EqualTo("selector"));
+            Assert.That(() => generator.Add(null!), Throws.ArgumentNullException("selector"));
         }
 
         [Test]

@@ -319,8 +319,8 @@ namespace Fizzler.Tests
         static void Test<T1>(string input, Func<TestSelectorGenerator, T1> actual1, T1 expected1)
         {
             Test(input,
-                new Func<TestSelectorGenerator, object>[] { g => actual1(g) },
-                new object[] { expected1 });
+                new Func<TestSelectorGenerator, object?>[] { g => actual1(g) },
+                new object?[] { expected1 });
         }
 
         static void Test<T1, T2>(string input,
@@ -328,8 +328,8 @@ namespace Fizzler.Tests
             Func<TestSelectorGenerator, T2> actual2, T2 expected2)
         {
             Test(input,
-                new Func<TestSelectorGenerator, object>[] {g => actual1(g), g => actual2(g)},
-                new object[] {expected1, expected2});
+                new Func<TestSelectorGenerator, object?>[] {g => actual1(g), g => actual2(g)},
+                new object?[] {expected1, expected2});
         }
 
         static void Test<T1, T2, T3>(string input,
@@ -338,13 +338,13 @@ namespace Fizzler.Tests
             Func<TestSelectorGenerator, T3> actual3, T2 expected3)
         {
             Test(input,
-                new Func<TestSelectorGenerator, object>[] { g => actual1(g), g => actual2(g), g => actual3(g) },
-                new object[] { expected1, expected2, expected3 });
+                new Func<TestSelectorGenerator, object?>[] { g => actual1(g), g => actual2(g), g => actual3(g) },
+                new object?[] { expected1, expected2, expected3 });
         }
 
         static void Test(string input,
-            IEnumerable<Func<TestSelectorGenerator, object>> actuals,
-            IEnumerable<object> expectations)
+            IEnumerable<Func<TestSelectorGenerator, object?>> actuals,
+            IEnumerable<object?> expectations)
         {
             var generator = new TestSelectorGenerator();
             Parser.Parse(Tokener.Tokenize(input), generator);
@@ -363,30 +363,30 @@ namespace Fizzler.Tests
         public class TestSelectorGenerator : ISelectorGenerator
         {
             public NamespacePrefix TypePrefix;
-            public string TypeName;
+            public string? TypeName;
 
             public NamespacePrefix UniversalPrefix;
 
             public NamespacePrefix AttributeExistsPrefix;
-            public string AttributeExistsName;
+            public string? AttributeExistsName;
             public NamespacePrefix AttributeExactPrefix;
-            public string AttributeExactName;
-            public string AttributeExactValue;
+            public string? AttributeExactName;
+            public string? AttributeExactValue;
             public NamespacePrefix AttributeIncludesPrefix;
-            public string AttributeIncludesName;
-            public string AttributeIncludesValue;
+            public string? AttributeIncludesName;
+            public string? AttributeIncludesValue;
             public NamespacePrefix AttributeDashMatchPrefix;
-            public string AttributeDashMatchName;
-            public string AttributeDashMatchValue;
+            public string? AttributeDashMatchName;
+            public string? AttributeDashMatchValue;
             public NamespacePrefix AttributePrefixMatchPrefix;
-            public string AttributePrefixMatchName;
-            public string AttributePrefixMatchValue;
+            public string? AttributePrefixMatchName;
+            public string? AttributePrefixMatchValue;
             public NamespacePrefix AttributeSuffixMatchPrefix;
-            public string AttributeSuffixMatchName;
-            public string AttributeSuffixMatchValue;
+            public string? AttributeSuffixMatchName;
+            public string? AttributeSuffixMatchValue;
             public NamespacePrefix AttributeSubstringPrefix;
-            public string AttributeSubstringName;
-            public string AttributeSubstringValue;
+            public string? AttributeSubstringName;
+            public string? AttributeSubstringValue;
 
             public void Type(NamespacePrefix prefix, string name)
             {

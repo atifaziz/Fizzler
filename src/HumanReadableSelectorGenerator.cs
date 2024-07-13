@@ -39,7 +39,7 @@ namespace Fizzler
         /// <summary>
         /// Gets the generated human-readable description text.
         /// </summary>
-        public string Text { get; private set; }
+        public string? Text { get; private set; }
 
         /// <summary>
         /// Generates human-readable for a selector in a group.
@@ -57,8 +57,10 @@ namespace Fizzler
         /// </summary>
         public virtual void OnClose()
         {
-            Text = Text.Trim();
-            Text += " and select them.";
+            if (Text is not { } text)
+                throw new InvalidOperationException();
+
+            Text = $"{text.Trim()} and select them.";
         }
 
         /// <summary>

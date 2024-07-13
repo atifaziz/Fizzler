@@ -36,17 +36,15 @@ namespace Fizzler.Tests
         [Test]
         public void NullEnumeratorInitialization()
         {
-            var e = Assert.Throws<ArgumentNullException>(() =>
-                new Reader<int>((IEnumerator<int>)null));
-            Assert.That(e.ParamName, Is.EqualTo("e"));
+            Assert.That(() => new Reader<int>((IEnumerator<int>)null!),
+                        Throws.ArgumentNullException("e"));
         }
 
         [Test]
         public void NullEnumerableInitialization()
         {
-            var e = Assert.Throws<ArgumentNullException>(() =>
-                new Reader<int>((IEnumerable<int>)null));
-            Assert.That(e.ParamName, Is.EqualTo("e"));
+            Assert.That(() => new Reader<int>((IEnumerable<int>)null!),
+                        Throws.ArgumentNullException("e"));
         }
 
         [Test]
@@ -160,43 +158,36 @@ namespace Fizzler.Tests
         [Test]
         public void HasMoreDisposed()
         {
-            var e = Assert.Throws<ObjectDisposedException>(() =>
-            {
-                var unused = CreateDisposedReader<int>().HasMore;
-            });
-            Assert.That(e.ObjectName, Is.EqualTo(typeof(Reader<>).Name));
+            Assert.That(() => _ = CreateDisposedReader<int>().HasMore,
+                        Throws.ObjectDisposedException(typeof(Reader<>).Name));
         }
 
         [Test]
         public void ReadDisposed()
         {
-            var e = Assert.Throws<ObjectDisposedException>(() =>
-                CreateDisposedReader<int>().Read());
-            Assert.That(e.ObjectName, Is.EqualTo(typeof(Reader<>).Name));
+            Assert.That(() => _ = CreateDisposedReader<int>().Read(),
+                        Throws.ObjectDisposedException(typeof(Reader<>).Name));
         }
 
         [Test]
         public void UnreadDisposed()
         {
-            var e = Assert.Throws<ObjectDisposedException>(() =>
-                CreateDisposedReader<int>().Unread(42));
-            Assert.That(e.ObjectName, Is.EqualTo(typeof(Reader<>).Name));
+            Assert.That(() => CreateDisposedReader<int>().Unread(42),
+                        Throws.ObjectDisposedException(typeof(Reader<>).Name));
         }
 
         [Test]
         public void PeekDisposed()
         {
-            var e = Assert.Throws<ObjectDisposedException>(() =>
-                CreateDisposedReader<int>().Peek());
-            Assert.That(e.ObjectName, Is.EqualTo(typeof(Reader<>).Name));
+            Assert.That(() => CreateDisposedReader<int>().Peek(),
+                        Throws.ObjectDisposedException(typeof(Reader<>).Name));
         }
 
         [Test]
         public void EnumerateDisposed()
         {
-            var e = Assert.Throws<ObjectDisposedException>(() =>
-                CreateDisposedReader<int>().GetEnumerator());
-            Assert.That(e.ObjectName, Is.EqualTo(typeof(Reader<>).Name));
+            Assert.That(() => CreateDisposedReader<int>().GetEnumerator(),
+                        Throws.ObjectDisposedException(typeof(Reader<>).Name));
         }
 
         static Reader<T> CreateDisposedReader<T>()
@@ -215,7 +206,7 @@ namespace Fizzler.Tests
             public bool MoveNext() => false;
             public void Reset() => throw new NotImplementedException();
             public T Current => throw new NotImplementedException();
-            object IEnumerator.Current => Current;
+            object? IEnumerator.Current => Current;
         }
     }
 }

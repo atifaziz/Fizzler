@@ -35,15 +35,15 @@ namespace Fizzler
     /// </summary>
     public sealed class Reader<T> : IDisposable, IEnumerable<T>
     {
-        IEnumerator<T> _enumerator;
-        Stack<T> _buffer;
+        IEnumerator<T>? _enumerator;
+        Stack<T>? _buffer;
 
         /// <summary>
         /// Initialize a new <see cref="Reader{T}"/> with a base
         /// <see cref="IEnumerable{T}"/> object.
         /// </summary>
         public Reader(IEnumerable<T> e) :
-            this(e?.GetEnumerator()) { }
+            this(e is { } some ? some.GetEnumerator() : throw new ArgumentNullException(nameof(e))) { }
 
         /// <summary>
         /// Initialize a new <see cref="Reader{T}"/> with a base
@@ -56,25 +56,26 @@ namespace Fizzler
             RealRead();
         }
 
+        ObjectDisposedException ObjectDisposedException() => new(GetType().Name);
+
+        Stack<T> Buffer => _buffer ?? throw ObjectDisposedException();
+        IEnumerator<T> Enumerator => _enumerator ?? throw ObjectDisposedException();
+
         /// <summary>
         /// Indicates whether there is, at least, one value waiting to be read or not.
         /// </summary>
-        public bool HasMore
-        {
-            get
-            {
-                EnsureAlive();
-                return _buffer.Count > 0;
-            }
-        }
+        public bool HasMore => _buffer is { Count: var count }
+                             ? count > 0
+                             : throw ObjectDisposedException();
 
         /// <summary>
         /// Pushes back a new value that will be returned on the next read.
         /// </summary>
         public void Unread(T value)
         {
-            EnsureAlive();
-            _buffer.Push(value);
+            if (_buffer is not { } buffer)
+                throw ObjectDisposedException();
+            buffer.Push(value);
         }
 
         /// <summary>
@@ -82,15 +83,18 @@ namespace Fizzler
         /// </summary>
         public T Read()
         {
-            if (!HasMore)
-                throw new InvalidOperationException();
-
-            var value = _buffer.Pop();
-
-            if (_buffer.Count == 0)
-                RealRead();
-
-            return value;
+            switch (_buffer)
+            {
+                case null:
+                    throw ObjectDisposedException();
+                case { Count: 0 }:
+                    throw new InvalidOperationException();
+                case var buffer:
+                    var value = buffer.Pop();
+                    if (buffer.Count == 0)
+                        RealRead();
+                    return value;
+            }
         }
 
         /// <summary>
@@ -99,13 +103,12 @@ namespace Fizzler
         /// <exception cref="InvalidOperationException">
         /// Thrown if there is no value waiting to be read.
         /// </exception>
-        public T Peek()
+        public T Peek() => _buffer switch
         {
-            if (!HasMore)
-                throw new InvalidOperationException();
-
-            return _buffer.Peek();
-        }
+            null => throw ObjectDisposedException(),
+            { Count: 0 } => throw new InvalidOperationException(),
+            var buffer => buffer.Peek()
+        };
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
@@ -115,22 +118,22 @@ namespace Fizzler
         /// </summary>
         public IEnumerator<T> GetEnumerator()
         {
-            EnsureAlive();
-            return GetEnumeratorImpl();
-        }
+            return _enumerator is not null ? Iterator(this) : throw ObjectDisposedException();
 
-        IEnumerator<T> GetEnumeratorImpl()
-        {
-            while (HasMore)
-                yield return Read();
+            static IEnumerator<T> Iterator(Reader<T> reader)
+            {
+                while (reader.HasMore)
+                    yield return reader.Read();
+            }
         }
 
         void RealRead()
         {
-            EnsureAlive();
+            if (_enumerator is not { } enumerator)
+                throw ObjectDisposedException();
 
-            if (_enumerator.MoveNext())
-                Unread(_enumerator.Current);
+            if (enumerator.MoveNext())
+                Unread(enumerator.Current);
         }
 
         /// <summary>
@@ -148,12 +151,6 @@ namespace Fizzler
             _enumerator.Dispose();
             _enumerator = null;
             _buffer = null;
-        }
-
-        void EnsureAlive()
-        {
-            if (_enumerator == null)
-                throw new ObjectDisposedException(GetType().Name);
         }
     }
 }
