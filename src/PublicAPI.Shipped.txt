@@ -20,7 +20,7 @@ Fizzler.HumanReadableSelectorGenerator.LastChild() -> void
 Fizzler.HumanReadableSelectorGenerator.NthChild(int a, int b) -> void
 Fizzler.HumanReadableSelectorGenerator.NthLastChild(int a, int b) -> void
 Fizzler.HumanReadableSelectorGenerator.OnlyChild() -> void
-Fizzler.HumanReadableSelectorGenerator.Text.get -> string?
+Fizzler.HumanReadableSelectorGenerator.Text.get -> string!
 Fizzler.HumanReadableSelectorGenerator.Type(Fizzler.NamespacePrefix prefix, string! type) -> void
 Fizzler.HumanReadableSelectorGenerator.Universal(Fizzler.NamespacePrefix prefix) -> void
 Fizzler.IElementOps<TElement>

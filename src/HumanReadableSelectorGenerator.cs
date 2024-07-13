@@ -30,26 +30,27 @@ namespace Fizzler
     public class HumanReadableSelectorGenerator : ISelectorGenerator
     {
         int _chainCount;
+        string? _text;
 
         /// <summary>
         /// Initializes the text.
         /// </summary>
-        public virtual void OnInit() => Text = null;
+        public virtual void OnInit() => _text = null;
 
         /// <summary>
         /// Gets the generated human-readable description text.
         /// </summary>
-        public string? Text { get; private set; }
+        public string Text => _text ?? throw new InvalidOperationException();
 
         /// <summary>
         /// Generates human-readable for a selector in a group.
         /// </summary>
         public virtual void OnSelector()
         {
-            if (string.IsNullOrEmpty(Text))
-                Text = "Take all";
+            if (string.IsNullOrEmpty(_text))
+                _text = "Take all";
             else
-                Text += " and select them. Combined with previous, take all";
+                _text += " and select them. Combined with previous, take all";
         }
 
         /// <summary>
@@ -57,17 +58,17 @@ namespace Fizzler
         /// </summary>
         public virtual void OnClose()
         {
-            if (Text is not { } text)
+            if (_text is not { } text)
                 throw new InvalidOperationException();
 
-            Text = $"{text.Trim()} and select them.";
+            _text = $"{text.Trim()} and select them.";
         }
 
         /// <summary>
         /// Adds to the generated human-readable text.
         /// </summary>
         protected void Add(string selector) =>
-            Text += selector ?? throw new ArgumentNullException(nameof(selector));
+            _text += selector ?? throw new ArgumentNullException(nameof(selector));
 
         /// <summary>
         /// Generates human-readable text of this type selector.
