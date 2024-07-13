@@ -50,12 +50,12 @@ namespace Fizzler
         /// <summary>
         /// Initializes an instance with a namespace prefix specification.
         /// </summary>
-        public NamespacePrefix(string text) : this() => Text = text;
+        public NamespacePrefix(string? text) : this() => Text = text;
 
         /// <summary>
         /// Gets the raw text value of this instance.
         /// </summary>
-        public string Text { get; }
+        public string? Text { get; }
 
         /// <summary>
         /// Indicates whether this instance represents a name
@@ -63,20 +63,20 @@ namespace Fizzler
         /// document, depending on whether a default namespace is
         /// in effect or not.
         /// </summary>
-        public bool IsNone => Text == null;
+        public bool IsNone => Text is null;
 
         /// <summary>
         /// Indicates whether this instance represents a name
         /// from any namespace (including one without one)
         /// in a target document.
         /// </summary>
-        public bool IsAny => !IsNone && Text.Length == 1 && Text[0] == '*';
+        public bool IsAny => Text is ['*'];
 
         /// <summary>
         /// Indicates whether this instance represents a name
         /// without a namespace in a target document.
         /// </summary>
-        public bool IsEmpty => !IsNone && Text.Length == 0;
+        public bool IsEmpty => Text is { Length: 0 };
 
         /// <summary>
         /// Indicates whether this instance represents a name from a
@@ -87,7 +87,7 @@ namespace Fizzler
         /// <summary>
         /// Indicates whether this instance and a specified object are equal.
         /// </summary>
-        public override bool Equals(object obj) =>
+        public override bool Equals(object? obj) =>
             obj is NamespacePrefix prefix && Equals(prefix);
 
         /// <summary>
@@ -98,12 +98,12 @@ namespace Fizzler
         /// <summary>
         /// Returns the hash code for this instance.
         /// </summary>
-        public override int GetHashCode() => IsNone ? 0 : Text.GetHashCode();
+        public override int GetHashCode() => Text?.GetHashCode() ?? 0;
 
         /// <summary>
         /// Returns a string representation of this instance.
         /// </summary>
-        public override string ToString() => IsNone ? "(none)" : Text;
+        public override string ToString() => Text ?? "(none)";
 
         /// <summary>
         /// Formats this namespace together with a name.

@@ -38,9 +38,11 @@ namespace Fizzler.Tests
     [TestFixture]
     public class SelectorGeneratorTeeTests
     {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable. (Assigned during setup)
         static SelectorGeneratorTee _tee;
         static FakeSelectorGenerator _primary;
         static FakeSelectorGenerator _secondary;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
         [SetUp]
         public void Setup()
@@ -53,17 +55,15 @@ namespace Fizzler.Tests
         [Test]
         public void NullPrimary()
         {
-            var e = Assert.Throws<ArgumentNullException>(() =>
-                new SelectorGeneratorTee(null, new FakeSelectorGenerator()));
-            Assert.That(e.ParamName, Is.EqualTo("primary"));
+            Assert.That(() => new SelectorGeneratorTee(null!, new FakeSelectorGenerator()),
+                        Throws.ArgumentNullException("primary"));
         }
 
         [Test]
         public void NullSecondary()
         {
-            var e = Assert.Throws<ArgumentNullException>(() =>
-                new SelectorGeneratorTee(new FakeSelectorGenerator(), null));
-            Assert.That(e.ParamName, Is.EqualTo("secondary"));
+            Assert.That(() => new SelectorGeneratorTee(new FakeSelectorGenerator(), null!),
+                        Throws.ArgumentNullException("secondary"));
         }
 
         [Test]
@@ -228,7 +228,7 @@ namespace Fizzler.Tests
         /// Take the passed action, run it, and then check that the last method
         /// and last args are the same for pri and sec.
         /// </summary>
-        static void RunImpl(MethodBase action, params object[] args)
+        static void RunImpl(MethodBase action, params object?[] args)
         {
             var recordings = new Queue<CallRecording<ISelectorGenerator>>(2);
             _primary.Recorder = recordings.Enqueue;
@@ -252,7 +252,8 @@ namespace Fizzler.Tests
 
         static MethodInfo MapMethod<T>(MethodInfo method) where T : class
         {
-            var mapping = method.ReflectedType.GetInterfaceMap(typeof(T));
+            var type = method.ReflectedType ?? throw new NullReferenceException();
+            var mapping = type.GetInterfaceMap(typeof(T));
             return mapping.InterfaceMethods
                           .Select((m, i) => new { Source = m, Target = mapping.TargetMethods[i] })
                           .Single(m => m.Target == method).Source;
@@ -274,7 +275,7 @@ namespace Fizzler.Tests
 
         sealed class FakeSelectorGenerator : ISelectorGenerator
         {
-            public Action<CallRecording<ISelectorGenerator>> Recorder;
+            public Action<CallRecording<ISelectorGenerator>>? Recorder;
 
             public void OnInit() =>
                 OnInvoked(MethodBase.GetCurrentMethod());
@@ -348,8 +349,15 @@ namespace Fizzler.Tests
             public void NthLastChild(int a, int b) =>
                 OnInvoked(MethodBase.GetCurrentMethod(), a, b);
 
-            void OnInvoked(MethodBase method, params object[] args) =>
-                Recorder(new CallRecording<ISelectorGenerator>(this, (MethodInfo) method, args));
+            void OnInvoked(MethodBase? method, params object[] args)
+            {
+                switch (method)
+                {
+                    case null: throw new ArgumentNullException(nameof(method));
+                    case MethodInfo info: Recorder?.Invoke(new CallRecording<ISelectorGenerator>(this, info, args)); break;
+                    default: throw new ArgumentException(null, nameof(method));
+                }
+            }
         }
     }
 }

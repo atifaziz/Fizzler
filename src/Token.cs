@@ -36,9 +36,11 @@ namespace Fizzler
         /// <summary>
         /// Gets text, if any, associated with the token.
         /// </summary>
-        public string Text { get; }
+        public string? Text { get; }
 
-        Token(TokenKind kind, string text = null) : this()
+        internal string SomeText => Text ?? throw new InvalidOperationException();
+
+        Token(TokenKind kind, string? text = null) : this()
         {
             Kind = kind;
             Text = text;
@@ -184,7 +186,7 @@ namespace Fizzler
         /// <summary>
         /// Creates a string token.
         /// </summary>
-        public static Token String(string text) =>
+        public static Token String(string? text) =>
             new Token(TokenKind.String, text ?? string.Empty);
 
         /// <summary>
@@ -210,14 +212,14 @@ namespace Fizzler
         /// <summary>
         /// Indicates whether this instance and a specified object are equal.
         /// </summary>
-        public override bool Equals(object obj) =>
+        public override bool Equals(object? obj) =>
             obj is Token token && Equals(token);
 
         /// <summary>
         /// Returns the hash code for this instance.
         /// </summary>
         public override int GetHashCode() =>
-            Text == null ? Kind.GetHashCode() : Kind.GetHashCode() ^ Text.GetHashCode();
+            Text is { } text ? Kind.GetHashCode() ^ text.GetHashCode() : Kind.GetHashCode();
 
         /// <summary>
         /// Indicates whether the current object is equal to another object of the same type.
@@ -229,7 +231,7 @@ namespace Fizzler
         /// Gets a string representation of the token.
         /// </summary>
         public override string ToString() =>
-            Text == null ? Kind.ToString() : Kind + ": " + Text;
+            Text is { } text ? Kind + ": " + text : Kind.ToString();
 
         /// <summary>
         /// Performs a logical comparison of the two tokens to determine

@@ -40,7 +40,7 @@ namespace Fizzler
         public static Either<TA, TB> A(TA value) => new AImpl(value);
         public static Either<TA, TB> B(TB value) => new BImpl(value);
 
-        public abstract override bool Equals(object obj);
+        public abstract override bool Equals(object? obj);
         public abstract bool Equals(Either<TA, TB> obj);
         public abstract override int GetHashCode();
         public abstract override string ToString();
@@ -56,9 +56,9 @@ namespace Fizzler
             public override int GetHashCode() =>
                 EqualityComparer<TA>.Default.GetHashCode(_value);
 
-            public override bool Equals(object obj) => Equals(obj as AImpl);
+            public override bool Equals(object? obj) => Equals(obj as AImpl);
 
-            public override bool Equals(Either<TA, TB> obj) =>
+            public override bool Equals(Either<TA, TB>? obj) =>
                 obj is AImpl a
                 && EqualityComparer<TA>.Default.Equals(_value, a._value);
 
@@ -89,9 +89,9 @@ namespace Fizzler
             public override int GetHashCode() =>
                 EqualityComparer<TB>.Default.GetHashCode(_value);
 
-            public override bool Equals(object obj) => Equals(obj as BImpl);
+            public override bool Equals(object? obj) => Equals(obj as BImpl);
 
-            public override bool Equals(Either<TA, TB> obj) =>
+            public override bool Equals(Either<TA, TB>? obj) =>
                 obj is BImpl b
                 && EqualityComparer<TB>.Default.Equals(_value, b._value);
 

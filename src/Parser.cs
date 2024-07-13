@@ -25,7 +25,6 @@ namespace Fizzler
 
     using System;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.Globalization;
     using System.Linq;
 
@@ -43,8 +42,6 @@ namespace Fizzler
 
         Parser(Reader<Token> reader, ISelectorGenerator generator)
         {
-            Debug.Assert(reader != null);
-            Debug.Assert(generator != null);
             _reader = reader;
             _generator = generator;
         }
@@ -201,46 +198,44 @@ namespace Fizzler
             var named = false;
             for (var modifiers = 0; ; modifiers++)
             {
-                var token = TryRead(TokenSpecs.Hash_Dot_LeftBracket_Colon_Not);
-
-                if (token == null)
-                {
-                    if (named || modifiers > 0)
-                        break;
-                    TypeSelectorOrUniversal();
-                    named = true;
-                }
-                else
+                if (TryRead(TokenSpecs.Hash_Dot_LeftBracket_Colon_Not) is { } token)
                 {
                     if (modifiers == 0 && !named)
                         _generator.Universal(NamespacePrefix.None); // implied
 
-                    switch (token.Value.Kind)
+                    switch (token.Kind)
                     {
                         case TokenKind.Not:
                         {
-                            Unread(token.Value);
+                            Unread(token);
                             Negation();
                             break;
                         }
                         case TokenKind.Hash:
                         {
-                            _generator.Id(token.Value.Text);
+                            _generator.Id(token.SomeText);
                             break;
                         }
                         default:
                         {
-                            Unread(token.Value);
-                            switch (token.Value.Text[0])
+                            Unread(token);
+                            switch (token.Text)
                             {
-                                case '.': Class(); break;
-                                case '[': Attrib(); break;
-                                case ':': Pseudo(); break;
+                                case ['.']: Class(); break;
+                                case ['[']: Attrib(); break;
+                                case [':']: Pseudo(); break;
                                 default: throw new Exception("Internal error.");
                             }
                             break;
                         }
                     }
+                }
+                else
+                {
+                    if (named || modifiers > 0)
+                        break;
+                    TypeSelectorOrUniversal();
+                    named = true;
                 }
             }
         }
@@ -263,31 +258,29 @@ namespace Fizzler
             //  : type_selector | universal | HASH | class | attrib | pseudo
             //  ;
 
-            var token = TryRead(TokenSpecs.Hash_Dot_LeftBracket_Colon);
-
-            if (token == null)
-            {
-                TypeSelectorOrUniversal();
-            }
-            else
+            if (TryRead(TokenSpecs.Hash_Dot_LeftBracket_Colon) is { } token)
             {
                 _generator.Universal(NamespacePrefix.None); // implied
 
-                if (token.Value.Kind == TokenKind.Hash)
+                if (token.Kind == TokenKind.Hash)
                 {
-                    _generator.Id(token.Value.Text);
+                    _generator.Id(token.SomeText);
                 }
                 else
                 {
-                    Unread(token.Value);
-                    switch (token.Value.Text[0])
+                    Unread(token);
+                    switch (token.Text)
                     {
-                        case '.': Class(); break;
-                        case '[': Attrib(); break;
-                        case ':': Pseudo(); break;
+                        case ['.']: Class(); break;
+                        case ['[']: Attrib(); break;
+                        case [':']: Pseudo(); break;
                         default: throw new Exception("Internal error.");
                     }
                 }
+            }
+            else
+            {
+                TypeSelectorOrUniversal();
             }
 
             TryRead(ToTokenSpec(TokenKind.WhiteSpace));
@@ -429,33 +422,35 @@ namespace Fizzler
 
             Read(ToTokenSpec(Token.LeftBracket()));
             var prefix = TryNamespacePrefix() ?? NamespacePrefix.None;
-            var name = Read(ToTokenSpec(TokenKind.Ident)).Text;
+            var name = Read(ToTokenSpec(TokenKind.Ident)).SomeText;
 
             var hasValue = false;
             while (true)
             {
-                var op = TryRead(TokenSpecs.Equals_Includes_DashMatch_PrefixMatch_SuffixMatch_SubstringMatch);
-
-                if (op == null)
-                    break;
-
-                hasValue = true;
-                var value = Read(TokenSpecs.String_Ident).Text;
-
-                if (op.Value == Token.Equals())
+                if (TryRead(TokenSpecs.Equals_Includes_DashMatch_PrefixMatch_SuffixMatch_SubstringMatch) is { } op)
                 {
-                    _generator.AttributeExact(prefix, name, value);
+                    hasValue = true;
+                    var value = Read(TokenSpecs.String_Ident).SomeText;
+
+                    if (op == Token.Equals())
+                    {
+                        _generator.AttributeExact(prefix, name, value);
+                    }
+                    else
+                    {
+                        switch (op.Kind)
+                        {
+                            case TokenKind.Includes: _generator.AttributeIncludes(prefix, name, value); break;
+                            case TokenKind.DashMatch: _generator.AttributeDashMatch(prefix, name, value); break;
+                            case TokenKind.PrefixMatch: _generator.AttributePrefixMatch(prefix, name, value); break;
+                            case TokenKind.SuffixMatch: _generator.AttributeSuffixMatch(prefix, name, value); break;
+                            case TokenKind.SubstringMatch: _generator.AttributeSubstring(prefix, name, value); break;
+                        }
+                    }
                 }
                 else
                 {
-                    switch (op.Value.Kind)
-                    {
-                        case TokenKind.Includes: _generator.AttributeIncludes(prefix, name, value); break;
-                        case TokenKind.DashMatch: _generator.AttributeDashMatch(prefix, name, value); break;
-                        case TokenKind.PrefixMatch: _generator.AttributePrefixMatch(prefix, name, value); break;
-                        case TokenKind.SuffixMatch: _generator.AttributeSuffixMatch(prefix, name, value); break;
-                        case TokenKind.SubstringMatch: _generator.AttributeSubstring(prefix, name, value); break;
-                    }
+                    break;
                 }
             }
 
@@ -472,7 +467,7 @@ namespace Fizzler
             //  ;
 
             Read(ToTokenSpec(Token.Dot()));
-            _generator.Class(Read(ToTokenSpec(TokenKind.Ident)).Text);
+            _generator.Class(Read(ToTokenSpec(TokenKind.Ident)).SomeText);
         }
 
         partial class TokenSpecs // ReSharper disable once InconsistentNaming
@@ -536,7 +531,7 @@ namespace Fizzler
             var prefix = TryNamespacePrefix() ?? NamespacePrefix.None;
             var token = Read(TokenSpecs.Ident_Star);
             if (token.Kind == TokenKind.Ident)
-                _generator.Type(prefix, token.Text);
+                _generator.Type(prefix, token.SomeText);
             else
                 _generator.Universal(prefix);
         }
