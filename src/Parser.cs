@@ -143,18 +143,16 @@ namespace Fizzler
             //  : PLUS S* | GREATER S* | TILDE S* | S+
             //  ;
 
-            var token = TryRead(TokenSpecs.Plus_Greater_Tilde_WhiteSpace);
-
-            if (token == null)
+            if (TryRead(TokenSpecs.Plus_Greater_Tilde_WhiteSpace) is not { } token)
                 return false;
 
-            if (token.Value.Kind == TokenKind.WhiteSpace)
+            if (token.Kind == TokenKind.WhiteSpace)
             {
                 _generator.Descendant();
             }
             else
             {
-                switch (token.Value.Kind)
+                switch (token.Kind)
                 {
                     case TokenKind.Tilde: _generator.GeneralSibling(); break;
                     case TokenKind.Greater: _generator.Child(); break;
@@ -333,18 +331,16 @@ namespace Fizzler
             //  : FUNCTION S* expression ')'
             //  ;
 
-            var token = TryRead(ToTokenSpec(TokenKind.Function));
-            if (token == null)
+            if (TryRead(ToTokenSpec(TokenKind.Function)) is not { } token)
                 return false;
 
             TryRead(ToTokenSpec(TokenKind.WhiteSpace));
 
-            var func = token.Value.Text;
-            switch (func)
+            switch (token.Text)
             {
                 case "nth-child": Nth(); break;
                 case "nth-last-child": NthLast(); break;
-                default:
+                case var func:
                     {
                         throw new FormatException(string.Format(
                             "Unknown functional pseudo '{0}'. Only nth-child and nth-last-child are supported.", func));
@@ -487,15 +483,13 @@ namespace Fizzler
             //  ;
 
             var pipe = Token.Pipe();
-            var token = TryRead(TokenSpecs.Ident_Star_Pipe);
-
-            if (token == null)
+            if (TryRead(TokenSpecs.Ident_Star_Pipe) is not { } token)
                 return null;
 
-            if (token.Value == pipe)
+            if (token == pipe)
                 return NamespacePrefix.Empty;
 
-            var prefix = token.Value;
+            var prefix = token;
             if (TryRead(ToTokenSpec(pipe)) == null)
             {
                 Unread(prefix);
