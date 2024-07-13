@@ -204,6 +204,11 @@ namespace Fizzler
         void NthLastChild(int a, int b);
     }
 
+    /// <summary>
+    /// Represent an implementation that is responsible for generating
+    /// an implementation for a selector and supports the
+    /// <a href="https://www.w3.org/TR/selectors-3/#negation">negation pseudo-class selector</a>.
+    /// </summary>
     public interface INegationSelectorGenerator : ISelectorGenerator
     {
         /// <summary>
