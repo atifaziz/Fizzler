@@ -23,7 +23,6 @@ namespace Fizzler.Tests
 {
     #region Imports
 
-    using System;
     using NUnit.Framework;
 
     #endregion
