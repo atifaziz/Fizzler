@@ -58,9 +58,6 @@ namespace Fizzler
 
         ObjectDisposedException ObjectDisposedException() => new(GetType().Name);
 
-        Stack<T> Buffer => _buffer ?? throw ObjectDisposedException();
-        IEnumerator<T> Enumerator => _enumerator ?? throw ObjectDisposedException();
-
         /// <summary>
         /// Indicates whether there is, at least, one value waiting to be read or not.
         /// </summary>
