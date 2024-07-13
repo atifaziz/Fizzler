@@ -301,7 +301,7 @@ namespace Fizzler
         /// </summary>
         public void BeginNegation()
         {
-            _negationSourceSelector = Selector ?? throw new InvalidOperationException();
+            _negationSourceSelector = Selector;
             _selector = null;
         }
 
