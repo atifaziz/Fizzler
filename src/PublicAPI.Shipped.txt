@@ -1,0 +1,232 @@
+#nullable enable
+Fizzler.HumanReadableSelectorGenerator
+Fizzler.HumanReadableSelectorGenerator.Add(string! selector) -> void
+Fizzler.HumanReadableSelectorGenerator.Adjacent() -> void
+Fizzler.HumanReadableSelectorGenerator.AttributeDashMatch(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.HumanReadableSelectorGenerator.AttributeExact(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.HumanReadableSelectorGenerator.AttributeExists(Fizzler.NamespacePrefix prefix, string! name) -> void
+Fizzler.HumanReadableSelectorGenerator.AttributeIncludes(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.HumanReadableSelectorGenerator.AttributePrefixMatch(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.HumanReadableSelectorGenerator.AttributeSubstring(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.HumanReadableSelectorGenerator.AttributeSuffixMatch(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.HumanReadableSelectorGenerator.Child() -> void
+Fizzler.HumanReadableSelectorGenerator.Descendant() -> void
+Fizzler.HumanReadableSelectorGenerator.Empty() -> void
+Fizzler.HumanReadableSelectorGenerator.FirstChild() -> void
+Fizzler.HumanReadableSelectorGenerator.GeneralSibling() -> void
+Fizzler.HumanReadableSelectorGenerator.HumanReadableSelectorGenerator() -> void
+Fizzler.HumanReadableSelectorGenerator.Id(string! id) -> void
+Fizzler.HumanReadableSelectorGenerator.LastChild() -> void
+Fizzler.HumanReadableSelectorGenerator.NthChild(int a, int b) -> void
+Fizzler.HumanReadableSelectorGenerator.NthLastChild(int a, int b) -> void
+Fizzler.HumanReadableSelectorGenerator.OnlyChild() -> void
+Fizzler.HumanReadableSelectorGenerator.Text.get -> string?
+Fizzler.HumanReadableSelectorGenerator.Type(Fizzler.NamespacePrefix prefix, string! type) -> void
+Fizzler.HumanReadableSelectorGenerator.Universal(Fizzler.NamespacePrefix prefix) -> void
+Fizzler.IElementOps<TElement>
+Fizzler.IElementOps<TElement>.Adjacent() -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.AttributeDashMatch(Fizzler.NamespacePrefix prefix, string! name, string! value) -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.AttributeExact(Fizzler.NamespacePrefix prefix, string! name, string! value) -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.AttributeExists(Fizzler.NamespacePrefix prefix, string! name) -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.AttributeIncludes(Fizzler.NamespacePrefix prefix, string! name, string! value) -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.AttributePrefixMatch(Fizzler.NamespacePrefix prefix, string! name, string! value) -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.AttributeSubstring(Fizzler.NamespacePrefix prefix, string! name, string! value) -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.AttributeSuffixMatch(Fizzler.NamespacePrefix prefix, string! name, string! value) -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.Child() -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.Class(string! clazz) -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.Descendant() -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.Empty() -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.FirstChild() -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.GeneralSibling() -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.Id(string! id) -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.LastChild() -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.NthChild(int a, int b) -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.NthLastChild(int a, int b) -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.OnlyChild() -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.Type(Fizzler.NamespacePrefix prefix, string! name) -> Fizzler.Selector<TElement>!
+Fizzler.IElementOps<TElement>.Universal(Fizzler.NamespacePrefix prefix) -> Fizzler.Selector<TElement>!
+Fizzler.INegationSelectorGenerator
+Fizzler.INegationSelectorGenerator.BeginNegation() -> void
+Fizzler.INegationSelectorGenerator.EndNegation() -> void
+Fizzler.ISelectorGenerator
+Fizzler.ISelectorGenerator.Adjacent() -> void
+Fizzler.ISelectorGenerator.AttributeDashMatch(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.ISelectorGenerator.AttributeExact(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.ISelectorGenerator.AttributeExists(Fizzler.NamespacePrefix prefix, string! name) -> void
+Fizzler.ISelectorGenerator.AttributeIncludes(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.ISelectorGenerator.AttributePrefixMatch(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.ISelectorGenerator.AttributeSubstring(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.ISelectorGenerator.AttributeSuffixMatch(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.ISelectorGenerator.Child() -> void
+Fizzler.ISelectorGenerator.Class(string! clazz) -> void
+Fizzler.ISelectorGenerator.Descendant() -> void
+Fizzler.ISelectorGenerator.Empty() -> void
+Fizzler.ISelectorGenerator.FirstChild() -> void
+Fizzler.ISelectorGenerator.GeneralSibling() -> void
+Fizzler.ISelectorGenerator.Id(string! id) -> void
+Fizzler.ISelectorGenerator.LastChild() -> void
+Fizzler.ISelectorGenerator.NthChild(int a, int b) -> void
+Fizzler.ISelectorGenerator.NthLastChild(int a, int b) -> void
+Fizzler.ISelectorGenerator.OnClose() -> void
+Fizzler.ISelectorGenerator.OnInit() -> void
+Fizzler.ISelectorGenerator.OnlyChild() -> void
+Fizzler.ISelectorGenerator.OnSelector() -> void
+Fizzler.ISelectorGenerator.Type(Fizzler.NamespacePrefix prefix, string! name) -> void
+Fizzler.ISelectorGenerator.Universal(Fizzler.NamespacePrefix prefix) -> void
+Fizzler.NamespacePrefix
+Fizzler.NamespacePrefix.Equals(Fizzler.NamespacePrefix other) -> bool
+Fizzler.NamespacePrefix.Format(string! name) -> string!
+Fizzler.NamespacePrefix.IsAny.get -> bool
+Fizzler.NamespacePrefix.IsEmpty.get -> bool
+Fizzler.NamespacePrefix.IsNone.get -> bool
+Fizzler.NamespacePrefix.IsSpecific.get -> bool
+Fizzler.NamespacePrefix.NamespacePrefix() -> void
+Fizzler.NamespacePrefix.NamespacePrefix(string? text) -> void
+Fizzler.NamespacePrefix.Text.get -> string?
+Fizzler.Parser
+Fizzler.Reader<T>
+Fizzler.Reader<T>.Close() -> void
+Fizzler.Reader<T>.GetEnumerator() -> System.Collections.Generic.IEnumerator<T>!
+Fizzler.Reader<T>.HasMore.get -> bool
+Fizzler.Reader<T>.Peek() -> T
+Fizzler.Reader<T>.Read() -> T
+Fizzler.Reader<T>.Reader(System.Collections.Generic.IEnumerable<T>! e) -> void
+Fizzler.Reader<T>.Reader(System.Collections.Generic.IEnumerator<T>! e) -> void
+Fizzler.Reader<T>.Unread(T value) -> void
+Fizzler.Selector<TElement>
+Fizzler.SelectorGenerator<TElement>
+Fizzler.SelectorGenerator<TElement>.Add(Fizzler.Selector<TElement>! selector) -> void
+Fizzler.SelectorGenerator<TElement>.AttributePrefixMatch(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.SelectorGenerator<TElement>.AttributeSubstring(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.SelectorGenerator<TElement>.AttributeSuffixMatch(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.SelectorGenerator<TElement>.BeginNegation() -> void
+Fizzler.SelectorGenerator<TElement>.EndNegation() -> void
+Fizzler.SelectorGenerator<TElement>.GetSelectors() -> System.Collections.Generic.IEnumerable<Fizzler.Selector<TElement>!>!
+Fizzler.SelectorGenerator<TElement>.NthLastChild(int a, int b) -> void
+Fizzler.SelectorGenerator<TElement>.Ops.get -> Fizzler.IElementOps<TElement>!
+Fizzler.SelectorGenerator<TElement>.Selector.get -> Fizzler.Selector<TElement>!
+Fizzler.SelectorGenerator<TElement>.SelectorGenerator(Fizzler.IElementOps<TElement>! ops) -> void
+Fizzler.SelectorGenerator<TElement>.SelectorGenerator(Fizzler.IElementOps<TElement>! ops, System.Collections.Generic.IEqualityComparer<TElement>? equalityComparer) -> void
+Fizzler.SelectorGeneratorTee
+Fizzler.SelectorGeneratorTee.Adjacent() -> void
+Fizzler.SelectorGeneratorTee.AttributeDashMatch(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.SelectorGeneratorTee.AttributeExact(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.SelectorGeneratorTee.AttributeExists(Fizzler.NamespacePrefix prefix, string! name) -> void
+Fizzler.SelectorGeneratorTee.AttributeIncludes(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.SelectorGeneratorTee.AttributePrefixMatch(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.SelectorGeneratorTee.AttributeSubstring(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.SelectorGeneratorTee.AttributeSuffixMatch(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+Fizzler.SelectorGeneratorTee.BeginNegation() -> void
+Fizzler.SelectorGeneratorTee.Child() -> void
+Fizzler.SelectorGeneratorTee.Class(string! clazz) -> void
+Fizzler.SelectorGeneratorTee.Descendant() -> void
+Fizzler.SelectorGeneratorTee.Empty() -> void
+Fizzler.SelectorGeneratorTee.EndNegation() -> void
+Fizzler.SelectorGeneratorTee.FirstChild() -> void
+Fizzler.SelectorGeneratorTee.GeneralSibling() -> void
+Fizzler.SelectorGeneratorTee.Id(string! id) -> void
+Fizzler.SelectorGeneratorTee.LastChild() -> void
+Fizzler.SelectorGeneratorTee.NthChild(int a, int b) -> void
+Fizzler.SelectorGeneratorTee.NthLastChild(int a, int b) -> void
+Fizzler.SelectorGeneratorTee.OnClose() -> void
+Fizzler.SelectorGeneratorTee.OnInit() -> void
+Fizzler.SelectorGeneratorTee.OnlyChild() -> void
+Fizzler.SelectorGeneratorTee.OnSelector() -> void
+Fizzler.SelectorGeneratorTee.Primary.get -> Fizzler.ISelectorGenerator!
+Fizzler.SelectorGeneratorTee.Secondary.get -> Fizzler.ISelectorGenerator!
+Fizzler.SelectorGeneratorTee.SelectorGeneratorTee(Fizzler.ISelectorGenerator! primary, Fizzler.ISelectorGenerator! secondary) -> void
+Fizzler.SelectorGeneratorTee.Type(Fizzler.NamespacePrefix prefix, string! type) -> void
+Fizzler.SelectorGeneratorTee.Universal(Fizzler.NamespacePrefix prefix) -> void
+Fizzler.SelectorsCachingCompiler
+Fizzler.Token
+Fizzler.Token.Equals(Fizzler.Token other) -> bool
+Fizzler.Token.Kind.get -> Fizzler.TokenKind
+Fizzler.Token.Text.get -> string?
+Fizzler.Token.Token() -> void
+Fizzler.Tokener
+Fizzler.TokenKind
+Fizzler.TokenKind.Char = 16 -> Fizzler.TokenKind
+Fizzler.TokenKind.DashMatch = 4 -> Fizzler.TokenKind
+Fizzler.TokenKind.Eoi = 0 -> Fizzler.TokenKind
+Fizzler.TokenKind.Function = 12 -> Fizzler.TokenKind
+Fizzler.TokenKind.Greater = 10 -> Fizzler.TokenKind
+Fizzler.TokenKind.Hash = 2 -> Fizzler.TokenKind
+Fizzler.TokenKind.Ident = 1 -> Fizzler.TokenKind
+Fizzler.TokenKind.Includes = 3 -> Fizzler.TokenKind
+Fizzler.TokenKind.Integer = 14 -> Fizzler.TokenKind
+Fizzler.TokenKind.Not = 13 -> Fizzler.TokenKind
+Fizzler.TokenKind.Plus = 9 -> Fizzler.TokenKind
+Fizzler.TokenKind.PrefixMatch = 5 -> Fizzler.TokenKind
+Fizzler.TokenKind.String = 8 -> Fizzler.TokenKind
+Fizzler.TokenKind.SubstringMatch = 7 -> Fizzler.TokenKind
+Fizzler.TokenKind.SuffixMatch = 6 -> Fizzler.TokenKind
+Fizzler.TokenKind.Tilde = 15 -> Fizzler.TokenKind
+Fizzler.TokenKind.WhiteSpace = 11 -> Fizzler.TokenKind
+override Fizzler.NamespacePrefix.Equals(object? obj) -> bool
+override Fizzler.NamespacePrefix.GetHashCode() -> int
+override Fizzler.NamespacePrefix.ToString() -> string!
+override Fizzler.Token.Equals(object? obj) -> bool
+override Fizzler.Token.GetHashCode() -> int
+override Fizzler.Token.ToString() -> string!
+static Fizzler.Parser.Parse<TGenerator, T>(string! selectors, TGenerator generator, System.Func<TGenerator, T>! resultor) -> T
+static Fizzler.Parser.Parse<TGenerator, T>(System.Collections.Generic.IEnumerable<Fizzler.Token>! tokens, TGenerator generator, System.Func<TGenerator, T>! resultor) -> T
+static Fizzler.Parser.Parse<TGenerator>(string! selectors, TGenerator generator) -> TGenerator
+static Fizzler.Parser.Parse<TGenerator>(System.Collections.Generic.IEnumerable<Fizzler.Token>! tokens, TGenerator generator) -> TGenerator
+static Fizzler.SelectorsCachingCompiler.Create<T>(System.Func<string!, T>! compiler) -> System.Func<string!, T>!
+static Fizzler.SelectorsCachingCompiler.Create<T>(System.Func<string!, T>! compiler, System.Collections.Generic.IDictionary<string!, T>? cache) -> System.Func<string!, T>!
+static Fizzler.Token.Char(char ch) -> Fizzler.Token
+static Fizzler.Token.Colon() -> Fizzler.Token
+static Fizzler.Token.Comma() -> Fizzler.Token
+static Fizzler.Token.DashMatch() -> Fizzler.Token
+static Fizzler.Token.Dot() -> Fizzler.Token
+static Fizzler.Token.Eoi() -> Fizzler.Token
+static Fizzler.Token.Equals() -> Fizzler.Token
+static Fizzler.Token.Function(string! text) -> Fizzler.Token
+static Fizzler.Token.Greater() -> Fizzler.Token
+static Fizzler.Token.Hash(string! text) -> Fizzler.Token
+static Fizzler.Token.Ident(string! text) -> Fizzler.Token
+static Fizzler.Token.Includes() -> Fizzler.Token
+static Fizzler.Token.Integer(string! text) -> Fizzler.Token
+static Fizzler.Token.LeftBracket() -> Fizzler.Token
+static Fizzler.Token.Not() -> Fizzler.Token
+static Fizzler.Token.operator !=(Fizzler.Token a, Fizzler.Token b) -> bool
+static Fizzler.Token.operator ==(Fizzler.Token a, Fizzler.Token b) -> bool
+static Fizzler.Token.Pipe() -> Fizzler.Token
+static Fizzler.Token.Plus() -> Fizzler.Token
+static Fizzler.Token.PrefixMatch() -> Fizzler.Token
+static Fizzler.Token.RightBracket() -> Fizzler.Token
+static Fizzler.Token.RightParenthesis() -> Fizzler.Token
+static Fizzler.Token.Star() -> Fizzler.Token
+static Fizzler.Token.String(string? text) -> Fizzler.Token
+static Fizzler.Token.SubstringMatch() -> Fizzler.Token
+static Fizzler.Token.SuffixMatch() -> Fizzler.Token
+static Fizzler.Token.Tilde() -> Fizzler.Token
+static Fizzler.Token.WhiteSpace(string! space) -> Fizzler.Token
+static Fizzler.Tokener.Tokenize(string? input) -> System.Collections.Generic.IEnumerable<Fizzler.Token>!
+static Fizzler.Tokener.Tokenize(System.IO.TextReader! reader) -> System.Collections.Generic.IEnumerable<Fizzler.Token>!
+static readonly Fizzler.NamespacePrefix.Any -> Fizzler.NamespacePrefix
+static readonly Fizzler.NamespacePrefix.Empty -> Fizzler.NamespacePrefix
+static readonly Fizzler.NamespacePrefix.None -> Fizzler.NamespacePrefix
+virtual Fizzler.HumanReadableSelectorGenerator.OnClose() -> void
+virtual Fizzler.HumanReadableSelectorGenerator.OnInit() -> void
+virtual Fizzler.HumanReadableSelectorGenerator.OnSelector() -> void
+virtual Fizzler.SelectorGenerator<TElement>.Adjacent() -> void
+virtual Fizzler.SelectorGenerator<TElement>.AttributeDashMatch(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+virtual Fizzler.SelectorGenerator<TElement>.AttributeExact(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+virtual Fizzler.SelectorGenerator<TElement>.AttributeExists(Fizzler.NamespacePrefix prefix, string! name) -> void
+virtual Fizzler.SelectorGenerator<TElement>.AttributeIncludes(Fizzler.NamespacePrefix prefix, string! name, string! value) -> void
+virtual Fizzler.SelectorGenerator<TElement>.Child() -> void
+virtual Fizzler.SelectorGenerator<TElement>.Class(string! clazz) -> void
+virtual Fizzler.SelectorGenerator<TElement>.Descendant() -> void
+virtual Fizzler.SelectorGenerator<TElement>.Empty() -> void
+virtual Fizzler.SelectorGenerator<TElement>.FirstChild() -> void
+virtual Fizzler.SelectorGenerator<TElement>.GeneralSibling() -> void
+virtual Fizzler.SelectorGenerator<TElement>.Id(string! id) -> void
+virtual Fizzler.SelectorGenerator<TElement>.LastChild() -> void
+virtual Fizzler.SelectorGenerator<TElement>.NthChild(int a, int b) -> void
+virtual Fizzler.SelectorGenerator<TElement>.OnClose() -> void
+virtual Fizzler.SelectorGenerator<TElement>.OnInit() -> void
+virtual Fizzler.SelectorGenerator<TElement>.OnlyChild() -> void
+virtual Fizzler.SelectorGenerator<TElement>.OnSelector() -> void
+virtual Fizzler.SelectorGenerator<TElement>.Type(Fizzler.NamespacePrefix prefix, string! type) -> void
+virtual Fizzler.SelectorGenerator<TElement>.Universal(Fizzler.NamespacePrefix prefix) -> void
