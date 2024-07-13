@@ -34,7 +34,7 @@ namespace Fizzler
     /// </summary>
     public class SelectorGenerator<TElement> : INegationSelectorGenerator
     {
-        readonly IEqualityComparer<TElement>? _equalityComparer;
+        readonly IEqualityComparer<TElement> _equalityComparer;
         Selector<TElement>? _selector;
         readonly Stack<Selector<TElement>> _selectors;
         Selector<TElement>? _negationSourceSelector;
