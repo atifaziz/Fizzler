@@ -39,9 +39,9 @@ namespace Fizzler.Tests
     public class SelectorGeneratorTeeTests
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable. (Assigned during setup)
-        static SelectorGeneratorTee _tee;
-        static FakeSelectorGenerator _primary;
-        static FakeSelectorGenerator _secondary;
+        SelectorGeneratorTee _tee;
+        FakeSelectorGenerator _primary;
+        FakeSelectorGenerator _secondary;
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
         [SetUp]
@@ -204,22 +204,22 @@ namespace Fizzler.Tests
             Run(_tee.GeneralSibling);
         }
 
-        static void Run(Action action)
+        void Run(Action action)
         {
             RunImpl(action.Method);
         }
 
-        static void Run<T>(Action<T> action, T arg)
+        void Run<T>(Action<T> action, T arg)
         {
             RunImpl(action.Method, arg);
         }
 
-        static void Run<T1, T2>(Action<T1, T2> action, T1 arg1, T2 arg2)
+        void Run<T1, T2>(Action<T1, T2> action, T1 arg1, T2 arg2)
         {
             RunImpl(action.Method, arg1, arg2);
         }
 
-        static void Run<T1, T2, T3>(Action<T1, T2, T3> action, T1 arg1, T2 arg2, T3 arg3)
+        void Run<T1, T2, T3>(Action<T1, T2, T3> action, T1 arg1, T2 arg2, T3 arg3)
         {
             RunImpl(action.Method, arg1, arg2, arg3);
         }
@@ -228,7 +228,7 @@ namespace Fizzler.Tests
         /// Take the passed action, run it, and then check that the last method
         /// and last args are the same for pri and sec.
         /// </summary>
-        static void RunImpl(MethodBase action, params object?[] args)
+        void RunImpl(MethodBase action, params object?[] args)
         {
             var recordings = new Queue<CallRecording<ISelectorGenerator>>(2);
             _primary.Recorder = recordings.Enqueue;
