@@ -172,6 +172,7 @@ namespace Fizzler.Tests
             AssertToken(TokenKind.String, string.Empty, Token.String(string.Empty));
         }
 
+        [Test]
         public void Function()
         {
             AssertToken(TokenKind.Function, "foo", Token.Function("foo"));
