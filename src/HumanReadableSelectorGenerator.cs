@@ -91,7 +91,7 @@ namespace Fizzler
         /// <summary>
         /// Generates human-readable text of this class selector.
         /// </summary>
-        void ISelectorGenerator.Class(string clazz) =>
+        public void Class(string clazz) =>
             Add($" with a class of '{clazz}'");
 
         /// <summary>

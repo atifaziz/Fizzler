@@ -1,1 +1,2 @@
 #nullable enable
+Fizzler.HumanReadableSelectorGenerator.Class(string! clazz) -> void
