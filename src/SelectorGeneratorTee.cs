@@ -231,8 +231,8 @@ namespace Fizzler
         /// </summary>
         public void BeginNegation()
         {
-            ((INegationSelectorGenerator) Primary).BeginNegation();
-            ((INegationSelectorGenerator) Secondary).BeginNegation();
+            ((INegationSelectorGenerator)Primary).BeginNegation();
+            ((INegationSelectorGenerator)Secondary).BeginNegation();
         }
 
         /// <summary>
@@ -240,8 +240,8 @@ namespace Fizzler
         /// </summary>
         public void EndNegation()
         {
-            ((INegationSelectorGenerator) Primary).EndNegation();
-            ((INegationSelectorGenerator) Secondary).EndNegation();
+            ((INegationSelectorGenerator)Primary).EndNegation();
+            ((INegationSelectorGenerator)Secondary).EndNegation();
         }
 
         /// <summary>

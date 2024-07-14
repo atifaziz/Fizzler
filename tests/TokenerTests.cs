@@ -36,7 +36,7 @@ namespace Fizzler.Tests
         [Test]
         public void NullInput()
         {
-            Assert.That(Tokener.Tokenize((string?) null).Single(), Is.EqualTo(Token.Eoi()));
+            Assert.That(Tokener.Tokenize((string?)null).Single(), Is.EqualTo(Token.Eoi()));
         }
 
         [Test]
@@ -351,7 +351,7 @@ namespace Fizzler.Tests
         [Test]
         public void NullReader()
         {
-            Assert.That(() => Tokener.Tokenize((TextReader) null!),
+            Assert.That(() => Tokener.Tokenize((TextReader)null!),
                         Throws.ArgumentNullException("reader"));
 
         }

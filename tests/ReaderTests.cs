@@ -119,7 +119,7 @@ namespace Fizzler.Tests
         public void EnumerationNonGeneric()
         {
             using var reader = new Reader<int>([12, 34, 56]);
-            var e = ((IEnumerable) reader).GetEnumerator();
+            var e = ((IEnumerable)reader).GetEnumerator();
             Assert.That(e.MoveNext(), Is.True);
             Assert.That(e.Current, Is.EqualTo(12));
             Assert.That(e.MoveNext(), Is.True);
@@ -143,7 +143,7 @@ namespace Fizzler.Tests
         {
             using var e = new TestEnumerator<object>();
             Assert.That(e.Disposed, Is.False);
-            ((IDisposable) new Reader<object>(e)).Dispose();
+            ((IDisposable)new Reader<object>(e)).Dispose();
             Assert.That(e.Disposed, Is.True);
         }
 

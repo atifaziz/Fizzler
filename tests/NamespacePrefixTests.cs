@@ -130,7 +130,7 @@ namespace Fizzler.Tests
             Assert.That(NamespacePrefix.Empty.Equals(NamespacePrefix.Empty), Is.True);
             var foo = new NamespacePrefix("foo");
             Assert.That(foo.Equals(foo), Is.True);
-            Assert.That(foo.Equals((object) foo), Is.True);
+            Assert.That(foo.Equals((object)foo), Is.True);
         }
 
         [Test]
