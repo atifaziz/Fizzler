@@ -74,7 +74,6 @@ Fizzler.ISelectorGenerator.OnSelector() -> void
 Fizzler.ISelectorGenerator.Type(Fizzler.NamespacePrefix prefix, string! name) -> void
 Fizzler.ISelectorGenerator.Universal(Fizzler.NamespacePrefix prefix) -> void
 Fizzler.NamespacePrefix
-Fizzler.NamespacePrefix.Equals(Fizzler.NamespacePrefix other) -> bool
 Fizzler.NamespacePrefix.Format(string! name) -> string!
 Fizzler.NamespacePrefix.IsAny.get -> bool
 Fizzler.NamespacePrefix.IsEmpty.get -> bool
@@ -139,7 +138,6 @@ Fizzler.SelectorGeneratorTee.Type(Fizzler.NamespacePrefix prefix, string! type) 
 Fizzler.SelectorGeneratorTee.Universal(Fizzler.NamespacePrefix prefix) -> void
 Fizzler.SelectorsCachingCompiler
 Fizzler.Token
-Fizzler.Token.Equals(Fizzler.Token other) -> bool
 Fizzler.Token.Kind.get -> Fizzler.TokenKind
 Fizzler.Token.Text.get -> string?
 Fizzler.Token.Token() -> void
@@ -162,11 +160,7 @@ Fizzler.TokenKind.SubstringMatch = 7 -> Fizzler.TokenKind
 Fizzler.TokenKind.SuffixMatch = 6 -> Fizzler.TokenKind
 Fizzler.TokenKind.Tilde = 15 -> Fizzler.TokenKind
 Fizzler.TokenKind.WhiteSpace = 11 -> Fizzler.TokenKind
-override Fizzler.NamespacePrefix.Equals(object? obj) -> bool
-override Fizzler.NamespacePrefix.GetHashCode() -> int
 override Fizzler.NamespacePrefix.ToString() -> string!
-override Fizzler.Token.Equals(object? obj) -> bool
-override Fizzler.Token.GetHashCode() -> int
 override Fizzler.Token.ToString() -> string!
 static Fizzler.Parser.Parse<TGenerator, T>(string! selectors, TGenerator generator, System.Func<TGenerator, T>! resultor) -> T
 static Fizzler.Parser.Parse<TGenerator, T>(System.Collections.Generic.IEnumerable<Fizzler.Token>! tokens, TGenerator generator, System.Func<TGenerator, T>! resultor) -> T
@@ -189,8 +183,6 @@ static Fizzler.Token.Includes() -> Fizzler.Token
 static Fizzler.Token.Integer(string! text) -> Fizzler.Token
 static Fizzler.Token.LeftBracket() -> Fizzler.Token
 static Fizzler.Token.Not() -> Fizzler.Token
-static Fizzler.Token.operator !=(Fizzler.Token a, Fizzler.Token b) -> bool
-static Fizzler.Token.operator ==(Fizzler.Token a, Fizzler.Token b) -> bool
 static Fizzler.Token.Pipe() -> Fizzler.Token
 static Fizzler.Token.Plus() -> Fizzler.Token
 static Fizzler.Token.PrefixMatch() -> Fizzler.Token

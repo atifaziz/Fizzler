@@ -28,7 +28,7 @@ namespace Fizzler
     /// Represent a type or attribute name.
     /// </summary>
     [Serializable]
-    public readonly struct NamespacePrefix : IEquatable<NamespacePrefix>
+    public readonly record struct NamespacePrefix
     {
         /// <summary>
         /// Represents a name from either the default or any namespace
@@ -85,22 +85,6 @@ namespace Fizzler
         public bool IsSpecific => !IsNone && !IsAny;
 
         /// <summary>
-        /// Indicates whether this instance and a specified object are equal.
-        /// </summary>
-        public override bool Equals(object? obj) =>
-            obj is NamespacePrefix prefix && Equals(prefix);
-
-        /// <summary>
-        /// Indicates whether this instance and another are equal.
-        /// </summary>
-        [Pure] public bool Equals(NamespacePrefix other) => Text == other.Text;
-
-        /// <summary>
-        /// Returns the hash code for this instance.
-        /// </summary>
-        public override int GetHashCode() => Text?.GetHashCode() ?? 0;
-
-        /// <summary>
         /// Returns a string representation of this instance.
         /// </summary>
         public override string ToString() => Text ?? "(none)";
@@ -115,19 +99,5 @@ namespace Fizzler
 
             return Text + (IsNone ? null : "|") + name;
         }
-
-        // Equality operators
-
-        /// <summary>
-        /// Indicates whether two namespace prefixes are equal.
-        /// </summary>
-        public static bool operator ==(NamespacePrefix left, NamespacePrefix right) =>
-            left.Equals(right);
-
-        /// <summary>
-        /// Indicates whether two namespace prefixes are inequal.
-        /// </summary>
-        public static bool operator !=(NamespacePrefix left, NamespacePrefix right) =>
-            !left.Equals(right);
     }
 }

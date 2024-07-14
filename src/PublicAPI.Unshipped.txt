@@ -1,4 +1,2 @@
 #nullable enable
 Fizzler.HumanReadableSelectorGenerator.Class(string! clazz) -> void
-static Fizzler.NamespacePrefix.operator !=(Fizzler.NamespacePrefix left, Fizzler.NamespacePrefix right) -> bool
-static Fizzler.NamespacePrefix.operator ==(Fizzler.NamespacePrefix left, Fizzler.NamespacePrefix right) -> bool

@@ -26,7 +26,7 @@ namespace Fizzler
     /// <summary>
     /// Represent a token and optionally any text associated with it.
     /// </summary>
-    public readonly struct Token : IEquatable<Token>
+    public readonly record struct Token
     {
         /// <summary>
         /// Gets the kind/type/class of the token.
@@ -214,40 +214,10 @@ namespace Fizzler
 #pragma warning restore CA1720 // Identifier contains type name
 
         /// <summary>
-        /// Indicates whether this instance and a specified object are equal.
-        /// </summary>
-        public override bool Equals(object? obj) =>
-            obj is Token token && Equals(token);
-
-        /// <summary>
-        /// Returns the hash code for this instance.
-        /// </summary>
-        public override int GetHashCode() =>
-            Text is { } text ? Kind.GetHashCode() ^ text.GetHashCode() : Kind.GetHashCode();
-
-        /// <summary>
-        /// Indicates whether the current object is equal to another object of the same type.
-        /// </summary>
-        public bool Equals(Token other) =>
-            Kind == other.Kind && Text == other.Text;
-
-        /// <summary>
         /// Gets a string representation of the token.
         /// </summary>
         public override string ToString() =>
             Text is { } text ? Kind + ": " + text : Kind.ToString();
-
-        /// <summary>
-        /// Performs a logical comparison of the two tokens to determine
-        /// whether they are equal.
-        /// </summary>
-        public static bool operator==(Token a, Token b) => a.Equals(b);
-
-        /// <summary>
-        /// Performs a logical comparison of the two tokens to determine
-        /// whether they are inequal.
-        /// </summary>
-        public static bool operator !=(Token a, Token b) => !a.Equals(b);
 
         static void ValidateTextArgument(string text)
         {
