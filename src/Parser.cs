@@ -555,7 +555,7 @@ namespace Fizzler
         Token? TryRead(TokenSpec spec)
         {
             var token = Peek();
-            if (!spec.Fold(token, (t, a) => a == t.Kind, (t, b) => b == t))
+            if (!spec.Fold(token, static (t, a) => a == t.Kind, static (t, b) => b == t))
                 return null;
             _ = this.reader.Read();
             return token;
