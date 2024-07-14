@@ -87,7 +87,7 @@ namespace Fizzler
             return resultor(generator);
         }
 
-        static partial class TokenSpecs { }
+        static partial class TokenSpecs;
 
         void Parse()
         {
