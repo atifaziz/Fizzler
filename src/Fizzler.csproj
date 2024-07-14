@@ -12,6 +12,7 @@
     <Authors>Atif Aziz, Colin Ramsay</Authors>
     <Description>Fizzler is a W3C Selectors parser and generic selector framework for document hierarchies.</Description>
     <PackageLicenseExpression>LGPL-3.0-or-later</PackageLicenseExpression>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageProjectUrl>https://github.com/atifaziz/Fizzler</PackageProjectUrl>
     <RepositoryUrl>https://github.com/atifaziz/Fizzler</RepositoryUrl>
     <RepositoryType>Git</RepositoryType>
@@ -37,6 +38,7 @@
 
   <ItemGroup>
     <None Include="..\COPYING.txt" Pack="true" PackagePath="COPYING.txt" />
+    <None Include="..\README.md" Pack="true" PackagePath="$(PackageReadmeFile)" />
   </ItemGroup>
 
   <ItemGroup>
