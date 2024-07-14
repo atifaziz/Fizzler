@@ -40,8 +40,8 @@ namespace Fizzler.Tests
         [TestCase(":not([foo][bar])")]
         public void Invalid(string selector)
         {
-            Assert.Throws<FormatException>(() =>
-                Parser.Parse(Tokener.Tokenize(selector), new NoSelectorGenerator()));
+            Assert.That(() => Parser.Parse(Tokener.Tokenize(selector), new NoSelectorGenerator()),
+                        Throws.TypeOf<FormatException>());
         }
 
         [Test]
@@ -318,9 +318,7 @@ namespace Fizzler.Tests
 
         static void Test<T1>(string input, Func<TestSelectorGenerator, T1> actual1, T1 expected1)
         {
-            Test(input,
-                new Func<TestSelectorGenerator, object?>[] { g => actual1(g) },
-                new object?[] { expected1 });
+            Test(input, [g => actual1(g)], [expected1]);
         }
 
         static void Test<T1, T2>(string input,
@@ -328,8 +326,8 @@ namespace Fizzler.Tests
             Func<TestSelectorGenerator, T2> actual2, T2 expected2)
         {
             Test(input,
-                new Func<TestSelectorGenerator, object?>[] {g => actual1(g), g => actual2(g)},
-                new object?[] {expected1, expected2});
+                 [g => actual1(g), g => actual2(g)],
+                 [expected1, expected2]);
         }
 
         static void Test<T1, T2, T3>(string input,
@@ -338,55 +336,52 @@ namespace Fizzler.Tests
             Func<TestSelectorGenerator, T3> actual3, T2 expected3)
         {
             Test(input,
-                new Func<TestSelectorGenerator, object?>[] { g => actual1(g), g => actual2(g), g => actual3(g) },
-                new object?[] { expected1, expected2, expected3 });
+                 [g => actual1(g), g => actual2(g), g => actual3(g)],
+                 [expected1, expected2, expected3]);
         }
 
         static void Test(string input,
             IEnumerable<Func<TestSelectorGenerator, object?>> actuals,
             IEnumerable<object?> expectations)
         {
-            var generator = new TestSelectorGenerator();
-            Parser.Parse(Tokener.Tokenize(input), generator);
-            using (var actual = actuals.GetEnumerator())
-            using (var expected = expectations.GetEnumerator())
+            var generator = Parser.Parse(Tokener.Tokenize(input), new TestSelectorGenerator());
+            using var actual = actuals.GetEnumerator();
+            using var expected = expectations.GetEnumerator();
+            while(actual.MoveNext())
             {
-                while(actual.MoveNext())
-                {
-                    Assert.That(expected.MoveNext(), Is.True, "Missing expectation");
-                    Assert.That(actual.Current(generator), Is.EqualTo(expected.Current));
-                }
-                Assert.That(expected.MoveNext(), Is.False, "Too many expectations");
+                Assert.That(expected.MoveNext(), Is.True, "Missing expectation");
+                Assert.That(actual.Current(generator), Is.EqualTo(expected.Current));
             }
+            Assert.That(expected.MoveNext(), Is.False, "Too many expectations");
         }
 
         public class TestSelectorGenerator : ISelectorGenerator
         {
-            public NamespacePrefix TypePrefix;
-            public string? TypeName;
+            public NamespacePrefix TypePrefix { get; private set; }
+            public string? TypeName { get; private set; }
 
-            public NamespacePrefix UniversalPrefix;
+            public NamespacePrefix UniversalPrefix { get; private set; }
 
-            public NamespacePrefix AttributeExistsPrefix;
-            public string? AttributeExistsName;
-            public NamespacePrefix AttributeExactPrefix;
-            public string? AttributeExactName;
-            public string? AttributeExactValue;
-            public NamespacePrefix AttributeIncludesPrefix;
-            public string? AttributeIncludesName;
-            public string? AttributeIncludesValue;
-            public NamespacePrefix AttributeDashMatchPrefix;
-            public string? AttributeDashMatchName;
-            public string? AttributeDashMatchValue;
-            public NamespacePrefix AttributePrefixMatchPrefix;
-            public string? AttributePrefixMatchName;
-            public string? AttributePrefixMatchValue;
-            public NamespacePrefix AttributeSuffixMatchPrefix;
-            public string? AttributeSuffixMatchName;
-            public string? AttributeSuffixMatchValue;
-            public NamespacePrefix AttributeSubstringPrefix;
-            public string? AttributeSubstringName;
-            public string? AttributeSubstringValue;
+            public NamespacePrefix AttributeExistsPrefix { get; private set; }
+            public string? AttributeExistsName { get; private set; }
+            public NamespacePrefix AttributeExactPrefix { get; private set; }
+            public string? AttributeExactName { get; private set; }
+            public string? AttributeExactValue { get; private set; }
+            public NamespacePrefix AttributeIncludesPrefix { get; private set; }
+            public string? AttributeIncludesName { get; private set; }
+            public string? AttributeIncludesValue { get; private set; }
+            public NamespacePrefix AttributeDashMatchPrefix { get; private set; }
+            public string? AttributeDashMatchName { get; private set; }
+            public string? AttributeDashMatchValue { get; private set; }
+            public NamespacePrefix AttributePrefixMatchPrefix { get; private set; }
+            public string? AttributePrefixMatchName { get; private set; }
+            public string? AttributePrefixMatchValue { get; private set; }
+            public NamespacePrefix AttributeSuffixMatchPrefix { get; private set; }
+            public string? AttributeSuffixMatchName { get; private set; }
+            public string? AttributeSuffixMatchValue { get; private set; }
+            public NamespacePrefix AttributeSubstringPrefix { get; private set; }
+            public string? AttributeSubstringName { get; private set; }
+            public string? AttributeSubstringValue { get; private set; }
 
             public void Type(NamespacePrefix prefix, string name)
             {

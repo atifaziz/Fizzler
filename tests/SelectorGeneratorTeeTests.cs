@@ -39,17 +39,17 @@ namespace Fizzler.Tests
     public class SelectorGeneratorTeeTests
     {
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable. (Assigned during setup)
-        SelectorGeneratorTee _tee;
-        FakeSelectorGenerator _primary;
-        FakeSelectorGenerator _secondary;
+        SelectorGeneratorTee tee;
+        FakeSelectorGenerator primary;
+        FakeSelectorGenerator secondary;
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
         [SetUp]
         public void Setup()
         {
-            _primary = new FakeSelectorGenerator();
-            _secondary = new FakeSelectorGenerator();
-            _tee = new SelectorGeneratorTee(_primary, _secondary);
+            this.primary = new FakeSelectorGenerator();
+            this.secondary = new FakeSelectorGenerator();
+            this.tee = new SelectorGeneratorTee(this.primary, this.secondary);
         }
 
         [Test]
@@ -69,139 +69,139 @@ namespace Fizzler.Tests
         [Test]
         public void OnInitTest()
         {
-            Run(_tee.OnInit);
+            Run(this.tee.OnInit);
         }
 
         [Test]
         public void OnCloseTest()
         {
-            Run(_tee.OnClose);
+            Run(this.tee.OnClose);
         }
 
         [Test]
         public void OnSelectorTest()
         {
-            Run(_tee.OnSelector);
+            Run(this.tee.OnSelector);
         }
 
         [Test]
         public void TypeTest()
         {
-            Run(_tee.Type, NamespacePrefix.None, "go");
+            Run(this.tee.Type, NamespacePrefix.None, "go");
         }
 
         [Test]
         public void UniversalTest()
         {
-            Run(_tee.Universal, NamespacePrefix.None);
+            Run(this.tee.Universal, NamespacePrefix.None);
         }
 
         [Test]
         public void IdTest()
         {
-            Run(_tee.Id, "hello");
+            Run(this.tee.Id, "hello");
         }
 
         [Test]
         public void ClassTest()
         {
-            Run(_tee.Class, "hello");
+            Run(this.tee.Class, "hello");
         }
 
         [Test]
         public void AttrExistsTest()
         {
-            Run(_tee.AttributeExists, NamespacePrefix.None, "hello");
+            Run(this.tee.AttributeExists, NamespacePrefix.None, "hello");
         }
 
         [Test]
         public void AttExactTest()
         {
-            Run(_tee.AttributeExact, NamespacePrefix.None, "hello", "there");
+            Run(this.tee.AttributeExact, NamespacePrefix.None, "hello", "there");
         }
 
         [Test]
         public void AttrIncludesTest()
         {
-            Run(_tee.AttributeIncludes, NamespacePrefix.None, "hello", "there");
+            Run(this.tee.AttributeIncludes, NamespacePrefix.None, "hello", "there");
         }
 
         [Test]
         public void AttrDashMatchTest()
         {
-            Run(_tee.AttributeDashMatch, NamespacePrefix.None, "hello", "there");
+            Run(this.tee.AttributeDashMatch, NamespacePrefix.None, "hello", "there");
         }
 
         [Test]
         public void AttrPrefixMatchTest()
         {
-            Run(_tee.AttributePrefixMatch,NamespacePrefix.None, "hello", "there");
+            Run(this.tee.AttributePrefixMatch,NamespacePrefix.None, "hello", "there");
         }
 
         [Test]
         public void AttrSuffixMatchTest()
         {
-            Run(_tee.AttributeSuffixMatch, NamespacePrefix.None, "hello", "there");
+            Run(this.tee.AttributeSuffixMatch, NamespacePrefix.None, "hello", "there");
         }
 
         [Test]
         public void AttrSubstringTest()
         {
-            Run(_tee.AttributeSubstring, NamespacePrefix.None, "hello", "there");
+            Run(this.tee.AttributeSubstring, NamespacePrefix.None, "hello", "there");
         }
 
         [Test]
         public void FirstChildTest()
         {
-            Run(_tee.FirstChild);
+            Run(this.tee.FirstChild);
         }
 
         [Test]
         public void LastChildTest()
         {
-            Run(_tee.LastChild);
+            Run(this.tee.LastChild);
         }
 
         [Test]
         public void NthChildTest()
         {
-            Run(_tee.NthChild, 1, 2);
+            Run(this.tee.NthChild, 1, 2);
         }
 
         [Test]
         public void OnlyChildTest()
         {
-            Run(_tee.OnlyChild);
+            Run(this.tee.OnlyChild);
         }
 
         [Test]
         public void EmptyTest()
         {
-            Run(_tee.Empty);
+            Run(this.tee.Empty);
         }
 
         [Test]
         public void ChildTest()
         {
-            Run(_tee.Child);
+            Run(this.tee.Child);
         }
 
         [Test]
         public void DescendantTest()
         {
-            Run(_tee.Descendant);
+            Run(this.tee.Descendant);
         }
 
         [Test]
         public void AdjacentTest()
         {
-            Run(_tee.Adjacent);
+            Run(this.tee.Adjacent);
         }
 
         [Test]
         public void GeneralSiblingTest()
         {
-            Run(_tee.GeneralSibling);
+            Run(this.tee.GeneralSibling);
         }
 
         void Run(Action action)
@@ -231,51 +231,46 @@ namespace Fizzler.Tests
         void RunImpl(MethodBase action, params object?[] args)
         {
             var recordings = new Queue<CallRecording<ISelectorGenerator>>(2);
-            _primary.Recorder = recordings.Enqueue;
-            _secondary.Recorder = recordings.Enqueue;
+            this.primary.Recorder = recordings.Enqueue;
+            this.secondary.Recorder = recordings.Enqueue;
 
-            action.Invoke(_tee, args);
+            _ = action.Invoke(this.tee, args);
 
             // Assert the fact that the primary and secondary methods were
             // both called with the same arguments and in the right order!
 
             var recording = recordings.Dequeue();
-            Assert.That(recording.Target, Is.SameAs(_primary));
+            Assert.That(recording.Target, Is.SameAs(this.primary));
             Assert.That(MapMethod<ISelectorGenerator>(recording.Method).Name, Is.EqualTo(action.Name));
             Assert.That(recording.Arguments, Is.EqualTo(args));
 
             recording = recordings.Dequeue();
-            Assert.That(recording.Target, Is.SameAs(_secondary));
+            Assert.That(recording.Target, Is.SameAs(this.secondary));
             Assert.That(MapMethod<ISelectorGenerator>(recording.Method).Name, Is.EqualTo(action.Name));
             Assert.That(recording.Arguments, Is.EqualTo(args));
         }
 
         static MethodInfo MapMethod<T>(MethodInfo method) where T : class
         {
+#pragma warning disable CA2201 // Do not raise reserved exception types (test code)
             var type = method.ReflectedType ?? throw new NullReferenceException();
+#pragma warning restore CA2201 // Do not raise reserved exception types
             var mapping = type.GetInterfaceMap(typeof(T));
             return mapping.InterfaceMethods
                           .Select((m, i) => new { Source = m, Target = mapping.TargetMethods[i] })
                           .Single(m => m.Target == method).Source;
         }
 
-        sealed class CallRecording<T>
+        sealed class CallRecording<T>(T target, MethodInfo method, object[] arguments)
         {
-            public T Target { get; }
-            public MethodInfo Method { get; }
-            public object[] Arguments { get; }
-
-            public CallRecording(T target, MethodInfo method, object[] arguments)
-            {
-                Target = target;
-                Method = method;
-                Arguments = arguments;
-            }
+            public T Target { get; } = target;
+            public MethodInfo Method { get; } = method;
+            public object[] Arguments { get; } = arguments;
         }
 
         sealed class FakeSelectorGenerator : ISelectorGenerator
         {
-            public Action<CallRecording<ISelectorGenerator>>? Recorder;
+            public Action<CallRecording<ISelectorGenerator>>? Recorder { get; set; }
 
             public void OnInit() =>
                 OnInvoked(MethodBase.GetCurrentMethod());

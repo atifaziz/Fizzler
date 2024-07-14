@@ -64,7 +64,7 @@ namespace Fizzler
                     if (ch == '-')
                     {
                         if (reader.Read() is not { } n || !IsNmStart(n))
-                            throw new FormatException(string.Format("Invalid identifier at position {0}.", reader.Position));
+                            throw new FormatException($"Invalid identifier at position {reader.Position}.");
                     }
 
                     var r = reader.Read();
@@ -104,7 +104,9 @@ namespace Fizzler
                             break;
                     }
                 }
+#pragma warning disable IDE0011 // Add braces (save indentation for readability)
                 else switch(ch)
+#pragma warning restore IDE0011 // Add braces
                 {
                     case '*': // * or *=
                     case '~': // ~ or ~=
@@ -120,7 +122,7 @@ namespace Fizzler
                         else
                         {
                             reader.Unread();
-                            yield return ch == '*' || ch == '|'
+                            yield return ch is '*' or '|'
                                 ? Token.Char(ch)
                                 : Token.Tilde();
                         }
@@ -130,9 +132,11 @@ namespace Fizzler
                     case '$': // $=
                     {
                         if (reader.Read() != '=')
-                            throw new FormatException(string.Format("Invalid character at position {0}.", reader.Position));
+                            throw new FormatException($"Invalid character at position {reader.Position}.");
 
+#pragma warning disable IDE0010 // Add missing cases (handled by compiler)
                         switch (ch)
+#pragma warning restore IDE0010 // Add missing cases
                         {
                             case '^': yield return Token.PrefixMatch(); break;
                             case '$': yield return Token.SuffixMatch(); break;
@@ -154,10 +158,12 @@ namespace Fizzler
                     case ':':
                     {
                         var pos = reader.Position;
+#pragma warning disable IDE0078 // Use pattern matching (may change code meaning)
                         if (reader.Read() == 'n' &&
                             reader.Read() == 'o' &&
                             reader.Read() == 't' &&
                             reader.Read() == '(')
+#pragma warning restore IDE0078 // Use pattern matching
                         {
                             yield return Token.Not(); // ":"{N}{O}{T}"("  return NOT;
                             break;
@@ -176,7 +182,7 @@ namespace Fizzler
                     case '\'': yield return ParseString(reader, /* quote */ ch, ref sb); break;
 
                     default:
-                        throw new FormatException(string.Format("Invalid character at position {0}.", reader.Position));
+                        throw new FormatException($"Invalid character at position {reader.Position}.");
                 }
             }
             yield return Token.Eoi();
@@ -195,7 +201,7 @@ namespace Fizzler
             while (reader.Read() is { } ch && IsNmChar(ch)) { /* NOP */ }
             var text = reader.MarkedWithUnread();
             if (text.Length == 0)
-                throw new FormatException(string.Format("Invalid hash at position {0}.", reader.Position));
+                throw new FormatException($"Invalid hash at position {reader.Position}.");
             return text;
         }
 
@@ -215,14 +221,16 @@ namespace Fizzler
             var strpos = reader.Position;
             reader.MarkFromNext(); // skipping quote
 
-            sb?.Clear();
+            _ = sb?.Clear();
 
             for (var done = false; !done;)
             {
+#pragma warning disable IDE0010 // Add missing cases (handled by compiler)
                 switch (reader.Read())
+#pragma warning restore IDE0010 // Add missing cases
                 {
                     case null:
-                        throw new FormatException(string.Format("Unterminated string at position {0}.", strpos));
+                        throw new FormatException($"Unterminated string at position {strpos}.");
 
                     case { } ch when ch == quote:
                         done = true;
@@ -236,10 +244,10 @@ namespace Fizzler
 
                         var esc = reader.Read();
                         if (esc != quote && esc != '\\')
-                            throw new FormatException(string.Format("Invalid escape sequence at position {0} in a string at position {1}.", reader.Position, strpos));
+                            throw new FormatException($"Invalid escape sequence at position {reader.Position} in a string at position {strpos}.");
 
                         sb ??= new StringBuilder();
-                        sb.Append(reader.MarkedExceptLast());
+                        _ = sb.Append(reader.MarkedExceptLast());
                         reader.Mark();
                         break;
                     }
@@ -256,58 +264,53 @@ namespace Fizzler
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static bool IsDigit(char ch) => // [0-9]
-            ch >= '0' && ch <= '9';
+            ch is >= '0' and <= '9';
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static bool IsS(char ch) => // [ \t\r\n\f]
-            ch == ' ' || ch == '\t' || ch == '\r' || ch == '\n' || ch == '\f';
+            ch is ' ' or '\t' or '\r' or '\n' or '\f';
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool IsNmStart(char ch) // [_a-z]|{nonascii}|{escape}
-            => ch == '_'
-            || (ch >= 'a' && ch <= 'z')
-            || (ch >= 'A' && ch <= 'Z');
+        static bool IsNmStart(char ch) => // [_a-z]|{nonascii}|{escape}
+            ch is '_' or >= 'a' and <= 'z' or >= 'A' and <= 'Z';
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         static bool IsNmChar(char ch) => // [_a-z0-9-]|{nonascii}|{escape}
-            IsNmStart(ch) || ch == '-' || (ch >= '0' && ch <= '9');
+            IsNmStart(ch) || ch is '-' or >= '0' and <= '9';
 
-        sealed class Reader
+        sealed class Reader(string input)
         {
-            readonly string _input;
-            int _index = -1;
-            int _start = -1;
+            readonly string input = input;
+            int index = -1;
+            int start = -1;
 
-            public Reader(string input) => _input = input;
+            public int Position => this.index + 1;
 
-            public int Position => _index + 1;
-
-            public void Mark() => _start = _index;
-            public void MarkFromNext() => _start = _index + 1;
+            public void Mark() => this.start = this.index;
+            public void MarkFromNext() => this.start = this.index + 1;
             public string Marked() => Marked(0);
             public string MarkedExceptLast() => Marked(-1);
 
             string Marked(int trim)
             {
-                var start = _start;
-                var count = Math.Min(_input.Length, _index + trim) - start;
-                return count > 0
-                     ? _input.Substring(start, count)
+                var start = this.start;
+                return Math.Min(this.input.Length, this.index + trim) - start is var count and > 0
+                     ? this.input.Substring(start, count)
                      : string.Empty;
             }
 
             public char? Read()
             {
-                var input = _input;
+                var input = this.input;
 
-                var i = _index = Position >= input.Length
-                               ? input.Length
-                               : _index + 1;
+                var i = this.index = Position >= input.Length
+                                   ? input.Length
+                                   : this.index + 1;
 
                 return i >= 0 && i < input.Length ? input[i] : null;
             }
 
-            public void Unread() => _index = Math.Max(-1, _index - 1);
+            public void Unread() => this.index = Math.Max(-1, this.index - 1);
 
             public string MarkedWithUnread()
             {

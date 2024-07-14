@@ -37,13 +37,13 @@ namespace Fizzler
     /// </summary>
     public sealed class Parser
     {
-        readonly Reader<Token> _reader;
-        readonly ISelectorGenerator _generator;
+        readonly Reader<Token> reader;
+        readonly ISelectorGenerator generator;
 
         Parser(Reader<Token> reader, ISelectorGenerator generator)
         {
-            _reader = reader;
-            _generator = generator;
+            this.reader = reader;
+            this.generator = generator;
         }
 
         /// <summary>
@@ -91,9 +91,9 @@ namespace Fizzler
 
         void Parse()
         {
-            _generator.OnInit();
+            this.generator.OnInit();
             SelectorGroup();
-            _generator.OnClose();
+            this.generator.OnClose();
         }
 
         void SelectorGroup()
@@ -103,18 +103,18 @@ namespace Fizzler
             //  ;
 
             Selector();
-            while (TryRead(ToTokenSpec(Token.Comma())) != null)
+            while (TryRead(ToTokenSpec(Token.Comma())) is not null)
             {
-                TryRead(ToTokenSpec(TokenKind.WhiteSpace));
+                _ = TryRead(ToTokenSpec(TokenKind.WhiteSpace));
                 Selector();
             }
 
-            Read(ToTokenSpec(TokenKind.Eoi));
+            _ = Read(ToTokenSpec(TokenKind.Eoi));
         }
 
         void Selector()
         {
-            _generator.OnSelector();
+            this.generator.OnSelector();
 
             //selector
             //  : simple_selector_sequence [ combinator simple_selector_sequence ]*
@@ -128,12 +128,12 @@ namespace Fizzler
         partial class TokenSpecs // ReSharper disable once InconsistentNaming
         {
             public static readonly TokenSpec[] Plus_Greater_Tilde_WhiteSpace =
-            {
+            [
                 ToTokenSpec(TokenKind.Plus),
                 ToTokenSpec(TokenKind.Greater),
                 ToTokenSpec(TokenKind.Tilde),
                 ToTokenSpec(TokenKind.WhiteSpace)
-            };
+            ];
         }
 
         bool TryCombinator()
@@ -148,18 +148,20 @@ namespace Fizzler
 
             if (token.Kind == TokenKind.WhiteSpace)
             {
-                _generator.Descendant();
+                this.generator.Descendant();
             }
             else
             {
+#pragma warning disable IDE0010 // Add missing cases (handled by compiler)
                 switch (token.Kind)
+#pragma warning restore IDE0010 // Add missing cases
                 {
-                    case TokenKind.Tilde: _generator.GeneralSibling(); break;
-                    case TokenKind.Greater: _generator.Child(); break;
-                    case TokenKind.Plus: _generator.Adjacent(); break;
+                    case TokenKind.Tilde: this.generator.GeneralSibling(); break;
+                    case TokenKind.Greater: this.generator.Child(); break;
+                    case TokenKind.Plus: this.generator.Adjacent(); break;
                 }
 
-                TryRead(ToTokenSpec(TokenKind.WhiteSpace));
+                _ = TryRead(ToTokenSpec(TokenKind.WhiteSpace));
             }
 
             return true;
@@ -168,21 +170,21 @@ namespace Fizzler
         partial class TokenSpecs // ReSharper disable once InconsistentNaming
         {
             public static readonly TokenSpec[] Hash_Dot_LeftBracket_Colon =
-            {
+            [
                 ToTokenSpec(TokenKind.Hash),
                 ToTokenSpec(Token.Dot()),
                 ToTokenSpec(Token.LeftBracket()),
                 ToTokenSpec(Token.Colon())
-            };
+            ];
 
             public static readonly TokenSpec[] Hash_Dot_LeftBracket_Colon_Not =
-            {
+            [
                 ToTokenSpec(TokenKind.Hash),
                 ToTokenSpec(Token.Dot()),
                 ToTokenSpec(Token.LeftBracket()),
                 ToTokenSpec(Token.Colon()),
                 ToTokenSpec(Token.Not())
-            };
+            ];
         }
 
         void SimpleSelectorSequence()
@@ -199,9 +201,11 @@ namespace Fizzler
                 if (TryRead(TokenSpecs.Hash_Dot_LeftBracket_Colon_Not) is { } token)
                 {
                     if (modifiers == 0 && !named)
-                        _generator.Universal(NamespacePrefix.None); // implied
+                        this.generator.Universal(NamespacePrefix.None); // implied
 
+#pragma warning disable IDE0010 // Add missing cases (defaulted)
                     switch (token.Kind)
+#pragma warning restore IDE0010 // Add missing cases
                     {
                         case TokenKind.Not:
                         {
@@ -211,7 +215,7 @@ namespace Fizzler
                         }
                         case TokenKind.Hash:
                         {
-                            _generator.Id(token.SomeText);
+                            this.generator.Id(token.SomeText);
                             break;
                         }
                         default:
@@ -222,7 +226,7 @@ namespace Fizzler
                                 case ['.']: Class(); break;
                                 case ['[']: Attrib(); break;
                                 case [':']: Pseudo(); break;
-                                default: throw new Exception("Internal error.");
+                                default: throw new UnreachableException("Internal error.");
                             }
                             break;
                         }
@@ -244,11 +248,10 @@ namespace Fizzler
             //  : NOT S* negation_arg S* ')'
             //  ;
 
-            Read(ToTokenSpec(TokenKind.Not));
-            TryRead(ToTokenSpec(TokenKind.WhiteSpace));
-            var generator = _generator as INegationSelectorGenerator;
-            if (generator == null)
-                throw new NotSupportedException("Negation pseudo-class is not supported.");
+            _ = Read(ToTokenSpec(TokenKind.Not));
+            _ = TryRead(ToTokenSpec(TokenKind.WhiteSpace));
+            var generator = this.generator as INegationSelectorGenerator
+                            ?? throw new NotSupportedException("Negation pseudo-class is not supported.");
 
             generator.BeginNegation();
 
@@ -258,11 +261,11 @@ namespace Fizzler
 
             if (TryRead(TokenSpecs.Hash_Dot_LeftBracket_Colon) is { } token)
             {
-                _generator.Universal(NamespacePrefix.None); // implied
+                this.generator.Universal(NamespacePrefix.None); // implied
 
                 if (token.Kind == TokenKind.Hash)
                 {
-                    _generator.Id(token.SomeText);
+                    this.generator.Id(token.SomeText);
                 }
                 else
                 {
@@ -272,7 +275,7 @@ namespace Fizzler
                         case ['.']: Class(); break;
                         case ['[']: Attrib(); break;
                         case [':']: Pseudo(); break;
-                        default: throw new Exception("Internal error.");
+                        default: throw new UnreachableException("Internal error.");
                     }
                 }
             }
@@ -281,8 +284,8 @@ namespace Fizzler
                 TypeSelectorOrUniversal();
             }
 
-            TryRead(ToTokenSpec(TokenKind.WhiteSpace));
-            Read(ToTokenSpec(Token.RightParenthesis()));
+            _ = TryRead(ToTokenSpec(TokenKind.WhiteSpace));
+            _ = Read(ToTokenSpec(Token.RightParenthesis()));
 
             generator.EndNegation();
         }
@@ -306,21 +309,18 @@ namespace Fizzler
             //  : ':' [ IDENT | functional_pseudo ]
             //  ;
 
-            Read(ToTokenSpec(Token.Colon()));
+            _ = Read(ToTokenSpec(Token.Colon()));
             if (!TryFunctionalPseudo())
             {
                 var clazz = Read(ToTokenSpec(TokenKind.Ident)).Text;
                 switch (clazz)
                 {
-                    case "first-child": _generator.FirstChild(); break;
-                    case "last-child": _generator.LastChild(); break;
-                    case "only-child": _generator.OnlyChild(); break;
-                    case "empty": _generator.Empty(); break;
+                    case "first-child": this.generator.FirstChild(); break;
+                    case "last-child": this.generator.LastChild(); break;
+                    case "only-child": this.generator.OnlyChild(); break;
+                    case "empty": this.generator.Empty(); break;
                     default:
-                        {
-                            throw new FormatException(string.Format(
-                                "Unknown pseudo-class '{0}'. Use either first-child, last-child, only-child or empty.", clazz));
-                        }
+                        throw new FormatException($"Unknown pseudo-class '{clazz}'. Use either first-child, last-child, only-child or empty.");
                 }
             }
         }
@@ -334,7 +334,7 @@ namespace Fizzler
             if (TryRead(ToTokenSpec(TokenKind.Function)) is not { } token)
                 return false;
 
-            TryRead(ToTokenSpec(TokenKind.WhiteSpace));
+            _ = TryRead(ToTokenSpec(TokenKind.WhiteSpace));
 
             switch (token.Text)
             {
@@ -342,12 +342,11 @@ namespace Fizzler
                 case "nth-last-child": NthLast(); break;
                 case var func:
                     {
-                        throw new FormatException(string.Format(
-                            "Unknown functional pseudo '{0}'. Only nth-child and nth-last-child are supported.", func));
+                        throw new FormatException($"Unknown functional pseudo '{func}'. Only nth-child and nth-last-child are supported.");
                     }
             }
 
-            Read(ToTokenSpec(Token.RightParenthesis()));
+            _ = Read(ToTokenSpec(Token.RightParenthesis()));
             return true;
         }
 
@@ -361,7 +360,7 @@ namespace Fizzler
             // TODO Add support for the full syntax
             // At present, only INTEGER is allowed
 
-            _generator.NthChild(1, NthB());
+            this.generator.NthChild(1, NthB());
         }
 
         void NthLast()
@@ -374,7 +373,7 @@ namespace Fizzler
             // TODO Add support for the full syntax
             // At present, only INTEGER is allowed
 
-            _generator.NthLastChild(1, NthB());
+            this.generator.NthLastChild(1, NthB());
         }
 
         int NthB()
@@ -386,21 +385,21 @@ namespace Fizzler
         {
             // ReSharper disable once InconsistentNaming
             public static readonly TokenSpec[] Equals_Includes_DashMatch_PrefixMatch_SuffixMatch_SubstringMatch =
-            {
+            [
                 ToTokenSpec(Token.Equals()),
                 ToTokenSpec(TokenKind.Includes),
                 ToTokenSpec(TokenKind.DashMatch),
                 ToTokenSpec(TokenKind.PrefixMatch),
                 ToTokenSpec(TokenKind.SuffixMatch),
                 ToTokenSpec(TokenKind.SubstringMatch)
-            };
+            ];
 
             // ReSharper disable once InconsistentNaming
             public static readonly TokenSpec[] String_Ident =
-            {
+            [
                 ToTokenSpec(TokenKind.String),
                 ToTokenSpec(TokenKind.Ident)
-            };
+            ];
         }
 
         void Attrib()
@@ -416,7 +415,7 @@ namespace Fizzler
             //        ]? ']'
             //  ;
 
-            Read(ToTokenSpec(Token.LeftBracket()));
+            _ = Read(ToTokenSpec(Token.LeftBracket()));
             var prefix = TryNamespacePrefix() ?? NamespacePrefix.None;
             var name = Read(ToTokenSpec(TokenKind.Ident)).SomeText;
 
@@ -430,17 +429,19 @@ namespace Fizzler
 
                     if (op == Token.Equals())
                     {
-                        _generator.AttributeExact(prefix, name, value);
+                        this.generator.AttributeExact(prefix, name, value);
                     }
                     else
                     {
+#pragma warning disable IDE0010 // Add missing cases (handled by compiler)
                         switch (op.Kind)
+#pragma warning restore IDE0010 // Add missing cases
                         {
-                            case TokenKind.Includes: _generator.AttributeIncludes(prefix, name, value); break;
-                            case TokenKind.DashMatch: _generator.AttributeDashMatch(prefix, name, value); break;
-                            case TokenKind.PrefixMatch: _generator.AttributePrefixMatch(prefix, name, value); break;
-                            case TokenKind.SuffixMatch: _generator.AttributeSuffixMatch(prefix, name, value); break;
-                            case TokenKind.SubstringMatch: _generator.AttributeSubstring(prefix, name, value); break;
+                            case TokenKind.Includes: this.generator.AttributeIncludes(prefix, name, value); break;
+                            case TokenKind.DashMatch: this.generator.AttributeDashMatch(prefix, name, value); break;
+                            case TokenKind.PrefixMatch: this.generator.AttributePrefixMatch(prefix, name, value); break;
+                            case TokenKind.SuffixMatch: this.generator.AttributeSuffixMatch(prefix, name, value); break;
+                            case TokenKind.SubstringMatch: this.generator.AttributeSubstring(prefix, name, value); break;
                         }
                     }
                 }
@@ -451,9 +452,9 @@ namespace Fizzler
             }
 
             if (!hasValue)
-                _generator.AttributeExists(prefix, name);
+                this.generator.AttributeExists(prefix, name);
 
-            Read(ToTokenSpec(Token.RightBracket()));
+            _ = Read(ToTokenSpec(Token.RightBracket()));
         }
 
         void Class()
@@ -462,18 +463,18 @@ namespace Fizzler
             //  : '.' IDENT
             //  ;
 
-            Read(ToTokenSpec(Token.Dot()));
-            _generator.Class(Read(ToTokenSpec(TokenKind.Ident)).SomeText);
+            _ = Read(ToTokenSpec(Token.Dot()));
+            this.generator.Class(Read(ToTokenSpec(TokenKind.Ident)).SomeText);
         }
 
         partial class TokenSpecs // ReSharper disable once InconsistentNaming
         {
             public static readonly TokenSpec[] Ident_Star_Pipe =
-            {
+            [
                 ToTokenSpec(TokenKind.Ident),
                 ToTokenSpec(Token.Star()),
                 ToTokenSpec(Token.Pipe())
-            };
+            ];
         }
 
         NamespacePrefix? TryNamespacePrefix()
@@ -504,10 +505,10 @@ namespace Fizzler
         partial class TokenSpecs // ReSharper disable once InconsistentNaming
         {
             public static readonly TokenSpec[] Ident_Star =
-            {
+            [
                 ToTokenSpec(TokenKind.Ident),
                 ToTokenSpec(Token.Star())
-            };
+            ];
         }
 
         void TypeSelectorOrUniversal()
@@ -525,25 +526,20 @@ namespace Fizzler
             var prefix = TryNamespacePrefix() ?? NamespacePrefix.None;
             var token = Read(TokenSpecs.Ident_Star);
             if (token.Kind == TokenKind.Ident)
-                _generator.Type(prefix, token.SomeText);
+                this.generator.Type(prefix, token.SomeText);
             else
-                _generator.Universal(prefix);
+                this.generator.Universal(prefix);
         }
 
-        Token Peek() => _reader.Peek();
+        Token Peek() => this.reader.Peek();
 
         Token Read(TokenSpec spec) =>
             TryRead(spec)
-            ?? throw new FormatException(string.Format(
-                    @"Unexpected token {{{0}}} where {{{1}}} was expected.",
-                    Peek().Kind, spec));
+            ?? throw new FormatException($"Unexpected token {{{Peek().Kind}}} where {{{spec}}} was expected.");
 
         Token Read(params TokenSpec[] specs) =>
             TryRead(specs)
-            ?? throw new FormatException(string.Format(
-                   @"Unexpected token {{{0}}} where one of [{1}] was expected.",
-                   Peek().Kind,
-                   string.Join(", ", from k in specs select k.ToString())));
+            ?? throw new FormatException($"Unexpected token {{{Peek().Kind}}} where one of [{string.Join(", ", from k in specs select k.ToString())}] was expected.");
 
         Token? TryRead(params TokenSpec[] specs)
         {
@@ -561,11 +557,11 @@ namespace Fizzler
             var token = Peek();
             if (!spec.Fold(token, (t, a) => a == t.Kind, (t, b) => b == t))
                 return null;
-            _reader.Read();
+            _ = this.reader.Read();
             return token;
         }
 
-        void Unread(Token token) => _reader.Unread(token);
+        void Unread(Token token) => this.reader.Unread(token);
 
         static TokenSpec ToTokenSpec(TokenKind kind) => TokenSpec.A(kind);
         static TokenSpec ToTokenSpec(Token token) => TokenSpec.B(token);

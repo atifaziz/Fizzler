@@ -50,26 +50,28 @@ namespace Fizzler.Tests
         [Test]
         public void HasMoreWhenEmpty()
         {
-            Assert.That(new Reader<int>(new int[0]).HasMore, Is.False);
+            using var reader = new Reader<int>([]);
+            Assert.That(reader.HasMore, Is.False);
         }
 
         [Test]
         public void HasMoreWhenNotEmpty()
         {
-            Assert.That(new Reader<int>(new int[1]).HasMore, Is.True);
+            using var reader = new Reader<int>(new int[1]);
+            Assert.That(reader.HasMore, Is.True);
         }
 
         [Test]
         public void ReadEmpty()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                new Reader<int>(new int[0]).Read());
+            using var reader = new Reader<int>([]);
+            Assert.That(reader.Read, Throws.InvalidOperationException);
         }
 
         [Test]
         public void Unreading()
         {
-            var reader = new Reader<int>(new[] { 78, 910 });
+            using var reader = new Reader<int>([78, 910]);
             reader.Unread(56);
             reader.Unread(34);
             reader.Unread(12);
@@ -83,14 +85,14 @@ namespace Fizzler.Tests
         [Test]
         public void PeekEmpty()
         {
-            Assert.Throws<InvalidOperationException>(() =>
-                new Reader<int>(new int[0]).Peek());
+            using var reader = new Reader<int>([]);
+            Assert.That(reader.Peek, Throws.InvalidOperationException);
         }
 
         [Test]
         public void PeekNonEmpty()
         {
-            var reader = new Reader<int>(new[] { 12, 34, 56 });
+            using var reader = new Reader<int>([12, 34, 56]);
             Assert.That(reader.Peek(), Is.EqualTo(12));
             Assert.That(reader.Read(), Is.EqualTo(12));
             Assert.That(reader.Peek(), Is.EqualTo(34));
@@ -102,7 +104,8 @@ namespace Fizzler.Tests
         [Test]
         public void Enumeration()
         {
-            var e = new Reader<int>(new[] { 12, 34, 56 }).GetEnumerator();
+            using var reader = new Reader<int>([12, 34, 56]);
+            using var e = reader.GetEnumerator();
             Assert.That(e.MoveNext(), Is.True);
             Assert.That(e.Current, Is.EqualTo(12));
             Assert.That(e.MoveNext(), Is.True);
@@ -115,7 +118,8 @@ namespace Fizzler.Tests
         [Test]
         public void EnumerationNonGeneric()
         {
-            var e = ((IEnumerable) new Reader<int>(new[] { 12, 34, 56 })).GetEnumerator();
+            using var reader = new Reader<int>([12, 34, 56]);
+            var e = ((IEnumerable) reader).GetEnumerator();
             Assert.That(e.MoveNext(), Is.True);
             Assert.That(e.Current, Is.EqualTo(12));
             Assert.That(e.MoveNext(), Is.True);
@@ -128,7 +132,7 @@ namespace Fizzler.Tests
         [Test]
         public void CloseDisposes()
         {
-            var e = new TestEnumerator<object>();
+            using var e = new TestEnumerator<object>();
             Assert.That(e.Disposed, Is.False);
             new Reader<object>(e).Close();
             Assert.That(e.Disposed, Is.True);
@@ -137,7 +141,7 @@ namespace Fizzler.Tests
         [Test]
         public void DisposeDisposes()
         {
-            var e = new TestEnumerator<object>();
+            using var e = new TestEnumerator<object>();
             Assert.That(e.Disposed, Is.False);
             ((IDisposable) new Reader<object>(e)).Dispose();
             Assert.That(e.Disposed, Is.True);
@@ -146,9 +150,9 @@ namespace Fizzler.Tests
         [Test]
         public void DisposeDisposesOnce()
         {
-            var e = new TestEnumerator<object>();
+            using var e = new TestEnumerator<object>();
             Assert.That(e.Disposed, Is.False);
-            var disposable = ((IDisposable)new Reader<object>(e));
+            IDisposable disposable = new Reader<object>(e);
             disposable.Dispose();
             Assert.That(e.DisposeCallCount, Is.EqualTo(1));
             disposable.Dispose();
@@ -192,7 +196,7 @@ namespace Fizzler.Tests
 
         static Reader<T> CreateDisposedReader<T>()
         {
-            var reader = new Reader<T>(new T[0]);
+            var reader = new Reader<T>([]);
             reader.Close();
             return reader;
         }

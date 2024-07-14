@@ -35,8 +35,8 @@ namespace Fizzler
     /// </summary>
     public sealed class Reader<T> : IDisposable, IEnumerable<T>
     {
-        IEnumerator<T>? _enumerator;
-        Stack<T>? _buffer;
+        IEnumerator<T>? enumerator;
+        Stack<T>? buffer;
 
         /// <summary>
         /// Initialize a new <see cref="Reader{T}"/> with a base
@@ -51,8 +51,8 @@ namespace Fizzler
         /// </summary>
         public Reader(IEnumerator<T> e)
         {
-            _enumerator = e ?? throw new ArgumentNullException(nameof(e));
-            _buffer = new Stack<T>();
+            this.enumerator = e ?? throw new ArgumentNullException(nameof(e));
+            this.buffer = new Stack<T>();
             RealRead();
         }
 
@@ -61,7 +61,7 @@ namespace Fizzler
         /// <summary>
         /// Indicates whether there is, at least, one value waiting to be read or not.
         /// </summary>
-        public bool HasMore => _buffer is { Count: var count }
+        public bool HasMore => this.buffer is { Count: var count }
                              ? count > 0
                              : throw ObjectDisposedException();
 
@@ -70,9 +70,9 @@ namespace Fizzler
         /// </summary>
         public void Unread(T value)
         {
-            if (_buffer is not { } buffer)
+            if (this.buffer is not { } someBuffer)
                 throw ObjectDisposedException();
-            buffer.Push(value);
+            someBuffer.Push(value);
         }
 
         /// <summary>
@@ -80,15 +80,15 @@ namespace Fizzler
         /// </summary>
         public T Read()
         {
-            switch (_buffer)
+            switch (this.buffer)
             {
                 case null:
                     throw ObjectDisposedException();
                 case { Count: 0 }:
                     throw new InvalidOperationException();
-                case var buffer:
-                    var value = buffer.Pop();
-                    if (buffer.Count == 0)
+                case var someBuffer:
+                    var value = someBuffer.Pop();
+                    if (someBuffer.Count == 0)
                         RealRead();
                     return value;
             }
@@ -100,7 +100,7 @@ namespace Fizzler
         /// <exception cref="InvalidOperationException">
         /// Thrown if there is no value waiting to be read.
         /// </exception>
-        public T Peek() => _buffer switch
+        public T Peek() => this.buffer switch
         {
             null => throw ObjectDisposedException(),
             { Count: 0 } => throw new InvalidOperationException(),
@@ -115,7 +115,7 @@ namespace Fizzler
         /// </summary>
         public IEnumerator<T> GetEnumerator()
         {
-            return _enumerator is not null ? Iterator(this) : throw ObjectDisposedException();
+            return this.enumerator is not null ? Iterator(this) : throw ObjectDisposedException();
 
             static IEnumerator<T> Iterator(Reader<T> reader)
             {
@@ -126,11 +126,11 @@ namespace Fizzler
 
         void RealRead()
         {
-            if (_enumerator is not { } enumerator)
+            if (this.enumerator is not { } someEnumerator)
                 throw ObjectDisposedException();
 
-            if (enumerator.MoveNext())
-                Unread(enumerator.Current);
+            if (someEnumerator.MoveNext())
+                Unread(someEnumerator.Current);
         }
 
         /// <summary>
@@ -139,15 +139,17 @@ namespace Fizzler
         /// </summary>
         public void Close() => Dispose();
 
+#pragma warning disable CA1063 // Implement IDisposable correctly (false negative)
         void IDisposable.Dispose() => Dispose();
+#pragma warning restore CA1063 // Implement IDisposable correctly
 
         void Dispose()
         {
-            if(_enumerator == null)
+            if(this.enumerator == null)
                 return;
-            _enumerator.Dispose();
-            _enumerator = null;
-            _buffer = null;
+            this.enumerator.Dispose();
+            this.enumerator = null;
+            this.buffer = null;
         }
     }
 }

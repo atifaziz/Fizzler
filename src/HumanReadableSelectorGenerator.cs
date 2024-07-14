@@ -29,28 +29,28 @@ namespace Fizzler
     /// </summary>
     public class HumanReadableSelectorGenerator : ISelectorGenerator
     {
-        int _chainCount;
-        string? _text;
+        int chainCount;
+        string? text;
 
         /// <summary>
         /// Initializes the text.
         /// </summary>
-        public virtual void OnInit() => _text = null;
+        public virtual void OnInit() => this.text = null;
 
         /// <summary>
         /// Gets the generated human-readable description text.
         /// </summary>
-        public string Text => _text ?? throw new InvalidOperationException();
+        public string Text => this.text ?? throw new InvalidOperationException();
 
         /// <summary>
         /// Generates human-readable for a selector in a group.
         /// </summary>
         public virtual void OnSelector()
         {
-            if (string.IsNullOrEmpty(_text))
-                _text = "Take all";
+            if (string.IsNullOrEmpty(this.text))
+                this.text = "Take all";
             else
-                _text += " and select them. Combined with previous, take all";
+                this.text += " and select them. Combined with previous, take all";
         }
 
         /// <summary>
@@ -58,22 +58,24 @@ namespace Fizzler
         /// </summary>
         public virtual void OnClose()
         {
-            if (_text is not { } text)
+            if (this.text is not { } someText)
                 throw new InvalidOperationException();
 
-            _text = $"{text.Trim()} and select them.";
+            this.text = $"{someText.Trim()} and select them.";
         }
 
         /// <summary>
         /// Adds to the generated human-readable text.
         /// </summary>
         protected void Add(string selector) =>
-            _text += selector ?? throw new ArgumentNullException(nameof(selector));
+            this.text += selector ?? throw new ArgumentNullException(nameof(selector));
 
         /// <summary>
         /// Generates human-readable text of this type selector.
         /// </summary>
+#pragma warning disable CA1725 // Parameter names should match base declaration (compatibility)
         public void Type(NamespacePrefix prefix, string type) =>
+#pragma warning restore CA1725 // Parameter names should match base declaration
             Add($" <{type}> elements");
 
         /// <summary>
@@ -177,14 +179,14 @@ namespace Fizzler
         /// </summary>
         public void Descendant()
         {
-            if (_chainCount > 0)
+            if (this.chainCount > 0)
             {
                 Add(". With those, take only their descendants which are");
             }
             else
             {
                 Add(", then take their descendants which are");
-                _chainCount++;
+                this.chainCount++;
             }
         }
 

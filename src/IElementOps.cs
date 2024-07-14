@@ -56,7 +56,9 @@ namespace Fizzler
         /// which is an alternative <see cref="AttributeIncludes"/> when
         /// representing the <c>class</c> attribute.
         /// </summary>
+#pragma warning disable CA1716 // Identifiers should not match keywords (by-design)
         Selector<TElement> Class(string clazz);
+#pragma warning restore CA1716 // Identifiers should not match keywords
 
         //
         // Attribute selectors

@@ -27,6 +27,8 @@ namespace Fizzler.Tests
 
     static class Throws
     {
+        public static ExactTypeConstraint InvalidOperationException => NUnit.Framework.Throws.InvalidOperationException;
+
         public static EqualConstraint ObjectDisposedException(string objectName) =>
             ObjectDisposedException()
                .And.Property(nameof(System.ObjectDisposedException.ObjectName))

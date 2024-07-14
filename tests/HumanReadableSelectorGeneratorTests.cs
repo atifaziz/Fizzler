@@ -164,8 +164,7 @@ namespace Fizzler.Tests
 
         static void Run(string selector, string message)
         {
-            var generator = new HumanReadableSelectorGenerator();
-            Parser.Parse(selector, generator);
+            var generator = Parser.Parse(selector, new HumanReadableSelectorGenerator());
             Assert.That(generator.Text, Is.EqualTo(message));
         }
     }

@@ -34,10 +34,10 @@ namespace Fizzler
     /// </summary>
     public class SelectorGenerator<TElement> : INegationSelectorGenerator
     {
-        readonly IEqualityComparer<TElement> _equalityComparer;
-        Selector<TElement>? _selector;
-        readonly Stack<Selector<TElement>> _selectors;
-        Selector<TElement>? _negationSourceSelector;
+        readonly IEqualityComparer<TElement> equalityComparer;
+        Selector<TElement>? selector;
+        readonly Stack<Selector<TElement>> selectors = new();
+        Selector<TElement>? negationSourceSelector;
 
         /// <summary>
         /// Initializes a new instance of this object with an instance
@@ -51,11 +51,12 @@ namespace Fizzler
         /// of <see cref="IElementOps{TElement}"/> and an equality comparer
         /// used for determining if two elements are equal.
         /// </summary>
+#pragma warning disable IDE0290 // Use primary constructor (preserve doc)
         public SelectorGenerator(IElementOps<TElement> ops, IEqualityComparer<TElement>? equalityComparer)
+#pragma warning restore IDE0290 // Use primary constructor
         {
             Ops = ops ?? throw new ArgumentNullException(nameof(ops));
-            _equalityComparer = equalityComparer ?? EqualityComparer<TElement>.Default;
-            _selectors = new Stack<Selector<TElement>>();
+            this.equalityComparer = equalityComparer ?? EqualityComparer<TElement>.Default;
         }
 
         /// <summary>
@@ -65,7 +66,7 @@ namespace Fizzler
         /// If the generation is not complete, this property returns the
         /// last generated selector.
         /// </remarks>
-        public Selector<TElement> Selector => _selector ?? throw new InvalidOperationException();
+        public Selector<TElement> Selector => this.selector ?? throw new InvalidOperationException();
 
         /// <summary>
         /// Gets the <see cref="IElementOps{TElement}"/> instance that this object
@@ -83,8 +84,8 @@ namespace Fizzler
         /// </remarks>
         public IEnumerable<Selector<TElement>> GetSelectors()
         {
-            var selectors = _selectors;
-            return _selector is { } top
+            var selectors = this.selectors;
+            return this.selector is { } top
                  ? selectors.Concat(Enumerable.Repeat(top, 1))
                  : selectors.Select(s => s);
         }
@@ -96,7 +97,7 @@ namespace Fizzler
         {
             if(selector == null) throw new ArgumentNullException(nameof(selector));
 
-            _selector = _selector is { } top ? (elements => selector(top(elements))) : selector;
+            this.selector = this.selector is { } top ? (elements => selector(top(elements))) : selector;
         }
 
         /// <summary>
@@ -104,8 +105,8 @@ namespace Fizzler
         /// </summary>
         public virtual void OnInit()
         {
-            _selectors.Clear();
-            _selector = null;
+            this.selectors.Clear();
+            this.selector = null;
         }
 
         /// <summary>
@@ -113,9 +114,9 @@ namespace Fizzler
         /// </summary>
         public virtual void OnSelector()
         {
-            if (_selector is { } someSelector)
-                _selectors.Push(someSelector);
-            _selector = null;
+            if (this.selector is { } someSelector)
+                this.selectors.Push(someSelector);
+            this.selector = null;
         }
 
         /// <summary>
@@ -123,10 +124,10 @@ namespace Fizzler
         /// </summary>
         public virtual void OnClose()
         {
-            var sum = GetSelectors().Aggregate((a, b) => (elements => a(elements).Concat(b(elements))));
+            var sum = GetSelectors().Aggregate((a, b) => elements => a(elements).Concat(b(elements)));
             var normalize = Ops.Descendant();
-            _selector = elements => sum(normalize(elements)).Distinct(_equalityComparer);
-            _selectors.Clear();
+            this.selector = elements => sum(normalize(elements)).Distinct(this.equalityComparer);
+            this.selectors.Clear();
         }
 
         /// <summary>
@@ -142,15 +143,19 @@ namespace Fizzler
         /// which is an alternative <see cref="ISelectorGenerator.AttributeIncludes"/> when
         /// representing the <c>class</c> attribute.
         /// </summary>
+#pragma warning disable CA1716 // Identifiers should not match keywords (inherited)
         public virtual void Class(string clazz) =>
             Add(Ops.Class(clazz));
+#pragma warning restore CA1716 // Identifiers should not match keywords
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#type-selectors">type selector</a>,
         /// which represents an instance of the element type in the document tree.
         /// </summary>
+#pragma warning disable CA1725 // Parameter names should match base declaration (compatibility)
         public virtual void Type(NamespacePrefix prefix, string type) =>
             Add(Ops.Type(prefix, type));
+#pragma warning restore CA1725 // Parameter names should match base declaration
 
         /// <summary>
         /// Generates a <a href="http://www.w3.org/TR/css3-selectors/#universal-selector">universal selector</a>,
@@ -301,8 +306,8 @@ namespace Fizzler
         /// </summary>
         public void BeginNegation()
         {
-            _negationSourceSelector = Selector;
-            _selector = null;
+            this.negationSourceSelector = Selector;
+            this.selector = null;
         }
 
         /// <summary>
@@ -311,10 +316,10 @@ namespace Fizzler
         /// </summary>
         public void EndNegation()
         {
-            var negationSourceSelector = _negationSourceSelector ?? throw new InvalidOperationException();
+            var negationSourceSelector = this.negationSourceSelector ?? throw new InvalidOperationException();
             var selector = Selector;
-            _selector = nodes => negationSourceSelector(nodes).Except(selector(nodes), _equalityComparer);
-            _negationSourceSelector = null;
+            this.selector = nodes => negationSourceSelector(nodes).Except(selector(nodes), this.equalityComparer);
+            this.negationSourceSelector = null;
         }
     }
 }

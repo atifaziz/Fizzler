@@ -157,8 +157,8 @@ namespace Fizzler.Tests
         [Test]
         public void IdentifierUsingVendorExtensionSyntaxCannotBeginWithDigit()
         {
-            Assert.Throws<FormatException>(() =>
-                Tokener.Tokenize("-42").ToArray());
+            Assert.That(() => Tokener.Tokenize("-42").ToArray(),
+                        Throws.TypeOf<FormatException>());
         }
 
         [Test]
@@ -249,8 +249,7 @@ namespace Fizzler.Tests
         [Test]
         public void BadHash()
         {
-            Assert.Throws<FormatException>(() =>
-                Tokener.Tokenize("#").ToArray());
+            Assert.That(() => Tokener.Tokenize("#").ToArray(), Throws.TypeOf<FormatException>());
         }
 
         [Test]
@@ -281,7 +280,9 @@ namespace Fizzler.Tests
         }
 
         [Test]
+#pragma warning disable CA1720 // Identifier contains type name (matches subject)
         public void Integer()
+#pragma warning restore CA1720 // Identifier contains type name
         {
             Assert.That(Tokener.Tokenize("42").First(), Is.EqualTo(Token.Integer("42")));
         }
@@ -331,23 +332,20 @@ namespace Fizzler.Tests
         [Test]
         public void StringSingleQuoteUnterminated()
         {
-            Assert.Throws<FormatException>(() =>
-                Tokener.Tokenize("'foo").ToArray());
+            Assert.That(() => Tokener.Tokenize("'foo").ToArray(), Throws.TypeOf<FormatException>());
         }
 
         [Test]
         public void StringDoubleQuoteUnterminated()
         {
-            Assert.Throws<FormatException>(() =>
-                Tokener.Tokenize("\"foo").ToArray());
+            Assert.That(() => Tokener.Tokenize("\"foo").ToArray(), Throws.TypeOf<FormatException>());
         }
 
         [TestCase(@"'f\oo")]
         [TestCase(@"'foo\")]
         public void StringInvalidEscaping(string input)
         {
-            Assert.Throws<FormatException>(() =>
-                Tokener.Tokenize(input).ToArray());
+            Assert.That(() => Tokener.Tokenize(input).ToArray(), Throws.TypeOf<FormatException>());
         }
 
         [Test]
@@ -368,8 +366,7 @@ namespace Fizzler.Tests
         [Test]
         public void InvalidChar()
         {
-            Assert.Throws<FormatException>(() =>
-                Tokener.Tokenize("what?").ToArray());
+            Assert.That(() => Tokener.Tokenize("what?").ToArray(), Throws.TypeOf<FormatException>());
         }
 
         [Test]

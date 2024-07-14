@@ -28,24 +28,24 @@ namespace Fizzler
     /// Represent a type or attribute name.
     /// </summary>
     [Serializable]
-    public struct NamespacePrefix
+    public readonly struct NamespacePrefix : IEquatable<NamespacePrefix>
     {
         /// <summary>
         /// Represents a name from either the default or any namespace
         /// in a target document, depending on whether a default namespace is
         /// in effect or not.
         /// </summary>
-        public static readonly NamespacePrefix None = new NamespacePrefix(null);
+        public static readonly NamespacePrefix None = new(null);
 
         /// <summary>
         /// Represents an empty namespace.
         /// </summary>
-        public static readonly NamespacePrefix Empty = new NamespacePrefix(string.Empty);
+        public static readonly NamespacePrefix Empty = new(string.Empty);
 
         /// <summary>
         /// Represents any namespace.
         /// </summary>
-        public static readonly NamespacePrefix Any = new NamespacePrefix("*");
+        public static readonly NamespacePrefix Any = new("*");
 
         /// <summary>
         /// Initializes an instance with a namespace prefix specification.
@@ -115,5 +115,19 @@ namespace Fizzler
 
             return Text + (IsNone ? null : "|") + name;
         }
+
+        // Equality operators
+
+        /// <summary>
+        /// Indicates whether two namespace prefixes are equal.
+        /// </summary>
+        public static bool operator ==(NamespacePrefix left, NamespacePrefix right) =>
+            left.Equals(right);
+
+        /// <summary>
+        /// Indicates whether two namespace prefixes are inequal.
+        /// </summary>
+        public static bool operator !=(NamespacePrefix left, NamespacePrefix right) =>
+            !left.Equals(right);
     }
 }

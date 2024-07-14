@@ -19,6 +19,8 @@
 //
 #endregion
 
+#pragma warning disable CA1720 // Identifier contains type name (by-design)
+
 namespace Fizzler
 {
     /// <summary>

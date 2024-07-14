@@ -26,7 +26,7 @@ namespace Fizzler
     /// <summary>
     /// Represent a token and optionally any text associated with it.
     /// </summary>
-    public struct Token : IEquatable<Token>
+    public readonly struct Token : IEquatable<Token>
     {
         /// <summary>
         /// Gets the kind/type/class of the token.
@@ -49,8 +49,7 @@ namespace Fizzler
         /// <summary>
         /// Creates an end-of-input token.
         /// </summary>
-        public static Token Eoi() =>
-            new Token(TokenKind.Eoi);
+        public static Token Eoi() => new(TokenKind.Eoi);
 
         static readonly Token StarToken = Char('*');
         static readonly Token DotToken = Char('.');
@@ -110,42 +109,42 @@ namespace Fizzler
         /// <summary>
         /// Creates a plus token.
         /// </summary>
-        public static Token Plus() => new Token(TokenKind.Plus);
+        public static Token Plus() => new(TokenKind.Plus);
 
         /// <summary>
         /// Creates a greater token.
         /// </summary>
-        public static Token Greater() => new Token(TokenKind.Greater);
+        public static Token Greater() => new(TokenKind.Greater);
 
         /// <summary>
         /// Creates an includes token.
         /// </summary>
-        public static Token Includes() => new Token(TokenKind.Includes);
+        public static Token Includes() => new(TokenKind.Includes);
 
         /// <summary>
         /// Creates a dash-match token.
         /// </summary>
-        public static Token DashMatch() => new Token(TokenKind.DashMatch);
+        public static Token DashMatch() => new(TokenKind.DashMatch);
 
         /// <summary>
         /// Creates a prefix-match token.
         /// </summary>
-        public static Token PrefixMatch() => new Token(TokenKind.PrefixMatch);
+        public static Token PrefixMatch() => new(TokenKind.PrefixMatch);
 
         /// <summary>
         /// Creates a suffix-match token.
         /// </summary>
-        public static Token SuffixMatch() => new Token(TokenKind.SuffixMatch);
+        public static Token SuffixMatch() => new(TokenKind.SuffixMatch);
 
         /// <summary>
         /// Creates a substring-match token.
         /// </summary>
-        public static Token SubstringMatch() => new Token(TokenKind.SubstringMatch);
+        public static Token SubstringMatch() => new(TokenKind.SubstringMatch);
 
         /// <summary>
         /// Creates a general sibling token.
         /// </summary>
-        public static Token Tilde() => new Token(TokenKind.Tilde);
+        public static Token Tilde() => new(TokenKind.Tilde);
 
         /// <summary>
         /// Creates an identifier token.
@@ -159,7 +158,9 @@ namespace Fizzler
         /// <summary>
         /// Creates an integer token.
         /// </summary>
+#pragma warning disable CA1720 // Identifier contains type name (by-design)
         public static Token Integer(string text)
+#pragma warning restore CA1720 // Identifier contains type name
         {
             ValidateTextArgument(text);
             return new Token(TokenKind.Integer, text);
@@ -186,8 +187,10 @@ namespace Fizzler
         /// <summary>
         /// Creates a string token.
         /// </summary>
+#pragma warning disable CA1720 // Identifier contains type name (by-design)
         public static Token String(string? text) =>
-            new Token(TokenKind.String, text ?? string.Empty);
+            new(TokenKind.String, text ?? string.Empty);
+#pragma warning restore CA1720 // Identifier contains type name
 
         /// <summary>
         /// Creates a function token.
@@ -201,13 +204,14 @@ namespace Fizzler
         /// <summary>
         /// Creates a not token.
         /// </summary>
-        public static Token Not() => new Token(TokenKind.Not);
+        public static Token Not() => new(TokenKind.Not);
 
         /// <summary>
         /// Creates an arbitrary character token.
         /// </summary>
-        public static Token Char(char ch) =>
-            new Token(TokenKind.Char, ch.ToString());
+#pragma warning disable CA1720 // Identifier contains type name (by-design)
+        public static Token Char(char ch) => new(TokenKind.Char, ch.ToString());
+#pragma warning restore CA1720 // Identifier contains type name
 
         /// <summary>
         /// Indicates whether this instance and a specified object are equal.

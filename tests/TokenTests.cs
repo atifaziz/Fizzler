@@ -154,7 +154,9 @@ namespace Fizzler.Tests
         }
 
         [Test]
+#pragma warning disable CA1720 // Identifier contains type name (matches subject)
         public void String()
+#pragma warning restore CA1720 // Identifier contains type name
         {
             AssertToken(TokenKind.String, "foo", Token.String("foo"));
         }
@@ -162,7 +164,7 @@ namespace Fizzler.Tests
         [Test]
         public void StringNullText()
         {
-            Token.String(null);
+            _ = Token.String(null);
         }
 
         [Test]
@@ -214,7 +216,9 @@ namespace Fizzler.Tests
         }
 
         [Test]
+#pragma warning disable CA1720 // Identifier contains type name (matches subject)
         public void Integer()
+#pragma warning restore CA1720 // Identifier contains type name
         {
             AssertToken(TokenKind.Integer, "123", Token.Integer("123"));
         }

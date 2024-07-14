@@ -45,7 +45,9 @@ namespace Fizzler
         /// with the two other <see cref="ISelectorGenerator"/> objects
         /// it delegates to.
         /// </summary>
+#pragma warning disable IDE0290 // Use primary constructor (preserve doc)
         public SelectorGeneratorTee(ISelectorGenerator primary, ISelectorGenerator secondary)
+#pragma warning restore IDE0290 // Use primary constructor
         {
             Primary = primary ?? throw new ArgumentNullException(nameof(primary));
             Secondary = secondary ?? throw new ArgumentNullException(nameof(secondary));
@@ -81,7 +83,9 @@ namespace Fizzler
         /// <summary>
         /// Delegates to <see cref="Primary"/> then <see cref="Secondary"/> generator.
         /// </summary>
+#pragma warning disable CA1725 // Parameter names should match base declaration (compatibility)
         public void Type(NamespacePrefix prefix, string type)
+#pragma warning restore CA1725 // Parameter names should match base declaration
         {
             Primary.Type(prefix, type);
             Secondary.Type(prefix, type);
